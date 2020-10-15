@@ -11,10 +11,12 @@ namespace NMC.Models
         
         [Required]
         [StringLength(75)]
+        [Display(Name = "Department")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(75)]
+        [Display(Name = "Department (ar)")]
         public string NameAr { get; set; }
 
         public ICollection<DepartmentDoctor> DepartmentDoctors { get; set; }

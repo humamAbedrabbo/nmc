@@ -8,10 +8,12 @@ namespace NMC.Models
 
         [Required]
         [StringLength(75)]
+        [Display(Name = "Discharge Type")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(75)]
+        [Display(Name = "Discharge Type (ar)")]
         public string NameAr { get; set; }
     }
 }

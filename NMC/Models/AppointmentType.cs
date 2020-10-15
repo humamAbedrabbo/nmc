@@ -9,10 +9,12 @@ namespace NMC.Models
 
         [Required]
         [StringLength(75)]
+        [Display(Name = "Appointment Type")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(75)]
+        [Display(Name = "Appointment Type (ar)")]
         public string NameAr { get; set; }
 
         public IEnumerable<Appointment> Appointments { get; set; }
