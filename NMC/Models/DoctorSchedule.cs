@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace NMC.Models
 {
@@ -10,8 +11,15 @@ namespace NMC.Models
         public int DoctorId { get; set; }
         public Doctor Doctor { get; set; }
         public string Days { get; set; }
+
+        [Required]
+        [StringLength(20)]
         public string StartTime { get; set; }
+
+        [Required]
+        [StringLength(20)]
         public string EndTime { get; set; }
+
         public string Message { get; set; }
     }
 }

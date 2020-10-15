@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace NMC.Models
 {
@@ -7,15 +8,33 @@ namespace NMC.Models
     {
         public int Id { get; set; }
         public string Name => $"{FirstName} {LastName}";
+
+        [Required]
+        [StringLength(75)]
         public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(75)]
         public string LastName { get; set; }
         public Gender Gender { get; set; }
+
+        [StringLength(75)]
         public string Speciality { get; set; }
         public string Biography { get; set; }
+
+        [StringLength(30)] 
         public string Phone { get; set; }
+
+        [StringLength(30)]
         public string Mobile { get; set; }
+
+        [StringLength(200)] 
         public string Address { get; set; }
+
+
+        [StringLength(200)] 
         public string Email { get; set; }
+
         public string Username { get; set; }
         public DateTime? JoiningDate { get; set; }
         public bool Consultant { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace NMC.Models
 {
@@ -11,7 +12,12 @@ namespace NMC.Models
         public Patient Patient { get; set; }
         public int AdmissionTypeId { get; set; }
         public AdmissionType AdmissionType { get; set; }
+
+        [StringLength(50)]
         public string FileNo { get; set; }
+
+        [StringLength(50)]
+        public string PoliceCode { get; set; }
         public int? ReferrerDoctorId { get; set; }
         public Doctor ReferrerDoctor { get; set; }
         public string ReferralLetter { get; set; }

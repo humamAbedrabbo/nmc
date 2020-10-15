@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201015142620_Create_InitialSchema.cs" />
+    <Compile Remove="Migrations\20201015142620_Create_InitialSchema.Designer.cs" />
+    <Compile Remove="Migrations\20201015142928_Create_InitialSchema.cs" />
+    <Compile Remove="Migrations\20201015142928_Create_InitialSchema.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\assets.html" />
   </ItemGroup>
 

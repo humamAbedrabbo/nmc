@@ -6,6 +6,6 @@
         Reservation,
         Doctor,
         Admission,
-        Invoices
+        Accounting
     }
 }

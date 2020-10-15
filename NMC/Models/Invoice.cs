@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace NMC.Models
 {
     public class Invoice
     {
         public int Id { get; set; }
+
+        [Required]
+        [StringLength(50)]
         public string InvoiceNo { get; set; }
         public int? ReservationId { get; set; }
         public Reservation Reservation { get; set; }
