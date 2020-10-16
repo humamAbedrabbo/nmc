@@ -1,4 +1,7 @@
-﻿msgid "Department"
+﻿msgid "NMC"
+msgstr "المركز الطبي الحديث"
+
+msgid "Department"
 msgstr "القسم"
 
 msgid "Department (ar)"

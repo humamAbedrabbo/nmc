@@ -48,32 +48,10 @@ namespace NMC
                 new CultureInfo("ar"),
             };
 
-                options.DefaultRequestCulture = new RequestCulture("ar");
+                options.DefaultRequestCulture = new RequestCulture("en");
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
-
-            //services.AddLocalization(options => options.ResourcesPath = "Resources");
-
-            //services.AddRazorPages()
-            //    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-            //    .AddDataAnnotationsLocalization(options => {
-            //        options.DataAnnotationLocalizerProvider = (type, factory) =>
-            //            factory.Create(typeof(SharedResource));
-
-            //    });
-
-            //services.Configure<RequestLocalizationOptions>(options =>
-            //{
-            //    options.DefaultRequestCulture = new RequestCulture(supportedCultures[0]);
-            //    options.SupportedCultures = cultures;
-            //    options.SupportedUICultures = cultures;
-            //    options.RequestCultureProviders = new List<IRequestCultureProvider>
-            //    {
-            //      new QueryStringRequestCultureProvider(),
-            //      new CookieRequestCultureProvider()
-            //    };
-            //});
 
             // Configure route options
             services.Configure<RouteOptions>(options => {
@@ -99,41 +77,20 @@ namespace NMC
                 app.UseHsts();
             }
 
-            //app.UseRequestLocalization(options => {
-            //    options.DefaultRequestCulture = new RequestCulture(supportedCultures[0]);
-            //    options.SupportedCultures = cultures;
-            //    options.SupportedUICultures = cultures;
-            //});
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.Use(async (context, next) =>
             {
-                
                 context.Request.QueryString = context.Request.QueryString.Add("culture", context.User.GetUserLanguage());
-
-                // Do work that doesn't write to the Response.
                 await next();
-                // Do other work that doesn't write to the Response.
             });
 
             app.UseRequestLocalization();
 
-            //var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
-            //    .AddSupportedCultures(supportedCultures)
-            //    .AddSupportedUICultures(supportedCultures);
-
-
-            //app.UseRequestLocalization(localizationOptions);
-
-
-
             app.UseRouting();
 
             app.UseAuthorization();
-
-
 
             app.UseEndpoints(endpoints =>
             {

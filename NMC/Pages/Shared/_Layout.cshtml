@@ -1,12 +1,16 @@
-﻿
-@{ 
+﻿@inject IViewLocalizer _localizer
+
+@{
     string lang = ViewContext.HttpContext.Request.Query["culture"];
     bool isArabic = (lang?.StartsWith("ar") ?? false);
     string rtl = ""; //  isArabic ? "rtl" : "";
 
-    string bootstrapCSS = "bootstrap.min.css"; //isArabic ? "bootstrap-rtl.min.css" : "bootstrap.min.css";
-    string bootstrapJS = "bootstrap.min.js"; //isArabic ? "bootstrap-rtl.min.js" : "bootstrap.min.js";
-    
+    string bootstrapCSS = isArabic ? "bootstrap-rtl.min.css" : "bootstrap.min.css";
+    string styleCSS = isArabic ? "style-rtl.css" : "style.css";
+    string bootstrapJS = isArabic ? "bootstrap-rtl.min.js" : "bootstrap.min.js";
+    string chartJS = isArabic ? "chart-rtl.js" : "chart.js";
+    string appJS = isArabic ? "app-rtl.js" : "app.js";
+
 }
 
 <!DOCTYPE html>
@@ -16,12 +20,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="~/assets/img/favicon.ico">
-    <title>NMC</title>
+    <title>@_localizer["NMC"]</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="~/assets/css/@bootstrapCSS">
     <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="~/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/@styleCSS">
     <!--[if lt IE 9]>
         <script src="~/assets/js/html5shiv.min.js"></script>
         <script src="~/assets/js/respond.min.js"></script>
@@ -46,8 +50,8 @@
     <script src="assets/js/dataTables.bootstrap4.min.js"></script>
     <script src="~/assets/js/jquery.slimscroll.js"></script>
     <script src="~/assets/js/Chart.bundle.js"></script>
-    <script src="~/assets/js/chart.js"></script>
-    <script src="~/assets/js/app.js"></script>
+    <script src="~/assets/js/@chartJS"></script>
+    <script src="~/assets/js/@appJS"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
