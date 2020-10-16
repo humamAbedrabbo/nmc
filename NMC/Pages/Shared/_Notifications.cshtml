@@ -1,7 +1,9 @@
-﻿<div class="notification-box">
+﻿@inject IViewLocalizer _localizer
+
+<div class="notification-box">
     <div class="msg-sidebar notifications msg-noti">
         <div class="topnav-dropdown-header">
-            <span>Messages</span>
+            <span>@_localizer["Messages"]</span>
         </div>
         <div class="drop-scroll msg-list-scroll" id="msg_list">
             <ul class="list-box">
@@ -203,7 +205,7 @@
             </ul>
         </div>
         <div class="topnav-dropdown-footer">
-            <a href="chat.html">See all messages</a>
+            <a href="chat.html">@_localizer["See all messages"]</a>
         </div>
     </div>
 </div>
