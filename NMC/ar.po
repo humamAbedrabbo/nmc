@@ -1,0 +1,27 @@
+﻿msgid "Department"
+msgstr "القسم"
+
+msgid "Department (ar)"
+msgstr "القسم (ع)"
+
+msgid "Departments"
+msgstr "الأقسام"
+
+msgid "Add Department"
+msgstr "إضافة قسم"
+
+msgid "Action"
+msgstr "العمليات"
+
+msgid "Edit"
+msgstr "تعديل"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Are you sure want to delete this Department?"
+msgstr "هل أنت متأكد من حذف القسم؟"
+
+msgid "Close"
+msgstr "إلغاء"
+

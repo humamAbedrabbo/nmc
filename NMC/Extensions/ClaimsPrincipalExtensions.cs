@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -28,6 +29,11 @@ namespace NMC.Extensions
             var currentUserId = GetUserId(principal);
 
             return string.Equals(currentUserId, id, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public static string GetUserLanguage(this ClaimsPrincipal principal)
+        {
+            return "en";
         }
     }
 }

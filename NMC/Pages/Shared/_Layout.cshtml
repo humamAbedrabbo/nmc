@@ -1,5 +1,16 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿
+@{ 
+    string lang = ViewContext.HttpContext.Request.Query["culture"];
+    bool isArabic = (lang?.StartsWith("ar") ?? false);
+    string rtl = ""; //  isArabic ? "rtl" : "";
+
+    string bootstrapCSS = "bootstrap.min.css"; //isArabic ? "bootstrap-rtl.min.css" : "bootstrap.min.css";
+    string bootstrapJS = "bootstrap.min.js"; //isArabic ? "bootstrap-rtl.min.js" : "bootstrap.min.js";
+    
+}
+
+<!DOCTYPE html>
+<html lang="@lang">
 
 <head>
     <meta charset="utf-8">
@@ -7,7 +18,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="~/assets/img/favicon.ico">
     <title>NMC</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/@bootstrapCSS">
     <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="~/assets/css/style.css">
@@ -17,7 +28,7 @@
     <![endif]-->
 </head>
 
-<body>
+<body dir="@rtl">
     <div class="main-wrapper">
 
         <partial name="_Header" />
@@ -30,7 +41,7 @@
     <div class="sidebar-overlay" data-reff=""></div>
     <script src="~/assets/js/jquery-3.2.1.min.js"></script>
     <script src="~/assets/js/popper.min.js"></script>
-    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/@bootstrapJS"></script>
     <script src="assets/js/jquery.dataTables.min.js"></script>
     <script src="assets/js/dataTables.bootstrap4.min.js"></script>
     <script src="~/assets/js/jquery.slimscroll.js"></script>
