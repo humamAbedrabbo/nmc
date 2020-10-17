@@ -12,10 +12,14 @@ namespace NMC.Models
 
         [Display(Name = "Patient")]
         public int PatientId { get; set; }
+        
+        [Display(Name = "Patient")]
         public Patient Patient { get; set; }
 
         [Display(Name = "Admission Type")]
         public int AdmissionTypeId { get; set; }
+
+        [Display(Name = "Admission Type")]
         public AdmissionType AdmissionType { get; set; }
 
         [StringLength(50)]
@@ -28,6 +32,8 @@ namespace NMC.Models
 
         [Display(Name = "Doctor Referrer")]
         public int? ReferrerDoctorId { get; set; }
+
+        [Display(Name = "Doctor Referrer")]
         public Doctor ReferrerDoctor { get; set; }
 
         [Display(Name = "Referral Letter")]
@@ -35,6 +41,8 @@ namespace NMC.Models
 
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
+
+        [Display(Name = "Department")]
         public Department Department { get; set; }
 
         [Display(Name = "Reservation")]
@@ -56,10 +64,16 @@ namespace NMC.Models
         [Display(Name = "Admission Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public DateTime AdmissionDate { get; set; }
+        public DateTime AdmissionDate { get; set; } = DateTime.Today;
 
         [Display(Name = "Admission Time")]
         public string AdmissionTime { get; set; }
+
+        [Display(Name = "Discharge Type")]
+        public int? DischargeTypeId { get; set; }
+
+        [Display(Name = "Discharge Type")]
+        public DischargeType DischargeType { get; set; }
 
         [Display(Name = "Discharge Date")]
         public DateTime? DischargeDate { get; set; }

@@ -9,6 +9,8 @@ namespace NMC.Models
 
         [Display(Name = "Invoice")]
         public int InvoiceId { get; set; }
+
+        [Display(Name = "Invoice")]
         public Invoice Invoice { get; set; }
 
         [Required]

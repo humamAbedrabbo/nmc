@@ -14,6 +14,8 @@ namespace NMC.Models
 
         [Display(Name = "Employee")]
         public int EmployeeId { get; set; }
+
+        [Display(Name = "Employee")]
         public Employee Employee { get; set; }
 
     }

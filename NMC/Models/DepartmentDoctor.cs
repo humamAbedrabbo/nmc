@@ -8,10 +8,14 @@ namespace NMC.Models
 
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
+
+        [Display(Name = "Department")]
         public Department Department { get; set; }
 
         [Display(Name = "Doctor")]
         public int DoctorId { get; set; }
+
+        [Display(Name = "Doctor")]
         public Doctor Doctor { get; set; }
     }
 }

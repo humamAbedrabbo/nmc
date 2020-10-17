@@ -15,10 +15,14 @@ namespace NMC.Models
 
         [Display(Name = "Reservation")]
         public int? ReservationId { get; set; }
+
+        [Display(Name = "Reservation")]
         public Reservation Reservation { get; set; }
 
         [Display(Name = "Admission")]
         public int? AdmissionId { get; set; }
+
+        [Display(Name = "Admission")]
         public Admission Admission { get; set; }
 
         [Display(Name = "Created On")]

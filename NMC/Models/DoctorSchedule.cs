@@ -19,6 +19,8 @@ namespace NMC.Models
 
         [Display(Name = "Doctor")]
         public int DoctorId { get; set; }
+
+        [Display(Name = "Doctor")]
         public Doctor Doctor { get; set; }
 
         [Display(Name = "Weekdays")]

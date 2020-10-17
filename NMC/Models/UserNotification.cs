@@ -8,6 +8,8 @@ namespace NMC.Models
 
         [Display(Name = "Notification")]
         public int NotificationId { get; set; }
+
+        [Display(Name = "Notification")]
         public Notification Notification { get; set; }
 
         [Display(Name = "Username")]

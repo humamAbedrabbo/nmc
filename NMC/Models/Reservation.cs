@@ -13,10 +13,14 @@ namespace NMC.Models
         [StringLength(10)]
         [Display(Name = "Room No.")]
         public string RoomNo { get; set; }
+
+        [Display(Name = "Room No.")]
         public Room Room { get; set; }
 
         [Display(Name = "Room Grade")]
         public int? GradeId { get; set; }
+
+        [Display(Name = "Room Grade")]
         public RoomGrade Grade { get; set; }
 
         [StringLength(10)]
@@ -46,6 +50,10 @@ namespace NMC.Models
         [StringLength(75)]
         [Display(Name = "Requestor")]
         public string Requestor { get; set; }
+
+        [Display(Name = "Request Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime RequestDate { get; set; } = DateTime.Now;
 
         [Required]
@@ -83,6 +91,7 @@ namespace NMC.Models
         
         [Display(Name = "Reservation Period")]
         public string ReservationPeriod => $"{FromDate.ToShortDateString()} {StartTime} - {ToDateStr}{EndTime}";
+
         public string ActiveText => Active ? "Active" : "Inactive";
         public string ActiveCSS => Active ? "status-green" : "status-red";
 

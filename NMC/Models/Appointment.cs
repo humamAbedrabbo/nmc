@@ -9,6 +9,8 @@ namespace NMC.Models
 
         [Display(Name = "Appointment Type")]
         public int AppointmentTypeId { get; set; }
+
+        [Display(Name = "Appointment Type")]
         public AppointmentType AppointmentType { get; set; }
 
         [Display(Name = "Appointment Date")]
@@ -33,6 +35,8 @@ namespace NMC.Models
 
         [Display(Name = "Patient")]
         public int? PatientId { get; set; }
+
+        [Display(Name = "Patient")]
         public Patient Patient { get; set; }
 
         [StringLength(30)]
@@ -45,6 +49,8 @@ namespace NMC.Models
 
         [Display(Name = "Doctor")]
         public int? DoctorId { get; set; }
+
+        [Display(Name = "Doctor")]
         public Doctor Doctor { get; set; }
 
         [Display(Name = "Department")]
@@ -59,6 +65,7 @@ namespace NMC.Models
 
         [Display(Name = "Appointment Time")]
         public string AppointmentTime => $"{StartTime} - {EndTime}";
+
         public string ActiveText => Active ? "Active" : "Inactive";
         public string ActiveCSS => Active ? "status-green" : "status-red";
 

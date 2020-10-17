@@ -17,10 +17,14 @@ namespace NMC.Models
 
         [Display(Name = "Room Type")]
         public int RoomTypeId { get; set; }
+
+        [Display(Name = "Room Type")]
         public RoomType RoomType { get; set; }
 
         [Display(Name = "Room Grade")]
         public int? RoomGradeId { get; set; }
+
+        [Display(Name = "Room Grade")]
         public RoomGrade RoomGrade { get; set; }
 
         [Display(Name = "Bed Count")]
@@ -31,6 +35,7 @@ namespace NMC.Models
 
         public string AvailableText => Available ? "Available" : "Not Available";
         public string AvailableCSS => Available ? "status-green" : "status-red";
+
         public IEnumerable<DepartmentRoom> DepartmentRooms { get; set; }
     }
 }

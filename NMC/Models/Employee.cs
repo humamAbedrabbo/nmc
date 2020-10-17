@@ -31,10 +31,14 @@ namespace NMC.Models
 
         [Display(Name = "Employee Type")]
         public int EmployeeTypeId { get; set; }
+
+        [Display(Name = "Employee Type")]
         public EmployeeType EmployeeType { get; set; }
 
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
+
+        [Display(Name = "Department")]
         public Department Department { get; set; }
 
         [Display(Name = "Joining Date")]
