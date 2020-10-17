@@ -29,6 +29,8 @@ namespace NMC.Models
         [Display(Name = "Available")]
         public bool Available { get; set; }
 
+        public string AvailableText => Available ? "Available" : "Not Available";
+        public string AvailableCSS => Available ? "status-green" : "status-red";
         public IEnumerable<DepartmentRoom> DepartmentRooms { get; set; }
     }
 }

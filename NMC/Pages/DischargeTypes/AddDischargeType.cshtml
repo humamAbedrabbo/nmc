@@ -1,0 +1,31 @@
+﻿@page
+@model NMC.Pages.DischargeTypes.AddDischargeTypeModel
+@inject IViewLocalizer _localizer
+@{
+    ViewData["PageTitle"] = _localizer["Add Discharge Type"];
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <h4 class="page-title">@_localizer["Add Discharge Type"]</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="DischargeType.Name"></label>
+                    <input asp-for="DischargeType.Name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label asp-for="DischargeType.NameAr"></label>
+                    <input asp-for="DischargeType.NameAr" class="form-control">
+                </div>
+                <div class="m-t-20 text-center">
+                    <button class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

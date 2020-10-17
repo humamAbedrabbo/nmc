@@ -52,8 +52,8 @@ namespace NMC.Models
         public string Username { get; set; }
 
         [Display(Name = "Joining Date")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:YYYY-MM-dd}")]
+        [DataType(DataType.Text)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? JoiningDate { get; set; }
 
         [Display(Name = "Consultant")]
@@ -70,6 +70,9 @@ namespace NMC.Models
 
         [Display(Name = "Active")]
         public bool Active { get; set; }
+
+        public string ActiveText => Active ? "Active" : "Inactive";
+        public string ActiveCSS => Active ? "status-green" : "status-red";
 
         public IEnumerable<DepartmentDoctor> DepartmentDoctors { get; set; }
         public ICollection<DoctorEducation> EducationDetails { get; set; }

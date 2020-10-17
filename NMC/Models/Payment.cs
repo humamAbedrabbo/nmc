@@ -13,7 +13,7 @@ namespace NMC.Models
 
         [Display(Name = "Paid Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:YYYY-MM-dd}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime PaidDate { get; set; }
 
         [Display(Name = "Paid Amount (SYP)")]

@@ -22,7 +22,7 @@ namespace NMC.Models
 
         [Display(Name = "Purchase Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:YYYY-MM-dd}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime PurchaseDate { get; set; }
 
         [StringLength(75)]

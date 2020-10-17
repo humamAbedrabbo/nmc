@@ -9,10 +9,10 @@
                     <a href="index-2.html"><i class="fa fa-dashboard"></i> <span>@_localizer["Dashboard"]</span></a>
                 </li>
                 <li>
-                    <a href="doctors.html"><i class="fa fa-user-md"></i> <span>@_localizer["Doctors"]</span></a>
+                    <a asp-page="/Doctors/Index"><i class="fa fa-user-md"></i> <span>@_localizer["Doctors"]</span></a>
                 </li>
                 <li>
-                    <a href="patients.html"><i class="fa fa-wheelchair"></i> <span>@_localizer["Patients"]</span></a>
+                    <a asp-page="/Patients/Index"><i class="fa fa-wheelchair"></i> <span>@_localizer["Patients"]</span></a>
                 </li>
                 <li>
                     <a href="appointments.html"><i class="fa fa-calendar"></i> <span>@_localizer["Appointments"]</span></a>
@@ -24,7 +24,7 @@
                     <a asp-page="/Departments/Index"><i class="fa fa-hospital-o"></i> <span>@_localizer["Departments"]</span></a>
                 </li>
                 <li>
-                    <a href="assets.html"><i class="fa fa-cube"></i> <span>@_localizer["Rooms"]</span></a>
+                    <a asp-page="/Rooms/Index"><i class="fa fa-cube"></i> <span>@_localizer["Rooms"]</span></a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-envelope-o"></i> <span>@_localizer["Reservations"]</span></a>
@@ -50,12 +50,12 @@
                 <li class="submenu">
                     <a href="#"><i class="fa fa-cogs"></i> <span> @_localizer["Types"] </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="#">@_localizer["Room Types"]</a></li>
-                        <li><a href="#">@_localizer["Room Grades"]</a></li>
-                        <li><a href="#">@_localizer["Appointment Types"]</a></li>
-                        <li><a href="#">@_localizer["Admission Types"]</a></li>
-                        <li><a href="#">@_localizer["Discharge Types"]</a></li>
-                        <li><a href="#">@_localizer["Employee Types"]</a></li>
+                        <li><a asp-page="/RoomTypes/Index">@_localizer["Room Types"]</a></li>
+                        <li><a asp-page="/RoomGrades/Index">@_localizer["Room Grades"]</a></li>
+                        <li><a asp-page="/AppointmentTypes/Index">@_localizer["Appointment Types"]</a></li>
+                        <li><a asp-page="/AdmissionTypes/Index">@_localizer["Admission Types"]</a></li>
+                        <li><a asp-page="/DischargeTypes/Index">@_localizer["Discharge Types"]</a></li>
+                        <li><a asp-page="/EmployeeTypes/Index">@_localizer["Employee Types"]</a></li>
                     </ul>
                 </li>
 

@@ -55,7 +55,7 @@ namespace NMC.Models
 
         [Display(Name = "Admission Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:YYYY-MM-dd}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime AdmissionDate { get; set; }
 
         [Display(Name = "Admission Time")]
@@ -66,12 +66,12 @@ namespace NMC.Models
 
         [Display(Name = "Discharge Time")]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:YYYY-MM-dd}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public string DischargeTime { get; set; }
 
         [Display(Name = "Active Until")]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:YYYY-MM-dd}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? ActiveThru { get; set; }
 
         public IEnumerable<Invoice> Invoices { get; set; }
