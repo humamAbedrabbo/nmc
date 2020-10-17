@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20201015142620_Create_InitialSchema.Designer.cs" />
     <Compile Remove="Migrations\20201015142928_Create_InitialSchema.cs" />
     <Compile Remove="Migrations\20201015142928_Create_InitialSchema.Designer.cs" />
+    <Compile Remove="Migrations\20201017142719_Add_Reservation.cs" />
+    <Compile Remove="Migrations\20201017142719_Add_Reservation.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

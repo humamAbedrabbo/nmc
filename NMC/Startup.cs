@@ -66,6 +66,7 @@ namespace NMC
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IRoomRepository, RoomRepository>();
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+            services.AddScoped<IReservationRepository, ReservationRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace NMC.Models
 {
@@ -27,7 +29,7 @@ namespace NMC.Models
         [Display(Name = "From Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public DateTime FromDate { get; set; }
+        public DateTime FromDate { get; set; } = DateTime.Today;
 
         [Display(Name = "Start Time")]
         public string StartTime { get; set; }
@@ -35,7 +37,7 @@ namespace NMC.Models
         [Display(Name = "To Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public DateTime ToDate { get; set; }
+        public DateTime ToDate { get; set; } = DateTime.Today;
 
         [Display(Name = "End Time")]
         public string EndTime { get; set; }
@@ -44,7 +46,7 @@ namespace NMC.Models
         [StringLength(75)]
         [Display(Name = "Requestor")]
         public string Requestor { get; set; }
-        public DateTime RequestDate { get; set; }
+        public DateTime RequestDate { get; set; } = DateTime.Now;
 
         [Required]
         [StringLength(75)]
@@ -69,7 +71,21 @@ namespace NMC.Models
         [Display(Name = "Active")]
         public bool Active { get; set; }
 
-        public ICollection<ReservationStatus> Status { get; set; }
+        [Display(Name = "Status Time")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime StatusTime { get; set; } = DateTime.Now;
+
+        [Display(Name = "Status Type")]
+        public ReservationStatusType Status { get; set; }
+
+        private string ToDateStr => (ToDate.Date == FromDate.Date) ? "" : $"{ToDate.ToShortDateString()} ";
+        
+        [Display(Name = "Reservation Period")]
+        public string ReservationPeriod => $"{FromDate.ToShortDateString()} {StartTime} - {ToDateStr}{EndTime}";
+        public string ActiveText => Active ? "Active" : "Inactive";
+        public string ActiveCSS => Active ? "status-green" : "status-red";
+
         public IEnumerable<Invoice> Invoices { get; set; }
 
     }

@@ -43,8 +43,8 @@ namespace NMC.Pages.Appointments
             string typeNameStr = isArabic ? "NameAr" : "Name";
             AppointmentTypesSelect = new SelectList(await typesRepository.GetAllAppointmentTypes(), "Id", typeNameStr, Appointment?.AppointmentTypeId);
             DepartmentsSelect = new SelectList(await apptRepository.GetDepartments(), "Id", typeNameStr, Appointment?.DepartmentId);
-            PatientsSelect = new SelectList(await apptRepository.GetPatients(), "Id", typeNameStr, Appointment?.PatientId);
-            DoctorsSelect = new SelectList(await apptRepository.GetDoctors(), "Id", typeNameStr, Appointment?.DoctorId);
+            PatientsSelect = new SelectList(await apptRepository.GetPatients(), "Id", "Name", Appointment?.PatientId);
+            DoctorsSelect = new SelectList(await apptRepository.GetDoctors(), "Id", "Name", Appointment?.DoctorId);
 
             return Page();
         }

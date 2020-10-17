@@ -25,6 +25,7 @@ namespace NMC.Data
         public DbSet<RoomGrade> RoomGrades { get; set; }
         public DbSet<RoomType> RoomTypes { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
         public DbSet<DepartmentRoom> DepartmentRooms { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<DoctorSchedule> DoctorSchedules { get; set; }
@@ -94,12 +95,12 @@ namespace NMC.Data
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
 
-            builder.Entity<Reservation>()
-                .OwnsMany(p => p.Status, s => {
-                    s.WithOwner().HasForeignKey("ReservationId");
-                    s.Property<int>("Id");
-                    s.HasKey("Id");
-                });
+            //builder.Entity<Reservation>()
+            //    .OwnsMany(p => p.Status, s => {
+            //        s.WithOwner().HasForeignKey("ReservationId");
+            //        s.Property<int>("Id");
+            //        s.HasKey("Id");
+            //    });
 
             builder.Entity<Invoice>()
                 .Property(p => p.Amount)

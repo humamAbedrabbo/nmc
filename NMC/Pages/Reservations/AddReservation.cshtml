@@ -1,0 +1,173 @@
+﻿@page
+@model NMC.Pages.Reservations.AddReservationModel
+@inject IViewLocalizer _localizer
+@{
+    ViewData["PageTitle"] = _localizer["Add Reservation"];
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <h4 class="page-title">@_localizer["Add Reservation"]</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Reservation.Id"></label>
+                            <input asp-for="Reservation.Id" readonly class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Reservation.Requestor"></label>
+                            <input asp-for="Reservation.Requestor" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Reservation.RoomNo"></label>
+                            <select asp-for="Reservation.RoomNo" asp-items="Model.RoomsSelect" class="select">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="Reservation.BedNo"></label>
+                            <input asp-for="Reservation.BedNo" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label asp-for="Reservation.GradeId"></label>
+                            <select asp-for="Reservation.GradeId" asp-items="Model.GradesSelect" class="select">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Reservation.Name"></label>
+                            <input asp-for="Reservation.Name" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Reservation.PatientId"></label>
+                            <select asp-for="Reservation.PatientId" asp-items="Model.PatientsSelect" class="select">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Reservation.FromDate"></label>
+                            <div class="cal-icon">
+                                <input asp-for="Reservation.FromDate" type="text" class="form-control datetimepicker">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Reservation.StartTime"></label>
+                            <div class="time-icon">
+                                <input asp-for="Reservation.StartTime" id="startTime" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Reservation.ToDate"></label>
+                            <div class="cal-icon">
+                                <input asp-for="Reservation.ToDate" type="text" class="form-control datetimepicker">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Reservation.EndTime"></label>
+                            <div class="time-icon">
+                                <input asp-for="Reservation.EndTime" id="endTime" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Reservation.Phone"></label>
+                            <input asp-for="Reservation.Phone" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Reservation.Mobile"></label>
+                            <input asp-for="Reservation.Mobile" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Reservation.Message"></label>
+                    <textarea asp-for="Reservation.Message" cols="30" rows="4" class="form-control"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Reservation.Status"></label>
+                            <select asp-for="Reservation.Status" asp-items="Html.GetEnumSelectList<ReservationStatusType>()" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Reservation.StatusTime"></label>
+                            <input asp-for="Reservation.StatusTime" readonly class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Reservation.Active" class="display-block"></label>
+                    <div class="form-check form-check-inline">
+                        <input asp-for="Reservation.Active" class="form-check-input" type="radio" id="active" value="True" checked="@(Model.Reservation.Active)">
+                        <label class="form-check-label" for="product_active">
+                            @_localizer["Active"]
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input asp-for="Reservation.Active" class="form-check-input" type="radio" id="inactive" value="False" checked="@(!Model.Reservation.Active)">
+                        <label class="form-check-label" for="product_inactive">
+                            @_localizer["Inactive"]
+                        </label>
+                    </div>
+                </div>
+
+                <div class="m-t-20 text-center">
+                    <button class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+    $(function () {
+        $('#startTime').datetimepicker({
+            format: 'LT'
+
+        });
+
+        $('#endTime').datetimepicker({
+            format: 'LT'
+
+        });
+    });
+    </script>
+}
