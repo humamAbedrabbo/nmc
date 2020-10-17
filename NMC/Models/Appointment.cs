@@ -14,7 +14,7 @@ namespace NMC.Models
         [Display(Name = "Appointment Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public DateTime AppointmentDate { get; set; }
+        public DateTime AppointmentDate { get; set; } = DateTime.Today;
 
         [Required]
         [StringLength(20)]
@@ -56,5 +56,11 @@ namespace NMC.Models
 
         [Display(Name = "Active")]
         public bool Active { get; set; }
+
+        [Display(Name = "Appointment Time")]
+        public string AppointmentTime => $"{StartTime} - {EndTime}";
+        public string ActiveText => Active ? "Active" : "Inactive";
+        public string ActiveCSS => Active ? "status-green" : "status-red";
+
     }
 }

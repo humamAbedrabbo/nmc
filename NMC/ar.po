@@ -506,3 +506,8 @@ msgid "Confirm Password"
 msgstr "كلمة المرور للتأكد"
 msgid "Not Available"
 msgstr "غير متاح"
+msgid "Appointment Time"
+msgstr "توقيت الموعد"
+msgid "Dr."
+msgstr "د."
+
