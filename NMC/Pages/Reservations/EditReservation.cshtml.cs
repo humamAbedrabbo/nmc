@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NMC.Extensions;
 using NMC.Models;
 using NMC.Services;
 
@@ -37,8 +38,8 @@ namespace NMC.Pages.Reservations
                 return RedirectToPage("/NotFound");
             }
 
-            string lang = HttpContext.Request.Query["culture"];
-            bool isArabic = (lang?.StartsWith("ar") ?? false);
+            string lang = User.GetUserLanguage();
+            bool isArabic = (lang == "ar");
             string typeNameStr = isArabic ? "NameAr" : "Name";
             RoomsSelect = new SelectList(await rsvRepository.GetRooms(), "Id", "RoomNo", Reservation?.RoomNo);
             PatientsSelect = new SelectList(await rsvRepository.GetPatients(), "Id", "Name", Reservation?.PatientId);

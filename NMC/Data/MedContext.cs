@@ -114,6 +114,27 @@ namespace NMC.Data
 
 
             // Master Seed
+            AppUser admin = new AppUser
+            {
+                Id = 1,
+                UserName = "admin",
+                NormalizedUserName = "ADMIN",
+                Email = "admin@localhost",
+                NormalizedEmail = "ADMIN@LOCALHOST",
+                ConcurrencyStamp = Guid.NewGuid().ToString("D"),
+                SecurityStamp = Guid.NewGuid().ToString("D")
+            };
+
+            var hasher = new PasswordHasher<AppUser>();
+            admin.PasswordHash = hasher.HashPassword(admin, "123456");
+
+            builder.Entity<AppUser>().HasData(admin);
+
+            builder.Entity<IdentityUserClaim<int>>().HasData(
+                new IdentityUserClaim<int> { Id = 1, UserId = 1, ClaimType = "Language", ClaimValue = "en" }
+                );
+
+
             builder.Entity<Department>().HasData(
                 new Department { Id = 1, Name = "Administration", NameAr = "الادارة" },
                 new Department { Id = 2, Name = "Accounting", NameAr = "قسم المحاسبة" },

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NMC.Extensions;
 using NMC.Models;
 using NMC.Services;
 
@@ -37,8 +38,8 @@ namespace NMC.Pages.Rooms
                 return RedirectToPage("/NotFound");
             }
 
-            string lang = HttpContext.Request.Query["culture"];
-            bool isArabic = (lang?.StartsWith("ar") ?? false);
+            string lang = User.GetUserLanguage();
+            bool isArabic = (lang == "ar");
             string roomTypeNameStr = isArabic ? "NameAr" : "Name";
             RoomTypesSelect = new SelectList(await typesRepository.GetAllRoomTypes(), "Id", roomTypeNameStr, Room?.RoomTypeId);
             RoomGradesSelect = new SelectList(await typesRepository.GetAllRoomGrades(), "Id", roomTypeNameStr, Room?.RoomGradeId);

@@ -3,8 +3,8 @@
 @inject IViewLocalizer _localizer
 @{
     ViewData["PageTitle"] = _localizer["Rooms"];
-    string lang = ViewContext.HttpContext.Request.Query["culture"];
-    bool isArabic = (lang?.StartsWith("ar") ?? false);
+            string lang = User.GetUserLanguage();
+            bool isArabic = (lang == "ar");
 }
 
 <div class="content">

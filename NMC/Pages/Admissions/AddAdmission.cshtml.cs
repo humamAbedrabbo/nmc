@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NMC.Extensions;
 using NMC.Models;
 using NMC.Services;
 
@@ -35,8 +36,8 @@ namespace NMC.Pages.Admissions
 
         public async Task OnGet()
         {
-            string lang = HttpContext.Request.Query["culture"];
-            bool isArabic = (lang?.StartsWith("ar") ?? false);
+            string lang = User.GetUserLanguage();
+            bool isArabic = (lang == "ar");
             string typeNameStr = isArabic ? "NameAr" : "Name";
             AdmissionTypesSelect = new SelectList(await typesRepository.GetAllAdmissionTypes(), "Id", typeNameStr, Admission?.AdmissionTypeId);
             DischargeTypesSelect = new SelectList(await typesRepository.GetAllDischargeTypes(), "Id", typeNameStr, Admission?.DischargeTypeId);

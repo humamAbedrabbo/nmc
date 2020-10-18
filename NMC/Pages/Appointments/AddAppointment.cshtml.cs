@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NMC.Extensions;
 using NMC.Models;
 using NMC.Services;
 
@@ -33,8 +34,8 @@ namespace NMC.Pages.Appointments
 
         public async Task OnGet()
         {
-            string lang = HttpContext.Request.Query["culture"];
-            bool isArabic = (lang?.StartsWith("ar") ?? false);
+            string lang = User.GetUserLanguage();
+            bool isArabic = (lang == "ar");
             string typeNameStr = isArabic ? "NameAr" : "Name";
             AppointmentTypesSelect = new SelectList(await typesRepository.GetAllAppointmentTypes(), "Id", typeNameStr, Appointment?.AppointmentTypeId);
             DepartmentsSelect = new SelectList(await apptRepository.GetDepartments(), "Id", typeNameStr, Appointment?.DepartmentId);

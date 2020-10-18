@@ -1,8 +1,8 @@
 ﻿@inject IViewLocalizer _localizer
 
 @{
-    string lang = ViewContext.HttpContext.Request.Query["culture"];
-    bool isArabic = (lang?.StartsWith("ar") ?? false);
+    string lang = User.GetUserLanguage();
+    bool isArabic = (lang == "ar");
     string rtl = ""; //  isArabic ? "rtl" : "";
 
     string bootstrapCSS = isArabic ? "bootstrap-rtl.min.css" : "bootstrap.min.css";

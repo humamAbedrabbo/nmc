@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NMC.Data;
 
 namespace NMC.Migrations
 {
     [DbContext(typeof(MedContext))]
-    partial class MedContextModelSnapshot : ModelSnapshot
+    [Migration("20201017221608_Add_Admin")]
+    partial class Add_Admin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,15 +65,6 @@ namespace NMC.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserClaims");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClaimType = "Language",
-                            ClaimValue = "en",
-                            UserId = 1
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
@@ -359,15 +352,15 @@ namespace NMC.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6fae3d7b-9e5a-408f-97f9-70d3af85951a",
+                            ConcurrencyStamp = "dc94c58a-7f3b-46f3-9a3a-3872a38e3241",
                             Email = "admin@localhost",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDVLqF93NJHOSK1I4fXzj3e1GAmBEqboWJSwWNYU8y77GiqxjxnfPsEcoDT1IXCH3A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOR3R1K9kcFFyzs3YSZhhrBB1A/WIUEPxrhVNyCa3OaJEVcO4ogZeORa8KGjYOnmoQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "68e3a189-6b92-40ab-9096-1eb59cae57ab",
+                            SecurityStamp = "960384c9-25a2-4dc1-b0b7-90c92db4aa73",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });

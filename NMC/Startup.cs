@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -34,7 +35,7 @@ namespace NMC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages()
+            services.AddRazorPages(x => x.Conventions.AuthorizeFolder("/"))
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization();
 
@@ -42,11 +43,18 @@ namespace NMC
 
             services.Configure<RequestLocalizationOptions>(options =>
             {
-                var supportedCultures = new List<CultureInfo>
-            {
-                new CultureInfo("en"),
-                new CultureInfo("ar"),
-            };
+                var supportedCultures = new List<CultureInfo>();
+                var en = new CultureInfo("en");
+                en.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
+                en.DateTimeFormat.DateSeparator = "/";
+                en.DateTimeFormat.Calendar = new GregorianCalendar();
+                supportedCultures.Add(en);
+
+                var ar = new CultureInfo("ar");
+                ar.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
+                ar.DateTimeFormat.DateSeparator = "/";
+                ar.DateTimeFormat.Calendar = new GregorianCalendar();
+                supportedCultures.Add(ar);
 
                 options.DefaultRequestCulture = new RequestCulture("en");
                 options.SupportedCultures = supportedCultures;
@@ -59,6 +67,8 @@ namespace NMC
                 options.LowercaseQueryStrings = true;
                 options.AppendTrailingSlash = true;
             });
+
+            
 
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<ITypesRepository, TypesRepository>();
@@ -87,20 +97,24 @@ namespace NMC
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.Use(async (context, next) =>
-            {
-                context.Request.QueryString = context.Request.QueryString.Add("culture", context.User.GetUserLanguage());
-                await next();
-            });
 
             app.UseRequestLocalization();
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
+
+            //app.Use(async (context, next) =>
+            //{
+            //    context.Request.QueryString = context.Request.QueryString.Add("culture", context.User.GetUserLanguage());
+            //    await next();
+            //});
 
             app.UseEndpoints(endpoints =>
             {
+                
                 endpoints.MapRazorPages();
             });
         }

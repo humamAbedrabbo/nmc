@@ -33,7 +33,12 @@ namespace NMC.Extensions
 
         public static string GetUserLanguage(this ClaimsPrincipal principal)
         {
-            return "en";
+            var lang = principal.FindFirstValue("Language");
+            if (string.IsNullOrEmpty(lang))
+                return "en";
+            else
+                return lang;
+
         }
     }
 }
