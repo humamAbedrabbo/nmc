@@ -68,8 +68,6 @@ namespace NMC
                 options.AppendTrailingSlash = true;
             });
 
-            
-
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<ITypesRepository, TypesRepository>();
             services.AddScoped<IDoctorRepository, DoctorRepository>();

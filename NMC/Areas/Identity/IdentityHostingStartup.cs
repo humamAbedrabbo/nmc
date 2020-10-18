@@ -17,8 +17,9 @@ namespace NMC.Areas.Identity
         {
             builder.ConfigureServices((context, services) => {
                 services.AddDbContextPool<MedContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("MedContextConnection")));
+                    options.UseSqlServer(context.Configuration.GetConnectionString("MedContextConnection"))
+                    // options.UseNpgsql(context.Configuration.GetConnectionString("Med"))
+                    ) ;
 
                 services.AddDefaultIdentity<AppUser>(options => {
                     options.SignIn.RequireConfirmedAccount = false;

@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace NMC.Migrations
+namespace NMC.Migrations.SqlServer
 {
-    public partial class Create_InitialSchema : Migration
+    public partial class Add_InitialSchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -172,6 +172,21 @@ namespace NMC.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RoomGrades",
                 columns: table => new
                 {
@@ -201,6 +216,33 @@ namespace NMC.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(maxLength: 256, nullable: false),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.UniqueConstraint("AK_Username", x => x.UserName);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DepartmentDoctors",
                 columns: table => new
                 {
@@ -213,8 +255,8 @@ namespace NMC.Migrations
                 {
                     table.PrimaryKey("PK_DepartmentDoctors", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DepartmentDoctors_Departments_DoctorId",
-                        column: x => x.DoctorId,
+                        name: "FK_DepartmentDoctors_Departments_DepartmentId",
+                        column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -409,6 +451,27 @@ namespace NMC.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RoleClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<int>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoleClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RoleClaims_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Rooms",
                 columns: table => new
                 {
@@ -435,6 +498,91 @@ namespace NMC.Migrations
                         name: "FK_Rooms_RoomTypes_RoomTypeId",
                         column: x => x.RoomTypeId,
                         principalTable: "RoomTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserClaims_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserLogins",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    ProviderDisplayName = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_UserLogins_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(nullable: false),
+                    RoleId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_UserRoles_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserRoles_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    Value = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.ForeignKey(
+                        name: "FK_UserTokens_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -472,8 +620,8 @@ namespace NMC.Migrations
                 {
                     table.PrimaryKey("PK_DepartmentRooms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DepartmentRooms_Departments_RoomId",
-                        column: x => x.RoomId,
+                        name: "FK_DepartmentRooms_Departments_DepartmentId",
+                        column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -486,7 +634,7 @@ namespace NMC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Reservation",
+                name: "Reservations",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -506,25 +654,27 @@ namespace NMC.Migrations
                     Mobile = table.Column<string>(maxLength: 30, nullable: true),
                     PatientId = table.Column<int>(nullable: true),
                     Message = table.Column<string>(nullable: true),
-                    Active = table.Column<bool>(nullable: false)
+                    Active = table.Column<bool>(nullable: false),
+                    StatusTime = table.Column<DateTime>(nullable: false),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reservation", x => x.Id);
+                    table.PrimaryKey("PK_Reservations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reservation_RoomGrades_GradeId",
+                        name: "FK_Reservations_RoomGrades_GradeId",
                         column: x => x.GradeId,
                         principalTable: "RoomGrades",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Reservation_Patients_PatientId",
+                        name: "FK_Reservations_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Reservation_Rooms_RoomNo",
+                        name: "FK_Reservations_Rooms_RoomNo",
                         column: x => x.RoomNo,
                         principalTable: "Rooms",
                         principalColumn: "RoomNo",
@@ -551,6 +701,7 @@ namespace NMC.Migrations
                     FoodAllergy = table.Column<string>(nullable: true),
                     AdmissionDate = table.Column<DateTime>(nullable: false),
                     AdmissionTime = table.Column<string>(nullable: true),
+                    DischargeTypeId = table.Column<int>(nullable: true),
                     DischargeDate = table.Column<DateTime>(nullable: true),
                     DischargeTime = table.Column<string>(nullable: true),
                     ActiveThru = table.Column<DateTime>(nullable: true)
@@ -571,6 +722,12 @@ namespace NMC.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_Admissions_DischargeTypes_DischargeTypeId",
+                        column: x => x.DischargeTypeId,
+                        principalTable: "DischargeTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Admissions_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
@@ -583,34 +740,11 @@ namespace NMC.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Admissions_Reservation_ReservationId",
+                        name: "FK_Admissions_Reservations_ReservationId",
                         column: x => x.ReservationId,
-                        principalTable: "Reservation",
+                        principalTable: "Reservations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ReservationStatus",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StatusTime = table.Column<DateTime>(nullable: false),
-                    StatusType = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(maxLength: 50, nullable: true),
-                    Block = table.Column<bool>(nullable: false),
-                    ReservationId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ReservationStatus", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ReservationStatus_Reservation_ReservationId",
-                        column: x => x.ReservationId,
-                        principalTable: "Reservation",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -637,9 +771,9 @@ namespace NMC.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Invoices_Reservation_ReservationId",
+                        name: "FK_Invoices_Reservations_ReservationId",
                         column: x => x.ReservationId,
-                        principalTable: "Reservation",
+                        principalTable: "Reservations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -692,6 +826,118 @@ namespace NMC.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AdmissionTypes",
+                columns: new[] { "Id", "Name", "NameAr" },
+                values: new object[,]
+                {
+                    { 1, "Normal", "عادي" },
+                    { 2, "Emergency", "إسعاف" },
+                    { 3, "Accident", "حادث" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AppointmentTypes",
+                columns: new[] { "Id", "Name", "NameAr" },
+                values: new object[,]
+                {
+                    { 7, "Other", "نوع آخر" },
+                    { 5, "Radiology", "تصوير شعاعي" },
+                    { 4, "Eye Care", "عينية" },
+                    { 6, "Referrals", "إحالة" },
+                    { 2, "Consulting", "استشارة طبية" },
+                    { 1, "Routine checkup", "فحص روتيني" },
+                    { 3, "Vaccinations", "لقاح" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Departments",
+                columns: new[] { "Id", "Name", "NameAr" },
+                values: new object[,]
+                {
+                    { 11, "Urine", "قسم البولية" },
+                    { 20, "Surgery", "قسم العمليات" },
+                    { 19, "Pharmacy", "الصيدلية" },
+                    { 18, "Warehouse", "المستودع" },
+                    { 17, "Radiology", "الصور الشعاعية" },
+                    { 15, "Maintenance", "قسم الصيانة" },
+                    { 14, "Emergency", "الطوارئ" },
+                    { 13, "Kitchen", "المطبخ" },
+                    { 12, "Chest", "قسم الصدرية" },
+                    { 10, "Blood vessels", "قسم الأوعية" },
+                    { 16, "Lab", "المخبر" },
+                    { 8, "Arthroscopy", "قسم التنظير" },
+                    { 7, "Dialysis", "قسم غسيل الكلى" },
+                    { 6, "Women", "قسم النسائية" },
+                    { 5, "Care", "قسم العناية" },
+                    { 4, "Internal", "قسم الداخلية" },
+                    { 9, "Cardiac and catheter", "قسم القلبية والقسطرة" },
+                    { 3, "Pediatrics and Baby incubator", "قسم طب الأطفال وال الحاضنات" },
+                    { 2, "Accounting", "قسم المحاسبة" },
+                    { 1, "Administration", "الادارة" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DischargeTypes",
+                columns: new[] { "Id", "Name", "NameAr" },
+                values: new object[,]
+                {
+                    { 1, "Healing", "شفاء" },
+                    { 2, "Improvement", "تحسن" },
+                    { 3, "Ill", "سوء" },
+                    { 4, "Death", "وفاة" },
+                    { 5, "Other", "أخرى" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "EmployeeTypes",
+                columns: new[] { "Id", "Name", "NameAr" },
+                values: new object[,]
+                {
+                    { 8, "Maintenance", "صيانة" },
+                    { 9, "Pharmacist", "صيدلي" },
+                    { 10, "Cleaner", "عامل تنظيف" },
+                    { 7, "Administrator", "إداري" },
+                    { 6, "Accountant", "محاسب" },
+                    { 2, "Nurse", "ممرض" },
+                    { 4, "Secretary", "سكرتيرة" },
+                    { 3, "Laboratorist", "مخبري" },
+                    { 1, "Doctor", "طبيب" },
+                    { 5, "Receptionist", "موظف استقبال" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RoomGrades",
+                columns: new[] { "Id", "Description", "Name", "NameAr" },
+                values: new object[,]
+                {
+                    { 1, null, "Suite", "جناح" },
+                    { 2, null, "Excellent Class", "درجة ممتازة" },
+                    { 3, null, "First Class", "درجة أولى" },
+                    { 4, null, "Second Class", "درجة ثانية" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RoomTypes",
+                columns: new[] { "Id", "Name", "NameAr" },
+                values: new object[,]
+                {
+                    { 3, "Care Room", "غرفة عناية" },
+                    { 1, "Patient Room", "غرفة مريض" },
+                    { 2, "Emergency Room", "غرفة طوارئ" },
+                    { 4, "Baby Incubator Room", "غرفة حاضنات" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { 1, 0, "6af42d9c-35b4-4206-9cc8-4014f4dde268", "admin@localhost", false, false, null, "ADMIN@LOCALHOST", "ADMIN", "AQAAAAEAACcQAAAAEMw+jDbhxHvkywdj4Hxl+nPnjLZ3yjQsWjYszOwEzEYEejBKZ061gLojUkAxK6cb0A==", null, false, "cc4c1a6c-e7cb-4251-a349-8e4cd90d0890", false, "admin" });
+
+            migrationBuilder.InsertData(
+                table: "UserClaims",
+                columns: new[] { "Id", "ClaimType", "ClaimValue", "UserId" },
+                values: new object[] { 1, "Language", "en", 1 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Admissions_AdmissionTypeId",
                 table: "Admissions",
@@ -701,6 +947,11 @@ namespace NMC.Migrations
                 name: "IX_Admissions_DepartmentId",
                 table: "Admissions",
                 column: "DepartmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Admissions_DischargeTypeId",
+                table: "Admissions",
+                column: "DischargeTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Admissions_PatientId",
@@ -743,9 +994,19 @@ namespace NMC.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DepartmentDoctors_DepartmentId",
+                table: "DepartmentDoctors",
+                column: "DepartmentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DepartmentDoctors_DoctorId",
                 table: "DepartmentDoctors",
                 column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DepartmentRooms_DepartmentId",
+                table: "DepartmentRooms",
+                column: "DepartmentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DepartmentRooms_RoomId",
@@ -798,24 +1059,31 @@ namespace NMC.Migrations
                 column: "InvoiceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservation_GradeId",
-                table: "Reservation",
+                name: "IX_Reservations_GradeId",
+                table: "Reservations",
                 column: "GradeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservation_PatientId",
-                table: "Reservation",
+                name: "IX_Reservations_PatientId",
+                table: "Reservations",
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservation_RoomNo",
-                table: "Reservation",
+                name: "IX_Reservations_RoomNo",
+                table: "Reservations",
                 column: "RoomNo");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ReservationStatus_ReservationId",
-                table: "ReservationStatus",
-                column: "ReservationId");
+                name: "IX_RoleClaims_RoleId",
+                table: "RoleClaims",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "Roles",
+                column: "NormalizedName",
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rooms_RoomGradeId",
@@ -828,9 +1096,36 @@ namespace NMC.Migrations
                 column: "RoomTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserClaims_UserId",
+                table: "UserClaims",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLogins_UserId",
+                table: "UserLogins",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserNotifications_NotificationId",
                 table: "UserNotifications",
                 column: "NotificationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRoles_RoleId",
+                table: "UserRoles",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                table: "Users",
+                column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "Users",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -846,9 +1141,6 @@ namespace NMC.Migrations
 
             migrationBuilder.DropTable(
                 name: "DepartmentRooms");
-
-            migrationBuilder.DropTable(
-                name: "DischargeTypes");
 
             migrationBuilder.DropTable(
                 name: "DoctorEducations");
@@ -869,10 +1161,22 @@ namespace NMC.Migrations
                 name: "Payments");
 
             migrationBuilder.DropTable(
-                name: "ReservationStatus");
+                name: "RoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "UserClaims");
+
+            migrationBuilder.DropTable(
+                name: "UserLogins");
 
             migrationBuilder.DropTable(
                 name: "UserNotifications");
+
+            migrationBuilder.DropTable(
+                name: "UserRoles");
+
+            migrationBuilder.DropTable(
+                name: "UserTokens");
 
             migrationBuilder.DropTable(
                 name: "AppointmentTypes");
@@ -887,6 +1191,12 @@ namespace NMC.Migrations
                 name: "Notifications");
 
             migrationBuilder.DropTable(
+                name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
                 name: "EmployeeTypes");
 
             migrationBuilder.DropTable(
@@ -899,10 +1209,13 @@ namespace NMC.Migrations
                 name: "Departments");
 
             migrationBuilder.DropTable(
+                name: "DischargeTypes");
+
+            migrationBuilder.DropTable(
                 name: "Doctors");
 
             migrationBuilder.DropTable(
-                name: "Reservation");
+                name: "Reservations");
 
             migrationBuilder.DropTable(
                 name: "Patients");

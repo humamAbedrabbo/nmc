@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NMC.Data;
 
-namespace NMC.Migrations
+namespace NMC.Migrations.SqlServer
 {
     [DbContext(typeof(MedContext))]
-    [Migration("20201018183332_Add_DepartmentDoctor_FK2")]
-    partial class Add_DepartmentDoctor_FK2
+    partial class MedContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -361,15 +359,15 @@ namespace NMC.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "308a5163-8268-421a-bc31-ef9992cbfd07",
+                            ConcurrencyStamp = "6af42d9c-35b4-4206-9cc8-4014f4dde268",
                             Email = "admin@localhost",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJcT9ZvCfe36h4XuR0W92OFf5L8FFT0kP2LW97GSqQNRR7ecZXBjw6IKH64fiODYyA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMw+jDbhxHvkywdj4Hxl+nPnjLZ3yjQsWjYszOwEzEYEejBKZ061gLojUkAxK6cb0A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e87e5ab1-d436-489a-a70a-8aa9fb9596f3",
+                            SecurityStamp = "cc4c1a6c-e7cb-4251-a349-8e4cd90d0890",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });

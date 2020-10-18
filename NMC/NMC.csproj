@@ -5,15 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20201015142620_Create_InitialSchema.cs" />
-    <Compile Remove="Migrations\20201015142620_Create_InitialSchema.Designer.cs" />
-    <Compile Remove="Migrations\20201015142928_Create_InitialSchema.cs" />
-    <Compile Remove="Migrations\20201015142928_Create_InitialSchema.Designer.cs" />
-    <Compile Remove="Migrations\20201017142719_Add_Reservation.cs" />
-    <Compile Remove="Migrations\20201017142719_Add_Reservation.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="wwwroot\assets.html" />
   </ItemGroup>
 
@@ -127,6 +118,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
     <PackageReference Include="OrchardCore.Localization.Core" Version="1.0.0-rc2-13450" />
   </ItemGroup>
 

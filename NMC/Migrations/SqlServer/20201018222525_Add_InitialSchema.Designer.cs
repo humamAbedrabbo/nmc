@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NMC.Data;
 
-namespace NMC.Migrations
+namespace NMC.Migrations.SqlServer
 {
     [DbContext(typeof(MedContext))]
-    [Migration("20201017222810_Add_Admin_Lang")]
-    partial class Add_Admin_Lang
+    [Migration("20201018222525_Add_InitialSchema")]
+    partial class Add_InitialSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -361,15 +361,15 @@ namespace NMC.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6fae3d7b-9e5a-408f-97f9-70d3af85951a",
+                            ConcurrencyStamp = "6af42d9c-35b4-4206-9cc8-4014f4dde268",
                             Email = "admin@localhost",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDVLqF93NJHOSK1I4fXzj3e1GAmBEqboWJSwWNYU8y77GiqxjxnfPsEcoDT1IXCH3A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMw+jDbhxHvkywdj4Hxl+nPnjLZ3yjQsWjYszOwEzEYEejBKZ061gLojUkAxK6cb0A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "68e3a189-6b92-40ab-9096-1eb59cae57ab",
+                            SecurityStamp = "cc4c1a6c-e7cb-4251-a349-8e4cd90d0890",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -684,6 +684,8 @@ namespace NMC.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DepartmentId");
+
                     b.HasIndex("DoctorId");
 
                     b.ToTable("DepartmentDoctors");
@@ -703,6 +705,8 @@ namespace NMC.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("RoomId");
 
@@ -1712,7 +1716,7 @@ namespace NMC.Migrations
                 {
                     b.HasOne("NMC.Models.Department", "Department")
                         .WithMany("DepartmentDoctors")
-                        .HasForeignKey("DoctorId")
+                        .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1727,7 +1731,7 @@ namespace NMC.Migrations
                 {
                     b.HasOne("NMC.Models.Department", "Department")
                         .WithMany("DepartmentRooms")
-                        .HasForeignKey("RoomId")
+                        .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
