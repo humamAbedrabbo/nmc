@@ -66,7 +66,7 @@ namespace NMC.Models
         public bool Referrer { get; set; }
 
         [Display(Name = "Photo")]
-        public string PhotoPath { get; set; }
+        public string PhotoPath { get; set; } = "user.jpg";
 
         [Display(Name = "Active")]
         public bool Active { get; set; }

@@ -48,7 +48,7 @@ namespace NMC.Models
 
         [StringLength(100)]
         [Display(Name = "Photo")]
-        public string PhotoPath { get; set; }
+        public string PhotoPath { get; set; } = "user.jpg";
 
         [StringLength(30)]
         [Display(Name = "Phone")]

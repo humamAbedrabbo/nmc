@@ -33,9 +33,10 @@
                     <tbody>
                         @foreach (var doc in Model.Doctors)
                         {
+                            string photo = (doc.PhotoPath == "user.jpg" ? "assets/img/user.jpg" : $"images/{doc.PhotoPath}");
                             <tr>
                                 <td>@doc.Id</td>
-                                <td><img width="28" height="28" src="~/images/@doc.PhotoPath" class="rounded-circle m-r-5" alt=""> @doc.Name</td>
+                                <td><img width="28" height="28" src="~/@photo" class="rounded-circle m-r-5" alt=""> @doc.Name</td>
                                 <td>@doc.Speciality</td>
                                 <td>@doc.Consultant</td>
                                 <td>@doc.Surgeon</td>

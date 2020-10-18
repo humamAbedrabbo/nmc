@@ -1,5 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace NMC.Models
 {
@@ -10,7 +13,7 @@ namespace NMC.Models
         [Display(Name = "From Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public DateTime FromDate { get; set; }
+        public DateTime FromDate { get; set; } = DateTime.Today;
 
         [Display(Name = "Thru Date")]
         [DataType(DataType.Date)]
@@ -23,8 +26,15 @@ namespace NMC.Models
         [Display(Name = "Doctor")]
         public Doctor Doctor { get; set; }
 
-        [Display(Name = "Weekdays")]
+        [Display(Name = "Available Days")]
         public string Days { get; set; }
+
+        [NotMapped]
+        public string[] DaysList
+        {
+            get => Days?.Split(" ");
+            set => Days = string.Join(" ", value);
+        }
 
         [Required]
         [StringLength(20)]
@@ -38,5 +48,8 @@ namespace NMC.Models
 
         [Display(Name = "Message")]
         public string Message { get; set; }
+
+        [Display(Name = "Timing")]
+        public string Timing => $"{StartTime} - {EndTime}";
     }
 }

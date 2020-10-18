@@ -34,9 +34,10 @@
                     <tbody>
                         @foreach (var emp in Model.Employees)
                         {
+                            string photo = (emp.PhotoPath == "user.jpg" ? "assets/img/user.jpg" : $"images/{emp.PhotoPath}");
                             <tr>
                                 <td>@emp.Id</td>
-                                <td><img width="28" height="28" src="~/images/@emp.PhotoPath" class="rounded-circle m-r-5" alt="">@emp.Name</td>
+                                <td><img width="28" height="28" src="~/@photo" class="rounded-circle m-r-5" alt="">@emp.Name</td>
                                 <td>@emp.EmployeeNo</td>
                                 <td>@(isArabic ? emp.EmployeeType?.NameAr : emp.EmployeeType?.Name)</td>
                                 <td>@(isArabic ? emp.Department?.NameAr : emp.Department?.Name)</td>
