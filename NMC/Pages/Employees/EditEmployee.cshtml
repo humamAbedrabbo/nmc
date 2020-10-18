@@ -1,0 +1,174 @@
+﻿@page
+@model NMC.Pages.Employees.EditEmployeeModel
+@inject IViewLocalizer _localizer
+@{
+    ViewData["PageTitle"] = _localizer["Edit Employee"];
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <h4 class="page-title">@_localizer["Edit Employee"]</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <form method="post" enctype="multipart/form-data">
+                <input asp-for="Employee.Id" type="hidden" />
+                <input asp-for="Username" type="hidden" />
+                <input asp-for="Employee.PhotoPath" type="hidden" />
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Employee.FirstName"></label>
+                            <input asp-for="Employee.FirstName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Employee.LastName"></label>
+                            <input asp-for="Employee.LastName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Employee.Username"></label>
+                            <input asp-for="Employee.Username" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Employee.Email"></label>
+                            <input asp-for="Employee.Email" class="form-control" type="email">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword"></label>
+                            <input asp-for="ConfirmPassword" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Employee.JoiningDate"></label>
+                            <div class="cal-icon">
+                                <input asp-for="Employee.JoiningDate" type="text" class="form-control datetimepicker">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Employee.DepartmentId"></label>
+                            <select asp-for="Employee.DepartmentId" asp-items="Model.DepartmentsSelect" class="form-control">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Employee.EmployeeTypeId"></label>
+                            <select asp-for="Employee.EmployeeTypeId" asp-items="Model.EmployeeTypesSelect" class="form-control">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Employee.EmployeeNo"></label>
+                            <input asp-for="Employee.EmployeeNo" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group gender-select">
+                            <label class="gen-label">@_localizer["Gender"]:</label>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Employee.Gender" id="genderMale" value="0" class="form-check-input">@_localizer["Male"]
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Employee.Gender" id="genderFemale" value="1" class="form-check-input">@_localizer["Female"]
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="Employee.Address"></label>
+                                    <input asp-for="Employee.Address" class="form-control ">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Employee.Phone"></label>
+                                    <input asp-for="Employee.Phone" class="form-control ">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Employee.Mobile"></label>
+                                    <input asp-for="Employee.Mobile" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Photo"></label>
+                            <div class="profile-upload">
+                                <div class="upload-img">
+                                    <img alt="" src="~/assets/img/user.jpg" asp-append-version="true">
+                                </div>
+                                <div class="upload-input">
+                                    <input asp-for="Photo" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="display-block">@_localizer["Status"]</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="Employee.Active" id="doctor_active" value="True" checked>
+                        <label class="form-check-label" for="doctor_active">
+                            @_localizer["Active"]
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="Employee.Active" id="doctor_inactive" value="False">
+                        <label class="form-check-label" for="doctor_inactive">
+                            @_localizer["Inactive"]
+                        </label>
+                    </div>
+                </div>
+                <div class="m-t-20 text-center">
+                    <button class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+    $(function () {
+        $('#JoiningDate').datetimepicker({
+            format: 'YYYY-MM-DD'
+
+        });
+    });
+    </script>
+}

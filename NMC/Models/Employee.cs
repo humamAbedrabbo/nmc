@@ -73,6 +73,9 @@ namespace NMC.Models
         [Display(Name = "Active")]
         public bool Active { get; set; }
 
+        public string ActiveText => Active ? "Active" : "Inactive";
+        public string ActiveCSS => Active ? "status-green" : "status-red";
+
         public IEnumerable<Attendance> AttendanceSheets { get; set; }
     }
 }
