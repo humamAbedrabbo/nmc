@@ -75,8 +75,8 @@ namespace NMC.Models
         public string ActiveCSS => Active ? "status-green" : "status-red";
 
         public IEnumerable<DepartmentDoctor> DepartmentDoctors { get; set; }
-        public ICollection<DoctorEducation> EducationDetails { get; set; }
-        public ICollection<DoctorExperience> ExperienceDetails { get; set; }
+        public IEnumerable<DoctorEducation> EducationDetails { get; set; }
+        public IEnumerable<DoctorExperience> ExperienceDetails { get; set; }
         public IEnumerable<DoctorSchedule> Schedules { get; set; }
         public IEnumerable<Appointment> Appointments { get; set; }
 

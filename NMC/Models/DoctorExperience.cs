@@ -36,5 +36,11 @@ namespace NMC.Models
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? PeriodTo { get; set; }
+
+        [Display(Name = "Period From")]
+        public string FromStr => PeriodFrom.ToString("MMM yyyy");
+
+        [Display(Name = "Period To")]
+        public string ToStr => PeriodTo.HasValue ? PeriodTo.Value.ToString("MMM yyyy") : "Present";
     }
 }

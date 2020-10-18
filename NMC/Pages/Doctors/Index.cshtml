@@ -36,7 +36,7 @@
                             string photo = (doc.PhotoPath == "user.jpg" ? "assets/img/user.jpg" : $"images/{doc.PhotoPath}");
                             <tr>
                                 <td>@doc.Id</td>
-                                <td><img width="28" height="28" src="~/@photo" class="rounded-circle m-r-5" alt=""> @doc.Name</td>
+                                <td><a asp-page="/Doctors/Details" asp-route-id="@doc.Id"><img width="28" height="28" src="~/@photo" class="rounded-circle m-r-5" alt=""></a> @doc.Name</td>
                                 <td>@doc.Speciality</td>
                                 <td>@doc.Consultant</td>
                                 <td>@doc.Surgeon</td>
@@ -46,6 +46,7 @@
                                     <div class="dropdown dropdown-action">
                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                         <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" asp-page="/Doctors/Details" asp-route-id="@doc.Id"><i class="fa fa-info m-r-5"></i> @_localizer["Details"]</a>
                                             <a class="dropdown-item" asp-page="/Doctors/EditDoctor" asp-route-id="@doc.Id"><i class="fa fa-pencil m-r-5"></i> @_localizer["Edit"]</a>
                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_Doctor"><i class="fa fa-trash-o m-r-5"></i> @_localizer["Delete"]</a>
                                         </div>

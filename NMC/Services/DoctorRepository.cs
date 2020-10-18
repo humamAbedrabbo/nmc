@@ -48,6 +48,20 @@ namespace NMC.Services
             return await context.Doctors.FirstOrDefaultAsync(p => p.Id == id);
         }
 
+        public async Task<Doctor> GetDoctorDetails(int id)
+        {
+            return await context.Doctors
+                .Include(p => p.DepartmentDoctors).ThenInclude(p => p.Department)
+                .Include(p => p.ExperienceDetails)
+                .Include(p => p.EducationDetails)
+                .Include(p => p.Schedules)
+                .Include(p => p.Appointments).ThenInclude(p => p.Department)
+                .Include(p => p.Appointments).ThenInclude(p => p.Patient)
+                .Include(p => p.Appointments).ThenInclude(p => p.AppointmentType)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
         public async Task<DoctorSchedule> GetDoctorSchedule(int id)
         {
             return await context.DoctorSchedules

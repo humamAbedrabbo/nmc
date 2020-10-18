@@ -79,7 +79,7 @@ namespace NMC.Data
             builder.Entity<DepartmentDoctor>()
                 .HasOne(p => p.Department)
                 .WithMany(p => p.DepartmentDoctors)
-                .HasForeignKey(p => p.DoctorId)
+                .HasForeignKey(p => p.DepartmentId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
             builder.Entity<DepartmentRoom>()
@@ -91,7 +91,7 @@ namespace NMC.Data
             builder.Entity<DepartmentRoom>()
                 .HasOne(p => p.Department)
                 .WithMany(p => p.DepartmentRooms)
-                .HasForeignKey(p => p.RoomId)
+                .HasForeignKey(p => p.DepartmentId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
 
