@@ -44,7 +44,7 @@ namespace NMC.Pages.Admissions
             PatientsSelect = new SelectList(await admRepository.GetPatients(), "Id", "Name", Admission?.PatientId);
             DoctorsSelect = new SelectList(await admRepository.GetDoctors(), "Id", "Name", Admission?.ReferrerDoctorId);
             DepartmentsSelect = new SelectList(await admRepository.GetDepartments(), "Id", typeNameStr, Admission?.DepartmentId);
-            ReservationsSelect = new SelectList(await admRepository.GetReservations(), "Id", typeNameStr, Admission?.ReservationId);
+            ReservationsSelect = new SelectList(await admRepository.GetReservations(), "Id", "RoomNo", Admission?.ReservationId);
         }
 
         public async Task<IActionResult> OnPost()

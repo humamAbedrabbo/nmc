@@ -552,5 +552,12 @@ msgid "Present"
 msgstr "اليوم الحالي"
 msgid "Make Appointment"
 msgstr "حجز موعد"
+msgid "Current Admission"
+msgstr "القبول الحالي"
+msgid "Medical History"
+msgstr "التاريخ المرضي"
+msgid "Allergy"
+msgstr "الحساسية"
+
 
 

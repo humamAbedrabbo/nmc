@@ -33,6 +33,17 @@ namespace NMC.Services
             return await context.Patients.FirstOrDefaultAsync(p => p.Id == id);
         }
 
+        public async Task<Patient> GetPatientDetails(int id)
+        {
+            return await context.Patients
+                .Include(p => p.Admissions).ThenInclude(p => p.AdmissionType)
+                .Include(p => p.Admissions).ThenInclude(p => p.Department)
+                .Include(p => p.Appointments).ThenInclude(p => p.AppointmentType)
+                .Include(p => p.Appointments).ThenInclude(p => p.Doctor)
+                .Include(p => p.Appointments).ThenInclude(p => p.Department)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
         public async Task<Patient> UpdatePatient(Patient obj)
         {
             var entry = context.Patients.Attach(obj);

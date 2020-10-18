@@ -9,6 +9,7 @@ namespace NMC.Services
         Task<IEnumerable<Patient>> GetAllPatients();
         Task<Patient> AddPatient(Patient obj);
         Task<Patient> GetPatient(int id);
+        Task<Patient> GetPatientDetails(int id);
         Task<Patient> UpdatePatient(Patient obj);
     }
 }
