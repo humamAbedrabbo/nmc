@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace NMC.Migrations.SqlServer
+namespace NMC.Migrations.Postgres
 {
-    public partial class Add_InitialSchema : Migration
+    public partial class Add_InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +13,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(maxLength: 75, nullable: false),
                     NameAr = table.Column<string>(maxLength: 75, nullable: false)
                 },
@@ -26,7 +27,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(maxLength: 75, nullable: false),
                     NameAr = table.Column<string>(maxLength: 75, nullable: false)
                 },
@@ -40,7 +41,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(maxLength: 75, nullable: false),
                     NameAr = table.Column<string>(maxLength: 75, nullable: false)
                 },
@@ -54,7 +55,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(maxLength: 75, nullable: false),
                     NameAr = table.Column<string>(maxLength: 75, nullable: false)
                 },
@@ -68,7 +69,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FirstName = table.Column<string>(maxLength: 75, nullable: false),
                     LastName = table.Column<string>(maxLength: 75, nullable: false),
                     Gender = table.Column<int>(nullable: false),
@@ -96,7 +97,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(maxLength: 75, nullable: false),
                     NameAr = table.Column<string>(maxLength: 75, nullable: false)
                 },
@@ -110,7 +111,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Module = table.Column<int>(nullable: false),
                     Username = table.Column<string>(nullable: true),
                     ReceiveNotification = table.Column<bool>(nullable: false)
@@ -125,7 +126,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Date = table.Column<DateTime>(nullable: false),
                     NotificationType = table.Column<int>(nullable: false),
                     Message = table.Column<string>(nullable: true),
@@ -144,7 +145,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FirstName = table.Column<string>(maxLength: 75, nullable: false),
                     LastName = table.Column<string>(maxLength: 75, nullable: false),
                     FatherName = table.Column<string>(maxLength: 75, nullable: true),
@@ -176,7 +177,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true)
@@ -191,7 +192,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(maxLength: 75, nullable: false),
                     NameAr = table.Column<string>(maxLength: 75, nullable: false),
                     Description = table.Column<string>(maxLength: 200, nullable: true)
@@ -206,7 +207,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(maxLength: 75, nullable: false),
                     NameAr = table.Column<string>(maxLength: 75, nullable: false)
                 },
@@ -220,7 +221,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserName = table.Column<string>(maxLength: 256, nullable: false),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
@@ -247,7 +248,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DepartmentId = table.Column<int>(nullable: false),
                     DoctorId = table.Column<int>(nullable: false)
                 },
@@ -273,7 +274,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DoctorId = table.Column<int>(nullable: false),
                     Institution = table.Column<string>(maxLength: 100, nullable: false),
                     Subject = table.Column<string>(maxLength: 100, nullable: true),
@@ -298,7 +299,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DoctorId = table.Column<int>(nullable: false),
                     Company = table.Column<string>(maxLength: 100, nullable: false),
                     Location = table.Column<string>(maxLength: 50, nullable: true),
@@ -322,7 +323,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FromDate = table.Column<DateTime>(nullable: false),
                     ThruDate = table.Column<DateTime>(nullable: true),
                     DoctorId = table.Column<int>(nullable: false),
@@ -347,7 +348,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FirstName = table.Column<string>(maxLength: 75, nullable: false),
                     LastName = table.Column<string>(maxLength: 75, nullable: false),
                     Gender = table.Column<int>(nullable: false),
@@ -385,7 +386,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     NotificationId = table.Column<int>(nullable: false),
                     Username = table.Column<string>(nullable: true),
                     Unread = table.Column<bool>(nullable: false),
@@ -407,7 +408,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     AppointmentTypeId = table.Column<int>(nullable: false),
                     AppointmentDate = table.Column<DateTime>(nullable: false),
                     StartTime = table.Column<string>(maxLength: 20, nullable: false),
@@ -455,7 +456,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     RoleId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -476,7 +477,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     RoomNo = table.Column<string>(maxLength: 10, nullable: false),
                     FloorNo = table.Column<int>(nullable: false),
                     RoomTypeId = table.Column<int>(nullable: false),
@@ -507,7 +508,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -592,7 +593,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Date = table.Column<DateTime>(nullable: false),
                     EmployeeId = table.Column<int>(nullable: false)
                 },
@@ -612,7 +613,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DepartmentId = table.Column<int>(nullable: false),
                     RoomId = table.Column<int>(nullable: false)
                 },
@@ -638,7 +639,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     RoomNo = table.Column<string>(maxLength: 10, nullable: true),
                     GradeId = table.Column<int>(nullable: true),
                     BedNo = table.Column<string>(maxLength: 10, nullable: true),
@@ -686,7 +687,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PatientId = table.Column<int>(nullable: false),
                     AdmissionTypeId = table.Column<int>(nullable: false),
                     FileNo = table.Column<string>(maxLength: 50, nullable: true),
@@ -752,7 +753,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     InvoiceNo = table.Column<string>(maxLength: 50, nullable: false),
                     ReservationId = table.Column<int>(nullable: true),
                     AdmissionId = table.Column<int>(nullable: true),
@@ -783,7 +784,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     InvoiceId = table.Column<int>(nullable: false),
                     Description = table.Column<string>(maxLength: 200, nullable: false),
                     PurchaseFrom = table.Column<string>(maxLength: 100, nullable: true),
@@ -809,7 +810,7 @@ namespace NMC.Migrations.SqlServer
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     InvoiceId = table.Column<int>(nullable: false),
                     PaidDate = table.Column<DateTime>(nullable: false),
                     PaidAmount = table.Column<decimal>(type: "money", nullable: false),
@@ -931,7 +932,7 @@ namespace NMC.Migrations.SqlServer
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "6af42d9c-35b4-4206-9cc8-4014f4dde268", "admin@localhost", false, false, null, "ADMIN@LOCALHOST", "ADMIN", "AQAAAAEAACcQAAAAEMw+jDbhxHvkywdj4Hxl+nPnjLZ3yjQsWjYszOwEzEYEejBKZ061gLojUkAxK6cb0A==", null, false, "cc4c1a6c-e7cb-4251-a349-8e4cd90d0890", false, "admin" });
+                values: new object[] { 1, 0, "c151ff10-2e94-4542-9547-39cfa523a51e", "admin@localhost", false, false, null, "ADMIN@LOCALHOST", "ADMIN", "AQAAAAEAACcQAAAAEKtk+/AL68M+E+jqmCnsYWZ+RqxoPQK6iSmR7RccOftJtXc11lBTuIkyV0t50/GgjA==", null, false, "b8c1dc63-90fd-40fe-8225-aaa1161819ee", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "UserClaims",
@@ -1082,8 +1083,7 @@ namespace NMC.Migrations.SqlServer
                 name: "RoleNameIndex",
                 table: "Roles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rooms_RoomGradeId",
@@ -1124,8 +1124,7 @@ namespace NMC.Migrations.SqlServer
                 name: "UserNameIndex",
                 table: "Users",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
