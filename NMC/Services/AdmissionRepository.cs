@@ -47,6 +47,19 @@ namespace NMC.Services
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
 
+        public async Task<Admission> GetAdmissionDetails(int id)
+        {
+            return await context.Admissions
+                .Include(p => p.ReferrerDoctor)
+                .Include(p => p.Patient)
+                .Include(p => p.Department)
+                .Include(p => p.AdmissionType)
+                .Include(p => p.DischargeType)
+                .Include(p => p.Reservation)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
         public async Task<IEnumerable<Doctor>> GetDoctors()
         {
             return await context.Doctors.AsNoTracking().ToListAsync();

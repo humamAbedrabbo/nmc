@@ -13,6 +13,7 @@ namespace NMC.Services
         Task<IEnumerable<Reservation>> GetReservations();
         Task<Admission> AddAdmission(Admission obj);
         Task<Admission> GetAdmission(int id);
+        Task<Admission> GetAdmissionDetails(int id);
         Task<Admission> UpdateAdmission(Admission obj);
     }
 }
