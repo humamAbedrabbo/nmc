@@ -99,13 +99,13 @@
                 </form>
                 <form method="post" id="chnageLang" class="form-inline" asp-page="/Index">
                     <input name="lang" value="ar" type="hidden" />
-                    <button id="logout" type="submit" class="dropdown-item">Arabic</button>
+                    <button id="logout" type="submit" class="dropdown-item">@_localizer["Arabic"]</button>
                 </form>
-                <a class="dropdown-item" href="#">My Profile</a>
-                <a class="dropdown-item" href="#">Edit Profile</a>
-                <a class="dropdown-item" href="#">Settings</a>
+                <a class="dropdown-item" href="#">@_localizer["My Profile"]</a>
+                <a class="dropdown-item" href="#">@_localizer["Edit Profile"]</a>
+                <a class="dropdown-item" href="#">@_localizer["Settings"]</a>
                 <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-                    <button id="logout" type="submit" class="dropdown-item">Logout</button>
+                    <button id="logout" type="submit" class="dropdown-item">@_localizer["Logout"]</button>
                 </form>
             </div>
         </li>
@@ -113,10 +113,18 @@
     <div class="dropdown mobile-user-menu float-right">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
         <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="#">My Profile</a>
-            <a class="dropdown-item" href="#">Edit Profile</a>
-            <a class="dropdown-item" href="#">Settings</a>
-            <a class="dropdown-item" href="#">Logout</a>
+            <form method="post" id="chnageLang" class="form-inline" asp-page="/Index">
+                <input name="lang" value="en" type="hidden" />
+                <button id="logout" type="submit" class="dropdown-item">@_localizer["English"]</button>
+            </form>
+            <form method="post" id="chnageLang" class="form-inline" asp-page="/Index">
+                <input name="lang" value="ar" type="hidden" />
+                <button id="logout" type="submit" class="dropdown-item">@_localizer["Arabic"]</button>
+            </form>
+            <a class="dropdown-item" href="#">@_localizer["My Profile"]</a>
+            <a class="dropdown-item" href="#">@_localizer["Edit Profile"]</a>
+            <a class="dropdown-item" href="#">@_localizer["Settings"]</a>
+            <a class="dropdown-item" href="#">@_localizer["Logout"]</a>
         </div>
     </div>
 </div>

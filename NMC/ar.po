@@ -558,6 +558,8 @@ msgid "Medical History"
 msgstr "التاريخ المرضي"
 msgid "Allergy"
 msgstr "الحساسية"
-
-
+msgid "Arabic"
+msgstr "عربية"
+msgid "English"
+msgstr "انجليزية"
 
