@@ -120,11 +120,11 @@ namespace NMC
 
             app.UseAuthorization();
 
-            //app.Use(async (context, next) =>
-            //{
-            //    context.Request.QueryString = context.Request.QueryString.Add("culture", context.User.GetUserLanguage());
-            //    await next();
-            //});
+            app.Use(async (context, next) =>
+            {
+                context.Request.QueryString = context.Request.QueryString.Add("culture", context.User.GetUserLanguage());
+                await next();
+            });
 
             app.UseEndpoints(endpoints =>
             {
