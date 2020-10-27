@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
@@ -35,6 +37,14 @@ namespace NMC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            if(!string.IsNullOrEmpty(Configuration["KnownProxy"]))
+            {
+                services.Configure<ForwardedHeadersOptions>(options =>
+                {
+                    options.KnownProxies.Add(IPAddress.Parse(Configuration["KnownProxy"]));
+                });
+            }
+
             services.AddRazorPages(x => x.Conventions.AuthorizeFolder("/"))
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization();
@@ -100,6 +110,11 @@ namespace NMC
             app.UseRequestLocalization();
 
             app.UseRouting();
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
 
             app.UseAuthentication();
 
