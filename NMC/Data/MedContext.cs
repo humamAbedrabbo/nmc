@@ -134,6 +134,9 @@ namespace NMC.Data
                 new IdentityUserClaim<int> { Id = 1, UserId = 1, ClaimType = "Language", ClaimValue = "en" }
                 );
 
+            builder.Entity<Department>()
+                .Property(p => p.Id)
+                .HasIdentityOptions(startValue: 100);
 
             builder.Entity<Department>().HasData(
                 new Department { Id = 1, Name = "Administration", NameAr = "الادارة" },
@@ -158,6 +161,9 @@ namespace NMC.Data
                 new Department { Id = 20, Name = "Surgery", NameAr = "قسم العمليات" }
                 );
 
+            builder.Entity<AppointmentType>()
+                .Property(p => p.Id)
+                .HasIdentityOptions(startValue: 100);
             builder.Entity<AppointmentType>().HasData(
                 new AppointmentType { Id = 1, Name = "Routine checkup", NameAr = "فحص روتيني" },
                 new AppointmentType { Id = 2, Name = "Consulting", NameAr = "استشارة طبية" },
@@ -168,12 +174,18 @@ namespace NMC.Data
                 new AppointmentType { Id = 7, Name = "Other", NameAr = "نوع آخر" }
                 );
 
+            builder.Entity<AdmissionType>()
+                .Property(p => p.Id)
+                .HasIdentityOptions(startValue: 100);
             builder.Entity<AdmissionType>().HasData(
                 new AdmissionType { Id = 1, Name = "Normal", NameAr = "عادي"},
                 new AdmissionType { Id = 2, Name = "Emergency", NameAr = "إسعاف"},
                 new AdmissionType { Id = 3, Name = "Accident", NameAr = "حادث"}
                 );
 
+            builder.Entity<DischargeType>()
+                .Property(p => p.Id)
+                .HasIdentityOptions(startValue: 100);
             builder.Entity<DischargeType>().HasData(
                 new DischargeType { Id = 1, Name = "Healing", NameAr = "شفاء" },
                 new DischargeType { Id = 2, Name = "Improvement", NameAr = "تحسن" },
@@ -182,6 +194,9 @@ namespace NMC.Data
                 new DischargeType { Id = 5, Name = "Other", NameAr = "أخرى" }
                 );
 
+            builder.Entity<EmployeeType>()
+                .Property(p => p.Id)
+                .HasIdentityOptions(startValue: 100);
             builder.Entity<EmployeeType>().HasData(
                 new EmployeeType { Id = 1, Name = "Doctor", NameAr = "طبيب" },
                 new EmployeeType { Id = 2, Name = "Nurse", NameAr = "ممرض" },
@@ -195,6 +210,9 @@ namespace NMC.Data
                 new EmployeeType { Id = 10, Name = "Cleaner", NameAr = "عامل تنظيف" }
                 );
 
+            builder.Entity<RoomGrade>()
+                .Property(p => p.Id)
+                .HasIdentityOptions(startValue: 100);
             builder.Entity<RoomGrade>().HasData(
                 new RoomGrade { Id = 1, Name = "Suite", NameAr = "جناح" },
                 new RoomGrade { Id = 2, Name = "Excellent Class", NameAr = "درجة ممتازة" },
@@ -202,6 +220,9 @@ namespace NMC.Data
                 new RoomGrade { Id = 4, Name = "Second Class", NameAr = "درجة ثانية" }
                 );
 
+            builder.Entity<RoomType>()
+                .Property(p => p.Id)
+                .HasIdentityOptions(startValue: 100);
             builder.Entity<RoomType>().HasData(
                 new RoomType { Id = 1, Name = "Patient Room", NameAr = "غرفة مريض" },
                 new RoomType { Id = 2, Name = "Emergency Room", NameAr = "غرفة طوارئ" },

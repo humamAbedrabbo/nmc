@@ -17,7 +17,7 @@ namespace NMC.Services
 
         public async Task<Department> AddDepartment(Department obj)
         {
-            obj.Id = 0;
+            //obj.Id = 0;
             context.Departments.Add(obj);
             await context.SaveChangesAsync();
             return obj;
