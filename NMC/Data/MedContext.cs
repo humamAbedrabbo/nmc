@@ -140,25 +140,25 @@ namespace NMC.Data
 
             builder.Entity<Department>().HasData(
                 new Department { Id = 1, Name = "Administration", NameAr = "الادارة" },
-                new Department { Id = 2, Name = "Accounting", NameAr = "قسم المحاسبة" },
-                new Department { Id = 3, Name = "Pediatrics and Baby incubator", NameAr = "قسم طب الأطفال وال الحاضنات" },
-                new Department { Id = 4, Name = "Internal", NameAr = "قسم الداخلية" },
-                new Department { Id = 5, Name = "Care", NameAr = "قسم العناية" },
-                new Department { Id = 6, Name = "Women", NameAr = "قسم النسائية" },
+                new Department { Id = 2, Name = "Financial and Accounting Department ", NameAr = "الإدارة المالية و قسم المحاسبة" },
+                new Department { Id = 3, Name = "Pediatric Department -  Incubators section (NICU)", NameAr = "جناح الأطفال - قسم الحواضن" },
+                new Department { Id = 4, Name = "Internal Medicine", NameAr = "قسم الداخلية الباطنية" },
+                new Department { Id = 5, Name = "Intensive Care Unite (ICU)", NameAr = "قسم العناية المشددة" },
+                new Department { Id = 6, Name = "Obstetric & Genecology", NameAr = "جناح النسائية والمخاض" },
                 new Department { Id = 7, Name = "Dialysis", NameAr = "قسم غسيل الكلى" },
                 new Department { Id = 8, Name = "Arthroscopy", NameAr = "قسم التنظير" },
-                new Department { Id = 9, Name = "Cardiac and catheter", NameAr = "قسم القلبية والقسطرة" },
+                new Department { Id = 9, Name = "Cath Lab - Cardiovascular (CCU)", NameAr = "قسم العناية القلبة والقثطرة القلبية" },
                 new Department { Id = 10, Name = "Blood vessels", NameAr = "قسم الأوعية" },
-                new Department { Id = 11, Name = "Urine", NameAr = "قسم البولية" },
-                new Department { Id = 12, Name = "Chest", NameAr = "قسم الصدرية" },
-                new Department { Id = 13, Name = "Kitchen", NameAr = "المطبخ" },
-                new Department { Id = 14, Name = "Emergency", NameAr = "الطوارئ" },
-                new Department { Id = 15, Name = "Maintenance", NameAr = "قسم الصيانة" },
-                new Department { Id = 16, Name = "Lab", NameAr = "المخبر" },
-                new Department { Id = 17, Name = "Radiology", NameAr = "الصور الشعاعية" },
-                new Department { Id = 18, Name = "Warehouse", NameAr = "المستودع" },
+                new Department { Id = 11, Name = "Urology", NameAr = "قسم البولية" },
+                new Department { Id = 12, Name = "Respiratory System Diseases", NameAr = "أمراض الجهاز التنفسي" },
+                new Department { Id = 13, Name = "Catering section", NameAr = "قسم الإطعام" },
+                new Department { Id = 14, Name = "Emergency (ER)", NameAr = "قسم الإسعاف والطوارئ" },
+                new Department { Id = 15, Name = "Maintenance Department", NameAr = "قسم الصيانة" },
+                new Department { Id = 16, Name = "Laboratory", NameAr = "المخبر" },
+                new Department { Id = 17, Name = "Radiography", NameAr = "قسم التصوير الشعاعي" },
+                new Department { Id = 18, Name = "Medical warehouse", NameAr = "المستودع الطبي" },
                 new Department { Id = 19, Name = "Pharmacy", NameAr = "الصيدلية" },
-                new Department { Id = 20, Name = "Surgery", NameAr = "قسم العمليات" }
+                new Department { Id = 20, Name = "Operation Rooms (OR)", NameAr = "جناح العمليات" }
                 );
 
             builder.Entity<AppointmentType>()
