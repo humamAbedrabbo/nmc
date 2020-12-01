@@ -1,0 +1,50 @@
+﻿@page
+@model IndexModel
+
+@inject IViewLocalizer _localizer
+
+@{
+    ViewData["Title"] = _localizer["Home page"];
+    ViewData["HasChart"] = true;
+}
+
+<div class="content">
+
+
+    @if (User.IsAdmin())
+    {
+        <partial name="_DashAdmin" />
+    }
+
+    @if (User.IsManagement())
+    {
+        <h1>MGT</h1>
+    }
+
+    @if (User.IsDoctor())
+    {
+        <h1>DOCTOR</h1>
+    }
+
+    @if (User.IsLabDoctor())
+    {
+        <h1>LABD</h1>
+    }
+
+    @if (User.IsLabTech())
+    {
+        <h1>LABT</h1>
+    }
+
+    @if (User.IsAccountant())
+    {
+        <h1>ACT</h1>
+    }
+
+    @if (User.IsFrontDesk())
+    {
+        <h1>FD</h1>
+    }
+
+
+</div>

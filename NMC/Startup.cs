@@ -12,12 +12,13 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NMC.Data;
 using NMC.Extensions;
-
-using NMC.Services;
+using NMC.Models;
 
 namespace NMC
 {
@@ -26,24 +27,37 @@ namespace NMC
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            //cultures = supportedCultures.Select(x => new CultureInfo(x)).ToArray();
         }
-
-        //private string[] supportedCultures = new[] { "en", "ar" };
-        //private CultureInfo[] cultures;
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            if(!string.IsNullOrEmpty(Configuration["KnownProxy"]))
+            if (!string.IsNullOrEmpty(Configuration["KnownProxy"]))
             {
                 services.Configure<ForwardedHeadersOptions>(options =>
                 {
                     options.KnownProxies.Add(IPAddress.Parse(Configuration["KnownProxy"]));
                 });
             }
+
+            services.AddDbContextPool<MedContext>(options =>
+                // options.UseSqlServer(context.Configuration.GetConnectionString("MedContextConnection"))
+                options.UseNpgsql(Configuration.GetConnectionString("Med"))
+                );
+
+            services.AddDefaultIdentity<AppUser>(options => {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.User.RequireUniqueEmail = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            })
+                .AddRoles<AppRole>()
+                .AddEntityFrameworkStores<MedContext>();
 
             services.AddRazorPages(x => x.Conventions.AuthorizeFolder("/"))
                 .AddViewLocalization()
@@ -78,15 +92,7 @@ namespace NMC
                 options.AppendTrailingSlash = true;
             });
 
-            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-            services.AddScoped<ITypesRepository, TypesRepository>();
-            services.AddScoped<IDoctorRepository, DoctorRepository>();
-            services.AddScoped<IPatientRepository, PatientRepository>();
-            services.AddScoped<IRoomRepository, RoomRepository>();
-            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
-            services.AddScoped<IReservationRepository, ReservationRepository>();
-            services.AddScoped<IAdmissionRepository, AdmissionRepository>();
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -95,6 +101,7 @@ namespace NMC
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
             }
             else
             {
@@ -106,9 +113,6 @@ namespace NMC
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-
-            app.UseRequestLocalization();
-
             app.UseRouting();
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
@@ -117,7 +121,6 @@ namespace NMC
             });
 
             app.UseAuthentication();
-
             app.UseAuthorization();
 
             app.Use(async (context, next) =>
@@ -128,7 +131,6 @@ namespace NMC
 
             app.UseEndpoints(endpoints =>
             {
-                
                 endpoints.MapRazorPages();
             });
         }
