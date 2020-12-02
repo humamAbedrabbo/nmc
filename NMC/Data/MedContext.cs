@@ -15,6 +15,15 @@ namespace NMC.Data
         {
         }
 
+        // Reference Entity Types
+        public DbSet<RoleType> RoleTypes { get; set; }
+        
+        // Domain Entities
+        public DbSet<Party> Parties { get; set; }
+        public DbSet<Person> People { get; set; }
+        public DbSet<Organization> Organizations { get; set; }
+        public DbSet<PartyRole> PartyRoles { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -34,6 +43,31 @@ namespace NMC.Data
 
             // Master Seed
 
+            SeedRoles(builder);
+
+            SeedUser(builder, "admin", "ADMIN");
+            SeedUser(builder, "fd", "FD");
+            SeedUser(builder, "act", "ACT");
+            SeedUser(builder, "mgt", "MGT");
+
+            SeedRoleTypes(builder);
+
+        }
+
+        private static void SeedRoleTypes(ModelBuilder builder)
+        {
+            var roleTypes = new[] {
+                new RoleType { Id = "DEPT", Name = "Department" },
+                new RoleType { Id = "DOCTOR", Name = "Doctor" },
+                new RoleType { Id = "IN-PATIENT", Name = "In-Patient" },
+                new RoleType { Id = "OUT-PATIENT", Name = "Out-Patient" },
+                new RoleType { Id = "EMP", Name = "Employee" },
+            };
+            builder.Entity<RoleType>().HasData(roleTypes);
+        }
+
+        private static void SeedRoles(ModelBuilder builder)
+        {
             var roles = new[]
             {
                 new AppRole { Id = "ADMIN", Name = "Admin", NormalizedName = "ADMIN" },
@@ -46,11 +80,6 @@ namespace NMC.Data
             };
 
             builder.Entity<AppRole>().HasData(roles);
-
-            SeedUser(builder, "admin", "ADMIN");
-            SeedUser(builder, "fd", "FD");
-            SeedUser(builder, "act", "ACT");
-            SeedUser(builder, "mgt", "MGT");
         }
 
         private static int claimId = 1;
