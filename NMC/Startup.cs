@@ -111,8 +111,9 @@ namespace NMC
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
+            app.UseStaticFiles();
+            app.UseRequestLocalization();
             app.UseRouting();
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
