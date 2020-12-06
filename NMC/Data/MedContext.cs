@@ -53,6 +53,7 @@ namespace NMC.Data
             SeedUser(builder, "management", new[] { SystemRole.Management });
             SeedUser(builder, "managerdoctor", new[] { SystemRole.Management, SystemRole.Doctor });
             SeedUser(builder, "accountant", new[] { SystemRole.Accounting });
+            SeedUser(builder, "doctor", new[] { SystemRole.Doctor });
 
         }
 
