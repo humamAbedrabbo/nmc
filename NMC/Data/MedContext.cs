@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using NMC.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace NMC.Data
@@ -32,13 +33,37 @@ namespace NMC.Data
                 .HasName("AK_Username");
 
             // seed roles and admin user
+            builder
+            .Entity<AppRole>().HasData(
+                Enum.GetValues(typeof(SystemRole))
+                    .Cast<SystemRole>()
+                    .Select(e => new AppRole()
+                    {
+                        Id = e.ToString(),
+                        Name = e.ToString(),
+                        NormalizedName = e.ToString(),
+                    })
+            );
+            
+            SeedUser(builder, "admin", new[] { SystemRole.Administration });
+            SeedUser(builder, "admission", new[] { SystemRole.Admission });
+            SeedUser(builder, "reception", new[] { SystemRole.Reception });
+            SeedUser(builder, "lab", new[] { SystemRole.Laboratory });
+            SeedUser(builder, "labdoctor", new[] { SystemRole.Laboratory, SystemRole.Doctor });
+            SeedUser(builder, "management", new[] { SystemRole.Management });
+            SeedUser(builder, "managerdoctor", new[] { SystemRole.Management, SystemRole.Doctor });
+            SeedUser(builder, "accountant", new[] { SystemRole.Accounting });
 
+        }
+
+        private static AppUser SeedUser(ModelBuilder builder, string username, SystemRole[] roles)
+        {
             var user = new AppUser
             {
-                UserName = "admin",
-                NormalizedUserName = "ADMIN",
-                Email = "admin@hospital",
-                NormalizedEmail = "ADMIN@HOSPITAL",
+                UserName = username,
+                NormalizedUserName = username.ToUpper(),
+                Email = $"{username}@hospital",
+                NormalizedEmail = $"{username}@hospital".ToUpper(),
                 SecurityStamp = Guid.NewGuid().ToString("D"),
                 ConcurrencyStamp = Guid.NewGuid().ToString("D")
             };
@@ -46,8 +71,9 @@ namespace NMC.Data
             var hasher = new PasswordHasher<AppUser>();
             user.PasswordHash = hasher.HashPassword(user, "123456");
             builder.Entity<AppUser>().HasData(user);
+            builder.Entity<IdentityUserRole<string>>().HasData(roles.Select(role => new IdentityUserRole<string> { RoleId = role.ToString(), UserId = user.Id }));
+
+            return user;
         }
-
-
     }
 }

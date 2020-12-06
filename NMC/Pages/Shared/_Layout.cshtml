@@ -40,7 +40,46 @@
     <div class="main-wrapper">
 
         <partial name="_Header" />
-        <partial name="_Sidebar" />
+        @*<partial name="_Sidebar" />*@
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                @if (User.IsInRole(SystemRole.Administration.ToString()))
+                {
+                    <partial name="_SBAdministration" />
+                }
+
+                @if (User.IsInRole(SystemRole.Management.ToString()))
+                {
+                    <partial name="_SBManagement" />
+                }
+
+                @if (User.IsInRole(SystemRole.Admission.ToString()))
+                {
+                    <partial name="_SBAdmission" />
+                }
+
+                @if (User.IsInRole(SystemRole.Accounting.ToString()))
+                {
+                    <partial name="_SBAccounting" />
+                }
+
+                @if (User.IsInRole(SystemRole.Reception.ToString()))
+                {
+                    <partial name="_SBReception" />
+                }
+
+                @if (User.IsInRole(SystemRole.Laboratory.ToString()))
+                {
+                    <partial name="_SBLaboratory" />
+                }
+
+                @if (User.IsInRole(SystemRole.Doctor.ToString()))
+                {
+                    <partial name="_SBDoctor" />
+                }
+            </div>
+        </div>
+
         <div class="page-wrapper">
             @RenderBody()
             <partial name="_Notifications" />
