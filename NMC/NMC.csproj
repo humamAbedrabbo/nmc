@@ -1,77 +1,147 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>aspnet-NMC-FD49E39E-706E-4436-8991-0006193F9423</UserSecretsId>
+    <AssemblyName>NMC</AssemblyName>
   </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Bogus" Version="32.0.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.0" />
-		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0" />
-		<PackageReference Include="OrchardCore.Localization.Core" Version="1.0.0-rc2-13450" />
-	</ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\Postgres\20201104120207_Update_Departments_PK.cs" />
+    <Compile Remove="Migrations\Postgres\20201104120207_Update_Departments_PK.Designer.cs" />
+  </ItemGroup>
 
-	<ItemGroup>
-	  <Content Update="Areas\Identity\Pages\_ViewStart.cshtml">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Update="Pages\Shared\_Layout.cshtml">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Update="Pages\Shared\_LoginPartial.cshtml">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Update="Pages\Shared\_Notifications.cshtml">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Update="Pages\Shared\_Sidebar.cshtml">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	  <Content Update="Pages\Shared\_ValidationScriptsPartial.cshtml">
-	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-	  </Content>
-	</ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\assets.html" />
+  </ItemGroup>
 
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Pages\Shared\_Header.cshtml" />
-	</ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\activities.html" />
+    <None Include="wwwroot\add-appointment.html" />
+    <None Include="wwwroot\add-asset.html" />
+    <None Include="wwwroot\add-blog.html" />
+    <None Include="wwwroot\add-department.html" />
+    <None Include="wwwroot\add-doctor.html" />
+    <None Include="wwwroot\add-employee.html" />
+    <None Include="wwwroot\add-expense.html" />
+    <None Include="wwwroot\add-holiday.html" />
+    <None Include="wwwroot\add-leave-type.html" />
+    <None Include="wwwroot\add-leave.html" />
+    <None Include="wwwroot\add-patient.html" />
+    <None Include="wwwroot\add-provident-fund.html" />
+    <None Include="wwwroot\add-role.html" />
+    <None Include="wwwroot\add-salary.html" />
+    <None Include="wwwroot\add-schedule.html" />
+    <None Include="wwwroot\add-tax.html" />
+    <None Include="wwwroot\appointments.html" />
+    <None Include="wwwroot\assets.html" />
+    <None Include="wwwroot\attendance.html" />
+    <None Include="wwwroot\blank-page.html" />
+    <None Include="wwwroot\blog-details.html" />
+    <None Include="wwwroot\blog.html" />
+    <None Include="wwwroot\calendar.html" />
+    <None Include="wwwroot\change-password.html" />
+    <None Include="wwwroot\change-password2.html" />
+    <None Include="wwwroot\chat.html" />
+    <None Include="wwwroot\compose.html" />
+    <None Include="wwwroot\create-invoice.html" />
+    <None Include="wwwroot\departments.html" />
+    <None Include="wwwroot\doctors.html" />
+    <None Include="wwwroot\edit-appointment.html" />
+    <None Include="wwwroot\edit-asset.html" />
+    <None Include="wwwroot\edit-blog.html" />
+    <None Include="wwwroot\edit-department.html" />
+    <None Include="wwwroot\edit-doctor.html" />
+    <None Include="wwwroot\edit-employee.html" />
+    <None Include="wwwroot\edit-expense.html" />
+    <None Include="wwwroot\edit-holiday.html" />
+    <None Include="wwwroot\edit-invoice.html" />
+    <None Include="wwwroot\edit-leave-type.html" />
+    <None Include="wwwroot\edit-leave.html" />
+    <None Include="wwwroot\edit-patient.html" />
+    <None Include="wwwroot\edit-profile.html" />
+    <None Include="wwwroot\edit-provident-fund.html" />
+    <None Include="wwwroot\edit-role.html" />
+    <None Include="wwwroot\edit-salary.html" />
+    <None Include="wwwroot\edit-schedule.html" />
+    <None Include="wwwroot\edit-tax.html" />
+    <None Include="wwwroot\email-settings.html" />
+    <None Include="wwwroot\employees.html" />
+    <None Include="wwwroot\error-404.html" />
+    <None Include="wwwroot\error-500.html" />
+    <None Include="wwwroot\expense-reports.html" />
+    <None Include="wwwroot\expenses.html" />
+    <None Include="wwwroot\forgot-password.html" />
+    <None Include="wwwroot\form-basic-inputs.html" />
+    <None Include="wwwroot\form-horizontal.html" />
+    <None Include="wwwroot\form-input-groups.html" />
+    <None Include="wwwroot\form-vertical.html" />
+    <None Include="wwwroot\gallery.html" />
+    <None Include="wwwroot\holidays.html" />
+    <None Include="wwwroot\inbox.html" />
+    <None Include="wwwroot\incoming-call.html" />
+    <None Include="wwwroot\index-2.html" />
+    <None Include="wwwroot\index.html" />
+    <None Include="wwwroot\index2.html" />
+    <None Include="wwwroot\invoice-reports.html" />
+    <None Include="wwwroot\invoice-settings.html" />
+    <None Include="wwwroot\invoice-view.html" />
+    <None Include="wwwroot\invoices.html" />
+    <None Include="wwwroot\leave-type.html" />
+    <None Include="wwwroot\leaves.html" />
+    <None Include="wwwroot\localization.html" />
+    <None Include="wwwroot\lock-screen.html" />
+    <None Include="wwwroot\login.html" />
+    <None Include="wwwroot\mail-view.html" />
+    <None Include="wwwroot\notifications-settings.html" />
+    <None Include="wwwroot\patients.html" />
+    <None Include="wwwroot\payments.html" />
+    <None Include="wwwroot\profile.html" />
+    <None Include="wwwroot\provident-fund.html" />
+    <None Include="wwwroot\register.html" />
+    <None Include="wwwroot\roles-permissions.html" />
+    <None Include="wwwroot\salary-settings.html" />
+    <None Include="wwwroot\salary-view.html" />
+    <None Include="wwwroot\salary.html" />
+    <None Include="wwwroot\schedule.html" />
+    <None Include="wwwroot\settings.html" />
+    <None Include="wwwroot\tables-basic.html" />
+    <None Include="wwwroot\tables-datatables.html" />
+    <None Include="wwwroot\tabs.html" />
+    <None Include="wwwroot\taxes.html" />
+    <None Include="wwwroot\theme-settings.html" />
+    <None Include="wwwroot\typography.html" />
+    <None Include="wwwroot\uikit.html" />
+    <None Include="wwwroot\video-call.html" />
+    <None Include="wwwroot\voice-call.html" />
+  </ItemGroup>
 
-	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Login.cshtml" />
-	  <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
-	  <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
-	  <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewImports.cshtml" />
-	  <_ContentIncludedByDefault Remove="Pages\Shared\_Header.cshtml" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="32.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0" />
+    <PackageReference Include="OrchardCore.Localization.Core" Version="1.0.0-rc2-13450" />
+  </ItemGroup>
 
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
-	</ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\SharedResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SharedResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
 
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Areas\Identity\Pages\Account\Login.cshtml" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <UpToDateCheckInput Remove="Areas\Identity\Pages\_ViewImports.cshtml" />
-	</ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\SharedResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SharedResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 
 </Project>

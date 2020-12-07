@@ -53,7 +53,7 @@ namespace NMC.Pages
                 CookieRequestCultureProvider.DefaultCookieName,
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(c)),
                 new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
-
+                
                 );
                 await signInManager.SignOutAsync();
                 return RedirectToPage("/Index");

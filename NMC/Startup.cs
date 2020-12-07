@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NMC.Extensions;
 
+using NMC.Services;
 
 namespace NMC
 {
@@ -36,7 +37,7 @@ namespace NMC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            if (!string.IsNullOrEmpty(Configuration["KnownProxy"]))
+            if(!string.IsNullOrEmpty(Configuration["KnownProxy"]))
             {
                 services.Configure<ForwardedHeadersOptions>(options =>
                 {
@@ -77,6 +78,15 @@ namespace NMC
                 options.AppendTrailingSlash = true;
             });
 
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<ITypesRepository, TypesRepository>();
+            services.AddScoped<IDoctorRepository, DoctorRepository>();
+            services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+            services.AddScoped<IReservationRepository, ReservationRepository>();
+            services.AddScoped<IAdmissionRepository, AdmissionRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -118,7 +128,7 @@ namespace NMC
 
             app.UseEndpoints(endpoints =>
             {
-
+                
                 endpoints.MapRazorPages();
             });
         }
