@@ -1,13 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-
 	<ItemGroup>
-		<PackageReference Include="Bogus" Version="32.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.1">
 			<PrivateAssets>all</PrivateAssets>
@@ -15,13 +12,9 @@
 		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.0" />
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0" />
-		<PackageReference Include="OrchardCore.Localization.Core" Version="1.0.0-rc2-13450" />
 	</ItemGroup>
-
 	<ItemGroup>
 	  <ProjectReference Include="..\NMC.Core\NMC.Core.csproj" />
 	  <ProjectReference Include="..\NMC.Domain\NMC.Domain.csproj" />
-	  <ProjectReference Include="..\NMC.Infrastructure\NMC.Infrastructure.csproj" />
 	</ItemGroup>
-
 </Project>
