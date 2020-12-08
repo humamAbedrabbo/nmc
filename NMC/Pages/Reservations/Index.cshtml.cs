@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
 using NMC.Models;
-using NMC.Resources;
+
 using NMC.Services;
 
 namespace NMC.Pages.Reservations
