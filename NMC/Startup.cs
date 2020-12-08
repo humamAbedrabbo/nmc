@@ -19,6 +19,7 @@ using NMC.Extensions;
 using NMC.Core.Services;
 using NMC.Infrastructure.Services;
 using SBMenu;
+using NMC.Infrastructure;
 
 namespace NMC
 {
@@ -79,16 +80,7 @@ namespace NMC
                 options.AppendTrailingSlash = true;
             });
 
-            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-            services.AddScoped<ITypesRepository, TypesRepository>();
-            services.AddScoped<IDoctorRepository, DoctorRepository>();
-            services.AddScoped<IPatientRepository, PatientRepository>();
-            services.AddScoped<IRoomRepository, RoomRepository>();
-            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
-            services.AddScoped<IReservationRepository, ReservationRepository>();
-            services.AddScoped<IAdmissionRepository, AdmissionRepository>();
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-            services.AddScoped<ISBMenu, NMC.Infrastructure.MenuComponent.SBMenu>();
+            services.AddInfrastructureServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
