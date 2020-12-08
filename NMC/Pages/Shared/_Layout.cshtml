@@ -40,7 +40,10 @@
     <div class="main-wrapper">
 
         <partial name="_Header" />
-        <partial name="_Sidebar" />
+        @*<partial name="_Sidebar" />*@
+
+        <vc:sb-menu-view role-name="Admin" />
+
         <div class="page-wrapper">
             @RenderBody()
             <partial name="_Notifications" />

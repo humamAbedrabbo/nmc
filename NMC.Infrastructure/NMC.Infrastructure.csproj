@@ -16,5 +16,6 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\NMC.Core\NMC.Core.csproj" />
 	  <ProjectReference Include="..\NMC.Domain\NMC.Domain.csproj" />
+	  <ProjectReference Include="..\SBMenu\SBMenu.csproj" />
 	</ItemGroup>
 </Project>

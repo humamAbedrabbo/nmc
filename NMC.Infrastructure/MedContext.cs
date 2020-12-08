@@ -45,6 +45,9 @@ namespace NMC.Infrastructure
         public DbSet<UserNotification> UserNotifications { get; set; }
         public DbSet<ModuleUser> ModuleUsers { get; set; }
 
+        public DbSet<SBMenu.SBMenuItem> SBMenuItems { get; set; }
+        public DbSet<SBMenu.SBMenuSection> SBMenuSections { get; set; }
+        public DbSet<SBMenu.SBMenuSectionItem> SBMenuSectionItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -230,6 +233,62 @@ namespace NMC.Infrastructure
                 new RoomType { Id = 3, Name = "Care Room", NameAr = "غرفة عناية" },
                 new RoomType { Id = 4, Name = "Baby Incubator Room", NameAr = "غرفة حاضنات" }
                 );
+
+
+            // Seed Menu
+            var menu = new[]
+            {
+                new SBMenu.SBMenuItem { Id = 1, SortKey = 1, HRef="/Index", Text = "Dashboard", Icon = "fa fa-dashboard", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 2, SortKey = 2, HRef="/UI1/Doctors/Index", Text = "Doctors", Icon = "fa fa-user-md", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 3, SortKey = 3, HRef="/UI1/Patients/Index", Text = "Patients", Icon = "fa fa-wheelchair", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 4, SortKey = 4, HRef="/UI1/Appointments/Index", Text = "Appointments", Icon = "fa fa-calendar", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 5, SortKey = 5, HRef="/UI1/Doctors/DoctorScheduleIndex", Text = "Doctor Schedules", Icon = "fa fa-calendar-check-o", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 6, SortKey = 6, HRef="/UI1/Departments/Index", Text = "Departments", Icon = "fa fa-calendar-check-o", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 7, SortKey = 7, HRef="/UI1/Rooms/Index", Text = "Rooms", Icon = "fa fa-cube", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 8, SortKey = 8, HRef="/UI1/Reservations/Index", Text = "Reservations", Icon = "fa fa-envelope-o", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 9, SortKey = 9, HRef="/UI1/Admissions/Index", Text = "Admissions", Icon = "fa fa-bed", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 10, SortKey = 10, HRef="#", Text = "Employees", Icon = "fa fa-user", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 11, ParentId = 10, SortKey = 11, HRef="/UI1/Employees/Index", Text = "Employee List", Icon = "", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 12, ParentId = 10, SortKey = 12, HRef="#", Text = "Attendance", Icon = "", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 13, SortKey = 13, HRef="#", Text = "Accounts", Icon = "fa fa-money", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 14, ParentId = 13, SortKey = 14, HRef="#", Text = "Invoices", Icon = "", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 15, ParentId = 13, SortKey = 15, HRef="#", Text = "Payments", Icon = "", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 16, ParentId = 13, SortKey = 16, HRef="#", Text = "Expenses", Icon = "", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 17, SortKey = 17, HRef="#", Text = "Types", Icon = "fa fa-cogs", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 18, ParentId = 17, SortKey = 18, HRef="/UI1/RoomTypes/Index", Text = "Room Types", Icon = "", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 19, ParentId = 17, SortKey = 19, HRef="/UI1/RoomGrades/Index", Text = "Room Grades", Icon = "", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 20, ParentId = 17, SortKey = 20, HRef="/UI1/AppointmentTypes/Index", Text = "Appointment Types", Icon = "", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 21, ParentId = 17, SortKey = 21, HRef="/UI1/AdmissionTypes/Index", Text = "Admission Types", Icon = "", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 22, ParentId = 17, SortKey = 22, HRef="/UI1/DischargeTypes/Index", Text = "Discharge Types", Icon = "", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 23, ParentId = 17, SortKey = 23, HRef="/UI1/EmployeeTypes/Index", Text = "Employee Types", Icon = "", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 24, SortKey = 24, HRef="#", Text = "Reports", Icon = "fa fa-flag-o", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 25, ParentId = 24, SortKey = 25, HRef="#", Text = "Report 1", Icon = "", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 26, ParentId = 26, SortKey = 25, HRef="#", Text = "Report 2", Icon = "", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 27, SortKey = 27, HRef="#", Text = "Settings", Icon = "fa fa-cog", Visible = true, Enabled = true },
+            };
+            builder.Entity<SBMenu.SBMenuItem>().HasData(menu);
+
+            var section = new SBMenu.SBMenuSection { Id = 1, Role = "Admin", SortKey = 1, Text = "Main" };
+            builder.Entity<SBMenu.SBMenuSection>().HasData(section);
+
+            var sectionItems = new[]
+            {
+                new SBMenu.SBMenuSectionItem { Id = 1, SortKey = 1, MenuItemId = 1, SectionId = 1 },
+                new SBMenu.SBMenuSectionItem { Id = 2, SortKey = 2, MenuItemId = 2, SectionId = 1 },
+                new SBMenu.SBMenuSectionItem { Id = 3, SortKey = 3, MenuItemId = 3, SectionId = 1 },
+                new SBMenu.SBMenuSectionItem { Id = 4, SortKey = 4, MenuItemId = 4, SectionId = 1 },
+                new SBMenu.SBMenuSectionItem { Id = 5, SortKey = 5, MenuItemId = 5, SectionId = 1 },
+                new SBMenu.SBMenuSectionItem { Id = 6, SortKey = 6, MenuItemId = 6, SectionId = 1 },
+                new SBMenu.SBMenuSectionItem { Id = 7, SortKey = 7, MenuItemId = 7, SectionId = 1 },
+                new SBMenu.SBMenuSectionItem { Id = 8, SortKey = 8, MenuItemId = 8, SectionId = 1 },
+                new SBMenu.SBMenuSectionItem { Id = 9, SortKey = 9, MenuItemId = 9, SectionId = 1 },
+                new SBMenu.SBMenuSectionItem { Id = 10, SortKey = 10, MenuItemId = 10, SectionId = 1 },
+                new SBMenu.SBMenuSectionItem { Id = 11, SortKey = 11, MenuItemId = 13, SectionId = 1 },
+                new SBMenu.SBMenuSectionItem { Id = 12, SortKey = 12, MenuItemId = 17, SectionId = 1 },
+                new SBMenu.SBMenuSectionItem { Id = 13, SortKey = 13, MenuItemId = 24, SectionId = 1 },
+                new SBMenu.SBMenuSectionItem { Id = 14, SortKey = 14, MenuItemId = 27, SectionId = 1 },
+            };
+            builder.Entity<SBMenu.SBMenuSectionItem>().HasData(sectionItems);
         }
     }
 }

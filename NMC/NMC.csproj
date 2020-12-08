@@ -23,6 +23,7 @@
 	  <ProjectReference Include="..\NMC.Domain\NMC.Domain.csproj" />
 	  <ProjectReference Include="..\NMC.Infrastructure\NMC.Infrastructure.csproj" />
 	  <ProjectReference Include="..\NMCUI\NMCUI.csproj" />
+	  <ProjectReference Include="..\SBMenu\SBMenu.csproj" />
 	</ItemGroup>
 
 </Project>

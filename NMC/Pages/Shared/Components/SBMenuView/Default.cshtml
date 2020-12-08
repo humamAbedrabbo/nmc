@@ -1,0 +1,39 @@
+﻿@using SBMenu
+@model IEnumerable<SBMenuSection> 
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
+
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+            <ul>
+                @foreach (var sec in Model)
+                {
+                    <li class="menu-title">@_localizer[sec.Text]</li>
+                    @foreach (var item in sec.SectionItems.OrderBy(x => x.SortKey))
+                    {
+                        @if (item.MenuItem.ParentId == null)
+                        {
+                            <li hidden="@(!item.MenuItem.Visible)">
+                                <a href="@item.MenuItem.HRef"><i class="@item.MenuItem.Icon"></i> <span>@_localizer[item.MenuItem.Text]</span></a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="submenu" hidden="@(!item.MenuItem.Visible)">
+                                <a href="#"><i class="@item.MenuItem.Icon"></i> <span> @_localizer[item.MenuItem.Text] </span> <span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+                                    @foreach(var subitem in item.MenuItem.Items.OrderBy(x => x.SortKey))
+                                    {
+                                        <li hidden="@(!subitem.Visible)"><a href="@subitem.HRef">@_localizer[subitem.Text]</a></li>
+
+                                    }
+                                </ul>
+                            </li>
+                        }
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</div>

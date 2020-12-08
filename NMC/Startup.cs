@@ -18,6 +18,7 @@ using Microsoft.Extensions.Hosting;
 using NMC.Extensions;
 using NMC.Core.Services;
 using NMC.Infrastructure.Services;
+using SBMenu;
 
 namespace NMC
 {
@@ -87,6 +88,7 @@ namespace NMC
             services.AddScoped<IReservationRepository, ReservationRepository>();
             services.AddScoped<IAdmissionRepository, AdmissionRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<ISBMenu, NMC.Infrastructure.MenuComponent.SBMenu>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
