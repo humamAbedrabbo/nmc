@@ -5,8 +5,9 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NMC.Data;
-using NMC.Models;
+using NMC.Infrastructure;
+using NMC.Domain.Models;
+using NMC.Core;
 
 [assembly: HostingStartup(typeof(NMC.Areas.Identity.IdentityHostingStartup))]
 namespace NMC.Areas.Identity

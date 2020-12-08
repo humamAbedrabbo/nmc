@@ -18,4 +18,10 @@
 		<PackageReference Include="OrchardCore.Localization.Core" Version="1.0.0-rc2-13450" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\NMC.Core\NMC.Core.csproj" />
+	  <ProjectReference Include="..\..\NMC.Infrastructure\NMC.Infrastructure.csproj" />
+	  <ProjectReference Include="..\NMC.Domain\NMC.Domain.csproj" />
+	</ItemGroup>
+
 </Project>

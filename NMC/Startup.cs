@@ -16,7 +16,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NMC.Extensions;
-using NMC.Services;
+using NMC.Core.Services;
+using NMC.Infrastructure.Services;
 
 namespace NMC
 {

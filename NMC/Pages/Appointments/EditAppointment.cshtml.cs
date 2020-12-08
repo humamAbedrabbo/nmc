@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NMC.Extensions;
-using NMC.Models;
-using NMC.Services;
+using NMC.Domain.Models;
+using NMC.Core.Services;
 
 namespace NMC.Pages.Appointments
 {

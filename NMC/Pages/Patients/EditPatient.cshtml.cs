@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using NMC.Models;
-using NMC.Services;
+using NMC.Domain.Models;
+using NMC.Core.Services;
 
 namespace NMC.Pages.Patients
 {

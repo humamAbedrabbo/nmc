@@ -11,7 +11,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using NMC.Models;
+using NMC.Domain.Models;
+using NMC.Core;
 
 namespace NMC.Areas.Identity.Pages.Account
 {

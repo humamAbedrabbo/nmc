@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using NMC.Models;
+using NMC.Core;
+using NMC.Domain.Models;
 
 namespace NMC.Pages
 {

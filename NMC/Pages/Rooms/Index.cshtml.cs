@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
-using NMC.Models;
+using NMC.Domain.Models;
 
-using NMC.Services;
+using NMC.Core.Services;
 
 namespace NMC.Pages.Rooms
 {
