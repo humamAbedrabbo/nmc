@@ -1,0 +1,214 @@
+﻿@page
+@model NMCUI.Areas.UI1.Pages.Doctors.EditDoctorModel
+
+@inject IViewLocalizer _localizer
+@{
+    ViewData["PageTitle"] = _localizer["Edit Doctor"];
+    bool hasUserName = !string.IsNullOrEmpty(Model.Username);
+    string photo = (Model.Doctor.PhotoPath == "user.jpg" ? "assets/img/user.jpg" : $"images/{Model.Doctor.PhotoPath}");
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <h4 class="page-title">@_localizer["Edit Doctor"]</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <form method="post" enctype="multipart/form-data">
+                <input asp-for="Doctor.Id" type="hidden" />
+                <input asp-for="Username" type="hidden" />
+                <input asp-for="Doctor.PhotoPath" type="hidden" />
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Doctor.FirstName"></label>
+                            <input asp-for="Doctor.FirstName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Doctor.LastName"></label>
+                            <input asp-for="Doctor.LastName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Doctor.Username"></label>
+                            <input asp-for="Doctor.Username" class="form-control" readonly="@(hasUserName)" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Doctor.Email"></label>
+                            <input asp-for="Doctor.Email" class="form-control" type="email">
+                        </div>
+                    </div>
+
+                    @if(!hasUserName)
+                    {
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword"></label>
+                            <input asp-for="ConfirmPassword" class="form-control">
+                        </div>
+                    </div>
+                    }
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Doctor.JoiningDate"></label>
+                            <div class="cal-icon">
+                                <input asp-for="Doctor.JoiningDate" type="text" class="form-control datetimepicker">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Doctor.Speciality"></label>
+                            <input asp-for="Doctor.Speciality" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group gender-select">
+                            <label class="gen-label">@_localizer["Gender"]:</label>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Doctor.Gender" id="genderMale" value="0" checked="@(Model.Doctor.Gender == Gender.Male)" class="form-check-input">@_localizer["Male"]
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Doctor.Gender" id="genderFemale" value="1" checked="@(Model.Doctor.Gender == Gender.Female)" class="form-check-input">@_localizer["Female"]
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="form-group gender-select">
+                            <label class="gen-label">@_localizer["Consultant"]:</label>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Doctor.Consultant" id="notConsultant" value="False" class="form-check-input">@_localizer["No"]
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Doctor.Consultant" id="consultant" value="True" class="form-check-input">@_localizer["Yes"]
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group gender-select">
+                            <label class="gen-label">@_localizer["Surgeon"]:</label>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Doctor.Surgeon" id="notSurgeon" value="False" class="form-check-input">@_localizer["No"]
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Doctor.Surgeon" id="surgeon" value="True" class="form-check-input">@_localizer["Yes"]
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group gender-select">
+                            <label class="gen-label">@_localizer["Referrer"]:</label>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Doctor.Referrer" id="notReferrer" value="False" class="form-check-input">@_localizer["No"]
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Doctor.Referrer" id="referrer" value="True" class="form-check-input">@_localizer["Yes"]
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="Doctor.Address"></label>
+                                    <input asp-for="Doctor.Address" class="form-control ">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Doctor.Phone"></label>
+                                    <input asp-for="Doctor.Phone" class="form-control ">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Doctor.Mobile"></label>
+                                    <input asp-for="Doctor.Mobile" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Photo"></label>
+                            <div class="profile-upload">
+                                <div class="upload-img">
+                                    <img alt="" src="~/@photo" asp-append-version="true">
+                                </div>
+                                <div class="upload-input">
+                                    <input asp-for="Photo" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Doctor.Biography"></label>
+                    <textarea asp-for="Doctor.Biography" class="form-control" rows="3" cols="30"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="display-block">@_localizer["Status"]</label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="Doctor.Active" id="doctor_active" value="True" checked>
+                        <label class="form-check-label" for="doctor_active">
+                            @_localizer["Active"]
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" asp-for="Doctor.Active" id="doctor_inactive" value="False">
+                        <label class="form-check-label" for="doctor_inactive">
+                            @_localizer["Inactive"]
+                        </label>
+                    </div>
+                </div>
+                <div class="m-t-20 text-center">
+                    <button class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+    $(function () {
+        $('#JoiningDate').datetimepicker({
+            format: 'YYYY-MM-DD'
+
+        });
+    });
+    </script>
+}

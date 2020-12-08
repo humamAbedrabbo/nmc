@@ -16,6 +16,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NMC.Core", "NMC.Core\NMC.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NMC.Infrastructure", "NMC.Infrastructure\NMC.Infrastructure.csproj", "{E72BDEE1-E3C4-4635-8070-1C868B9D3B8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMCUI", "NMCUI\NMCUI.csproj", "{D5CE7272-E1B5-4A36-9EFF-62928DBAC7B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{E72BDEE1-E3C4-4635-8070-1C868B9D3B8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E72BDEE1-E3C4-4635-8070-1C868B9D3B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E72BDEE1-E3C4-4635-8070-1C868B9D3B8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5CE7272-E1B5-4A36-9EFF-62928DBAC7B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5CE7272-E1B5-4A36-9EFF-62928DBAC7B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5CE7272-E1B5-4A36-9EFF-62928DBAC7B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5CE7272-E1B5-4A36-9EFF-62928DBAC7B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

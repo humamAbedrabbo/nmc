@@ -1,0 +1,200 @@
+﻿@page "{id:int}"
+@model NMCUI.Areas.UI1.Pages.Patients.DetailsModel
+@inject IViewLocalizer _localizer
+@{
+    ViewData["PageTitle"] = _localizer["Patient Details"];
+    bool isArabic = (User.GetUserLanguage() == "ar");
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-sm-7 col-6">
+            <h4 class="page-title">@ViewBag.PageTitle</h4>
+        </div>
+
+        <div class="col-sm-5 col-6 text-right m-b-30">
+            <a asp-page="/Patients/EditPatient" asp-route-id="@Model.Patient.Id" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> @_localizer["Edit Patient"]</a>
+        </div>
+    </div>
+    <div class="card-box profile-header">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="profile-view">
+                    <div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="profile-info-left">
+                                    <h3 class="user-name m-t-0 mb-0">@Model.Patient.Name</h3>
+                                    <small style="font-size: 90%;" class="text-muted">@Model.Patient.Occupation @Model.Patient.Company</small>
+                                    <div class="staff-id">@_localizer["Father Name"]: @Model.Patient.FatherName</div>
+                                    <div class="staff-id">@_localizer["Mother Name"]: @Model.Patient.MotherName</div>
+                                    <div class="staff-id">@_localizer["Married"]: @Model.Patient.Married.ToString()</div>
+                                    <div class="staff-id" hidden="@(Model.Patient.NationalID == null)">@_localizer["National ID."]: @Model.Patient.NationalID</div>
+                                    <div class="staff-id" hidden="@(Model.Patient.PassportID == null)">@_localizer["Passport No."]: @Model.Patient.PassportID</div>
+                                    <div class="staff-id" hidden="@(Model.Patient.ExternalID == null)">@_localizer["External ID."]: @Model.Patient.ExternalID</div>
+                                    <div class="staff-id" hidden="@(Model.Patient.Nationality == null)">@_localizer["Nationality"]: @Model.Patient.Nationality</div>
+                                    <div class="staff-msg"><a href="#" class="btn btn-primary">@_localizer["Current Admission"]</a></div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <ul class="personal-info">
+                                    <li>
+                                        <span class="title">@_localizer["Phone"]:</span>
+                                        <span class="text"><a href="#">@Model.Patient.Phone</a></span>
+                                    </li>
+                                    <li>
+                                        <span class="title">@_localizer["Mobile"]:</span>
+                                        <span class="text"><a href="#">@Model.Patient.Mobile</a></span>
+                                    </li>
+                                    <li>
+                                        <span class="title">@_localizer["Work Phone"]:</span>
+                                        <span class="text"><a href="#">@Model.Patient.WorkPhone</a></span>
+                                    </li>
+                                    <li>
+                                        <span class="title">@_localizer["Email"]:</span>
+                                        <span class="text"><a href="#">@Model.Patient.Email</a></span>
+                                    </li>
+                                    <li>
+                                        <span class="title">@_localizer["Date of Birth"]:</span>
+                                        <span class="text">@(Model.Patient.DateOfBirth.HasValue ? Model.Patient.DateOfBirth.Value.ToString("yyyy-MM-dd") : "")</span>
+                                    </li>
+                                    <li>
+                                        <span class="title">@_localizer["Address"]:</span>
+                                        <span class="text">@Model.Patient.Address</span>
+                                    </li>
+                                    <li>
+                                        <span class="title">@_localizer["Gender"]:</span>
+                                        <span class="text">@_localizer[Model.Patient.Gender.ToString()]</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="profile-tabs">
+        <ul class="nav nav-tabs nav-tabs-bottom">
+            <li class="nav-item"><a class="nav-link active" href="#general-infot" data-toggle="tab">@_localizer["General Information"]</a></li>
+            <li class="nav-item"><a class="nav-link" href="#admissions-info" data-toggle="tab">@_localizer["Admissions"]</a></li>
+            <li class="nav-item"><a class="nav-link" href="#appointments-info" data-toggle="tab">@_localizer["Appointments"]</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane show active" id="general-info">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-box">
+                            <h3 class="card-title">@_localizer["Medical History"]</h3>
+                        </div>
+                        <div class="card-box mb-0">
+                            <h3 class="card-title">@_localizer["Allergy"]</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="admissions-info">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-box mb-0">
+                            <h3 class="card-title">@_localizer["Admissions"]</h3>
+                            <div class="table-responsive" hidden="@(Model.Patient.Admissions == null)">
+                                <table class="table table-striped custom-table mb-0 datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>@Html.DisplayNameFor(p => p.Patient.Admissions.FirstOrDefault().AdmissionType)</th>
+                                            <th>@Html.DisplayNameFor(p => p.Patient.Admissions.FirstOrDefault().ReferrerDoctor)</th>
+                                            <th>@Html.DisplayNameFor(p => p.Patient.Admissions.FirstOrDefault().ReferrerDoctor.Speciality)</th>
+                                            <th>@Html.DisplayNameFor(p => p.Patient.Admissions.FirstOrDefault().Reservation.RoomNo)</th>
+                                            <th>@Html.DisplayNameFor(p => p.Patient.Admissions.FirstOrDefault().AdmissionDate)</th>
+                                            <th>@Html.DisplayNameFor(p => p.Patient.Admissions.FirstOrDefault().Department)</th>
+                                            <th class="text-right">@_localizer["Action"]</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var adm in Model.Patient.Admissions.OrderByDescending(p => p.AdmissionDate))
+                                        {
+                                            string photo = (adm.ReferrerDoctor == null || adm.ReferrerDoctor.PhotoPath == "user.jpg" ? "assets/img/user.jpg" : $"images/{adm.ReferrerDoctor.PhotoPath}");
+                                        <tr>
+                                            <td>@adm.Id</td>
+                                            <td>@(isArabic ? adm.AdmissionType?.NameAr : adm.AdmissionType?.Name)</td>
+                                            <td><a href="@(adm.ReferrerDoctorId.HasValue ? $"/Doctors/Details/{adm.ReferrerDoctorId}" : "#")"><img width="28" height="28" src="~/@photo" class="rounded-circle m-r-5" alt=""></a> @(adm.ReferrerDoctor?.Name)</td>
+                                            <td>@(adm.ReferrerDoctor?.Speciality)</td>
+                                            <td>@(adm.Reservation?.RoomNo)</td>
+                                            <td>@adm.AdmissionDate.ToShortDateString()</td>
+                                            <td>@(isArabic ? adm.AdmissionType?.NameAr : adm.AdmissionType?.Name)</td>
+                                            <td class="text-right">
+                                                <div class="dropdown dropdown-action">
+                                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item" asp-page="/Admissions/Details" asp-route-id="@adm.Id"><i class="fa fa-pencil m-r-5"></i> @_localizer["Details"]</a>
+                                                        <a class="dropdown-item" asp-page="/Admissions/EditAdmission" asp-route-id="@adm.Id"><i class="fa fa-pencil m-r-5"></i> @_localizer["Edit"]</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="appointments-info">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-box mb-0">
+                            <h3 class="card-title">@_localizer["Appointments"]</h3>
+                            <div class="table-responsive" hidden="@(Model.Patient.Appointments == null)">
+                                <table class="table table-striped custom-table mb-0 datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>@Html.DisplayNameFor(p => p.Patient.Appointments.FirstOrDefault().AppointmentType)</th>
+                                            <th>@Html.DisplayNameFor(p => p.Patient.Appointments.FirstOrDefault().Doctor)</th>
+                                            <th>@Html.DisplayNameFor(p => p.Patient.Appointments.FirstOrDefault().Department)</th>
+                                            <th>@Html.DisplayNameFor(p => p.Patient.Appointments.FirstOrDefault().AppointmentDate)</th>
+                                            <th>@Html.DisplayNameFor(p => p.Patient.Appointments.FirstOrDefault().AppointmentTime)</th>
+                                            <th>@Html.DisplayNameFor(p => p.Patient.Appointments.FirstOrDefault().Active)</th>
+                                            <th class="text-right">@_localizer["Action"]</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var appt in Model.Patient.Appointments)
+                                        {
+                                            string photo = (appt.Doctor == null || appt.Doctor.PhotoPath == "user.jpg" ? "assets/img/user.jpg" : $"images/{appt.Doctor.PhotoPath}");
+                                        <tr>
+                                            <td>@appt.Id</td>
+                                            <td>@(isArabic ? appt.AppointmentType.NameAr : appt.AppointmentType?.Name)</td>
+                                            <td><a href="@(appt.DoctorId.HasValue ? $"/Doctors/Details/{appt.DoctorId}" : "#")"><img width="28" height="28" src="~/@photo" class="rounded-circle m-r-5" alt=""></a> @(appt.Doctor?.Name)</td>
+                                            <td>@(isArabic ? appt.Department?.NameAr : appt.Department?.Name)</td>
+                                            <td>@appt.AppointmentDate.ToShortDateString()</td>
+                                            <td>@appt.AppointmentTime</td>
+                                            <td><span class="custom-badge @appt.ActiveCSS">@_localizer[appt.ActiveText]</span></td>
+                                            <td class="text-right">
+                                                <div class="dropdown dropdown-action">
+                                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item" asp-page="/Appointments/EditAppointment" asp-route-id="@appt.Id"><i class="fa fa-pencil m-r-5"></i> @_localizer["Edit"]</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

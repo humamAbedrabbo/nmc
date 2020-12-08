@@ -1,0 +1,77 @@
+﻿@page
+@model NMCUI.Areas.UI1.Pages.Rooms.IndexModel
+@inject IViewLocalizer _localizer
+@{
+    ViewData["PageTitle"] = _localizer["Rooms"];
+            string lang = User.GetUserLanguage();
+            bool isArabic = (lang == "ar");
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-sm-5 col-5">
+            <h4 class="page-title">@ViewBag.PageTitle</h4>
+        </div>
+        <div class="col-sm-7 col-7 text-right m-b-30">
+            <a asp-page="/Rooms/AddRoom" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> @_localizer["Add Room"]</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-striped custom-table mb-0 datatable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Html.DisplayNameFor(p => p.Rooms.FirstOrDefault().FloorNo)</th>
+                            <th>@Html.DisplayNameFor(p => p.Rooms.FirstOrDefault().RoomType)</th>
+                            <th>@Html.DisplayNameFor(p => p.Rooms.FirstOrDefault().RoomGrade)</th>
+                            <th>@Html.DisplayNameFor(p => p.Rooms.FirstOrDefault().BedCount)</th>
+                            <th>@Html.DisplayNameFor(p => p.Rooms.FirstOrDefault().Available)</th>
+                            <th class="text-right">@_localizer["Action"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var room in Model.Rooms)
+                        {
+                        <tr>
+                            <td>@room.RoomNo</td>
+                            <td>@room.FloorNo</td>
+                            <td>@(isArabic ? room.RoomType.NameAr : room.RoomType?.Name)</td>
+                            <td>@(isArabic ? room.RoomGrade.NameAr : room.RoomGrade?.Name)</td>
+                            <td>@room.BedCount</td>
+                            <td><span class="custom-badge @room.AvailableCSS">@_localizer[room.AvailableText]</span></td>
+                            <td class="text-right">
+                                <div class="dropdown dropdown-action">
+                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" asp-page="/Rooms/EditRoom" asp-route-id="@room.Id"><i class="fa fa-pencil m-r-5"></i> @_localizer["Edit"]</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_Room"><i class="fa fa-trash-o m-r-5"></i> @_localizer["Delete"]</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete_Room" class="modal fade delete-modal" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <img src="~/assets/img/sent.png" alt="" width="50" height="46">
+                    <h3>@_localizer["Are you sure want to delete this"] @_localizer["Room"] @_localizer["?"]</h3>
+                    <div class="m-t-20">
+                        <a href="#" class="btn btn-white" data-dismiss="modal">@_localizer["Close"]</a>
+                        <button type="submit" class="btn btn-danger">@_localizer["Delete"]</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,182 @@
+﻿@page
+@model NMCUI.Areas.UI1.Pages.Admissions.AddAdmissionModel
+@inject IViewLocalizer _localizer
+@{
+    ViewData["PageTitle"] = _localizer["Add Admission"];
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <h4 class="page-title">@_localizer["Add Admission"]</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Admission.FileNo"></label>
+                            <input asp-for="Admission.FileNo" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Admission.AdmissionTypeId"></label>
+                            <select asp-for="Admission.AdmissionTypeId" asp-items="Model.AdmissionTypesSelect" class="select">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Admission.PatientId"></label>
+                            <select asp-for="Admission.PatientId" asp-items="Model.PatientsSelect" class="select">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Admission.PoliceCode"></label>
+                            <input asp-for="Admission.PoliceCode" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Admission.DepartmentId"></label>
+                            <select asp-for="Admission.DepartmentId" asp-items="Model.DepartmentsSelect" class="select">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Admission.ReferrerDoctorId"></label>
+                            <select asp-for="Admission.ReferrerDoctorId" asp-items="Model.DoctorsSelect" class="select">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Admission.ReservationId"></label>
+                            <select asp-for="Admission.ReservationId" asp-items="Model.ReservationsSelect" class="select">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <!-- ROOM IF THERE IS NO RESERVATION -->
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Admission.ReferralLetter"></label>
+                            <textarea asp-for="Admission.ReferralLetter" cols="30" rows="4" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Admission.AdmissionDate"></label>
+                            <div class="cal-icon">
+                                <input asp-for="Admission.AdmissionDate" type="text" class="form-control datetimepicker">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Admission.AdmissionTime"></label>
+                            <div class="time-icon">
+                                <input asp-for="Admission.AdmissionTime" id="admissionTime" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Admission.FoodAllergy"></label>
+                            <textarea asp-for="Admission.FoodAllergy" cols="30" rows="4" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Admission.MedicalAllergy"></label>
+                            <textarea asp-for="Admission.MedicalAllergy" cols="30" rows="4" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label asp-for="Admission.Meals"></label>
+                            <input asp-for="Admission.Meals" class="form-control">
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Admission.DischargeDate"></label>
+                            <div class="cal-icon">
+                                <input asp-for="Admission.DischargeDate" type="text" class="form-control datetimepicker">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Admission.DischargeTime"></label>
+                            <div class="time-icon">
+                                <input asp-for="Admission.DischargeTime" id="dischargeTime" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Admission.DischargeTypeId"></label>
+                            <select asp-for="Admission.DischargeTypeId" asp-items="Model.DischargeTypesSelect" class="select">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="m-t-20 text-center">
+                    <button class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(function () {
+            $('#admissionTime').datetimepicker({
+                format: 'LT'
+
+            });
+
+            $('#dischargeTime').datetimepicker({
+                format: 'LT'
+
+            });
+        });
+    </script>
+}

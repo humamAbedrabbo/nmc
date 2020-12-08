@@ -1,0 +1,190 @@
+﻿@page
+@model NMCUI.Areas.UI1.Pages.Patients.EditPatientModel
+
+@inject IViewLocalizer _localizer
+@{
+    ViewData["PageTitle"] = _localizer["Edit Patient"];
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <h4 class="page-title">@_localizer["Edit Patient"]</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <form method="post">
+                <input asp-for="Patient.Id" type="hidden" />
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Patient.FirstName"></label>
+                            <input asp-for="Patient.FirstName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Patient.LastName"></label>
+                            <input asp-for="Patient.LastName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Patient.FatherName"></label>
+                            <input asp-for="Patient.FatherName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Patient.MotherName"></label>
+                            <input asp-for="Patient.MotherName" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Patient.NationalID"></label>
+                            <input asp-for="Patient.NationalID" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Patient.Nationality"></label>
+                            <input asp-for="Patient.Nationality" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Patient.PassportID"></label>
+                            <input asp-for="Patient.PassportID" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Patient.ExternalID"></label>
+                            <input asp-for="Patient.ExternalID" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label asp-for="Patient.Comments"></label>
+                            <input asp-for="Patient.Comments" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Patient.DateOfBirth"></label>
+                            <div class="cal-icon">
+                                <input asp-for="Patient.DateOfBirth" type="text" class="form-control datetimepicker">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group gender-select">
+                            <label class="gen-label">@_localizer["Gender"]:</label>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Patient.Gender" id="genderMale" value="0" checked="@(Model.Patient.Gender == Gender.Male)" class="form-check-input">@_localizer["Male"]
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Patient.Gender" id="genderFemale" value="1" checked="@(Model.Patient.Gender == Gender.Female)" class="form-check-input">@_localizer["Female"]
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group gender-select">
+                            <label class="gen-label">@_localizer["Married"]:</label>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Patient.Married" id="notMarried" value="False" class="form-check-input">@_localizer["No"]
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Patient.Married" id="married" value="True" class="form-check-input">@_localizer["Yes"]
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label asp-for="Patient.Children"></label>
+                            <input asp-for="Patient.Children" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="Patient.Address"></label>
+                                    <input asp-for="Patient.Address" class="form-control ">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label asp-for="Patient.Phone"></label>
+                                    <input asp-for="Patient.Phone" class="form-control ">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label asp-for="Patient.Mobile"></label>
+                                    <input asp-for="Patient.Mobile" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label asp-for="Patient.Email"></label>
+                                    <input asp-for="Patient.Email" class="form-control" type="email">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label asp-for="Patient.Company"></label>
+                                    <input asp-for="Patient.Company" class="form-control ">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label asp-for="Patient.WorkPhone"></label>
+                                    <input asp-for="Patient.WorkPhone" class="form-control ">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label asp-for="Patient.Occupation"></label>
+                                    <input asp-for="Patient.Occupation" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="m-t-20 text-center">
+                    <button class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+    $(function () {
+        $('#DateOfBirth').datetimepicker({
+            format: 'YYYY-MM-DD'
+
+        });
+    });
+    </script>
+}
