@@ -19,6 +19,9 @@ namespace NMC.Domain.Models
         [Display(Name = "Department (ar)")]
         public string NameAr { get; set; }
 
+        [Display(Name = "Department Type")]
+        public DepartmentType DepartmentType { get; set; }
+
         public ICollection<DepartmentDoctor> DepartmentDoctors { get; set; }
         public IEnumerable<DepartmentRoom> DepartmentRooms { get; set; }
         public IEnumerable<Employee> Employees { get; set; }

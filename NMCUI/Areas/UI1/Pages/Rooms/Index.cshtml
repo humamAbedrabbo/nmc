@@ -25,6 +25,7 @@
                             <th>#</th>
                             <th>@Html.DisplayNameFor(p => p.Rooms.FirstOrDefault().FloorNo)</th>
                             <th>@Html.DisplayNameFor(p => p.Rooms.FirstOrDefault().RoomType)</th>
+                            <th>@Html.DisplayNameFor(p => p.Rooms.FirstOrDefault().Ward)</th>
                             <th>@Html.DisplayNameFor(p => p.Rooms.FirstOrDefault().RoomGrade)</th>
                             <th>@Html.DisplayNameFor(p => p.Rooms.FirstOrDefault().BedCount)</th>
                             <th>@Html.DisplayNameFor(p => p.Rooms.FirstOrDefault().Available)</th>
@@ -38,6 +39,7 @@
                             <td>@room.RoomNo</td>
                             <td>@room.FloorNo</td>
                             <td>@(isArabic ? room.RoomType.NameAr : room.RoomType?.Name)</td>
+                            <td>@(isArabic ? room.Ward.NameAr : room.Ward?.Name)</td>
                             <td>@(isArabic ? room.RoomGrade.NameAr : room.RoomGrade?.Name)</td>
                             <td>@room.BedCount</td>
                             <td><span class="custom-badge @room.AvailableCSS">@_localizer[room.AvailableText]</span></td>

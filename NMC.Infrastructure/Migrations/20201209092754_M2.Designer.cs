@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NMC.Infrastructure;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NMC.Infrastructure.Migrations
 {
     [DbContext(typeof(MedContext))]
-    partial class MedContextModelSnapshot : ModelSnapshot
+    [Migration("20201209092754_M2")]
+    partial class M2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,21 +197,21 @@ namespace NMC.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "acba7e7f-1247-4123-ae3a-907cc40456c1",
+                            ConcurrencyStamp = "e636e3eb-7508-42de-a50a-c05ef03db905",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "3dde0314-9c72-4ea6-abae-3633f04c8b52",
+                            ConcurrencyStamp = "a5638254-8c86-436b-8a00-2433a0afb4ad",
                             Name = "Admission",
                             NormalizedName = "ADMISSION"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "4b3d235c-5280-44e4-9e44-6fff49a9a9aa",
+                            ConcurrencyStamp = "11cf130a-0089-460b-9719-274e2a8e6d38",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         });
@@ -289,15 +291,15 @@ namespace NMC.Infrastructure.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5166385d-a161-4f54-a06c-bb28f7eb7517",
+                            ConcurrencyStamp = "71119df7-8de4-4699-820c-6deb5efe77bf",
                             Email = "admin@localhost",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG6JJdnIRoXgsDgESUOfIRLWIYNSs4TifamtjXbqGsz7jjsyQxbXAoJTdrq9GSnAeA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMhEXaT1uYRvBS6pY6XpudW7jS2B42Wp4/PBnodFXfAWtG9imw1v0YC8kMK17h/HJg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6976e297-67ae-440c-9324-e4c17f526abd",
+                            SecurityStamp = "75833f1e-0f54-4f8d-971d-133e4ff5c5ff",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -305,15 +307,15 @@ namespace NMC.Infrastructure.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4194bac9-559e-4069-87a9-a22b85dc3ee2",
+                            ConcurrencyStamp = "0a01c232-db70-4f48-9130-1df15f1bddbd",
                             Email = "admission@localhost",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMISSION@LOCALHOST",
                             NormalizedUserName = "ADMISSION",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDLHYnZ3KJJEZC523hmUkbj/hWcXSCOmQh9YiVg2hot2xf0Bm3Q0jfKtE1mrTQoDKA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGCJlO9R3SkXOHuZPiarzpx/S9zDzZijRGfJVfgRcrAJpbTdAbLZY6TfGqm8BKs3eg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9845911b-58c0-4348-be3e-77e1d77b1dfd",
+                            SecurityStamp = "59aea061-d596-4e0a-8993-347cc7a83104",
                             TwoFactorEnabled = false,
                             UserName = "admission"
                         },
@@ -321,15 +323,15 @@ namespace NMC.Infrastructure.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "226bd783-7de3-41fa-a469-ad694b3be0f3",
+                            ConcurrencyStamp = "d581b5a8-5035-49e7-81e1-5c80ad64ee8e",
                             Email = "doctor@localhost",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DOCTOR@LOCALHOST",
                             NormalizedUserName = "DOCTOR",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPOlGV77kwe0T1RhTyXMi5PEcxKuIuuymCK2xtZbzWkw+L0PmJ7lHZqramKa6cIODQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOLSjS8fWx+tG9B9z45PM5Vqh4OCm8aMpFwialgjNMayLhLptSADizTK8GlbWvTiTg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5582acdb-d0a0-480b-88bf-a756fd33c02e",
+                            SecurityStamp = "74f5fa2a-12c0-455e-a6fe-4ca42e70a50f",
                             TwoFactorEnabled = false,
                             UserName = "doctor"
                         });
@@ -652,70 +654,70 @@ namespace NMC.Infrastructure.Migrations
                         new
                         {
                             Id = 3,
-                            DepartmentType = 1,
+                            DepartmentType = 0,
                             Name = "Pediatric Department -  Incubators section (NICU)",
                             NameAr = "جناح الأطفال - قسم الحواضن"
                         },
                         new
                         {
                             Id = 4,
-                            DepartmentType = 1,
+                            DepartmentType = 0,
                             Name = "Internal Medicine",
                             NameAr = "قسم الداخلية الباطنية"
                         },
                         new
                         {
                             Id = 5,
-                            DepartmentType = 1,
+                            DepartmentType = 0,
                             Name = "Intensive Care Unite (ICU)",
                             NameAr = "قسم العناية المشددة"
                         },
                         new
                         {
                             Id = 6,
-                            DepartmentType = 1,
+                            DepartmentType = 0,
                             Name = "Obstetric & Genecology",
                             NameAr = "جناح النسائية والمخاض"
                         },
                         new
                         {
                             Id = 7,
-                            DepartmentType = 1,
+                            DepartmentType = 0,
                             Name = "Dialysis",
                             NameAr = "قسم غسيل الكلى"
                         },
                         new
                         {
                             Id = 8,
-                            DepartmentType = 1,
+                            DepartmentType = 0,
                             Name = "Arthroscopy",
                             NameAr = "قسم التنظير"
                         },
                         new
                         {
                             Id = 9,
-                            DepartmentType = 2,
+                            DepartmentType = 0,
                             Name = "Cath Lab - Cardiovascular (CCU)",
                             NameAr = "قسم العناية القلبة والقثطرة القلبية"
                         },
                         new
                         {
                             Id = 10,
-                            DepartmentType = 1,
+                            DepartmentType = 0,
                             Name = "Blood vessels",
                             NameAr = "قسم الأوعية"
                         },
                         new
                         {
                             Id = 11,
-                            DepartmentType = 1,
+                            DepartmentType = 0,
                             Name = "Urology",
                             NameAr = "قسم البولية"
                         },
                         new
                         {
                             Id = 12,
-                            DepartmentType = 1,
+                            DepartmentType = 0,
                             Name = "Respiratory System Diseases",
                             NameAr = "أمراض الجهاز التنفسي"
                         },
@@ -729,7 +731,7 @@ namespace NMC.Infrastructure.Migrations
                         new
                         {
                             Id = 14,
-                            DepartmentType = 1,
+                            DepartmentType = 0,
                             Name = "Emergency (ER)",
                             NameAr = "قسم الإسعاف والطوارئ"
                         },
@@ -743,14 +745,14 @@ namespace NMC.Infrastructure.Migrations
                         new
                         {
                             Id = 16,
-                            DepartmentType = 2,
+                            DepartmentType = 0,
                             Name = "Laboratory",
                             NameAr = "المخبر"
                         },
                         new
                         {
                             Id = 17,
-                            DepartmentType = 2,
+                            DepartmentType = 0,
                             Name = "Radiography",
                             NameAr = "قسم التصوير الشعاعي"
                         },
@@ -771,7 +773,7 @@ namespace NMC.Infrastructure.Migrations
                         new
                         {
                             Id = 20,
-                            DepartmentType = 1,
+                            DepartmentType = 0,
                             Name = "Operation Rooms (OR)",
                             NameAr = "جناح العمليات"
                         });
@@ -1650,16 +1652,11 @@ namespace NMC.Infrastructure.Migrations
                     b.Property<int>("RoomTypeId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("WardId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("RoomGradeId");
 
                     b.HasIndex("RoomTypeId");
-
-                    b.HasIndex("WardId");
 
                     b.ToTable("Rooms");
 
@@ -1672,8 +1669,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 1,
                             RoomGradeId = 1,
                             RoomNo = "11",
-                            RoomTypeId = 1,
-                            WardId = 3
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1683,8 +1679,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 1,
                             RoomGradeId = 1,
                             RoomNo = "12",
-                            RoomTypeId = 1,
-                            WardId = 3
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1694,8 +1689,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 1,
                             RoomGradeId = 2,
                             RoomNo = "13",
-                            RoomTypeId = 1,
-                            WardId = 3
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1705,8 +1699,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 1,
                             RoomGradeId = 1,
                             RoomNo = "14",
-                            RoomTypeId = 1,
-                            WardId = 3
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1716,8 +1709,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 1,
                             RoomGradeId = 2,
                             RoomNo = "15",
-                            RoomTypeId = 1,
-                            WardId = 3
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1727,8 +1719,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 1,
                             RoomGradeId = 1,
                             RoomNo = "16",
-                            RoomTypeId = 1,
-                            WardId = 3
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1738,8 +1729,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 1,
                             RoomGradeId = 1,
                             RoomNo = "17",
-                            RoomTypeId = 1,
-                            WardId = 3
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1749,8 +1739,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 1,
                             RoomGradeId = 1,
                             RoomNo = "18",
-                            RoomTypeId = 1,
-                            WardId = 3
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1760,8 +1749,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 1,
                             RoomGradeId = 1,
                             RoomNo = "19",
-                            RoomTypeId = 1,
-                            WardId = 3
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1771,8 +1759,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 2,
                             RoomGradeId = 1,
                             RoomNo = "21",
-                            RoomTypeId = 1,
-                            WardId = 4
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1782,8 +1769,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 2,
                             RoomGradeId = 2,
                             RoomNo = "22",
-                            RoomTypeId = 1,
-                            WardId = 4
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1793,8 +1779,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 2,
                             RoomGradeId = 1,
                             RoomNo = "23",
-                            RoomTypeId = 1,
-                            WardId = 4
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1804,8 +1789,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 2,
                             RoomGradeId = 1,
                             RoomNo = "24",
-                            RoomTypeId = 1,
-                            WardId = 4
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1815,8 +1799,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 2,
                             RoomGradeId = 2,
                             RoomNo = "25",
-                            RoomTypeId = 1,
-                            WardId = 4
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1826,8 +1809,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 2,
                             RoomGradeId = 1,
                             RoomNo = "26",
-                            RoomTypeId = 1,
-                            WardId = 4
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1837,8 +1819,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 2,
                             RoomGradeId = 1,
                             RoomNo = "27",
-                            RoomTypeId = 1,
-                            WardId = 4
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1848,8 +1829,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 2,
                             RoomGradeId = 1,
                             RoomNo = "28",
-                            RoomTypeId = 1,
-                            WardId = 4
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1859,8 +1839,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 2,
                             RoomGradeId = 1,
                             RoomNo = "29",
-                            RoomTypeId = 1,
-                            WardId = 4
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1870,8 +1849,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 3,
                             RoomGradeId = 1,
                             RoomNo = "31",
-                            RoomTypeId = 1,
-                            WardId = 5
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1881,8 +1859,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 3,
                             RoomGradeId = 3,
                             RoomNo = "32",
-                            RoomTypeId = 1,
-                            WardId = 5
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1892,8 +1869,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 3,
                             RoomGradeId = 1,
                             RoomNo = "33",
-                            RoomTypeId = 1,
-                            WardId = 5
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1903,8 +1879,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 3,
                             RoomGradeId = 1,
                             RoomNo = "34",
-                            RoomTypeId = 1,
-                            WardId = 5
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1914,8 +1889,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 3,
                             RoomGradeId = 1,
                             RoomNo = "35",
-                            RoomTypeId = 1,
-                            WardId = 5
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1925,8 +1899,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 3,
                             RoomGradeId = 3,
                             RoomNo = "36",
-                            RoomTypeId = 1,
-                            WardId = 5
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1936,8 +1909,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 3,
                             RoomGradeId = 1,
                             RoomNo = "37",
-                            RoomTypeId = 1,
-                            WardId = 5
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1947,8 +1919,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 3,
                             RoomGradeId = 1,
                             RoomNo = "38",
-                            RoomTypeId = 1,
-                            WardId = 5
+                            RoomTypeId = 1
                         },
                         new
                         {
@@ -1958,8 +1929,7 @@ namespace NMC.Infrastructure.Migrations
                             FloorNo = 3,
                             RoomGradeId = 2,
                             RoomNo = "39",
-                            RoomTypeId = 1,
-                            WardId = 5
+                            RoomTypeId = 1
                         });
                 });
 
@@ -2962,15 +2932,9 @@ namespace NMC.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NMC.Domain.Models.Department", "Ward")
-                        .WithMany()
-                        .HasForeignKey("WardId");
-
                     b.Navigation("RoomGrade");
 
                     b.Navigation("RoomType");
-
-                    b.Navigation("Ward");
                 });
 
             modelBuilder.Entity("NMC.Domain.Models.UserNotification", b =>

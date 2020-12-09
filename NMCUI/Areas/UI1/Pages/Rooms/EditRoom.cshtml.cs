@@ -28,6 +28,8 @@ namespace NMCUI.Areas.UI1.Pages.Rooms
         public SelectList RoomTypesSelect { get; set; }
 
         public SelectList RoomGradesSelect { get; set; }
+        
+        public SelectList WardsSelect { get; set; }
 
         public async Task<IActionResult> OnGet(int id)
         {
@@ -41,8 +43,10 @@ namespace NMCUI.Areas.UI1.Pages.Rooms
             string lang = User.GetUserLanguage();
             bool isArabic = (lang == "ar");
             string roomTypeNameStr = isArabic ? "NameAr" : "Name";
+            string departmentNameStr = isArabic ? "NameAr" : "Name";
             RoomTypesSelect = new SelectList(await typesRepository.GetAllRoomTypes(), "Id", roomTypeNameStr, Room?.RoomTypeId);
             RoomGradesSelect = new SelectList(await typesRepository.GetAllRoomGrades(), "Id", roomTypeNameStr, Room?.RoomGradeId);
+            WardsSelect = new SelectList(await roomRepository.GetDepartments(), "Id", departmentNameStr, Room?.WardId);
 
             return Page();
         }

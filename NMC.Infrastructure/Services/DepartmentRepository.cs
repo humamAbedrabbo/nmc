@@ -2,6 +2,7 @@
 using NMC.Core.Services;
 using NMC.Domain.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NMC.Infrastructure.Services
@@ -26,6 +27,20 @@ namespace NMC.Infrastructure.Services
         public async Task<IEnumerable<Department>> GetAllDepartments()
         {
             return await context.Set<Department>().AsNoTracking().ToListAsync();
+        }
+
+        public async Task<IEnumerable<Department>> GetWards()
+        {
+            return await context.Set<Department>()
+                .Where(d => d.DepartmentType == DepartmentType.Ward)
+                .AsNoTracking().ToListAsync();
+        }
+
+        public async Task<IEnumerable<Department>> GetLabs()
+        {
+            return await context.Set<Department>()
+                .Where(d => d.DepartmentType == DepartmentType.Laboratory)
+                .AsNoTracking().ToListAsync();
         }
 
         public async Task<Department> GetDepartment(int id)

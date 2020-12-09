@@ -27,6 +27,12 @@ namespace NMC.Domain.Models
         [Display(Name = "Room Grade")]
         public RoomGrade RoomGrade { get; set; }
 
+        [Display(Name = "Ward")]
+        public int? WardId { get; set; }
+
+        [Display(Name = "Ward")]
+        public Department Ward { get; set; }
+
         [Display(Name = "Bed Count")]
         public int BedCount { get; set; }
 

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NMC.Infrastructure;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NMC.Infrastructure.Migrations
 {
     [DbContext(typeof(MedContext))]
-    partial class MedContextModelSnapshot : ModelSnapshot
+    [Migration("20201209102851_M5")]
+    partial class M5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,21 +197,21 @@ namespace NMC.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "acba7e7f-1247-4123-ae3a-907cc40456c1",
+                            ConcurrencyStamp = "23dad0b2-48bf-4cf4-8177-5239f585fcd7",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "3dde0314-9c72-4ea6-abae-3633f04c8b52",
+                            ConcurrencyStamp = "940fee37-7e11-434f-b40d-c9daca78b505",
                             Name = "Admission",
                             NormalizedName = "ADMISSION"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "4b3d235c-5280-44e4-9e44-6fff49a9a9aa",
+                            ConcurrencyStamp = "dd84191b-2a4b-49d9-8d60-6c4648aa9da1",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         });
@@ -289,15 +291,15 @@ namespace NMC.Infrastructure.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5166385d-a161-4f54-a06c-bb28f7eb7517",
+                            ConcurrencyStamp = "e9bd085f-fa4f-4571-81cc-56091e56738a",
                             Email = "admin@localhost",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEG6JJdnIRoXgsDgESUOfIRLWIYNSs4TifamtjXbqGsz7jjsyQxbXAoJTdrq9GSnAeA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECQXiqJrXRoPWeTIITHNjvb+xcznL1Ya9UKZA491m7hjLeX8fGPaKUvtbjK4P888YA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6976e297-67ae-440c-9324-e4c17f526abd",
+                            SecurityStamp = "b82b8e0b-b89a-4a43-a727-4ff028782a43",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -305,15 +307,15 @@ namespace NMC.Infrastructure.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4194bac9-559e-4069-87a9-a22b85dc3ee2",
+                            ConcurrencyStamp = "84faf830-8e89-4bed-ad94-3cdaa7368600",
                             Email = "admission@localhost",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMISSION@LOCALHOST",
                             NormalizedUserName = "ADMISSION",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDLHYnZ3KJJEZC523hmUkbj/hWcXSCOmQh9YiVg2hot2xf0Bm3Q0jfKtE1mrTQoDKA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEP/qZtEjGhBxf1+72qExgnUcINsQ+AyZSjmrSiYrVQOPOGJBcGsQQ+tIfFfEbhW/RA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9845911b-58c0-4348-be3e-77e1d77b1dfd",
+                            SecurityStamp = "d56f8cce-4303-4480-b841-700450353d6e",
                             TwoFactorEnabled = false,
                             UserName = "admission"
                         },
@@ -321,15 +323,15 @@ namespace NMC.Infrastructure.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "226bd783-7de3-41fa-a469-ad694b3be0f3",
+                            ConcurrencyStamp = "725f09bd-15c0-446a-83d5-c11c7483af44",
                             Email = "doctor@localhost",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DOCTOR@LOCALHOST",
                             NormalizedUserName = "DOCTOR",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPOlGV77kwe0T1RhTyXMi5PEcxKuIuuymCK2xtZbzWkw+L0PmJ7lHZqramKa6cIODQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHpwL8FCNwjJmU4ZXaVIZpc8ZVzHE0PTXBAZOgAu4Hr18BGtmXR2nCxeGDoVC53kjw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5582acdb-d0a0-480b-88bf-a756fd33c02e",
+                            SecurityStamp = "e9e4b574-15aa-41a9-9e40-b09cf04d3d62",
                             TwoFactorEnabled = false,
                             UserName = "doctor"
                         });

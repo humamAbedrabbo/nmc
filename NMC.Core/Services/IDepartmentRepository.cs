@@ -9,6 +9,8 @@ namespace NMC.Core.Services
     public interface IDepartmentRepository
     {
         Task<IEnumerable<Department>> GetAllDepartments();
+        Task<IEnumerable<Department>> GetWards();
+        Task<IEnumerable<Department>> GetLabs();
         Task<Department> AddDepartment(Department obj);
         Task<Department> GetDepartment(int id);
         Task<Department> UpdateDepartment(Department obj);
