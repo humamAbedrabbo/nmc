@@ -295,6 +295,159 @@ namespace NMC.Infrastructure
                 new SBMenu.SBMenuSectionItem { Id = 14, SortKey = 14, MenuItemId = 27, SectionId = 1 },
             };
             builder.Entity<SBMenu.SBMenuSectionItem>().HasData(sectionItems);
+
+            // Seed Roles
+            var roles = new[]
+            {
+                new AppRole { Id = 1, Name = AppRole.ROLE_ADMIN.ToString(), NormalizedName = AppRole.ROLE_ADMIN.ToString().ToUpper() },
+                new AppRole { Id = 2, Name = AppRole.ROLE_ADMISSION.ToString(), NormalizedName = AppRole.ROLE_ADMISSION.ToString().ToUpper() },
+                new AppRole { Id = 3, Name = AppRole.ROLE_DOCTOR.ToString(), NormalizedName = AppRole.ROLE_DOCTOR.ToString().ToUpper() },
+            };
+
+            builder.Entity<AppRole>().HasData(roles);
+            builder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int> { UserId = 1, RoleId = 1 });
+
+            var menuAdmission = new[]
+            {
+                new SBMenu.SBMenuItem { Id = 28, SortKey = 28, HRef="/UI1/Admissions/Index", Text = "Inpatients", Icon = "fa fa-bed", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 29, SortKey = 29, HRef="/UI1/Reservations/Index", Text = "Bookings", Icon = "fa fa-envelope-o", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 30, SortKey = 30, HRef="/UI1/Doctors/Index", Text = "Doctors", Icon = "fa fa-user-md", Visible = true, Enabled = true },
+            };
+            builder.Entity<SBMenu.SBMenuItem>().HasData(menuAdmission);
+            var sectionAdmission = new SBMenu.SBMenuSection { Id = 2, Role = AppRole.ROLE_ADMISSION, SortKey = 2, Text = "Admission" };
+            builder.Entity<SBMenu.SBMenuSection>().HasData(sectionAdmission);
+
+            var sectionItemsAdmission = new[]
+            {
+                new SBMenu.SBMenuSectionItem { Id = 15, SortKey = 15, MenuItemId = 28, SectionId = 2 },
+                new SBMenu.SBMenuSectionItem { Id = 16, SortKey = 16, MenuItemId = 29, SectionId = 2 },
+                new SBMenu.SBMenuSectionItem { Id = 17, SortKey = 17, MenuItemId = 30, SectionId = 2 },
+            };
+            builder.Entity<SBMenu.SBMenuSectionItem>().HasData(sectionItemsAdmission);
+
+            var menuDoctor = new[]
+            {
+                new SBMenu.SBMenuItem { Id = 31, SortKey = 31, HRef="/UI1/Admissions/Index", Text = "Inpatients", Icon = "fa fa-bed", Visible = true, Enabled = true },
+                new SBMenu.SBMenuItem { Id = 32, SortKey = 32, HRef="/UI1/Reservations/Index", Text = "Bookings", Icon = "fa fa-envelope-o", Visible = true, Enabled = true },
+
+            };
+            builder.Entity<SBMenu.SBMenuItem>().HasData(menuDoctor);
+            var sectionDoctor = new SBMenu.SBMenuSection { Id = 3, Role = AppRole.ROLE_DOCTOR, SortKey = 3, Text = "Doctor" };
+            builder.Entity<SBMenu.SBMenuSection>().HasData(sectionDoctor);
+
+            var sectionItemsDoctor = new[]
+            {
+                new SBMenu.SBMenuSectionItem { Id = 33, SortKey = 33, MenuItemId = 31, SectionId = 3 },
+                new SBMenu.SBMenuSectionItem { Id = 34, SortKey = 34, MenuItemId = 32, SectionId = 3 },
+            };
+            builder.Entity<SBMenu.SBMenuSectionItem>().HasData(sectionItemsDoctor);
+
+            AppUser admission = new AppUser
+            {
+                Id = 2,
+                UserName = "admission",
+                NormalizedUserName = "ADMISSION",
+                Email = "admission@localhost",
+                NormalizedEmail = "ADMISSION@LOCALHOST",
+                ConcurrencyStamp = Guid.NewGuid().ToString("D"),
+                SecurityStamp = Guid.NewGuid().ToString("D")
+            };
+
+            admission.PasswordHash = hasher.HashPassword(admission, "123456");
+
+            builder.Entity<AppUser>().HasData(admission);
+
+            builder.Entity<IdentityUserClaim<int>>().HasData(
+                new IdentityUserClaim<int> { Id = 2, UserId = 2, ClaimType = "Language", ClaimValue = "en" }
+                );
+            builder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int> { UserId = 2, RoleId = 2 });
+
+            AppUser doctorUser = new AppUser
+            {
+                Id = 3,
+                UserName = "doctor",
+                NormalizedUserName = "DOCTOR",
+                Email = "doctor@localhost",
+                NormalizedEmail = "DOCTOR@LOCALHOST",
+                ConcurrencyStamp = Guid.NewGuid().ToString("D"),
+                SecurityStamp = Guid.NewGuid().ToString("D")
+            };
+            doctorUser.PasswordHash = hasher.HashPassword(doctorUser, "123456");
+
+            builder.Entity<AppUser>().HasData(doctorUser);
+
+            builder.Entity<IdentityUserClaim<int>>().HasData(
+                new IdentityUserClaim<int> { Id = 3, UserId = 3, ClaimType = "Language", ClaimValue = "en" }
+                );
+            builder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int> { UserId = 3, RoleId = 3 });
+
+            var doctor = new Doctor
+            {
+                Id = 1,
+                FirstName = "An",
+                LastName = "Example",
+                Gender = Gender.Male,
+                Active = true,
+                Consultant = true,
+                Referrer = true,
+                Phone = "+963-11-5555555",
+                Mobile = "+963-993-555555",
+                Email = "an.example@localhost",
+                Address = "Planet Earth",
+                Biography = "Greate personality",
+                Speciality = "Cancer",
+                JoiningDate = new DateTime(2000, 10, 10),
+                Username = "doctor"
+            };
+            builder.Entity<Doctor>().HasData(doctor);
+
+            var edu = new[]
+            {
+                new DoctorEducation { Id = 1, DoctorId = 1, Institution = "University 1", Degree = "Degree 1", Subject = "Cancer", Grade = "A", StartingDate = new DateTime(1990,1,1), CompleteDate = new DateTime(1998,1,1) },
+                new DoctorEducation { Id = 2, DoctorId = 1, Institution = "University 2", Degree = "Degree 2", Subject = "Cancer2", Grade = "A", StartingDate = new DateTime(2000,1,1), CompleteDate = new DateTime(2005,1,1) },
+            };
+            builder.Entity<DoctorEducation>().HasData(edu);
+
+            var exp = new[]
+            {
+                new DoctorExperience { Id = 1, DoctorId = 1, Company = "Company 1", Location = "UK", Position = "Doctor", PeriodFrom = new DateTime(2006,1,1), PeriodTo = new DateTime(2008,1,1) },
+                new DoctorExperience { Id = 2, DoctorId = 1, Company = "Company 2", Location = "UK", Position = "Doctor", PeriodFrom = new DateTime(2008,1,1), PeriodTo = new DateTime(2009,1,1) },
+                new DoctorExperience { Id = 3, DoctorId = 1, Company = "NMC", Location = "SYRIA", Position = "Doctor", PeriodFrom = new DateTime(2009,1,1) },
+            };
+            builder.Entity<DoctorExperience>().HasData(exp);
+
+            var rooms = new[]
+            {
+                new Room { Id = 1, FloorNo = 1, RoomNo = "11", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 2, FloorNo = 1, RoomNo = "12", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 3, FloorNo = 1, RoomNo = "13", BedCount = 1, RoomTypeId = 1, RoomGradeId = 2  },
+                new Room { Id = 4, FloorNo = 1, RoomNo = "14", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 5, FloorNo = 1, RoomNo = "15", BedCount = 1, RoomTypeId = 1, RoomGradeId = 2  },
+                new Room { Id = 6, FloorNo = 1, RoomNo = "16", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 7, FloorNo = 1, RoomNo = "17", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 8, FloorNo = 1, RoomNo = "18", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 9, FloorNo = 1, RoomNo = "19", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 10, FloorNo = 2, RoomNo = "21", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 11, FloorNo = 2, RoomNo = "22", BedCount = 1, RoomTypeId = 1, RoomGradeId = 2  },
+                new Room { Id = 12, FloorNo = 2, RoomNo = "23", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 13, FloorNo = 2, RoomNo = "24", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 14, FloorNo = 2, RoomNo = "25", BedCount = 1, RoomTypeId = 1, RoomGradeId = 2  },
+                new Room { Id = 15, FloorNo = 2, RoomNo = "26", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 16, FloorNo = 2, RoomNo = "27", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 17, FloorNo = 2, RoomNo = "28", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 18, FloorNo = 2, RoomNo = "29", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 19, FloorNo = 3, RoomNo = "31", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 20, FloorNo = 3, RoomNo = "32", BedCount = 1, RoomTypeId = 1, RoomGradeId = 3  },
+                new Room { Id = 21, FloorNo = 3, RoomNo = "33", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 22, FloorNo = 3, RoomNo = "34", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 23, FloorNo = 3, RoomNo = "35", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 24, FloorNo = 3, RoomNo = "36", BedCount = 1, RoomTypeId = 1, RoomGradeId = 3  },
+                new Room { Id = 25, FloorNo = 3, RoomNo = "37", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 26, FloorNo = 3, RoomNo = "38", BedCount = 1, RoomTypeId = 1, RoomGradeId = 1  },
+                new Room { Id = 27, FloorNo = 3, RoomNo = "39", BedCount = 1, RoomTypeId = 1, RoomGradeId = 2  },
+            };
+
+            builder.Entity<Room>().HasData(rooms);
         }
     }
 }

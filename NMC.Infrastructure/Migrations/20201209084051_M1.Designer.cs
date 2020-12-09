@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NMC.Infrastructure.Migrations
 {
     [DbContext(typeof(MedContext))]
-    [Migration("20201208222515_M1")]
+    [Migration("20201209084051_M1")]
     partial class M1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,6 +73,20 @@ namespace NMC.Infrastructure.Migrations
                             ClaimType = "Language",
                             ClaimValue = "en",
                             UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClaimType = "Language",
+                            ClaimValue = "en",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ClaimType = "Language",
+                            ClaimValue = "en",
+                            UserId = 3
                         });
                 });
 
@@ -112,6 +126,23 @@ namespace NMC.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 3
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -161,6 +192,29 @@ namespace NMC.Infrastructure.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "e99e4489-4025-4ee8-a059-7360430fc6a0",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "b3c92566-94b9-434a-bbb9-c5176fe9c5e1",
+                            Name = "Admission",
+                            NormalizedName = "ADMISSION"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ConcurrencyStamp = "4b570f0e-8979-4616-9ea1-7b8ead5af33b",
+                            Name = "Doctor",
+                            NormalizedName = "DOCTOR"
+                        });
                 });
 
             modelBuilder.Entity("NMC.Core.AppUser", b =>
@@ -237,17 +291,49 @@ namespace NMC.Infrastructure.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f59aa59f-8836-4386-a4a4-3a1713cc23ed",
+                            ConcurrencyStamp = "999454fa-adaf-4edf-adba-ddc7c9361646",
                             Email = "admin@localhost",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB1VULmaITabTuP4sUy57+finl7S5KOOqi/OfgRldHCsFO5zdAZ2QQgPEAPfC9/qwg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE2gExCou8VHM4soIywqAry5kDaLxVKTPp1anbNvRt36gVHe/lTPc2PYhwf/DBwlmw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9bb89ed8-427e-4c1b-a181-4619539622d7",
+                            SecurityStamp = "355d6f63-ca58-455c-a00c-c18240c1bfee",
                             TwoFactorEnabled = false,
                             UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c42d5cea-db2d-4f82-82f4-d1fc7fab7c85",
+                            Email = "admission@localhost",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMISSION@LOCALHOST",
+                            NormalizedUserName = "ADMISSION",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOjCu3SfhTHwJ1oPmJQhXsgaldjphpYUqefiJim3cDMpGgpfBWhNUG9y0qEkAsHjVQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "1e25833c-eaed-4dd0-b0ec-3382accfd1f1",
+                            TwoFactorEnabled = false,
+                            UserName = "admission"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3b89ae2b-d9fb-4c38-a38b-fcf3a5e45e83",
+                            Email = "doctor@localhost",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "DOCTOR@LOCALHOST",
+                            NormalizedUserName = "DOCTOR",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFZ+GwyU9gfdW2tuIZF+4jGhh/OEQxE78FZEujApMVWuownnMSKesqvFlu1aZEnpvQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "d5b417bf-8607-44b8-9e0a-db06eec2b26b",
+                            TwoFactorEnabled = false,
+                            UserName = "doctor"
                         });
                 });
 
@@ -836,6 +922,28 @@ namespace NMC.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Doctors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Active = true,
+                            Address = "Planet Earth",
+                            Biography = "Greate personality",
+                            Consultant = true,
+                            Email = "an.example@localhost",
+                            FirstName = "An",
+                            Gender = 0,
+                            JoiningDate = new DateTime(2000, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastName = "Example",
+                            Mobile = "+963-993-555555",
+                            Phone = "+963-11-5555555",
+                            PhotoPath = "user.jpg",
+                            Referrer = true,
+                            Speciality = "Cancer",
+                            Surgeon = false,
+                            Username = "doctor"
+                        });
                 });
 
             modelBuilder.Entity("NMC.Domain.Models.DoctorEducation", b =>
@@ -877,6 +985,30 @@ namespace NMC.Infrastructure.Migrations
                     b.HasIndex("DoctorId");
 
                     b.ToTable("DoctorEducations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CompleteDate = new DateTime(1998, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Degree = "Degree 1",
+                            DoctorId = 1,
+                            Grade = "A",
+                            Institution = "University 1",
+                            StartingDate = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Subject = "Cancer"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CompleteDate = new DateTime(2005, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Degree = "Degree 2",
+                            DoctorId = 1,
+                            Grade = "A",
+                            Institution = "University 2",
+                            StartingDate = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Subject = "Cancer2"
+                        });
                 });
 
             modelBuilder.Entity("NMC.Domain.Models.DoctorExperience", b =>
@@ -914,6 +1046,37 @@ namespace NMC.Infrastructure.Migrations
                     b.HasIndex("DoctorId");
 
                     b.ToTable("DoctorExperiences");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Company = "Company 1",
+                            DoctorId = 1,
+                            Location = "UK",
+                            PeriodFrom = new DateTime(2006, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PeriodTo = new DateTime(2008, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Position = "Doctor"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Company = "Company 2",
+                            DoctorId = 1,
+                            Location = "UK",
+                            PeriodFrom = new DateTime(2008, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PeriodTo = new DateTime(2009, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Position = "Doctor"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Company = "NMC",
+                            DoctorId = 1,
+                            Location = "SYRIA",
+                            PeriodFrom = new DateTime(2009, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Position = "Doctor"
+                        });
                 });
 
             modelBuilder.Entity("NMC.Domain.Models.DoctorSchedule", b =>
@@ -1473,6 +1636,278 @@ namespace NMC.Infrastructure.Migrations
                     b.HasIndex("RoomTypeId");
 
                     b.ToTable("Rooms");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 1,
+                            RoomGradeId = 1,
+                            RoomNo = "11",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 1,
+                            RoomGradeId = 1,
+                            RoomNo = "12",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 1,
+                            RoomGradeId = 2,
+                            RoomNo = "13",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 1,
+                            RoomGradeId = 1,
+                            RoomNo = "14",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 1,
+                            RoomGradeId = 2,
+                            RoomNo = "15",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 1,
+                            RoomGradeId = 1,
+                            RoomNo = "16",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 1,
+                            RoomGradeId = 1,
+                            RoomNo = "17",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 1,
+                            RoomGradeId = 1,
+                            RoomNo = "18",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 1,
+                            RoomGradeId = 1,
+                            RoomNo = "19",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 2,
+                            RoomGradeId = 1,
+                            RoomNo = "21",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 2,
+                            RoomGradeId = 2,
+                            RoomNo = "22",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 2,
+                            RoomGradeId = 1,
+                            RoomNo = "23",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 2,
+                            RoomGradeId = 1,
+                            RoomNo = "24",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 2,
+                            RoomGradeId = 2,
+                            RoomNo = "25",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 2,
+                            RoomGradeId = 1,
+                            RoomNo = "26",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 2,
+                            RoomGradeId = 1,
+                            RoomNo = "27",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 2,
+                            RoomGradeId = 1,
+                            RoomNo = "28",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 2,
+                            RoomGradeId = 1,
+                            RoomNo = "29",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 3,
+                            RoomGradeId = 1,
+                            RoomNo = "31",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 3,
+                            RoomGradeId = 3,
+                            RoomNo = "32",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 3,
+                            RoomGradeId = 1,
+                            RoomNo = "33",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 3,
+                            RoomGradeId = 1,
+                            RoomNo = "34",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 3,
+                            RoomGradeId = 1,
+                            RoomNo = "35",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 3,
+                            RoomGradeId = 3,
+                            RoomNo = "36",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 3,
+                            RoomGradeId = 1,
+                            RoomNo = "37",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 3,
+                            RoomGradeId = 1,
+                            RoomNo = "38",
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Available = false,
+                            BedCount = 1,
+                            FloorNo = 3,
+                            RoomGradeId = 2,
+                            RoomNo = "39",
+                            RoomTypeId = 1
+                        });
                 });
 
             modelBuilder.Entity("NMC.Domain.Models.RoomGrade", b =>
@@ -1636,6 +2071,341 @@ namespace NMC.Infrastructure.Migrations
                     b.HasIndex("ParentId");
 
                     b.ToTable("SBMenuItems");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Enabled = true,
+                            HRef = "/Index",
+                            Icon = "fa fa-dashboard",
+                            SortKey = 1,
+                            Text = "Dashboard",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Enabled = true,
+                            HRef = "/UI1/Doctors/Index",
+                            Icon = "fa fa-user-md",
+                            SortKey = 2,
+                            Text = "Doctors",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Enabled = true,
+                            HRef = "/UI1/Patients/Index",
+                            Icon = "fa fa-wheelchair",
+                            SortKey = 3,
+                            Text = "Patients",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Enabled = true,
+                            HRef = "/UI1/Appointments/Index",
+                            Icon = "fa fa-calendar",
+                            SortKey = 4,
+                            Text = "Appointments",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Enabled = true,
+                            HRef = "/UI1/Doctors/DoctorScheduleIndex",
+                            Icon = "fa fa-calendar-check-o",
+                            SortKey = 5,
+                            Text = "Doctor Schedules",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Enabled = true,
+                            HRef = "/UI1/Departments/Index",
+                            Icon = "fa fa-calendar-check-o",
+                            SortKey = 6,
+                            Text = "Departments",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Enabled = true,
+                            HRef = "/UI1/Rooms/Index",
+                            Icon = "fa fa-cube",
+                            SortKey = 7,
+                            Text = "Rooms",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Enabled = true,
+                            HRef = "/UI1/Reservations/Index",
+                            Icon = "fa fa-envelope-o",
+                            SortKey = 8,
+                            Text = "Reservations",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Enabled = true,
+                            HRef = "/UI1/Admissions/Index",
+                            Icon = "fa fa-bed",
+                            SortKey = 9,
+                            Text = "Admissions",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Enabled = true,
+                            HRef = "#",
+                            Icon = "fa fa-user",
+                            SortKey = 10,
+                            Text = "Employees",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Enabled = true,
+                            HRef = "/UI1/Employees/Index",
+                            Icon = "",
+                            ParentId = 10,
+                            SortKey = 11,
+                            Text = "Employee List",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Enabled = true,
+                            HRef = "#",
+                            Icon = "",
+                            ParentId = 10,
+                            SortKey = 12,
+                            Text = "Attendance",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Enabled = true,
+                            HRef = "#",
+                            Icon = "fa fa-money",
+                            SortKey = 13,
+                            Text = "Accounts",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Enabled = true,
+                            HRef = "#",
+                            Icon = "",
+                            ParentId = 13,
+                            SortKey = 14,
+                            Text = "Invoices",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Enabled = true,
+                            HRef = "#",
+                            Icon = "",
+                            ParentId = 13,
+                            SortKey = 15,
+                            Text = "Payments",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Enabled = true,
+                            HRef = "#",
+                            Icon = "",
+                            ParentId = 13,
+                            SortKey = 16,
+                            Text = "Expenses",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Enabled = true,
+                            HRef = "#",
+                            Icon = "fa fa-cogs",
+                            SortKey = 17,
+                            Text = "Types",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Enabled = true,
+                            HRef = "/UI1/RoomTypes/Index",
+                            Icon = "",
+                            ParentId = 17,
+                            SortKey = 18,
+                            Text = "Room Types",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Enabled = true,
+                            HRef = "/UI1/RoomGrades/Index",
+                            Icon = "",
+                            ParentId = 17,
+                            SortKey = 19,
+                            Text = "Room Grades",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Enabled = true,
+                            HRef = "/UI1/AppointmentTypes/Index",
+                            Icon = "",
+                            ParentId = 17,
+                            SortKey = 20,
+                            Text = "Appointment Types",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Enabled = true,
+                            HRef = "/UI1/AdmissionTypes/Index",
+                            Icon = "",
+                            ParentId = 17,
+                            SortKey = 21,
+                            Text = "Admission Types",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Enabled = true,
+                            HRef = "/UI1/DischargeTypes/Index",
+                            Icon = "",
+                            ParentId = 17,
+                            SortKey = 22,
+                            Text = "Discharge Types",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Enabled = true,
+                            HRef = "/UI1/EmployeeTypes/Index",
+                            Icon = "",
+                            ParentId = 17,
+                            SortKey = 23,
+                            Text = "Employee Types",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Enabled = true,
+                            HRef = "#",
+                            Icon = "fa fa-flag-o",
+                            SortKey = 24,
+                            Text = "Reports",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Enabled = true,
+                            HRef = "#",
+                            Icon = "",
+                            ParentId = 24,
+                            SortKey = 25,
+                            Text = "Report 1",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Enabled = true,
+                            HRef = "#",
+                            Icon = "",
+                            ParentId = 26,
+                            SortKey = 25,
+                            Text = "Report 2",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Enabled = true,
+                            HRef = "#",
+                            Icon = "fa fa-cog",
+                            SortKey = 27,
+                            Text = "Settings",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Enabled = true,
+                            HRef = "/UI1/Admissions/Index",
+                            Icon = "fa fa-bed",
+                            SortKey = 28,
+                            Text = "Inpatients",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Enabled = true,
+                            HRef = "/UI1/Reservations/Index",
+                            Icon = "fa fa-envelope-o",
+                            SortKey = 29,
+                            Text = "Bookings",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Enabled = true,
+                            HRef = "/UI1/Doctors/Index",
+                            Icon = "fa fa-user-md",
+                            SortKey = 30,
+                            Text = "Doctors",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Enabled = true,
+                            HRef = "/UI1/Admissions/Index",
+                            Icon = "fa fa-bed",
+                            SortKey = 31,
+                            Text = "Inpatients",
+                            Visible = true
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Enabled = true,
+                            HRef = "/UI1/Reservations/Index",
+                            Icon = "fa fa-envelope-o",
+                            SortKey = 32,
+                            Text = "Bookings",
+                            Visible = true
+                        });
                 });
 
             modelBuilder.Entity("SBMenu.SBMenuSection", b =>
@@ -1657,6 +2427,29 @@ namespace NMC.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SBMenuSections");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Role = "Admin",
+                            SortKey = 1,
+                            Text = "Main"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Role = "Admission",
+                            SortKey = 2,
+                            Text = "Admission"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Role = "Doctor",
+                            SortKey = 3,
+                            Text = "Doctor"
+                        });
                 });
 
             modelBuilder.Entity("SBMenu.SBMenuSectionItem", b =>
@@ -1682,6 +2475,141 @@ namespace NMC.Infrastructure.Migrations
                     b.HasIndex("SectionId");
 
                     b.ToTable("SBMenuSectionItems");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            MenuItemId = 1,
+                            SectionId = 1,
+                            SortKey = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            MenuItemId = 2,
+                            SectionId = 1,
+                            SortKey = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            MenuItemId = 3,
+                            SectionId = 1,
+                            SortKey = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            MenuItemId = 4,
+                            SectionId = 1,
+                            SortKey = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            MenuItemId = 5,
+                            SectionId = 1,
+                            SortKey = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            MenuItemId = 6,
+                            SectionId = 1,
+                            SortKey = 6
+                        },
+                        new
+                        {
+                            Id = 7,
+                            MenuItemId = 7,
+                            SectionId = 1,
+                            SortKey = 7
+                        },
+                        new
+                        {
+                            Id = 8,
+                            MenuItemId = 8,
+                            SectionId = 1,
+                            SortKey = 8
+                        },
+                        new
+                        {
+                            Id = 9,
+                            MenuItemId = 9,
+                            SectionId = 1,
+                            SortKey = 9
+                        },
+                        new
+                        {
+                            Id = 10,
+                            MenuItemId = 10,
+                            SectionId = 1,
+                            SortKey = 10
+                        },
+                        new
+                        {
+                            Id = 11,
+                            MenuItemId = 13,
+                            SectionId = 1,
+                            SortKey = 11
+                        },
+                        new
+                        {
+                            Id = 12,
+                            MenuItemId = 17,
+                            SectionId = 1,
+                            SortKey = 12
+                        },
+                        new
+                        {
+                            Id = 13,
+                            MenuItemId = 24,
+                            SectionId = 1,
+                            SortKey = 13
+                        },
+                        new
+                        {
+                            Id = 14,
+                            MenuItemId = 27,
+                            SectionId = 1,
+                            SortKey = 14
+                        },
+                        new
+                        {
+                            Id = 15,
+                            MenuItemId = 28,
+                            SectionId = 2,
+                            SortKey = 15
+                        },
+                        new
+                        {
+                            Id = 16,
+                            MenuItemId = 29,
+                            SectionId = 2,
+                            SortKey = 16
+                        },
+                        new
+                        {
+                            Id = 17,
+                            MenuItemId = 30,
+                            SectionId = 2,
+                            SortKey = 17
+                        },
+                        new
+                        {
+                            Id = 33,
+                            MenuItemId = 31,
+                            SectionId = 3,
+                            SortKey = 33
+                        },
+                        new
+                        {
+                            Id = 34,
+                            MenuItemId = 32,
+                            SectionId = 3,
+                            SortKey = 34
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -2001,7 +2929,8 @@ namespace NMC.Infrastructure.Migrations
                 {
                     b.HasOne("SBMenu.SBMenuItem", "Parent")
                         .WithMany("Items")
-                        .HasForeignKey("ParentId");
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Parent");
                 });

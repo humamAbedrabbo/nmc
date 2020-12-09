@@ -245,7 +245,7 @@ namespace NMC.Infrastructure.Migrations
                         column: x => x.ParentId,
                         principalTable: "SBMenuItems",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -916,13 +916,13 @@ namespace NMC.Infrastructure.Migrations
                 columns: new[] { "Id", "Name", "NameAr" },
                 values: new object[,]
                 {
-                    { 6, "Referrals", "إحالة" },
-                    { 1, "Routine checkup", "فحص روتيني" },
                     { 2, "Consulting", "استشارة طبية" },
+                    { 7, "Other", "نوع آخر" },
+                    { 1, "Routine checkup", "فحص روتيني" },
+                    { 6, "Referrals", "إحالة" },
                     { 3, "Vaccinations", "لقاح" },
                     { 4, "Eye Care", "عينية" },
-                    { 5, "Radiology", "تصوير شعاعي" },
-                    { 7, "Other", "نوع آخر" }
+                    { 5, "Radiology", "تصوير شعاعي" }
                 });
 
             migrationBuilder.InsertData(
@@ -930,26 +930,26 @@ namespace NMC.Infrastructure.Migrations
                 columns: new[] { "Id", "Name", "NameAr" },
                 values: new object[,]
                 {
-                    { 12, "Respiratory System Diseases", "أمراض الجهاز التنفسي" },
-                    { 13, "Catering section", "قسم الإطعام" },
-                    { 15, "Maintenance Department", "قسم الصيانة" },
-                    { 17, "Radiography", "قسم التصوير الشعاعي" },
-                    { 16, "Laboratory", "المخبر" },
-                    { 19, "Pharmacy", "الصيدلية" },
-                    { 20, "Operation Rooms (OR)", "جناح العمليات" },
-                    { 11, "Urology", "قسم البولية" },
-                    { 18, "Medical warehouse", "المستودع الطبي" },
-                    { 10, "Blood vessels", "قسم الأوعية" },
-                    { 14, "Emergency (ER)", "قسم الإسعاف والطوارئ" },
-                    { 8, "Arthroscopy", "قسم التنظير" },
-                    { 7, "Dialysis", "قسم غسيل الكلى" },
-                    { 6, "Obstetric & Genecology", "جناح النسائية والمخاض" },
                     { 9, "Cath Lab - Cardiovascular (CCU)", "قسم العناية القلبة والقثطرة القلبية" },
+                    { 10, "Blood vessels", "قسم الأوعية" },
+                    { 11, "Urology", "قسم البولية" },
+                    { 12, "Respiratory System Diseases", "أمراض الجهاز التنفسي" },
+                    { 7, "Dialysis", "قسم غسيل الكلى" },
+                    { 13, "Catering section", "قسم الإطعام" },
+                    { 14, "Emergency (ER)", "قسم الإسعاف والطوارئ" },
+                    { 15, "Maintenance Department", "قسم الصيانة" },
+                    { 16, "Laboratory", "المخبر" },
+                    { 17, "Radiography", "قسم التصوير الشعاعي" },
+                    { 8, "Arthroscopy", "قسم التنظير" },
+                    { 20, "Operation Rooms (OR)", "جناح العمليات" },
+                    { 2, "Financial and Accounting Department ", "الإدارة المالية و قسم المحاسبة" },
                     { 5, "Intensive Care Unite (ICU)", "قسم العناية المشددة" },
                     { 4, "Internal Medicine", "قسم الداخلية الباطنية" },
                     { 3, "Pediatric Department -  Incubators section (NICU)", "جناح الأطفال - قسم الحواضن" },
-                    { 2, "Financial and Accounting Department ", "الإدارة المالية و قسم المحاسبة" },
-                    { 1, "Administration", "الادارة" }
+                    { 18, "Medical warehouse", "المستودع الطبي" },
+                    { 1, "Administration", "الادارة" },
+                    { 6, "Obstetric & Genecology", "جناح النسائية والمخاض" },
+                    { 19, "Pharmacy", "الصيدلية" }
                 });
 
             migrationBuilder.InsertData(
@@ -957,28 +957,43 @@ namespace NMC.Infrastructure.Migrations
                 columns: new[] { "Id", "Name", "NameAr" },
                 values: new object[,]
                 {
-                    { 4, "Death", "وفاة" },
-                    { 3, "Ill", "سوء" },
-                    { 5, "Other", "أخرى" },
                     { 1, "Healing", "شفاء" },
-                    { 2, "Improvement", "تحسن" }
+                    { 2, "Improvement", "تحسن" },
+                    { 3, "Ill", "سوء" },
+                    { 4, "Death", "وفاة" },
+                    { 5, "Other", "أخرى" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Doctors",
+                columns: new[] { "Id", "Active", "Address", "Biography", "Consultant", "Email", "FirstName", "Gender", "JoiningDate", "LastName", "Mobile", "Phone", "PhotoPath", "Referrer", "Speciality", "Surgeon", "Username" },
+                values: new object[] { 1, true, "Planet Earth", "Greate personality", true, "an.example@localhost", "An", 0, new DateTime(2000, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Example", "+963-993-555555", "+963-11-5555555", "user.jpg", true, "Cancer", false, "doctor" });
 
             migrationBuilder.InsertData(
                 table: "EmployeeTypes",
                 columns: new[] { "Id", "Name", "NameAr" },
                 values: new object[,]
                 {
-                    { 10, "Cleaner", "عامل تنظيف" },
-                    { 9, "Pharmacist", "صيدلي" },
-                    { 8, "Maintenance", "صيانة" },
-                    { 7, "Administrator", "إداري" },
-                    { 5, "Receptionist", "موظف استقبال" },
                     { 6, "Accountant", "محاسب" },
-                    { 3, "Laboratorist", "مخبري" },
-                    { 2, "Nurse", "ممرض" },
+                    { 7, "Administrator", "إداري" },
+                    { 8, "Maintenance", "صيانة" },
+                    { 9, "Pharmacist", "صيدلي" },
+                    { 10, "Cleaner", "عامل تنظيف" },
+                    { 5, "Receptionist", "موظف استقبال" },
                     { 1, "Doctor", "طبيب" },
+                    { 2, "Nurse", "ممرض" },
+                    { 3, "Laboratorist", "مخبري" },
                     { 4, "Secretary", "سكرتيرة" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { 1, "e99e4489-4025-4ee8-a059-7360430fc6a0", "Admin", "ADMIN" },
+                    { 3, "4b570f0e-8979-4616-9ea1-7b8ead5af33b", "Doctor", "DOCTOR" },
+                    { 2, "b3c92566-94b9-434a-bbb9-c5176fe9c5e1", "Admission", "ADMISSION" }
                 });
 
             migrationBuilder.InsertData(
@@ -986,9 +1001,9 @@ namespace NMC.Infrastructure.Migrations
                 columns: new[] { "Id", "Description", "Name", "NameAr" },
                 values: new object[,]
                 {
-                    { 3, null, "First Class", "درجة أولى" },
                     { 1, null, "Suite", "جناح" },
                     { 2, null, "Excellent Class", "درجة ممتازة" },
+                    { 3, null, "First Class", "درجة أولى" },
                     { 4, null, "Second Class", "درجة ثانية" }
                 });
 
@@ -997,21 +1012,176 @@ namespace NMC.Infrastructure.Migrations
                 columns: new[] { "Id", "Name", "NameAr" },
                 values: new object[,]
                 {
+                    { 1, "Patient Room", "غرفة مريض" },
                     { 2, "Emergency Room", "غرفة طوارئ" },
-                    { 4, "Baby Incubator Room", "غرفة حاضنات" },
                     { 3, "Care Room", "غرفة عناية" },
-                    { 1, "Patient Room", "غرفة مريض" }
+                    { 4, "Baby Incubator Room", "غرفة حاضنات" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SBMenuItems",
+                columns: new[] { "Id", "Enabled", "HRef", "Icon", "ParentId", "SortKey", "Text", "Visible" },
+                values: new object[,]
+                {
+                    { 10, true, "#", "fa fa-user", null, 10, "Employees", true },
+                    { 13, true, "#", "fa fa-money", null, 13, "Accounts", true },
+                    { 17, true, "#", "fa fa-cogs", null, 17, "Types", true },
+                    { 24, true, "#", "fa fa-flag-o", null, 24, "Reports", true },
+                    { 5, true, "/UI1/Doctors/DoctorScheduleIndex", "fa fa-calendar-check-o", null, 5, "Doctor Schedules", true },
+                    { 9, true, "/UI1/Admissions/Index", "fa fa-bed", null, 9, "Admissions", true },
+                    { 27, true, "#", "fa fa-cog", null, 27, "Settings", true },
+                    { 28, true, "/UI1/Admissions/Index", "fa fa-bed", null, 28, "Inpatients", true },
+                    { 26, true, "#", "", 26, 25, "Report 2", true },
+                    { 8, true, "/UI1/Reservations/Index", "fa fa-envelope-o", null, 8, "Reservations", true },
+                    { 3, true, "/UI1/Patients/Index", "fa fa-wheelchair", null, 3, "Patients", true },
+                    { 6, true, "/UI1/Departments/Index", "fa fa-calendar-check-o", null, 6, "Departments", true },
+                    { 31, true, "/UI1/Admissions/Index", "fa fa-bed", null, 31, "Inpatients", true },
+                    { 4, true, "/UI1/Appointments/Index", "fa fa-calendar", null, 4, "Appointments", true },
+                    { 29, true, "/UI1/Reservations/Index", "fa fa-envelope-o", null, 29, "Bookings", true },
+                    { 2, true, "/UI1/Doctors/Index", "fa fa-user-md", null, 2, "Doctors", true },
+                    { 1, true, "/Index", "fa fa-dashboard", null, 1, "Dashboard", true },
+                    { 32, true, "/UI1/Reservations/Index", "fa fa-envelope-o", null, 32, "Bookings", true },
+                    { 7, true, "/UI1/Rooms/Index", "fa fa-cube", null, 7, "Rooms", true },
+                    { 30, true, "/UI1/Doctors/Index", "fa fa-user-md", null, 30, "Doctors", true }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SBMenuSections",
+                columns: new[] { "Id", "Role", "SortKey", "Text" },
+                values: new object[,]
+                {
+                    { 1, "Admin", 1, "Main" },
+                    { 3, "Doctor", 3, "Doctor" },
+                    { 2, "Admission", 2, "Admission" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "f59aa59f-8836-4386-a4a4-3a1713cc23ed", "admin@localhost", false, false, null, "ADMIN@LOCALHOST", "ADMIN", "AQAAAAEAACcQAAAAEB1VULmaITabTuP4sUy57+finl7S5KOOqi/OfgRldHCsFO5zdAZ2QQgPEAPfC9/qwg==", null, false, "9bb89ed8-427e-4c1b-a181-4619539622d7", false, "admin" });
+                values: new object[,]
+                {
+                    { 1, 0, "999454fa-adaf-4edf-adba-ddc7c9361646", "admin@localhost", false, false, null, "ADMIN@LOCALHOST", "ADMIN", "AQAAAAEAACcQAAAAEE2gExCou8VHM4soIywqAry5kDaLxVKTPp1anbNvRt36gVHe/lTPc2PYhwf/DBwlmw==", null, false, "355d6f63-ca58-455c-a00c-c18240c1bfee", false, "admin" },
+                    { 2, 0, "c42d5cea-db2d-4f82-82f4-d1fc7fab7c85", "admission@localhost", false, false, null, "ADMISSION@LOCALHOST", "ADMISSION", "AQAAAAEAACcQAAAAEOjCu3SfhTHwJ1oPmJQhXsgaldjphpYUqefiJim3cDMpGgpfBWhNUG9y0qEkAsHjVQ==", null, false, "1e25833c-eaed-4dd0-b0ec-3382accfd1f1", false, "admission" },
+                    { 3, 0, "3b89ae2b-d9fb-4c38-a38b-fcf3a5e45e83", "doctor@localhost", false, false, null, "DOCTOR@LOCALHOST", "DOCTOR", "AQAAAAEAACcQAAAAEFZ+GwyU9gfdW2tuIZF+4jGhh/OEQxE78FZEujApMVWuownnMSKesqvFlu1aZEnpvQ==", null, false, "d5b417bf-8607-44b8-9e0a-db06eec2b26b", false, "doctor" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DoctorEducations",
+                columns: new[] { "Id", "CompleteDate", "Degree", "DoctorId", "Grade", "Institution", "StartingDate", "Subject" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(1998, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Degree 1", 1, "A", "University 1", new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancer" },
+                    { 2, new DateTime(2005, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Degree 2", 1, "A", "University 2", new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cancer2" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DoctorExperiences",
+                columns: new[] { "Id", "Company", "DoctorId", "Location", "PeriodFrom", "PeriodTo", "Position" },
+                values: new object[,]
+                {
+                    { 3, "NMC", 1, "SYRIA", new DateTime(2009, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Doctor" },
+                    { 1, "Company 1", 1, "UK", new DateTime(2006, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2008, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor" },
+                    { 2, "Company 2", 1, "UK", new DateTime(2008, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2009, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Rooms",
+                columns: new[] { "Id", "Available", "BedCount", "FloorNo", "RoomGradeId", "RoomNo", "RoomTypeId" },
+                values: new object[,]
+                {
+                    { 13, false, 1, 2, 1, "24", 1 },
+                    { 14, false, 1, 2, 2, "25", 1 },
+                    { 15, false, 1, 2, 1, "26", 1 },
+                    { 16, false, 1, 2, 1, "27", 1 },
+                    { 18, false, 1, 2, 1, "29", 1 },
+                    { 19, false, 1, 3, 1, "31", 1 },
+                    { 20, false, 1, 3, 3, "32", 1 },
+                    { 24, false, 1, 3, 3, "36", 1 },
+                    { 12, false, 1, 2, 1, "23", 1 },
+                    { 22, false, 1, 3, 1, "34", 1 },
+                    { 23, false, 1, 3, 1, "35", 1 },
+                    { 25, false, 1, 3, 1, "37", 1 },
+                    { 26, false, 1, 3, 1, "38", 1 },
+                    { 27, false, 1, 3, 2, "39", 1 },
+                    { 21, false, 1, 3, 1, "33", 1 },
+                    { 11, false, 1, 2, 2, "22", 1 },
+                    { 17, false, 1, 2, 1, "28", 1 },
+                    { 9, false, 1, 1, 1, "19", 1 },
+                    { 10, false, 1, 2, 1, "21", 1 },
+                    { 2, false, 1, 1, 1, "12", 1 },
+                    { 3, false, 1, 1, 2, "13", 1 },
+                    { 4, false, 1, 1, 1, "14", 1 },
+                    { 1, false, 1, 1, 1, "11", 1 },
+                    { 5, false, 1, 1, 2, "15", 1 },
+                    { 6, false, 1, 1, 1, "16", 1 },
+                    { 7, false, 1, 1, 1, "17", 1 },
+                    { 8, false, 1, 1, 1, "18", 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SBMenuItems",
+                columns: new[] { "Id", "Enabled", "HRef", "Icon", "ParentId", "SortKey", "Text", "Visible" },
+                values: new object[,]
+                {
+                    { 16, true, "#", "", 13, 16, "Expenses", true },
+                    { 23, true, "/UI1/EmployeeTypes/Index", "", 17, 23, "Employee Types", true },
+                    { 22, true, "/UI1/DischargeTypes/Index", "", 17, 22, "Discharge Types", true },
+                    { 21, true, "/UI1/AdmissionTypes/Index", "", 17, 21, "Admission Types", true },
+                    { 20, true, "/UI1/AppointmentTypes/Index", "", 17, 20, "Appointment Types", true },
+                    { 19, true, "/UI1/RoomGrades/Index", "", 17, 19, "Room Grades", true },
+                    { 18, true, "/UI1/RoomTypes/Index", "", 17, 18, "Room Types", true },
+                    { 25, true, "#", "", 24, 25, "Report 1", true },
+                    { 15, true, "#", "", 13, 15, "Payments", true },
+                    { 11, true, "/UI1/Employees/Index", "", 10, 11, "Employee List", true },
+                    { 12, true, "#", "", 10, 12, "Attendance", true },
+                    { 14, true, "#", "", 13, 14, "Invoices", true }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SBMenuSectionItems",
+                columns: new[] { "Id", "MenuItemId", "SectionId", "SortKey" },
+                values: new object[,]
+                {
+                    { 17, 30, 2, 17 },
+                    { 16, 29, 2, 16 },
+                    { 15, 28, 2, 15 },
+                    { 12, 17, 1, 12 },
+                    { 14, 27, 1, 14 },
+                    { 13, 24, 1, 13 },
+                    { 8, 8, 1, 8 },
+                    { 11, 13, 1, 11 },
+                    { 10, 10, 1, 10 },
+                    { 9, 9, 1, 9 },
+                    { 7, 7, 1, 7 },
+                    { 34, 32, 3, 34 },
+                    { 5, 5, 1, 5 },
+                    { 4, 4, 1, 4 },
+                    { 3, 3, 1, 3 },
+                    { 2, 2, 1, 2 },
+                    { 1, 1, 1, 1 },
+                    { 33, 31, 3, 33 },
+                    { 6, 6, 1, 6 }
+                });
 
             migrationBuilder.InsertData(
                 table: "UserClaims",
                 columns: new[] { "Id", "ClaimType", "ClaimValue", "UserId" },
-                values: new object[] { 1, "Language", "en", 1 });
+                values: new object[,]
+                {
+                    { 3, "Language", "en", 3 },
+                    { 2, "Language", "en", 2 },
+                    { 1, "Language", "en", 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { 3, 3 },
+                    { 2, 2 },
+                    { 1, 1 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Admissions_AdmissionTypeId",

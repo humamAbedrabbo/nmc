@@ -42,7 +42,23 @@
         <partial name="_Header" />
         @*<partial name="_Sidebar" />*@
 
-        <vc:sb-menu-view role-name="Admin" />
+        @if (User.IsInRole(AppRole.ROLE_ADMIN))
+        {
+            <vc:sb-menu-view role-name="@AppRole.ROLE_ADMIN" />
+        }
+        else if (User.IsInRole(AppRole.ROLE_ADMISSION))
+        {
+            <vc:sb-menu-view role-name="@AppRole.ROLE_ADMISSION" />
+        }
+        else if (User.IsInRole(AppRole.ROLE_DOCTOR))
+        {
+            <vc:sb-menu-view role-name="@AppRole.ROLE_DOCTOR" />
+        }
+        else
+        {
+            <vc:sb-menu-view role-name="Empty" />
+        }
+
 
         <div class="page-wrapper">
             @RenderBody()
