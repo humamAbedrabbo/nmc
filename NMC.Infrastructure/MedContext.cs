@@ -235,6 +235,12 @@ namespace NMC.Infrastructure
                 );
 
 
+            builder.Entity<SBMenu.SBMenuItem>()
+                .HasOne(p => p.Parent)
+                .WithMany(prop => prop.Items)
+                .HasForeignKey(p => p.ParentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             // Seed Menu
             var menu = new[]
             {
