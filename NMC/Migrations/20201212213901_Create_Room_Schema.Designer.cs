@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NMC.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NMC.Migrations
 {
     [DbContext(typeof(MedContext))]
-    partial class MedContextModelSnapshot : ModelSnapshot
+    [Migration("20201212213901_Create_Room_Schema")]
+    partial class Create_Room_Schema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,15 +237,15 @@ namespace NMC.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f5562ad1-4882-418d-b8d3-e32fee7d3af2",
+                            ConcurrencyStamp = "921e493b-d86a-408c-9b11-186f434c7678",
                             Email = "admin@localhost",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPT/5bV/BuDXWVSre+B5Ai31oZisd9KRIouZfkcQ3Eqyvb3blB/tuNZV5A7jX3eJYQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBd7On0W0XquFvQHLHnKrlflqoT/Bt59vLJ+m9xOZCTnJONnpxCYoha2erSomOdDqw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d76458e7-43be-494a-afe4-80f26877dcf2",
+                            SecurityStamp = "d43070bb-a024-4d77-8060-8c299382724f",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -268,9 +270,6 @@ namespace NMC.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("RoomNo")
-                        .HasName("AK_RoomNo");
 
                     b.HasIndex("RoomGradeId");
 
