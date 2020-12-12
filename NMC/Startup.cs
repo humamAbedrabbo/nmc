@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NMC.Extensions;
+using MediatR;
 
 namespace NMC
 {
@@ -42,6 +43,9 @@ namespace NMC
                     options.KnownProxies.Add(IPAddress.Parse(Configuration["KnownProxy"]));
                 });
             }
+
+            services.AddMemoryCache();
+            services.AddMediatR(typeof(Startup));
 
             services.AddRazorPages(x => x.Conventions.AuthorizeFolder("/"))
                 .AddViewLocalization()

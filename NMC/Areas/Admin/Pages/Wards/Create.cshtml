@@ -1,0 +1,43 @@
+﻿@page
+@model NMC.Areas.Admin.Pages.Wards.CreateModel
+@{
+    ViewData["PageTitle"] = _localizer["Create Ward"];
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <h4 class="page-title">@ViewBag.PageTitle</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="Ward.ArName"></label>
+                    <input asp-for="Ward.ArName" class="form-control">
+                    <span asp-validation-for="Ward.ArName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Ward.EnName"></label>
+                    <input asp-for="Ward.EnName" class="form-control">
+                    <span asp-validation-for="Ward.EnName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Ward.Floor"></label>
+                    <input asp-for="Ward.Floor" class="form-control">
+                    <span asp-validation-for="Ward.Floor" class="text-danger"></span>
+                </div>
+                <div class="m-t-20 text-center">
+                    <button class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+<partial name="_ValidationScriptsPartial" />
+
+}
