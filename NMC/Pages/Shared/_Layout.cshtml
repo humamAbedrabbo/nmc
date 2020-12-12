@@ -1,6 +1,4 @@
-﻿@inject IViewLocalizer _localizer
-
-@{
+﻿@{
     string lang = User.GetUserLanguage();
     bool isArabic = (lang == "ar");
     string rtl = ""; //  isArabic ? "rtl" : "";
@@ -10,8 +8,6 @@
     string bootstrapJS = isArabic ? "bootstrap-rtl.min.js" : "bootstrap.min.js";
     string chartJS = isArabic ? "chart-rtl.js" : "chart.js";
     string appJS = isArabic ? "app-rtl.js" : "app.js";
-
-    
 
 }
 
@@ -43,7 +39,6 @@
         <partial name="_Sidebar" />
         <div class="page-wrapper">
             @RenderBody()
-            <partial name="_Notifications" />
         </div>
     </div>
     <div class="sidebar-overlay" data-reff=""></div>

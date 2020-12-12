@@ -562,4 +562,6 @@ msgid "Arabic"
 msgstr "عربية"
 msgid "English"
 msgstr "انجليزية"
+msgid "Home"
+msgstr "الصفحة الرئيسية"
 
