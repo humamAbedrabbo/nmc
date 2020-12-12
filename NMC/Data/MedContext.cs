@@ -18,6 +18,7 @@ namespace NMC.Data
         }
 
         // Master Domain Entities
+        public DbSet<Room> Rooms { get; set; }
 
         // Master Types
         public DbSet<RoomGrade> RoomGrades { get; set; }
@@ -38,6 +39,10 @@ namespace NMC.Data
             builder.Entity<AppUser>()
                 .HasAlternateKey(p => p.UserName)
                 .HasName("AK_Username");
+
+            builder.Entity<Room>()
+                .HasAlternateKey(p => p.RoomNo)
+                .HasName("AK_RoomNo");
 
             // Master Seed
             SeedAdmin(builder);
