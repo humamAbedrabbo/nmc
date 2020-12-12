@@ -46,7 +46,8 @@ namespace NMC.Infrastructure.Migrations
                         .Annotation("Npgsql:IdentitySequenceOptions", "'100', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(75)", maxLength: 75, nullable: false),
-                    NameAr = table.Column<string>(type: "character varying(75)", maxLength: 75, nullable: false)
+                    NameAr = table.Column<string>(type: "character varying(75)", maxLength: 75, nullable: false),
+                    DepartmentType = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -529,6 +530,7 @@ namespace NMC.Infrastructure.Migrations
                     FloorNo = table.Column<int>(type: "integer", nullable: false),
                     RoomTypeId = table.Column<int>(type: "integer", nullable: false),
                     RoomGradeId = table.Column<int>(type: "integer", nullable: true),
+                    WardId = table.Column<int>(type: "integer", nullable: true),
                     BedCount = table.Column<int>(type: "integer", nullable: false),
                     Available = table.Column<bool>(type: "boolean", nullable: false)
                 },
@@ -536,6 +538,12 @@ namespace NMC.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Rooms", x => x.Id);
                     table.UniqueConstraint("AK_Rooms_RoomNo", x => x.RoomNo);
+                    table.ForeignKey(
+                        name: "FK_Rooms_Departments_WardId",
+                        column: x => x.WardId,
+                        principalTable: "Departments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Rooms_RoomGrades_RoomGradeId",
                         column: x => x.RoomGradeId,
@@ -927,29 +935,29 @@ namespace NMC.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Departments",
-                columns: new[] { "Id", "Name", "NameAr" },
+                columns: new[] { "Id", "DepartmentType", "Name", "NameAr" },
                 values: new object[,]
                 {
-                    { 9, "Cath Lab - Cardiovascular (CCU)", "قسم العناية القلبة والقثطرة القلبية" },
-                    { 10, "Blood vessels", "قسم الأوعية" },
-                    { 11, "Urology", "قسم البولية" },
-                    { 12, "Respiratory System Diseases", "أمراض الجهاز التنفسي" },
-                    { 7, "Dialysis", "قسم غسيل الكلى" },
-                    { 13, "Catering section", "قسم الإطعام" },
-                    { 14, "Emergency (ER)", "قسم الإسعاف والطوارئ" },
-                    { 15, "Maintenance Department", "قسم الصيانة" },
-                    { 16, "Laboratory", "المخبر" },
-                    { 17, "Radiography", "قسم التصوير الشعاعي" },
-                    { 8, "Arthroscopy", "قسم التنظير" },
-                    { 20, "Operation Rooms (OR)", "جناح العمليات" },
-                    { 2, "Financial and Accounting Department ", "الإدارة المالية و قسم المحاسبة" },
-                    { 5, "Intensive Care Unite (ICU)", "قسم العناية المشددة" },
-                    { 4, "Internal Medicine", "قسم الداخلية الباطنية" },
-                    { 3, "Pediatric Department -  Incubators section (NICU)", "جناح الأطفال - قسم الحواضن" },
-                    { 18, "Medical warehouse", "المستودع الطبي" },
-                    { 1, "Administration", "الادارة" },
-                    { 6, "Obstetric & Genecology", "جناح النسائية والمخاض" },
-                    { 19, "Pharmacy", "الصيدلية" }
+                    { 9, 2, "Cath Lab - Cardiovascular (CCU)", "قسم العناية القلبة والقثطرة القلبية" },
+                    { 10, 1, "Blood vessels", "قسم الأوعية" },
+                    { 11, 1, "Urology", "قسم البولية" },
+                    { 12, 1, "Respiratory System Diseases", "أمراض الجهاز التنفسي" },
+                    { 7, 1, "Dialysis", "قسم غسيل الكلى" },
+                    { 13, 0, "Catering section", "قسم الإطعام" },
+                    { 14, 1, "Emergency (ER)", "قسم الإسعاف والطوارئ" },
+                    { 15, 0, "Maintenance Department", "قسم الصيانة" },
+                    { 16, 2, "Laboratory", "المخبر" },
+                    { 17, 2, "Radiography", "قسم التصوير الشعاعي" },
+                    { 8, 1, "Arthroscopy", "قسم التنظير" },
+                    { 20, 1, "Operation Rooms (OR)", "جناح العمليات" },
+                    { 2, 0, "Financial and Accounting Department ", "الإدارة المالية و قسم المحاسبة" },
+                    { 5, 1, "Intensive Care Unite (ICU)", "قسم العناية المشددة" },
+                    { 4, 1, "Internal Medicine", "قسم الداخلية الباطنية" },
+                    { 3, 1, "Pediatric Department -  Incubators section (NICU)", "جناح الأطفال - قسم الحواضن" },
+                    { 18, 0, "Medical warehouse", "المستودع الطبي" },
+                    { 1, 0, "Administration", "الادارة" },
+                    { 6, 1, "Obstetric & Genecology", "جناح النسائية والمخاض" },
+                    { 19, 0, "Pharmacy", "الصيدلية" }
                 });
 
             migrationBuilder.InsertData(
@@ -991,9 +999,9 @@ namespace NMC.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "e99e4489-4025-4ee8-a059-7360430fc6a0", "Admin", "ADMIN" },
-                    { 3, "4b570f0e-8979-4616-9ea1-7b8ead5af33b", "Doctor", "DOCTOR" },
-                    { 2, "b3c92566-94b9-434a-bbb9-c5176fe9c5e1", "Admission", "ADMISSION" }
+                    { 1, "b32ca899-c8ec-4486-be19-3790950daae3", "Admin", "ADMIN" },
+                    { 3, "27ad3d0f-2e7a-4e2a-b94c-725fa9b78983", "Doctor", "DOCTOR" },
+                    { 2, "2f71f003-c54e-4d33-bb47-bc0fbfed2c17", "Admission", "ADMISSION" }
                 });
 
             migrationBuilder.InsertData(
@@ -1060,9 +1068,9 @@ namespace NMC.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "999454fa-adaf-4edf-adba-ddc7c9361646", "admin@localhost", false, false, null, "ADMIN@LOCALHOST", "ADMIN", "AQAAAAEAACcQAAAAEE2gExCou8VHM4soIywqAry5kDaLxVKTPp1anbNvRt36gVHe/lTPc2PYhwf/DBwlmw==", null, false, "355d6f63-ca58-455c-a00c-c18240c1bfee", false, "admin" },
-                    { 2, 0, "c42d5cea-db2d-4f82-82f4-d1fc7fab7c85", "admission@localhost", false, false, null, "ADMISSION@LOCALHOST", "ADMISSION", "AQAAAAEAACcQAAAAEOjCu3SfhTHwJ1oPmJQhXsgaldjphpYUqefiJim3cDMpGgpfBWhNUG9y0qEkAsHjVQ==", null, false, "1e25833c-eaed-4dd0-b0ec-3382accfd1f1", false, "admission" },
-                    { 3, 0, "3b89ae2b-d9fb-4c38-a38b-fcf3a5e45e83", "doctor@localhost", false, false, null, "DOCTOR@LOCALHOST", "DOCTOR", "AQAAAAEAACcQAAAAEFZ+GwyU9gfdW2tuIZF+4jGhh/OEQxE78FZEujApMVWuownnMSKesqvFlu1aZEnpvQ==", null, false, "d5b417bf-8607-44b8-9e0a-db06eec2b26b", false, "doctor" }
+                    { 1, 0, "5bfc777d-ba3f-48ae-8026-88fb1e9514f8", "admin@localhost", false, false, null, "ADMIN@LOCALHOST", "ADMIN", "AQAAAAEAACcQAAAAEDcZYFwaC4WnGxmBeDj6cgjh8b3DLrsguj69pFeMjPsXDK1F2U0aGbEvVEz2ZRiKsg==", null, false, "38c10d8b-7b56-48c1-a6d3-bb7fbadaf71b", false, "admin" },
+                    { 2, 0, "8372423d-b131-4386-bf88-766f5b2ab540", "admission@localhost", false, false, null, "ADMISSION@LOCALHOST", "ADMISSION", "AQAAAAEAACcQAAAAEJHwQp5wfAAR4TN8o43RsOwRc816duN/01z5i5+r9xAJTKDskCpEq/qS/7hFSAsbJQ==", null, false, "2f5e2402-1359-4e69-b4ba-15ea6cc45e64", false, "admission" },
+                    { 3, 0, "683a5a13-3aba-4ef5-8211-17a83edc3817", "doctor@localhost", false, false, null, "DOCTOR@LOCALHOST", "DOCTOR", "AQAAAAEAACcQAAAAEPBL1wJvzXvcHc7HZcYYwxdrMgVm/hN2bj9tB0J5BVZZYi9ADxgBLhPx2rH737SMMw==", null, false, "eefc6915-dcaf-4119-874b-fa9b401bc455", false, "doctor" }
                 });
 
             migrationBuilder.InsertData(
@@ -1086,36 +1094,36 @@ namespace NMC.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Rooms",
-                columns: new[] { "Id", "Available", "BedCount", "FloorNo", "RoomGradeId", "RoomNo", "RoomTypeId" },
+                columns: new[] { "Id", "Available", "BedCount", "FloorNo", "RoomGradeId", "RoomNo", "RoomTypeId", "WardId" },
                 values: new object[,]
                 {
-                    { 13, false, 1, 2, 1, "24", 1 },
-                    { 14, false, 1, 2, 2, "25", 1 },
-                    { 15, false, 1, 2, 1, "26", 1 },
-                    { 16, false, 1, 2, 1, "27", 1 },
-                    { 18, false, 1, 2, 1, "29", 1 },
-                    { 19, false, 1, 3, 1, "31", 1 },
-                    { 20, false, 1, 3, 3, "32", 1 },
-                    { 24, false, 1, 3, 3, "36", 1 },
-                    { 12, false, 1, 2, 1, "23", 1 },
-                    { 22, false, 1, 3, 1, "34", 1 },
-                    { 23, false, 1, 3, 1, "35", 1 },
-                    { 25, false, 1, 3, 1, "37", 1 },
-                    { 26, false, 1, 3, 1, "38", 1 },
-                    { 27, false, 1, 3, 2, "39", 1 },
-                    { 21, false, 1, 3, 1, "33", 1 },
-                    { 11, false, 1, 2, 2, "22", 1 },
-                    { 17, false, 1, 2, 1, "28", 1 },
-                    { 9, false, 1, 1, 1, "19", 1 },
-                    { 10, false, 1, 2, 1, "21", 1 },
-                    { 2, false, 1, 1, 1, "12", 1 },
-                    { 3, false, 1, 1, 2, "13", 1 },
-                    { 4, false, 1, 1, 1, "14", 1 },
-                    { 1, false, 1, 1, 1, "11", 1 },
-                    { 5, false, 1, 1, 2, "15", 1 },
-                    { 6, false, 1, 1, 1, "16", 1 },
-                    { 7, false, 1, 1, 1, "17", 1 },
-                    { 8, false, 1, 1, 1, "18", 1 }
+                    { 13, false, 1, 2, 1, "24", 1, 4 },
+                    { 14, false, 1, 2, 2, "25", 1, 4 },
+                    { 15, false, 1, 2, 1, "26", 1, 4 },
+                    { 16, false, 1, 2, 1, "27", 1, 4 },
+                    { 18, false, 1, 2, 1, "29", 1, 4 },
+                    { 19, false, 1, 3, 1, "31", 1, 5 },
+                    { 20, false, 1, 3, 3, "32", 1, 5 },
+                    { 24, false, 1, 3, 3, "36", 1, 5 },
+                    { 12, false, 1, 2, 1, "23", 1, 4 },
+                    { 22, false, 1, 3, 1, "34", 1, 5 },
+                    { 23, false, 1, 3, 1, "35", 1, 5 },
+                    { 25, false, 1, 3, 1, "37", 1, 5 },
+                    { 26, false, 1, 3, 1, "38", 1, 5 },
+                    { 27, false, 1, 3, 2, "39", 1, 5 },
+                    { 21, false, 1, 3, 1, "33", 1, 5 },
+                    { 11, false, 1, 2, 2, "22", 1, 4 },
+                    { 17, false, 1, 2, 1, "28", 1, 4 },
+                    { 9, false, 1, 1, 1, "19", 1, 3 },
+                    { 10, false, 1, 2, 1, "21", 1, 4 },
+                    { 2, false, 1, 1, 1, "12", 1, 3 },
+                    { 3, false, 1, 1, 2, "13", 1, 3 },
+                    { 4, false, 1, 1, 1, "14", 1, 3 },
+                    { 1, false, 1, 1, 1, "11", 1, 3 },
+                    { 5, false, 1, 1, 2, "15", 1, 3 },
+                    { 6, false, 1, 1, 1, "16", 1, 3 },
+                    { 7, false, 1, 1, 1, "17", 1, 3 },
+                    { 8, false, 1, 1, 1, "18", 1, 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -1340,6 +1348,11 @@ namespace NMC.Infrastructure.Migrations
                 column: "RoomTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Rooms_WardId",
+                table: "Rooms",
+                column: "WardId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SBMenuItems_ParentId",
                 table: "SBMenuItems",
                 column: "ParentId");
@@ -1473,9 +1486,6 @@ namespace NMC.Infrastructure.Migrations
                 name: "AdmissionTypes");
 
             migrationBuilder.DropTable(
-                name: "Departments");
-
-            migrationBuilder.DropTable(
                 name: "DischargeTypes");
 
             migrationBuilder.DropTable(
@@ -1489,6 +1499,9 @@ namespace NMC.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Rooms");
+
+            migrationBuilder.DropTable(
+                name: "Departments");
 
             migrationBuilder.DropTable(
                 name: "RoomGrades");
