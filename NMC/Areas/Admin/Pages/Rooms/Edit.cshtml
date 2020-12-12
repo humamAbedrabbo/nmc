@@ -1,0 +1,46 @@
+﻿@page
+@model NMC.Areas.Admin.Pages.Rooms.EditModel
+@{
+    ViewData["PageTitle"] = _localizer["Edit Room"];
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <h4 class="page-title">@ViewBag.PageTitle</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <form method="post">
+
+                <input asp-for="Room.Id" type="hidden" />
+
+                <div class="form-group">
+                    <label asp-for="Room.RoomNo"></label>
+                    <input asp-for="Room.RoomNo" class="form-control">
+                    <span asp-validation-for="Room.RoomNo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Room.RoomGradeId"></label>
+                    <select asp-for="Room.RoomGradeId" asp-items="Model.RoomGradesSelect" class="form-control"></select>
+                    <span asp-validation-for="Room.RoomGradeId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Room.WardId"></label>
+                    <select asp-for="Room.WardId" asp-items="Model.WardsSelect" class="form-control"></select>
+                    <span asp-validation-for="Room.WardId" class="text-danger"></span>
+                </div>
+                <div class="m-t-20 text-center">
+                    <button class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+}
