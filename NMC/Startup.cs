@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NMC.Extensions;
 using MediatR;
+using NMC.Services;
 
 namespace NMC
 {
@@ -79,6 +80,9 @@ namespace NMC
                 options.LowercaseQueryStrings = true;
                 options.AppendTrailingSlash = true;
             });
+
+            // Add Services
+            services.AddScoped<ICacheManager, CacheManager>();
 
         }
 
