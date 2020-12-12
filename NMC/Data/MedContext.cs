@@ -17,6 +17,12 @@ namespace NMC.Data
         {
         }
 
+        // Master Domain Entities
+
+        // Master Types
+        public DbSet<RoomGrade> RoomGrades { get; set; }
+        public DbSet<Ward> Wards { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
