@@ -7,6 +7,7 @@ namespace NMC.Services
     public interface ICacheManager
     {
         Task<IEnumerable<Doctor>> GetDoctors();
+        Task<IEnumerable<Doctor>> GetReferrers();
         Task<IEnumerable<RoomGrade>> GetRoomGrades();
         Task<IEnumerable<Room>> GetRooms();
         Task<IEnumerable<Ward>> GetWards();

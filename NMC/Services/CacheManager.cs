@@ -116,6 +116,9 @@ namespace NMC.Services
             return cacheEntry;
         }
 
+        public async Task<IEnumerable<Doctor>> GetReferrers() => (await GetDoctors())?.Where(x => x.Referrer);
+
+
         public void ResetCache(CacheKeys key)
         {
             cache.Remove(key.ToString());
