@@ -20,6 +20,7 @@ namespace NMC.Data
         // Master Domain Entities
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Patient> Patients { get; set; }
 
         // Master Types
         public DbSet<RoomGrade> RoomGrades { get; set; }
