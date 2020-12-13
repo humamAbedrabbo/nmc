@@ -92,16 +92,33 @@ namespace NMC.Services
             return cacheEntry;
         }
 
+        public async Task<IEnumerable<Doctor>> GetDoctors()
+        {
+            IEnumerable<Doctor> cacheEntry;
+            string cacheKey = CacheKeys.Doctors.ToString();
+
+            // Look for cache key.
+            if (!cache.TryGetValue(cacheKey, out cacheEntry))
+            {
+                // Key not in cache, so get data.
+                cacheEntry = await context.Doctors
+                    .AsNoTracking().ToListAsync();
+
+                // Set cache options.
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    // Keep in cache for this time, reset time if accessed.
+                    .SetSlidingExpiration(TimeSpan.FromSeconds(20));
+
+                // Save data in cache.
+                cache.Set(cacheKey, cacheEntry, cacheEntryOptions);
+            }
+
+            return cacheEntry;
+        }
+
         public void ResetCache(CacheKeys key)
         {
             cache.Remove(key.ToString());
         }
-    }
-
-    public enum CacheKeys
-    {
-        Wards,
-        RoomGrades,
-        Rooms
     }
 }
