@@ -47,6 +47,13 @@ namespace NMC.Data
                 .HasAlternateKey(p => p.RoomNo)
                 .HasName("AK_RoomNo");
 
+            builder.Entity<Booking>()
+                .HasOne(p => p.Room)
+                .WithMany(p => p.Bookings)
+                .HasForeignKey(p => p.RoomNo)
+                .HasPrincipalKey(p => p.RoomNo);
+
+
             // Master Seed
             SeedAdmin(builder);
 

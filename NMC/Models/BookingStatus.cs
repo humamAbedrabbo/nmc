@@ -11,6 +11,9 @@ namespace NMC.Models
         Confirmed,
 
         [Display(Name = "Cancelled")]
-        Cancelled
+        Cancelled,
+
+        [Display(Name = "Completed")]
+        Completed
     }
 }

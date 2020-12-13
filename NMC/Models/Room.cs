@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace NMC.Models
 {
@@ -22,9 +25,13 @@ namespace NMC.Models
         [Display(Name = "Ward")]
         public Ward Ward { get; set; }
 
+        public IEnumerable<Booking> Bookings { get; set; }
+
         public RoomStatusType GetCurrentStatus()
         {
             return RoomStatusType.Available;
         }
+
+
     }
 }

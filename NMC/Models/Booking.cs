@@ -85,5 +85,11 @@ namespace NMC.Models
 
         [Display(Name = "Expired")]
         public bool Expired => Status == BookingStatus.Pending && DateTime.Today > ValidUntil;
+
+        [Display(Name = "Room No.")]
+        public string RoomNo { get; set; }
+
+        [Display(Name = "Room")]
+        public Room Room { get; set; }
     }
 }
