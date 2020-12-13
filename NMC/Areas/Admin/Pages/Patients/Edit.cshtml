@@ -1,0 +1,137 @@
+﻿@page
+@model NMC.Areas.Admin.Pages.Patients.EditModel
+@{
+    ViewData["PageTitle"] = _localizer["Edit Patient"];
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <h4 class="page-title">@ViewBag.PageTitle</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <form method="post">
+
+                <input asp-for="Patient.Id" type="hidden" />
+                <input asp-for="Patient.PhotoUrl" type="hidden" />
+                <input asp-for="Patient.BloodType" type="hidden" />
+                <input asp-for="Patient.RH" type="hidden" />
+
+                <div class="form-group">
+                    <label asp-for="Patient.FirstName"></label>
+                    <input asp-for="Patient.FirstName" class="form-control">
+                    <span asp-validation-for="Patient.FirstName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Patient.LastName"></label>
+                    <input asp-for="Patient.LastName" class="form-control">
+                    <span asp-validation-for="Patient.LastName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Patient.FatherName"></label>
+                    <input asp-for="Patient.FatherName" class="form-control">
+                    <span asp-validation-for="Patient.FatherName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Patient.MotherName"></label>
+                    <input asp-for="Patient.MotherName" class="form-control">
+                    <span asp-validation-for="Patient.MotherName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Patient.Occupation"></label>
+                    <input asp-for="Patient.Occupation" class="form-control">
+                    <span asp-validation-for="Patient.Occupation" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Patient.Gender"></label>
+                    <select asp-for="Patient.Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control"></select>
+                    <span asp-validation-for="Patient.Gender" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Patient.MaritalStatus"></label>
+                    <select asp-for="Patient.MaritalStatus" asp-items="Html.GetEnumSelectList<MaritalStatus>()" class="form-control"></select>
+                    <span asp-validation-for="Patient.MaritalStatus" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Patient.Children"></label>
+                    <select asp-for="Patient.Children" class="form-control">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="100">&gt; 10</option>
+                    </select>
+                    <span asp-validation-for="Patient.Children" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Patient.BirthDate"></label>
+                    <input asp-for="Patient.BirthDate" class="form-control">
+                    <span asp-validation-for="Patient.BirthDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Patient.IdentityNo"></label>
+                    <input asp-for="Patient.IdentityNo" class="form-control">
+                    <span asp-validation-for="Patient.IdentityNo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Patient.IdentityType"></label>
+                    <select asp-for="Patient.IdentityType" asp-items="Html.GetEnumSelectList<IdentityType>()" class="form-control"></select>
+                    <span asp-validation-for="Patient.IdentityType" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Patient.Phone"></label>
+                    <input asp-for="Patient.Phone" class="form-control" />
+                    <span asp-validation-for="Patient.Phone" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Patient.Mobile"></label>
+                    <input asp-for="Patient.Mobile" class="form-control" />
+                    <span asp-validation-for="Patient.Mobile" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Patient.Email"></label>
+                    <input asp-for="Patient.Email" class="form-control" />
+                    <span asp-validation-for="Patient.Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Patient.Address"></label>
+                    <textarea asp-for="Patient.Address" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Patient.Address" class="text-danger"></span>
+                </div>
+
+                <div class="m-t-20 text-center">
+                    <button class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+}
