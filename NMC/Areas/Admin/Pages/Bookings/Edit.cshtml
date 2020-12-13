@@ -1,0 +1,138 @@
+﻿@page
+@model NMC.Areas.Admin.Pages.Bookings.EditModel
+@{
+    ViewData["PageTitle"] = _localizer["Edit Booking"];
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <h4 class="page-title">@ViewBag.PageTitle</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <form method="post">
+
+                <input asp-for="Booking.Id" type="hidden" />
+
+                <div class="form-group">
+                    <label asp-for="Booking.Name"></label>
+                    <input asp-for="Booking.Name" class="form-control">
+                    <span asp-validation-for="Booking.Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.PatientFirstName"></label>
+                    <input asp-for="Booking.PatientFirstName" class="form-control">
+                    <span asp-validation-for="Booking.PatientFirstName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.PatientLastName"></label>
+                    <input asp-for="Booking.PatientLastName" class="form-control">
+                    <span asp-validation-for="Booking.PatientLastName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.Gender"></label>
+                    <select asp-for="Booking.Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control"></select>
+                    <span asp-validation-for="Booking.Gender" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.Phone"></label>
+                    <input asp-for="Booking.Phone" class="form-control" />
+                    <span asp-validation-for="Booking.Phone" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.DoctorId"></label>
+                    <select asp-for="Booking.DoctorId" asp-items="Model.DoctorsSelect" class="form-control"></select>
+                    <span asp-validation-for="Booking.DoctorId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Booking.WardId"></label>
+                    <select asp-for="Booking.WardId" asp-items="Model.WardsSelect" class="form-control"></select>
+                    <span asp-validation-for="Booking.WardId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.Notes"></label>
+                    <textarea asp-for="Booking.Notes" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Booking.Notes" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.DownPayment"></label>
+                    <input asp-for="Booking.DownPayment" class="form-control" />
+                    <span asp-validation-for="Booking.DownPayment" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.AmountReceived"></label>
+                    <input asp-for="Booking.AmountReceived" class="form-control" />
+                    <span asp-validation-for="Booking.AmountReceived" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.From"></label>
+                    <input asp-for="Booking.From" class="form-control" />
+                    <span asp-validation-for="Booking.From" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.To"></label>
+                    <input asp-for="Booking.To" class="form-control" />
+                    <span asp-validation-for="Booking.To" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.Status"></label>
+                    <select asp-for="Booking.Status" asp-items="Html.GetEnumSelectList<BookingStatus>()" class="form-control"></select>
+                    <span asp-validation-for="Booking.Status" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.ValidUntil"></label>
+                    <input readonly asp-for="Booking.ValidUntil" class="form-control" />
+                    <span asp-validation-for="Booking.ValidUntil" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.Expired"></label>
+                    <input readonly asp-for="Booking.Expired" class="form-control" />
+                    <span asp-validation-for="Booking.Expired" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.ConfirmationDate"></label>
+                    <input asp-for="Booking.ConfirmationDate" class="form-control" />
+                    <span asp-validation-for="Booking.ConfirmationDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.CreatedBy"></label>
+                    <input readonly asp-for="Booking.CreatedBy" class="form-control" />
+                    <span asp-validation-for="Booking.CreatedBy" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Booking.CreatedOn"></label>
+                    <input readonly asp-for="Booking.CreatedOn" class="form-control" />
+                    <span asp-validation-for="Booking.CreatedOn" class="text-danger"></span>
+                </div>
+
+                <div class="m-t-20 text-center">
+                    <button class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+}
