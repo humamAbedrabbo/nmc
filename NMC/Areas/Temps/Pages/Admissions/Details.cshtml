@@ -1,0 +1,902 @@
+﻿@page
+
+@{ 
+    ViewBag.PageTitle = "INPATIENT (P-0001)";
+}
+
+<div class="content">
+
+    <div class="row">
+        <div class="col-sm-7 col-6">
+            <h4 class="page-title">@ViewBag.PageTitle</h4>
+        </div>
+
+        <div class="col-sm-5 col-6 text-right m-b-30">
+            @*<a href="#" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit</a>*@
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> Your <a href="#" class="alert-link">message</a> has been sent successfully.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    
+    <div class="card-box profile-header">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="profile-view">
+
+                    <div class="profile-img-wrap">
+                        <div class="profile-img">
+                            <a href="#"><img class="" src="~/assets/img/barcode.png" alt=""></a>
+                        </div>
+                    </div>
+
+                    <div class="profile-basic">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="profile-info-left">
+                                    <h3 class="user-name m-t-0 mb-0">Patient Full Name</h3>
+                                    <small class="text-muted">22 years old, male</small>
+                                    <div class="staff-id">Generated ID : P-0001</div>
+                                    <div class="staff-msg">
+                                        Dr. Wael Muhssen
+                                        <div class="text-muted">Specialist in bones and back</div>
+                                        <div class="text-primary m6-2"><i class="fa fa-phone-square"></i> 993 585738</div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <ul class="personal-info">
+                                    <li>
+                                        <span class="title">Status:</span>
+                                        <span class="text"><span class="font-weight-bold text-primary">New</span> (Registration in progress)</span>
+                                    </li>
+                                    <li>
+                                        <span class="title">Last Update:</span>
+                                        <span class="text">Tuesday 1 Jan 2020 8:00 PM</span>
+                                    </li>
+                                    <li>
+                                        <span class="title">Ward:</span>
+                                        <span class="text">Cancer Medical Section</span>
+                                    </li>
+                                    <li>
+                                        <span class="title">Room/Grade:</span>
+                                        <span class="text">1/15 <span class="text-danger mx-2">Suite <i class="fa fa-arrow-circle-o-up"></i></span></span>
+                                    </li>
+                                    <li>
+                                        <span class="title">Companion:</span>
+                                        <span class="text">Wife</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <div class="profile-tabs">
+        <ul class="nav nav-tabs nav-tabs-bottom">
+            <li class="nav-item"><a class="nav-link active" href="#tab-overview" data-toggle="tab">Overview</a></li>
+            <li class="nav-item"><a class="nav-link" href="#tab-personal-info" data-toggle="tab">Personal Information</a></li>
+            <li class="nav-item"><a class="nav-link" href="#tab-admission" data-toggle="tab">Admission</a></li>
+            <li class="nav-item"><a class="nav-link" href="#tab-discharge" data-toggle="tab">Dishcharge</a></li>
+            <li class="nav-item"><a class="nav-link" href="#tab-admission-timeline" data-toggle="tab">Admission Timeline</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane show active" id="tab-overview">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs nav-tabs-solid nav-justified">
+                            <li class="nav-item"><a class="nav-link active" href="#tab-medical-story" data-toggle="tab">Medical Story</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#tab-tests" data-toggle="tab">Lab Tests</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#tab-imaging" data-toggle="tab">Imaging</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane show active" id="tab-medical-story">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card-body">
+                                            <div class="card-body">
+                                                <div class="card-title">BLOOD TYPE</div>
+                                                <h2>AB+</h2>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="card-title">Patient Check List</div>
+                                                <p class="card-text">notes from doctor</p>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Smoking
+                                                    <h2 class="badge badge-danger badge-pill">Heavy</h2>
+                                                </li>
+
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Alcohol
+                                                    <h2 class="badge badge-primary badge-pill">No</h2>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="card-title">Allergies and Diseases</div>
+                                                <p class="card-text">notes from doctor</p>
+                                            </div>
+                                            <ul class="list-group">
+
+                                                <li class="list-group-item">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Food Allergy</h5>
+                                                    </div>
+                                                    <p class="mb-1">None</p>
+
+                                                </li>
+
+                                                <li class="list-group-item">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Medical Allergy</h5>
+                                                    </div>
+                                                    <ul class="mb-1">
+                                                        <li>Histameen</li>
+                                                        <li>Medicne 2</li>
+                                                    </ul>
+                                                    <p class="mb-1">Comments</p>
+                                                </li>
+
+                                                <li class="list-group-item">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Diabeties</h5>
+                                                    </div>
+                                                    <ul class="mb-1">
+                                                        <li>Type 1</li>
+                                                        <li>Type 2</li>
+                                                    </ul>
+                                                    <p class="mb-1">Comments</p>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="card-title">Medicines</div>
+                                                <p class="card-text">notes from doctor</p>
+                                            </div>
+                                            <ul class="list-group">
+
+                                                <li class="list-group-item">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">Current Medicins</h5>
+                                                    </div>
+                                                    <ul class="mb-1">
+                                                        <li>Blood Pressue 3/day</li>
+                                                        <li>Aspirin 1/d</li>
+                                                        <li>Diabetes Med</li>
+                                                    </ul>
+                                                    <p class="mb-1">Comments</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab-tests">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card-box">
+                                            <div class="card-body">
+                                                <div class="card-title">Test Request</div>
+                                                
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <input type="checkbox">
+                                                        </span>
+                                                    </div>
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">HEMATOLOGY</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Comments">
+                                                </div>
+                                                
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <input type="checkbox">
+                                                        </span>
+                                                    </div>
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">URINALYSIS</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Comments">
+                                                </div>
+                                                
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <input type="checkbox">
+                                                        </span>
+                                                    </div>
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">BACTERIOLAGY</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Comments">
+                                                </div>
+                                                
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <input type="checkbox">
+                                                        </span>
+                                                    </div>
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">BLOOD GAS</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Comments">
+                                                </div>
+                                                
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">
+                                                            <input type="checkbox">
+                                                        </span>
+                                                    </div>
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">CHEMISTRY</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" placeholder="Comments">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="selectTest" class="col-form-label">Select Tests</label>
+                                                    <select id="selectTest" class="select" multiple>
+                                                        <optgroup label="Blood Gas">
+                                                            <option>PH</option>
+                                                            <option>PCO2</option>
+                                                            <option>HCO3</option>
+                                                            <option>TCO3</option>
+                                                            <option>B E b</option>
+                                                            <option>% SO2 C</option>
+                                                        </optgroup>
+                                                        <optgroup label="Hematology">
+                                                            <option>R.B.C</option>
+                                                            <option>Hgb.</option>
+                                                            <option>Hct.</option>
+                                                            <option>W.B.C</option>
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                                <button class="btn btn-primary">Submit Request</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-box">
+                                            <div class="card-body">
+                                                <div class="card-title">Pending Requests</div>
+                                            </div>
+                                            <ul class="list-group">
+                                                <li class="list-group-item">
+                                                    <div class="d-flex w-100 justify-content-between">
+                                                        <h5 class="mb-1">BLOOD GAS</h5>
+                                                        <small>2 hrs ago</small>
+                                                    </div>
+                                                    <ul class="tags mb-1">
+                                                        <li><a href="#." class="tag">PH</a></li>
+                                                        <li><a href="#." class="tag bg-danger text-light">PCO2 <i class="fa fa-check"></i></a></li>
+                                                        <li><a href="#." class="tag bg-success text-light">HCO3 <i class="fa fa-check"></i></a></li>
+                                                        <li><a href="#." class="tag">TCO2</a></li>
+                                                    </ul>
+                                                    <small>Samples collected 1 hr ago</small>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-8">
+                                        <div class="card-box">
+                                            <div class="card-header">Test Results</div>
+                                            <div class="card-body">
+                                                <form class="form-inline">
+                                                    <div class="form-group mb-2">
+                                                        <label for="category" class="sr-only">Category</label>
+                                                        <select id="category" class="form-control">
+                                                            <option>Blood Gas</option>
+                                                            <option>Hematology</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group mx-sm-3 mb-2">
+                                                        <label for="date" class="sr-only">Date</label>
+                                                        <input type="date" class="form-control" id="date">
+                                                        <select class="form-control">
+                                                            <option>12:00 AM</option>
+                                                            <option>01:00 AM</option>
+                                                            <option>02:00 AM</option>
+                                                            <option>03:00 AM</option>
+                                                            <option>04:00 AM</option>
+                                                            <option>05:00 AM</option>
+                                                            <option>06:00 AM</option>
+                                                            <option>07:00 AM</option>
+                                                            <option>08:00 AM</option>
+                                                            <option>09:00 AM</option>
+                                                            <option>10:00 AM</option>
+                                                            <option>11:00 AM</option>
+                                                            <option>12:00 PM</option>
+                                                            <option>01:00 PM</option>
+                                                            <option>02:00 PM</option>
+                                                            <option>03:00 PM</option>
+                                                            <option>04:00 PM</option>
+                                                            <option>05:00 PM</option>
+                                                            <option>06:00 PM</option>
+                                                            <option>07:00 PM</option>
+                                                            <option>08:00 PM</option>
+                                                            <option>09:00 PM</option>
+                                                            <option>10:00 PM</option>
+                                                            <option>11:00 PM</option>
+                                                        </select>
+                                                        <select class="form-control">
+                                                            <option>12:00 AM</option>
+                                                            <option>01:00 AM</option>
+                                                            <option>02:00 AM</option>
+                                                            <option>03:00 AM</option>
+                                                            <option>04:00 AM</option>
+                                                            <option>05:00 AM</option>
+                                                            <option>06:00 AM</option>
+                                                            <option>07:00 AM</option>
+                                                            <option>08:00 AM</option>
+                                                            <option>09:00 AM</option>
+                                                            <option>10:00 AM</option>
+                                                            <option>11:00 AM</option>
+                                                            <option>12:00 PM</option>
+                                                            <option>01:00 PM</option>
+                                                            <option>02:00 PM</option>
+                                                            <option>03:00 PM</option>
+                                                            <option>04:00 PM</option>
+                                                            <option>05:00 PM</option>
+                                                            <option>06:00 PM</option>
+                                                            <option>07:00 PM</option>
+                                                            <option>08:00 PM</option>
+                                                            <option>09:00 PM</option>
+                                                            <option>10:00 PM</option>
+                                                            <option>11:00 PM</option>
+                                                        </select>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary mb-2">Refresh</button>
+                                                </form>
+
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Test</th>
+                                                                <th>Date</th>
+                                                                <th>Time</th>
+                                                                <th>Range</th>
+                                                                <th>Result</th>
+                                                                <th>UOM</th>
+                                                                <th>Comments</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="text-nowrap">R.B.C</td>
+                                                                <td>T 01/05/20</td>
+                                                                <td>12:30 AM</td>
+                                                                <td></td>
+                                                                <td>5</td>
+                                                                <td>million / mm3</td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr class="table-warning">
+                                                                <td class="text-nowrap">Hgb.</td>
+                                                                <td>T 01/05/20</td>
+                                                                <td>12:30 AM</td>
+                                                                <td></td>
+                                                                <td>0.05</td>
+                                                                <td>g./100</td>
+                                                                <td>L</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr class="table-danger">
+                                                                <td class="text-nowrap">XXX</td>
+                                                                <td>T 01/05/20</td>
+                                                                <td>12:30 AM</td>
+                                                                <td>1 - 5</td>
+                                                                <td>7</td>
+                                                                <td>yy</td>
+                                                                <td>H</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-nowrap">A</td>
+                                                                <td>T 01/05/20</td>
+                                                                <td>12:30 AM</td>
+                                                                <td></td>
+                                                                <td>5</td>
+                                                                <td>million / mm3</td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-nowrap">B</td>
+                                                                <td>T 01/05/20</td>
+                                                                <td>12:30 AM</td>
+                                                                <td></td>
+                                                                <td>5</td>
+                                                                <td>million / mm3</td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-nowrap">C</td>
+                                                                <td>T 01/05/20</td>
+                                                                <td>12:30 AM</td>
+                                                                <td></td>
+                                                                <td>5</td>
+                                                                <td>million / mm3</td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered text-center">
+                                                        <tr>
+                                                            <th scope="row" rowspan="2">Test</th>
+                                                            <th colspan="24">Date</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>12A</th>
+                                                            <th>01A</th>
+                                                            <th>02A</th>
+                                                            <th>03A</th>
+                                                            <th>04A</th>
+                                                            <th>05A</th>
+                                                            <th>06A</th>
+                                                            <th>07A</th>
+                                                            <th>08A</th>
+                                                            <th>09A</th>
+                                                            <th>10A</th>
+                                                            <th>11A</th>
+                                                            <th>12P</th>
+                                                            <th>01P</th>
+                                                            <th>02P</th>
+                                                            <th>03P</th>
+                                                            <th>04P</th>
+                                                            <th>05P</th>
+                                                            <th>06P</th>
+                                                            <th>07P</th>
+                                                            <th>08P</th>
+                                                            <th>09P</th>
+                                                            <th>10P</th>
+                                                            <th>11P</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-nowrap">R. B. C.</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>
+                                                                <span class="badge badge-primary">5</span>
+                                                            </td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>
+                                                                <span class="badge badge-primary">8</span>
+                                                            </td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>
+                                                                <span class="badge badge-primary">3</span>
+                                                            </td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-nowrap">W.B.C.</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>
+                                                                <span class="badge badge-primary">0.1</span>
+                                                            </td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>
+                                                                <span class="badge badge-warning"><i class="fa fa-long-arrow-up"></i> 0.5</span>
+                                                            </td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>
+                                                                <span class="badge badge-danger"><i class="fa fa-long-arrow-up"></i> 0.6</span>
+                                                            </td>
+                                                            <td></td>
+                                                            <td>
+                                                                <span class="badge badge-warning"><i class="fa fa-long-arrow-down"></i> 0.4</span>
+                                                            </td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>
+                                                                <span class="badge badge-success"><i class="fa fa-long-arrow-down"></i> 0.3</span>
+                                                            </td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-nowrap">Hgb.</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-nowrap">AAA</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab-imaging">
+                                <div id="lightgallery" class="row">
+                                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 m-b-20">
+                                        <a href="~/assets/img/xray1.jpg">
+                                            <img class="img-thumbnail" src="~/assets/img/xray1.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 m-b-20">
+                                        <a href="~/assets/img/xray2.jpg">
+                                            <img class="img-thumbnail" src="~/assets/img/xray2.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 m-b-20">
+                                        <a href="~/assets/img/xray3.jpg">
+                                            <img class="img-thumbnail" src="~/assets/img/xray3.jpg" alt="">
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="tab-admission">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-box">
+                            <div class="card-body">
+                                <div class="card-title">Admission</div>
+                                <dl class="row">
+                                    <dt class="col-sm-12 col-md-3">Type:</dt>
+                                    <dd class="col-md-9">Accident</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Admet On:</dt>
+                                    <dd class="col-md-9">1/1/2020 9:00 PM</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Police Ref.:</dt>
+                                    <dd class="col-md-9">1222222</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Companion:</dt>
+                                    <dd class="col-md-9">Wife</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Ward:</dt>
+                                    <dd class="col-md-9">Cancer</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Room:</dt>
+                                    <dd class="col-md-9">1/15</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Current Grade:</dt>
+                                    <dd class="col-md-9">Suite</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Original Grade:</dt>
+                                    <dd class="col-md-9">Excellent</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Meals</dt>
+                                    <dd class="col-md-9">Salads</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Referrer:</dt>
+                                    <dd class="col-md-9">Dr. Mhd Samer</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Notes:</dt>
+                                    <dd class="col-md-9">xxxxxxxxxxxxxxx</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="tab-pane" id="tab-discharge">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <div class="card-title">Discharge</div>
+                            <dl class="row">
+                                <dt class="col-sm-12 col-md-3">Type:</dt>
+                                <dd class="col-md-9">Improvement</dd>
+
+                                <dt class="col-sm-12 col-md-3">Time:</dt>
+                                <dd class="col-md-9">1/1/2020 9:00 PM</dd>
+
+                                <dt class="col-sm-12 col-md-3">Deseased:</dt>
+                                <dd class="col-md-9">No</dd>
+
+                                <dt class="col-sm-12 col-md-3">Des. Time:</dt>
+                                <dd class="col-md-9">1/1/2020 9:00 PM</dd>
+
+                                <dt class="col-sm-12 col-md-3">Notes:</dt>
+                                <dd class="col-md-9">xxxx</dd>
+
+                            </dl>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="tab-pane" id="tab-personal-info">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card-box">
+                            <div class="card-body">
+                                <div class="card-title">About</div>
+                                <dl class="row">
+                                    <dt class="col-sm-12 col-md-3">First Name:</dt>
+                                    <dd class="col-md-9">First</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Last Name:</dt>
+                                    <dd class="col-md-9">Last</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Father:</dt>
+                                    <dd class="col-md-9">Father</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Mother:</dt>
+                                    <dd class="col-md-9">Mother</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Gender:</dt>
+                                    <dd class="col-md-9">Male</dd>
+
+                                    <dt class="col-sm-12 col-md-3">DOB:</dt>
+                                    <dd class="col-md-9">1/5/1995 (25 yrs)</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Nationality:</dt>
+                                    <dd class="col-md-9">Syrian</dd>
+
+                                    <dt class="col-sm-12 col-md-3">National No.:</dt>
+                                    <dd class="col-md-9">878787879797979</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Marital Status:</dt>
+                                    <dd class="col-md-9">Married</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Children:</dt>
+                                    <dd class="col-md-9">3</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card-box">
+                            <div class="card-body">
+                                <div class="card-title">Contact Details</div>
+                                <dl class="row">
+                                    <dt class="col-sm-12 col-md-3">Home Phone:</dt>
+                                    <dd class="col-md-9">+(963) 11 3330408</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Personal Mobile:</dt>
+                                    <dd class="col-md-9">+(963) 993 585738</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Email Address:</dt>
+                                    <dd class="col-md-9"><a href="#">abdrbo@gmail.com</a></dd>
+
+                                    <dt class="col-sm-12 col-md-3">Residence Address:</dt>
+                                    <dd class="col-md-9"><a href="#">Damascus, jiser abyad</a></dd>
+
+                                    <dt class="col-sm-12 col-md-3">Work Address:</dt>
+                                    <dd class="col-md-9">Damascus, jiser abyad</dd>
+                                </dl>
+                                <hr />
+                                <h5>Sponsor</h5>
+                                <dl class="row">
+                                    <dt class="col-sm-12 col-md-3">Name:</dt>
+                                    <dd class="col-md-9">Saleem Waliid Abu Samra</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Phone:</dt>
+                                    <dd class="col-md-9">+(963) 11 3330408</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Mobile:</dt>
+                                    <dd class="col-md-9">+(963) 993 585738</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Email Address:</dt>
+                                    <dd class="col-md-9">Damascus, jiser abyad</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Address:</dt>
+                                    <dd class="col-md-9">Damascus, jiser abyad</dd>
+                                </dl>
+                                <hr />
+                                <h5>Emergency</h5>
+                                <dl class="row">
+                                    <dt class="col-sm-12 col-md-3">Contact:</dt>
+                                    <dd class="col-md-9">Mhd. Hatem</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Phone:</dt>
+                                    <dd class="col-md-9">+(963) 11 3330408</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Mobile:</dt>
+                                    <dd class="col-md-9">+(963) 993 585738</dd>
+
+                                    <dt class="col-sm-12 col-md-3">Email Address:</dt>
+                                    <dd class="col-md-9"><a href="#">abdrbo@gmail.com</a></dd>
+
+                                    <dt class="col-sm-12 col-md-3">Address:</dt>
+                                    <dd class="col-md-9">Damascus, jiser abyad</dd>
+                                </dl>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="tab-pane" id="tab-admission-timeline">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-box">
+                            <h3 class="card-title">Admission Status</h3>
+                            <div class="experience-box">
+                                <ul class="experience-list">
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#" class="name">Created</a>
+                                                <div>Maria Kosovo</div>
+                                                <span class="time">Tuesday, 1 Jan 2020 8:00 AM</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#" class="name">Admet</a>
+                                                <span class="time">Tuesday, 1 Jan 2020 8:10 AM</span>
+                                                <div>Accident</div>
+                                                <div>Emergency</div>
+                                                <div>Ward: Cancer and Something</div>
+                                                <div>Room: 1/15</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="experience-user">
+                                            <div class="before-circle"></div>
+                                        </div>
+                                        <div class="experience-content">
+                                            <div class="timeline-content">
+                                                <a href="#" class="name">Discharged</a>
+                                                <span class="time">Tuesday, 1 Jan 2020 8:10 AM</span>
+                                                <div>Improvement</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    
+
+</div>
