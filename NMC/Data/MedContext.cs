@@ -17,6 +17,32 @@ namespace NMC.Data
         {
         }
 
+        public DbSet<Ward> Wards { get; set; }
+        public DbSet<Speciality> Specialities { get; set; }
+        public DbSet<AdmissionType> AdmissionTypes { get; set; }
+        public DbSet<DischargeType> DischargeTypes { get; set; }
+        public DbSet<AppointmentType> AppointmentTypes { get; set; }
+        public DbSet<RoomType> RoomTypes { get; set; }
+        public DbSet<RoomGrade> RoomGrades { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Education> Educations { get; set; }
+        public DbSet<Experience> Experiences { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<RoomAllocation> RoomAllocations { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Inpatient> Inpatients { get; set; }
+        public DbSet<InpatientStatus> InpatientStatuses { get; set; }
+        public DbSet<Bill> Bills { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -32,6 +58,44 @@ namespace NMC.Data
             builder.Entity<AppUser>()
                 .HasAlternateKey(p => p.UserName)
                 .HasName("AK_Username");
+
+            builder.Entity<RoomAllocation>()
+                .HasOne(p => p.Room)
+                .WithMany(p => p.Allocations)
+                .HasForeignKey(p => p.RoomNo);
+            
+            builder.Entity<RoomAllocation>()
+                .HasOne(p => p.Booking)
+                .WithMany(p => p.Allocations)
+                .HasForeignKey(p => p.BookingId);
+            
+            builder.Entity<RoomAllocation>()
+                .HasOne(p => p.Patient)
+                .WithMany(p => p.Allocations)
+                .HasForeignKey(p => p.PatientId);
+            
+            builder.Entity<RoomAllocation>()
+                .HasOne(p => p.Inpatient)
+                .WithMany(p => p.Allocations)
+                .HasForeignKey(p => p.InpatientId);
+
+            builder.Entity<Inpatient>()
+                .HasOne(p => p.Room)
+                .WithMany()
+                .HasForeignKey(p => p.RoomNo);
+
+            builder.Entity<Inpatient>()
+                .Ignore(p => p.Status);
+
+            builder.Entity<Bill>()
+                .Property(p => p.Amount)
+                .HasColumnType("money");
+            builder.Entity<Payment>()
+                .Property(p => p.PaidAmount)
+                .HasColumnType("money");
+            builder.Entity<Expense>()
+                .Property(p => p.Amount)
+                .HasColumnType("money");
 
             // Master Seed
             SeedAdmin(builder);
