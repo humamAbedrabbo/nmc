@@ -2,8 +2,14 @@
 @using NMC.Models
 @using Microsoft.AspNetCore.Mvc.Localization
 @using NMC.Extensions
+@using NMC.Data
+@using NMC.Services
+@using System.ComponentModel.DataAnnotations
 
 @inject IViewLocalizer _localizer
+@inject ICacheManager _mem
+@inject IListsManager _lm
+@inject MedContext _ctx
 
 @namespace NMC.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

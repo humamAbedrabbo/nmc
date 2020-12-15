@@ -17,5 +17,9 @@ namespace NMC.Models
 
         public string Language { get; set; }
 
+        public List<AppRole> Roles { get; set; } = new();
+        public List<AppUserClaim> Claims { get; set; } = new();
+        public List<AppUserToken> Tokens { get; set; } = new();
+        public List<AppUserLogin> Logins { get; set; } = new();
     }
 }

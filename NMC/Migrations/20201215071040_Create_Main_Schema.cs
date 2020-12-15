@@ -8,6 +8,31 @@ namespace NMC.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropPrimaryKey(
+                name: "PK_UserRoles",
+                table: "UserRoles");
+
+            migrationBuilder.DropIndex(
+                name: "IX_UserRoles_RoleId",
+                table: "UserRoles");
+
+            migrationBuilder.AddColumn<int>(
+                name: "UserId1",
+                table: "UserTokens",
+                type: "integer",
+                nullable: true);
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Id",
+                table: "Users",
+                type: "integer",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldType: "integer")
+                .Annotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
+                .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                .OldAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
             migrationBuilder.AddColumn<int>(
                 name: "DoctorId",
                 table: "Users",
@@ -20,17 +45,57 @@ namespace NMC.Migrations
                 type: "text",
                 nullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "NameAr",
-                table: "Roles",
-                type: "text",
+            migrationBuilder.AddColumn<int>(
+                name: "UserId1",
+                table: "UserLogins",
+                type: "integer",
                 nullable: true);
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Id",
+                table: "UserClaims",
+                type: "integer",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldType: "integer")
+                .Annotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
+                .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                .OldAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            migrationBuilder.AddColumn<int>(
+                name: "UserId1",
+                table: "UserClaims",
+                type: "integer",
+                nullable: true);
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Id",
+                table: "Roles",
+                type: "integer",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldType: "integer")
+                .Annotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
+                .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                .OldAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            migrationBuilder.AddColumn<int>(
+                name: "RoleId1",
+                table: "RoleClaims",
+                type: "integer",
+                nullable: true);
+
+            migrationBuilder.AddPrimaryKey(
+                name: "PK_UserRoles",
+                table: "UserRoles",
+                columns: new[] { "RoleId", "UserId" });
 
             migrationBuilder.CreateTable(
                 name: "AdmissionTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     NameAr = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
@@ -46,6 +111,7 @@ namespace NMC.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     NameAr = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
@@ -61,6 +127,7 @@ namespace NMC.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     NameAr = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
@@ -90,6 +157,7 @@ namespace NMC.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     NameAr = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
@@ -107,6 +175,7 @@ namespace NMC.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     NameAr = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
@@ -137,6 +206,7 @@ namespace NMC.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'15', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     NameAr = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
@@ -243,6 +313,7 @@ namespace NMC.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'3', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     NameAr = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
@@ -713,17 +784,223 @@ namespace NMC.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AdmissionTypes",
+                columns: new[] { "Id", "Name", "NameAr", "SortKey" },
+                values: new object[,]
+                {
+                    { 1, "Normal", "عادي", 0 },
+                    { 2, "Emergency", "إسعاف", 0 },
+                    { 3, "Accident", "حادث", 0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AppointmentTypes",
+                columns: new[] { "Id", "Name", "NameAr", "SortKey" },
+                values: new object[,]
+                {
+                    { 7, "Other", "نوع آخر", 0 },
+                    { 6, "Referrals", "إحالة", 0 },
+                    { 5, "Radiology", "تصوير شعاعي", 0 },
+                    { 1, "Routine checkup", "فحص روتيني", 0 },
+                    { 2, "Consulting", "استشارة طبية", 0 },
+                    { 3, "Vaccinations", "لقاح", 0 },
+                    { 4, "Eye Care", "عينية", 0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DischargeTypes",
+                columns: new[] { "Id", "Name", "NameAr", "SortKey" },
+                values: new object[,]
+                {
+                    { 4, "Death", "وفاة", 0 },
+                    { 3, "Ill", "سوء", 0 },
+                    { 2, "Improvement", "تحسن", 0 },
+                    { 1, "Healing", "شفاء", 0 },
+                    { 5, "Other", "أخرى", 0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Languages",
+                columns: new[] { "Id", "Name", "NameAr", "SortKey" },
+                values: new object[,]
+                {
+                    { "en", "Emglish", "انجليزي", 0 },
+                    { "ar", "Arabic", "عربي", 0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { 5, "69a932c2-6c7a-4208-95f6-aad8fbaf265b", "Doctor", "DOCTOR" },
+                    { 4, "dae65000-7c65-4e5d-8a27-d59e87d8273b", "Accountant", "ACCOUNTANT" },
+                    { 3, "55b3518b-715c-48f2-9870-2cbbe26e975e", "Receptionist", "RECEPTIONIST" },
+                    { 2, "989cb316-dbfa-4d9a-a7f2-9c104dc7cdf1", "Admission Officer", "ADMISSION OFFICER" },
+                    { 1, "faa95a6b-5c3e-46d4-b265-364a5b361b8f", "Admin", "ADMIN" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RoomGrades",
+                columns: new[] { "Id", "Capacity", "Level", "Name", "NameAr", "SortKey" },
+                values: new object[,]
+                {
+                    { 1, 1, 10, "Suite", "جناح", 0 },
+                    { 2, 1, 9, "Excellent Class", "درجة ممتازة", 0 },
+                    { 3, 1, 8, "First Class", "درجة أولى", 0 },
+                    { 4, 2, 2, "Second Class", "درجة ثانية", 0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RoomTypes",
+                columns: new[] { "Id", "Name", "NameAr", "SortKey" },
+                values: new object[] { 1, "Patient Room", "غرفة مريض", 0 });
+
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: 1,
-                columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "2f4ac1cf-3e65-49fc-bf9d-edca7d2bba29", "AQAAAAEAACcQAAAAEOhDglIk4JXoOPbjTqsQfbWnw5f5vc3XdZ910rwj/rz84lmTTL1NEKn+1rYcDACgDA==", "8848e4c5-5488-4a39-883c-805afb35efec" });
+                columns: new[] { "ConcurrencyStamp", "Email", "NormalizedEmail", "PasswordHash", "SecurityStamp" },
+                values: new object[] { "38d58f58-fbe7-400e-9c2c-b6b14fac1d3c", "admin@nmc", "ADMIN@NMC", "AQAAAAEAACcQAAAAEF1/IZIw3ZtqhiabjXY0IBgrgVs/KaWzb+sLZUXpFkVjgOVeAfFc8PFsvOGi8UDQAg==", "e572cbdb-80bb-4269-a21d-043199cbe0f6" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DoctorId", "Email", "EmailConfirmed", "Language", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { 3, 0, "d8e6e7a6-dd96-4850-8d3d-75c63443812f", null, "acc@nmc", false, null, false, null, "ACC@NMC", "ACC", "AQAAAAEAACcQAAAAEN3tpuw68CMTYCg8xO1a4eLwoM0f8yuFbsxChZSFRpCrolh0S7ZGRSq43QD2FWIIrQ==", null, false, "5c94b16d-8f57-43bd-be79-24d16e7990bc", false, "acc" },
+                    { 2, 0, "24c51a31-326d-4a3d-ad30-fd85f06507bd", null, "adm@nmc", false, null, false, null, "ADM@NMC", "ADM", "AQAAAAEAACcQAAAAEEdavvXz1IfpJeSg354gyJX7UPj0zVSuHw4LO2IORYNSoZYlt4ot9aqKxv74id1ZIw==", null, false, "516ae177-3d42-4888-817e-6d0519272f92", false, "adm" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Wards",
+                columns: new[] { "Id", "Floor", "Name", "NameAr", "SortKey" },
+                values: new object[,]
+                {
+                    { 2, 2, "Internal Medicine", "قسم الداخلية الباطنية", 0 },
+                    { 3, 3, "Intensive Care Unite (ICU)", "قسم العناية المشددة", 0 },
+                    { 4, 4, "Obstetric & Genecology", "جناح النسائية والمخاض", 0 },
+                    { 5, 5, "Dialysis", "قسم غسيل الكلى", 0 },
+                    { 6, 6, "Arthroscopy", "قسم التنظير", 0 },
+                    { 7, 6, "Cath Lab - Cardiovascular (CCU)", "قسم العناية القلبة والقثطرة القلبية", 0 },
+                    { 8, 6, "Blood vessels", "قسم الأوعية", 0 },
+                    { 9, -1, "Urology", "قسم البولية", 0 },
+                    { 10, 0, "Respiratory System Diseases", "أمراض الجهاز التنفسي", 0 },
+                    { 11, 4, "Emergency (ER)", "قسم الإسعاف والطوارئ", 0 },
+                    { 12, -1, "Laboratory", "المخبر", 0 },
+                    { 13, -1, "Radiography", "قسم التصوير الشعاعي", 0 },
+                    { 14, -2, "Operation Rooms (OR)", "جناح العمليات", 0 },
+                    { 1, 1, "Pediatric Department -  Incubators section (NICU)", "جناح الأطفال - قسم الحواضن", 0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Countries",
+                columns: new[] { "Id", "LanguageId", "Name", "NameAr", "NationalityName", "NationalityNameAr", "SortKey", "TelecomCode" },
+                values: new object[,]
+                {
+                    { "US", "en", "USA", "أمريكي", "American", "أمريكي", 0, "1" },
+                    { "SY", "ar", "Syria", "سورية", "Syrian", "سوري", 0, "963" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Rooms",
+                columns: new[] { "RoomNo", "Floor", "RoomGradeId", "RoomTypeId", "WardId" },
+                values: new object[,]
+                {
+                    { "33", 3, 4, 1, 3 },
+                    { "40", 4, 2, 1, 4 },
+                    { "41", 4, 3, 1, 4 },
+                    { "42", 4, 3, 1, 4 },
+                    { "43", 4, 4, 1, 4 },
+                    { "44", 4, 4, 1, 4 },
+                    { "45", 4, 1, 1, 4 },
+                    { "50", 5, 4, 1, 5 },
+                    { "51", 5, 3, 1, 5 },
+                    { "52", 5, 3, 1, 5 },
+                    { "53", 5, 2, 1, 5 },
+                    { "54", 5, 2, 1, 5 },
+                    { "55", 5, 2, 1, 5 },
+                    { "56", 5, 1, 1, 5 },
+                    { "60", 6, 1, 1, 6 },
+                    { "61", 6, 1, 1, 6 },
+                    { "62", 6, 2, 1, 6 },
+                    { "63", 6, 2, 1, 6 },
+                    { "64", 6, 3, 1, 6 },
+                    { "35", 3, 2, 1, 3 },
+                    { "34", 3, 1, 1, 3 },
+                    { "66", 6, 4, 1, 6 },
+                    { "32", 3, 4, 1, 3 },
+                    { "10", 1, 2, 1, 1 },
+                    { "11", 1, 3, 1, 1 },
+                    { "12", 1, 3, 1, 1 },
+                    { "13", 1, 4, 1, 1 },
+                    { "65", 6, 3, 1, 6 },
+                    { "15", 1, 4, 1, 1 },
+                    { "20", 2, 4, 1, 2 },
+                    { "14", 1, 4, 1, 1 },
+                    { "22", 2, 3, 1, 2 },
+                    { "23", 2, 1, 1, 2 },
+                    { "24", 2, 2, 1, 2 },
+                    { "25", 2, 3, 1, 2 },
+                    { "30", 3, 3, 1, 3 },
+                    { "31", 3, 3, 1, 3 },
+                    { "21", 2, 4, 1, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserClaims",
+                columns: new[] { "Id", "ClaimType", "ClaimValue", "UserId", "UserId1" },
+                values: new object[,]
+                {
+                    { 3, "Language", "en", 3, null },
+                    { 2, "Language", "en", 2, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { 4, 3 },
+                    { 2, 2 },
+                    { 1, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Cities",
+                columns: new[] { "Id", "CountryId", "Name", "NameAr", "SortKey", "TelecomCode" },
+                values: new object[] { 1, "SY", "Damascus", "دمشق", 0, "11" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserTokens_UserId1",
+                table: "UserTokens",
+                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_DoctorId",
                 table: "Users",
                 column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRoles_UserId",
+                table: "UserRoles",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLogins_UserId1",
+                table: "UserLogins",
+                column: "UserId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserClaims_UserId1",
+                table: "UserClaims",
+                column: "UserId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoleClaims_RoleId1",
+                table: "RoleClaims",
+                column: "RoleId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AdmissionTypes_Name",
@@ -1207,10 +1484,42 @@ namespace NMC.Migrations
                 unique: true);
 
             migrationBuilder.AddForeignKey(
+                name: "FK_RoleClaims_Roles_RoleId1",
+                table: "RoleClaims",
+                column: "RoleId1",
+                principalTable: "Roles",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_UserClaims_Users_UserId1",
+                table: "UserClaims",
+                column: "UserId1",
+                principalTable: "Users",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_UserLogins_Users_UserId1",
+                table: "UserLogins",
+                column: "UserId1",
+                principalTable: "Users",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
                 name: "FK_Users_Doctors_DoctorId",
                 table: "Users",
                 column: "DoctorId",
                 principalTable: "Doctors",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_UserTokens_Users_UserId1",
+                table: "UserTokens",
+                column: "UserId1",
+                principalTable: "Users",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -1218,8 +1527,24 @@ namespace NMC.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
+                name: "FK_RoleClaims_Roles_RoleId1",
+                table: "RoleClaims");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_UserClaims_Users_UserId1",
+                table: "UserClaims");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_UserLogins_Users_UserId1",
+                table: "UserLogins");
+
+            migrationBuilder.DropForeignKey(
                 name: "FK_Users_Doctors_DoctorId",
                 table: "Users");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_UserTokens_Users_UserId1",
+                table: "UserTokens");
 
             migrationBuilder.DropTable(
                 name: "Appointments");
@@ -1297,8 +1622,96 @@ namespace NMC.Migrations
                 name: "Languages");
 
             migrationBuilder.DropIndex(
+                name: "IX_UserTokens_UserId1",
+                table: "UserTokens");
+
+            migrationBuilder.DropIndex(
                 name: "IX_Users_DoctorId",
                 table: "Users");
+
+            migrationBuilder.DropPrimaryKey(
+                name: "PK_UserRoles",
+                table: "UserRoles");
+
+            migrationBuilder.DropIndex(
+                name: "IX_UserRoles_UserId",
+                table: "UserRoles");
+
+            migrationBuilder.DropIndex(
+                name: "IX_UserLogins_UserId1",
+                table: "UserLogins");
+
+            migrationBuilder.DropIndex(
+                name: "IX_UserClaims_UserId1",
+                table: "UserClaims");
+
+            migrationBuilder.DropIndex(
+                name: "IX_RoleClaims_RoleId1",
+                table: "RoleClaims");
+
+            migrationBuilder.DeleteData(
+                table: "Roles",
+                keyColumn: "Id",
+                keyValue: 3);
+
+            migrationBuilder.DeleteData(
+                table: "Roles",
+                keyColumn: "Id",
+                keyValue: 5);
+
+            migrationBuilder.DeleteData(
+                table: "UserClaims",
+                keyColumn: "Id",
+                keyValue: 2);
+
+            migrationBuilder.DeleteData(
+                table: "UserClaims",
+                keyColumn: "Id",
+                keyValue: 3);
+
+            migrationBuilder.DeleteData(
+                table: "UserRoles",
+                keyColumns: new[] { "RoleId", "UserId" },
+                keyValues: new object[] { 1, 1 });
+
+            migrationBuilder.DeleteData(
+                table: "UserRoles",
+                keyColumns: new[] { "RoleId", "UserId" },
+                keyValues: new object[] { 2, 2 });
+
+            migrationBuilder.DeleteData(
+                table: "UserRoles",
+                keyColumns: new[] { "RoleId", "UserId" },
+                keyValues: new object[] { 4, 3 });
+
+            migrationBuilder.DeleteData(
+                table: "Roles",
+                keyColumn: "Id",
+                keyValue: 1);
+
+            migrationBuilder.DeleteData(
+                table: "Roles",
+                keyColumn: "Id",
+                keyValue: 2);
+
+            migrationBuilder.DeleteData(
+                table: "Roles",
+                keyColumn: "Id",
+                keyValue: 4);
+
+            migrationBuilder.DeleteData(
+                table: "Users",
+                keyColumn: "Id",
+                keyValue: 2);
+
+            migrationBuilder.DeleteData(
+                table: "Users",
+                keyColumn: "Id",
+                keyValue: 3);
+
+            migrationBuilder.DropColumn(
+                name: "UserId1",
+                table: "UserTokens");
 
             migrationBuilder.DropColumn(
                 name: "DoctorId",
@@ -1309,15 +1722,66 @@ namespace NMC.Migrations
                 table: "Users");
 
             migrationBuilder.DropColumn(
-                name: "NameAr",
-                table: "Roles");
+                name: "UserId1",
+                table: "UserLogins");
+
+            migrationBuilder.DropColumn(
+                name: "UserId1",
+                table: "UserClaims");
+
+            migrationBuilder.DropColumn(
+                name: "RoleId1",
+                table: "RoleClaims");
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Id",
+                table: "Users",
+                type: "integer",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldType: "integer")
+                .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                .OldAnnotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
+                .OldAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Id",
+                table: "UserClaims",
+                type: "integer",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldType: "integer")
+                .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                .OldAnnotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
+                .OldAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            migrationBuilder.AlterColumn<int>(
+                name: "Id",
+                table: "Roles",
+                type: "integer",
+                nullable: false,
+                oldClrType: typeof(int),
+                oldType: "integer")
+                .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                .OldAnnotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
+                .OldAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            migrationBuilder.AddPrimaryKey(
+                name: "PK_UserRoles",
+                table: "UserRoles",
+                columns: new[] { "UserId", "RoleId" });
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: 1,
-                columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "04ebd99a-8baf-444e-9ff0-faa08977c59d", "AQAAAAEAACcQAAAAEEnEbErArHnDJbFuBNC4psA6NvW54pN5fKG0KAGX7xxW5FYt6LGrKLIi0tM7aYmyow==", "f47c6cae-dd6e-467d-b154-dd0c902716da" });
+                columns: new[] { "ConcurrencyStamp", "Email", "NormalizedEmail", "PasswordHash", "SecurityStamp" },
+                values: new object[] { "04ebd99a-8baf-444e-9ff0-faa08977c59d", "admin@localhost", "ADMIN@LOCALHOST", "AQAAAAEAACcQAAAAEEnEbErArHnDJbFuBNC4psA6NvW54pN5fKG0KAGX7xxW5FYt6LGrKLIi0tM7aYmyow==", "f47c6cae-dd6e-467d-b154-dd0c902716da" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRoles_RoleId",
+                table: "UserRoles",
+                column: "RoleId");
         }
     }
 }

@@ -34,126 +34,13 @@ namespace NMC.Migrations
                     b.ToTable("DoctorSpeciality");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("text");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("RoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("text");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserClaims");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClaimType = "Language",
-                            ClaimValue = "en",
-                            UserId = 1
-                        });
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("text");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserLogins");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("UserRoles");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("text");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("UserTokens");
-                });
-
             modelBuilder.Entity("NMC.Models.AdmissionType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityByDefaultColumn()
+                        .HasIdentityOptions(10L, null, null, null, null, null);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -177,6 +64,29 @@ namespace NMC.Migrations
                         .IsUnique();
 
                     b.ToTable("AdmissionTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Normal",
+                            NameAr = "عادي",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Emergency",
+                            NameAr = "إسعاف",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Accident",
+                            NameAr = "حادث",
+                            SortKey = 0
+                        });
                 });
 
             modelBuilder.Entity("NMC.Models.AppRole", b =>
@@ -184,7 +94,8 @@ namespace NMC.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityByDefaultColumn()
+                        .HasIdentityOptions(10L, null, null, null, null, null);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -193,9 +104,6 @@ namespace NMC.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
-
-                    b.Property<string>("NameAr")
-                        .HasColumnType("text");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
@@ -208,6 +116,71 @@ namespace NMC.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "faa95a6b-5c3e-46d4-b265-364a5b361b8f",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "989cb316-dbfa-4d9a-a7f2-9c104dc7cdf1",
+                            Name = "Admission Officer",
+                            NormalizedName = "ADMISSION OFFICER"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ConcurrencyStamp = "55b3518b-715c-48f2-9870-2cbbe26e975e",
+                            Name = "Receptionist",
+                            NormalizedName = "RECEPTIONIST"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ConcurrencyStamp = "dae65000-7c65-4e5d-8a27-d59e87d8273b",
+                            Name = "Accountant",
+                            NormalizedName = "ACCOUNTANT"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ConcurrencyStamp = "69a932c2-6c7a-4208-95f6-aad8fbaf265b",
+                            Name = "Doctor",
+                            NormalizedName = "DOCTOR"
+                        });
+                });
+
+            modelBuilder.Entity("NMC.Models.AppRoleClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("RoleId1")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("RoleId1");
+
+                    b.ToTable("RoleClaims");
                 });
 
             modelBuilder.Entity("NMC.Models.AppUser", b =>
@@ -215,7 +188,8 @@ namespace NMC.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityByDefaultColumn()
+                        .HasIdentityOptions(10L, null, null, null, null, null);
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
@@ -292,18 +266,188 @@ namespace NMC.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2f4ac1cf-3e65-49fc-bf9d-edca7d2bba29",
-                            Email = "admin@localhost",
+                            ConcurrencyStamp = "38d58f58-fbe7-400e-9c2c-b6b14fac1d3c",
+                            Email = "admin@nmc",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@LOCALHOST",
+                            NormalizedEmail = "ADMIN@NMC",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOhDglIk4JXoOPbjTqsQfbWnw5f5vc3XdZ910rwj/rz84lmTTL1NEKn+1rYcDACgDA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF1/IZIw3ZtqhiabjXY0IBgrgVs/KaWzb+sLZUXpFkVjgOVeAfFc8PFsvOGi8UDQAg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8848e4c5-5488-4a39-883c-805afb35efec",
+                            SecurityStamp = "e572cbdb-80bb-4269-a21d-043199cbe0f6",
                             TwoFactorEnabled = false,
                             UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "24c51a31-326d-4a3d-ad30-fd85f06507bd",
+                            Email = "adm@nmc",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADM@NMC",
+                            NormalizedUserName = "ADM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEdavvXz1IfpJeSg354gyJX7UPj0zVSuHw4LO2IORYNSoZYlt4ot9aqKxv74id1ZIw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "516ae177-3d42-4888-817e-6d0519272f92",
+                            TwoFactorEnabled = false,
+                            UserName = "adm"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "d8e6e7a6-dd96-4850-8d3d-75c63443812f",
+                            Email = "acc@nmc",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ACC@NMC",
+                            NormalizedUserName = "ACC",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN3tpuw68CMTYCg8xO1a4eLwoM0f8yuFbsxChZSFRpCrolh0S7ZGRSq43QD2FWIIrQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "5c94b16d-8f57-43bd-be79-24d16e7990bc",
+                            TwoFactorEnabled = false,
+                            UserName = "acc"
                         });
+                });
+
+            modelBuilder.Entity("NMC.Models.AppUserClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn()
+                        .HasIdentityOptions(10L, null, null, null, null, null);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("UserClaims");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClaimType = "Language",
+                            ClaimValue = "en",
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClaimType = "Language",
+                            ClaimValue = "en",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ClaimType = "Language",
+                            ClaimValue = "en",
+                            UserId = 3
+                        });
+                });
+
+            modelBuilder.Entity("NMC.Models.AppUserLogin", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("integer");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("UserLogins");
+                });
+
+            modelBuilder.Entity("NMC.Models.AppUserRole", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("RoleId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            RoleId = 4,
+                            UserId = 3
+                        });
+                });
+
+            modelBuilder.Entity("NMC.Models.AppUserToken", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("text");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("UserTokens");
                 });
 
             modelBuilder.Entity("NMC.Models.Appointment", b =>
@@ -379,7 +523,8 @@ namespace NMC.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityByDefaultColumn()
+                        .HasIdentityOptions(10L, null, null, null, null, null);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -403,6 +548,57 @@ namespace NMC.Migrations
                         .IsUnique();
 
                     b.ToTable("AppointmentTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Routine checkup",
+                            NameAr = "فحص روتيني",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Consulting",
+                            NameAr = "استشارة طبية",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Vaccinations",
+                            NameAr = "لقاح",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Eye Care",
+                            NameAr = "عينية",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Radiology",
+                            NameAr = "تصوير شعاعي",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Referrals",
+                            NameAr = "إحالة",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Other",
+                            NameAr = "نوع آخر",
+                            SortKey = 0
+                        });
                 });
 
             modelBuilder.Entity("NMC.Models.Bill", b =>
@@ -493,7 +689,8 @@ namespace NMC.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityByDefaultColumn()
+                        .HasIdentityOptions(3L, null, null, null, null, null);
 
                     b.Property<string>("CountryId")
                         .IsRequired()
@@ -527,6 +724,17 @@ namespace NMC.Migrations
                     b.HasIndex("NameAr");
 
                     b.ToTable("Cities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CountryId = "SY",
+                            Name = "Damascus",
+                            NameAr = "دمشق",
+                            SortKey = 0,
+                            TelecomCode = "11"
+                        });
                 });
 
             modelBuilder.Entity("NMC.Models.Country", b =>
@@ -584,6 +792,30 @@ namespace NMC.Migrations
                         .IsUnique();
 
                     b.ToTable("Countries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "SY",
+                            LanguageId = "ar",
+                            Name = "Syria",
+                            NameAr = "سورية",
+                            NationalityName = "Syrian",
+                            NationalityNameAr = "سوري",
+                            SortKey = 0,
+                            TelecomCode = "963"
+                        },
+                        new
+                        {
+                            Id = "US",
+                            LanguageId = "en",
+                            Name = "USA",
+                            NameAr = "أمريكي",
+                            NationalityName = "American",
+                            NationalityNameAr = "أمريكي",
+                            SortKey = 0,
+                            TelecomCode = "1"
+                        });
                 });
 
             modelBuilder.Entity("NMC.Models.DischargeType", b =>
@@ -591,7 +823,8 @@ namespace NMC.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityByDefaultColumn()
+                        .HasIdentityOptions(10L, null, null, null, null, null);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -615,6 +848,43 @@ namespace NMC.Migrations
                         .IsUnique();
 
                     b.ToTable("DischargeTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Healing",
+                            NameAr = "شفاء",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Improvement",
+                            NameAr = "تحسن",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Ill",
+                            NameAr = "سوء",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Death",
+                            NameAr = "وفاة",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Other",
+                            NameAr = "أخرى",
+                            SortKey = 0
+                        });
                 });
 
             modelBuilder.Entity("NMC.Models.Doctor", b =>
@@ -1030,7 +1300,8 @@ namespace NMC.Migrations
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(2)
-                        .HasColumnType("character varying(2)");
+                        .HasColumnType("character varying(2)")
+                        .HasIdentityOptions(3L, null, null, null, null, null);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1054,6 +1325,22 @@ namespace NMC.Migrations
                         .IsUnique();
 
                     b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "en",
+                            Name = "Emglish",
+                            NameAr = "انجليزي",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = "ar",
+                            Name = "Arabic",
+                            NameAr = "عربي",
+                            SortKey = 0
+                        });
                 });
 
             modelBuilder.Entity("NMC.Models.Patient", b =>
@@ -1241,6 +1528,312 @@ namespace NMC.Migrations
                     b.HasIndex("WardId");
 
                     b.ToTable("Rooms");
+
+                    b.HasData(
+                        new
+                        {
+                            RoomNo = "10",
+                            Floor = 1,
+                            RoomGradeId = 2,
+                            RoomTypeId = 1,
+                            WardId = 1
+                        },
+                        new
+                        {
+                            RoomNo = "11",
+                            Floor = 1,
+                            RoomGradeId = 3,
+                            RoomTypeId = 1,
+                            WardId = 1
+                        },
+                        new
+                        {
+                            RoomNo = "12",
+                            Floor = 1,
+                            RoomGradeId = 3,
+                            RoomTypeId = 1,
+                            WardId = 1
+                        },
+                        new
+                        {
+                            RoomNo = "13",
+                            Floor = 1,
+                            RoomGradeId = 4,
+                            RoomTypeId = 1,
+                            WardId = 1
+                        },
+                        new
+                        {
+                            RoomNo = "14",
+                            Floor = 1,
+                            RoomGradeId = 4,
+                            RoomTypeId = 1,
+                            WardId = 1
+                        },
+                        new
+                        {
+                            RoomNo = "15",
+                            Floor = 1,
+                            RoomGradeId = 4,
+                            RoomTypeId = 1,
+                            WardId = 1
+                        },
+                        new
+                        {
+                            RoomNo = "20",
+                            Floor = 2,
+                            RoomGradeId = 4,
+                            RoomTypeId = 1,
+                            WardId = 2
+                        },
+                        new
+                        {
+                            RoomNo = "21",
+                            Floor = 2,
+                            RoomGradeId = 4,
+                            RoomTypeId = 1,
+                            WardId = 2
+                        },
+                        new
+                        {
+                            RoomNo = "22",
+                            Floor = 2,
+                            RoomGradeId = 3,
+                            RoomTypeId = 1,
+                            WardId = 2
+                        },
+                        new
+                        {
+                            RoomNo = "23",
+                            Floor = 2,
+                            RoomGradeId = 1,
+                            RoomTypeId = 1,
+                            WardId = 2
+                        },
+                        new
+                        {
+                            RoomNo = "24",
+                            Floor = 2,
+                            RoomGradeId = 2,
+                            RoomTypeId = 1,
+                            WardId = 2
+                        },
+                        new
+                        {
+                            RoomNo = "25",
+                            Floor = 2,
+                            RoomGradeId = 3,
+                            RoomTypeId = 1,
+                            WardId = 2
+                        },
+                        new
+                        {
+                            RoomNo = "30",
+                            Floor = 3,
+                            RoomGradeId = 3,
+                            RoomTypeId = 1,
+                            WardId = 3
+                        },
+                        new
+                        {
+                            RoomNo = "31",
+                            Floor = 3,
+                            RoomGradeId = 3,
+                            RoomTypeId = 1,
+                            WardId = 3
+                        },
+                        new
+                        {
+                            RoomNo = "32",
+                            Floor = 3,
+                            RoomGradeId = 4,
+                            RoomTypeId = 1,
+                            WardId = 3
+                        },
+                        new
+                        {
+                            RoomNo = "33",
+                            Floor = 3,
+                            RoomGradeId = 4,
+                            RoomTypeId = 1,
+                            WardId = 3
+                        },
+                        new
+                        {
+                            RoomNo = "34",
+                            Floor = 3,
+                            RoomGradeId = 1,
+                            RoomTypeId = 1,
+                            WardId = 3
+                        },
+                        new
+                        {
+                            RoomNo = "35",
+                            Floor = 3,
+                            RoomGradeId = 2,
+                            RoomTypeId = 1,
+                            WardId = 3
+                        },
+                        new
+                        {
+                            RoomNo = "40",
+                            Floor = 4,
+                            RoomGradeId = 2,
+                            RoomTypeId = 1,
+                            WardId = 4
+                        },
+                        new
+                        {
+                            RoomNo = "41",
+                            Floor = 4,
+                            RoomGradeId = 3,
+                            RoomTypeId = 1,
+                            WardId = 4
+                        },
+                        new
+                        {
+                            RoomNo = "42",
+                            Floor = 4,
+                            RoomGradeId = 3,
+                            RoomTypeId = 1,
+                            WardId = 4
+                        },
+                        new
+                        {
+                            RoomNo = "43",
+                            Floor = 4,
+                            RoomGradeId = 4,
+                            RoomTypeId = 1,
+                            WardId = 4
+                        },
+                        new
+                        {
+                            RoomNo = "44",
+                            Floor = 4,
+                            RoomGradeId = 4,
+                            RoomTypeId = 1,
+                            WardId = 4
+                        },
+                        new
+                        {
+                            RoomNo = "45",
+                            Floor = 4,
+                            RoomGradeId = 1,
+                            RoomTypeId = 1,
+                            WardId = 4
+                        },
+                        new
+                        {
+                            RoomNo = "50",
+                            Floor = 5,
+                            RoomGradeId = 4,
+                            RoomTypeId = 1,
+                            WardId = 5
+                        },
+                        new
+                        {
+                            RoomNo = "51",
+                            Floor = 5,
+                            RoomGradeId = 3,
+                            RoomTypeId = 1,
+                            WardId = 5
+                        },
+                        new
+                        {
+                            RoomNo = "52",
+                            Floor = 5,
+                            RoomGradeId = 3,
+                            RoomTypeId = 1,
+                            WardId = 5
+                        },
+                        new
+                        {
+                            RoomNo = "53",
+                            Floor = 5,
+                            RoomGradeId = 2,
+                            RoomTypeId = 1,
+                            WardId = 5
+                        },
+                        new
+                        {
+                            RoomNo = "54",
+                            Floor = 5,
+                            RoomGradeId = 2,
+                            RoomTypeId = 1,
+                            WardId = 5
+                        },
+                        new
+                        {
+                            RoomNo = "55",
+                            Floor = 5,
+                            RoomGradeId = 2,
+                            RoomTypeId = 1,
+                            WardId = 5
+                        },
+                        new
+                        {
+                            RoomNo = "56",
+                            Floor = 5,
+                            RoomGradeId = 1,
+                            RoomTypeId = 1,
+                            WardId = 5
+                        },
+                        new
+                        {
+                            RoomNo = "60",
+                            Floor = 6,
+                            RoomGradeId = 1,
+                            RoomTypeId = 1,
+                            WardId = 6
+                        },
+                        new
+                        {
+                            RoomNo = "61",
+                            Floor = 6,
+                            RoomGradeId = 1,
+                            RoomTypeId = 1,
+                            WardId = 6
+                        },
+                        new
+                        {
+                            RoomNo = "62",
+                            Floor = 6,
+                            RoomGradeId = 2,
+                            RoomTypeId = 1,
+                            WardId = 6
+                        },
+                        new
+                        {
+                            RoomNo = "63",
+                            Floor = 6,
+                            RoomGradeId = 2,
+                            RoomTypeId = 1,
+                            WardId = 6
+                        },
+                        new
+                        {
+                            RoomNo = "64",
+                            Floor = 6,
+                            RoomGradeId = 3,
+                            RoomTypeId = 1,
+                            WardId = 6
+                        },
+                        new
+                        {
+                            RoomNo = "65",
+                            Floor = 6,
+                            RoomGradeId = 3,
+                            RoomTypeId = 1,
+                            WardId = 6
+                        },
+                        new
+                        {
+                            RoomNo = "66",
+                            Floor = 6,
+                            RoomGradeId = 4,
+                            RoomTypeId = 1,
+                            WardId = 6
+                        });
                 });
 
             modelBuilder.Entity("NMC.Models.RoomAllocation", b =>
@@ -1295,7 +1888,8 @@ namespace NMC.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityByDefaultColumn()
+                        .HasIdentityOptions(10L, null, null, null, null, null);
 
                     b.Property<int>("Capacity")
                         .HasColumnType("integer");
@@ -1325,6 +1919,44 @@ namespace NMC.Migrations
                         .IsUnique();
 
                     b.ToTable("RoomGrades");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Capacity = 1,
+                            Level = 10,
+                            Name = "Suite",
+                            NameAr = "جناح",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Capacity = 1,
+                            Level = 9,
+                            Name = "Excellent Class",
+                            NameAr = "درجة ممتازة",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Capacity = 1,
+                            Level = 8,
+                            Name = "First Class",
+                            NameAr = "درجة أولى",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Capacity = 2,
+                            Level = 2,
+                            Name = "Second Class",
+                            NameAr = "درجة ثانية",
+                            SortKey = 0
+                        });
                 });
 
             modelBuilder.Entity("NMC.Models.RoomType", b =>
@@ -1332,7 +1964,8 @@ namespace NMC.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityByDefaultColumn()
+                        .HasIdentityOptions(10L, null, null, null, null, null);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1356,6 +1989,15 @@ namespace NMC.Migrations
                         .IsUnique();
 
                     b.ToTable("RoomTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Patient Room",
+                            NameAr = "غرفة مريض",
+                            SortKey = 0
+                        });
                 });
 
             modelBuilder.Entity("NMC.Models.Schedule", b =>
@@ -1437,7 +2079,8 @@ namespace NMC.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityByDefaultColumn()
+                        .HasIdentityOptions(15L, null, null, null, null, null);
 
                     b.Property<int>("Floor")
                         .HasColumnType("integer");
@@ -1464,6 +2107,120 @@ namespace NMC.Migrations
                         .IsUnique();
 
                     b.ToTable("Wards");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Floor = 1,
+                            Name = "Pediatric Department -  Incubators section (NICU)",
+                            NameAr = "جناح الأطفال - قسم الحواضن",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Floor = 2,
+                            Name = "Internal Medicine",
+                            NameAr = "قسم الداخلية الباطنية",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Floor = 3,
+                            Name = "Intensive Care Unite (ICU)",
+                            NameAr = "قسم العناية المشددة",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Floor = 4,
+                            Name = "Obstetric & Genecology",
+                            NameAr = "جناح النسائية والمخاض",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Floor = 5,
+                            Name = "Dialysis",
+                            NameAr = "قسم غسيل الكلى",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Floor = 6,
+                            Name = "Arthroscopy",
+                            NameAr = "قسم التنظير",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Floor = 6,
+                            Name = "Cath Lab - Cardiovascular (CCU)",
+                            NameAr = "قسم العناية القلبة والقثطرة القلبية",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Floor = 6,
+                            Name = "Blood vessels",
+                            NameAr = "قسم الأوعية",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Floor = -1,
+                            Name = "Urology",
+                            NameAr = "قسم البولية",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Floor = 0,
+                            Name = "Respiratory System Diseases",
+                            NameAr = "أمراض الجهاز التنفسي",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Floor = 4,
+                            Name = "Emergency (ER)",
+                            NameAr = "قسم الإسعاف والطوارئ",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Floor = -1,
+                            Name = "Laboratory",
+                            NameAr = "المخبر",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Floor = -1,
+                            Name = "Radiography",
+                            NameAr = "قسم التصوير الشعاعي",
+                            SortKey = 0
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Floor = -2,
+                            Name = "Operation Rooms (OR)",
+                            NameAr = "جناح العمليات",
+                            SortKey = 0
+                        });
                 });
 
             modelBuilder.Entity("DoctorSpeciality", b =>
@@ -1481,34 +2238,7 @@ namespace NMC.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
-                {
-                    b.HasOne("NMC.Models.AppRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
-                {
-                    b.HasOne("NMC.Models.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
-                {
-                    b.HasOne("NMC.Models.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("NMC.Models.AppRoleClaim", b =>
                 {
                     b.HasOne("NMC.Models.AppRole", null)
                         .WithMany()
@@ -1516,20 +2246,11 @@ namespace NMC.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NMC.Models.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                    b.HasOne("NMC.Models.AppRole", "Role")
+                        .WithMany("Claims")
+                        .HasForeignKey("RoleId1");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
-                {
-                    b.HasOne("NMC.Models.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("NMC.Models.AppUser", b =>
@@ -1539,6 +2260,70 @@ namespace NMC.Migrations
                         .HasForeignKey("DoctorId");
 
                     b.Navigation("Doctor");
+                });
+
+            modelBuilder.Entity("NMC.Models.AppUserClaim", b =>
+                {
+                    b.HasOne("NMC.Models.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NMC.Models.AppUser", "User")
+                        .WithMany("Claims")
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NMC.Models.AppUserLogin", b =>
+                {
+                    b.HasOne("NMC.Models.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NMC.Models.AppUser", "User")
+                        .WithMany("Logins")
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NMC.Models.AppUserRole", b =>
+                {
+                    b.HasOne("NMC.Models.AppRole", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NMC.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NMC.Models.AppUserToken", b =>
+                {
+                    b.HasOne("NMC.Models.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NMC.Models.AppUser", "User")
+                        .WithMany("Tokens")
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("NMC.Models.Appointment", b =>
@@ -1799,6 +2584,20 @@ namespace NMC.Migrations
                         .IsRequired();
 
                     b.Navigation("Doctor");
+                });
+
+            modelBuilder.Entity("NMC.Models.AppRole", b =>
+                {
+                    b.Navigation("Claims");
+                });
+
+            modelBuilder.Entity("NMC.Models.AppUser", b =>
+                {
+                    b.Navigation("Claims");
+
+                    b.Navigation("Logins");
+
+                    b.Navigation("Tokens");
                 });
 
             modelBuilder.Entity("NMC.Models.Bill", b =>
