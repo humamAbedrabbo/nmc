@@ -36,12 +36,12 @@ namespace NMC.Models
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name")]
+        [Display(Name = "Ward")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name (ar)")]
+        [Display(Name = "Ward (ar)")]
         public string NameAr { get; set; }
 
         [Display(Name = "Sort Key")]
@@ -58,12 +58,12 @@ namespace NMC.Models
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name")]
+        [Display(Name = "Speciality")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name (ar)")]
+        [Display(Name = "Speciality (ar)")]
         public string NameAr { get; set; }
 
         [Display(Name = "Sort Key")]
@@ -80,12 +80,12 @@ namespace NMC.Models
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name")]
+        [Display(Name = "Admission Type")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name (ar)")]
+        [Display(Name = "Admission Type (ar)")]
         public string NameAr { get; set; }
 
         [Display(Name = "Sort Key")]
@@ -100,12 +100,12 @@ namespace NMC.Models
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name")]
+        [Display(Name = "Discharge Type")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name (ar)")]
+        [Display(Name = "Discharge Type (ar)")]
         public string NameAr { get; set; }
 
         [Display(Name = "Sort Key")]
@@ -120,12 +120,12 @@ namespace NMC.Models
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name")]
+        [Display(Name = "Appointment Type")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name (ar)")]
+        [Display(Name = "Appointment Type (ar)")]
         public string NameAr { get; set; }
 
         [Display(Name = "Sort Key")]
@@ -140,12 +140,12 @@ namespace NMC.Models
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name")]
+        [Display(Name = "Room Type")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name (ar)")]
+        [Display(Name = "Room Type (ar)")]
         public string NameAr { get; set; }
 
         [Display(Name = "Sort Key")]
@@ -160,12 +160,12 @@ namespace NMC.Models
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name")]
+        [Display(Name = "Room Grade")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name (ar)")]
+        [Display(Name = "Room Grade (ar)")]
         public string NameAr { get; set; }
 
         [Display(Name = "Sort Key")]
@@ -186,12 +186,12 @@ namespace NMC.Models
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name")]
+        [Display(Name = "Language")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name (ar)")]
+        [Display(Name = "Language (ar)")]
         public string NameAr { get; set; }
 
         [Display(Name = "Sort Key")]
@@ -211,12 +211,12 @@ namespace NMC.Models
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name")]
+        [Display(Name = "Country")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name (ar)")]
+        [Display(Name = "Country (ar)")]
         public string NameAr { get; set; }
 
         [Display(Name = "Sort Key")]
@@ -255,12 +255,12 @@ namespace NMC.Models
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name")]
+        [Display(Name = "City")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name (ar)")]
+        [Display(Name = "City (ar)")]
         public string NameAr { get; set; }
 
         [Display(Name = "Sort Key")]
@@ -300,7 +300,7 @@ namespace NMC.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Display(Name = "Name")]
+        [Display(Name = "Doctor")]
         public string Name => $"{FirstName} {LastName}";
 
         public Gender Gender { get; set; }
@@ -624,7 +624,7 @@ namespace NMC.Models
         public string LastName { get; set; }
 
         [StringLength(50, MinimumLength = 1)]
-        [Display(Name = "Name")]
+        [Display(Name = "Patient")]
         public string Name => $"{FirstName} {LastName}";
 
         [Required]
