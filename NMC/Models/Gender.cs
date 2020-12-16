@@ -514,6 +514,18 @@ namespace NMC.Models
         [Display(Name = "Created By")]
         public string CreatedBy { get; set; }
 
+        [NotMapped]
+        [Display(Name = "Room No.")]
+        public string RoomNo => Allocations?.Select(x => x.RoomNo).FirstOrDefault();
+
+        [NotMapped]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime From => Allocations?.Min(x => x.Date) ?? RequestDate;
+
+        [NotMapped]
+        public DateTime To => Allocations?.Max(x => x.Date) ?? RequestDate;
+
         public List<RoomAllocation> Allocations { get; set; } = new();
 
     }

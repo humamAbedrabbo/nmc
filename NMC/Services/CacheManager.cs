@@ -20,6 +20,11 @@ namespace NMC.Services
             this.mem = mem;
         }
 
+        public void Reset(string key)
+        {
+            mem.Remove(key);
+        }
+
         public async Task<IEnumerable<Ward>> GetWards()
         {
             string key = nameof(Ward);

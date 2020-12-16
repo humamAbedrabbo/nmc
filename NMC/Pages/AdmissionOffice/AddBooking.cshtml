@@ -88,8 +88,9 @@
 
                 _ctx.Bookings.Add(booking);
                 await _ctx.SaveChangesAsync();
-
+                _mem.Reset(nameof(Booking));
                 return RedirectToPage("./Bookings");
+                //
             }
 
         }
@@ -109,65 +110,70 @@
 
     <div class="row">
         <div class="col-md-3">
-            <form method="post">
-                <div class="form-group">
-                    <label asp-for="Name"></label>
-                    <input asp-for="Name" class="form-control">
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="DoctorId">@_localizer["Doctor"]</label>
-                    <select asp-for="DoctorId" asp-items="DoctorsSelect" class="form-control">
-                        <option></option>
-                    </select>
-                    <span asp-validation-for="DoctorId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Message"></label>
-                    <textarea rows="3" asp-for="Message" class="form-control">
+            <div class="card-box">
+                <div class="card-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" class="form-control">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DoctorId">@_localizer["Doctor"]</label>
+                            <select asp-for="DoctorId" asp-items="DoctorsSelect" class="form-control">
+                                <option></option>
+                            </select>
+                            <span asp-validation-for="DoctorId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Message"></label>
+                            <textarea rows="3" asp-for="Message" class="form-control">
                     </textarea>
-                    <span asp-validation-for="Message" class="text-danger"></span>
+                            <span asp-validation-for="Message" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DownPayment"></label>
+                            <input asp-for="DownPayment" class="form-control">
+                            <span asp-validation-for="DownPayment" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="RoomNo"></label>
+                            <input readonly asp-for="RoomNo" class="form-control">
+                            <span asp-validation-for="RoomNo" class="text-danger"></span>
+                        </div>
+                        <input type="hidden" asp-for="DaysIndex" class="form-control">
+
+                        <div class="m-t-20 text-center">
+                            <button class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label asp-for="DownPayment"></label>
-                    <input asp-for="DownPayment" class="form-control">
-                    <span asp-validation-for="DownPayment" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="RoomNo"></label>
-                    <input readonly asp-for="RoomNo" class="form-control">
-                    <span asp-validation-for="RoomNo" class="text-danger"></span>
-                </div>
-                <input type="hidden" asp-for="DaysIndex" class="form-control">
-                
-                <div class="m-t-20 text-center">
-                    <button class="btn btn-primary submit-btn">@_localizer["Save"]</button>
-                </div>
-            </form>
+            </div>
+            
         </div>
         <div class="col-md-9">
             <div class="card-box">
                 <div class="card-body">
                     <div class="card-title">@_localizer["Select Room"]</div>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
+                        <table class="table text-nowrap text-center table-bordered table-hover">
                             <tr>
-                                <td>@_localizer["Room"]</td>
+                                <th>@_localizer["Room"]</th>
                                 @for (DateTime s = From; s <= To; s = s.AddDays(1))
                                 {
-                                    <td>@s.ToString("ddd dd-MMM")</td>
+                                    <th scope="col"><date value="@s" format="ddd MMM dd"></date></th>
                                 }
                             </tr>
                             @foreach (var w in Wards)
                             {
                                 <tr>
-                                    <td class="table-primary" colspan="25">@(Model.IsArabic ? w.NameAr : w.Name)</td>
+                                    <td class="table-primary text-left" scope="colgroup" colspan="25">@(Model.IsArabic ? w.NameAr : w.Name)</td>
                                 </tr>
                                 @foreach (var r in Rooms.Where(x => x.WardId == w.Id).OrderBy(x => x.RoomNo))
                                 {
                                     int ndx = 0;
                                     <tr>
-                                        <td>@r.Name</td>
+                                        <th scope="row">@r.Name</th>
                                         @for (DateTime s = From; s <= To; s = s.AddDays(1))
                                         {
                                             string color = "";

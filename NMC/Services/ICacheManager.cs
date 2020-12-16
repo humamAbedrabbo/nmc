@@ -22,5 +22,6 @@ namespace NMC.Services
         Task<IEnumerable<Speciality>> GetSpecialities();
         Task<IEnumerable<AppUser>> GetUsers();
         Task<IEnumerable<Ward>> GetWards();
+        void Reset(string key);
     }
 }
