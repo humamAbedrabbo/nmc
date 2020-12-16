@@ -14,3 +14,6 @@ div.dataTables_wrapper div.dataTables_length select {
     background-color: Highlight;
 }
 
+.delete-modal .modal-body .btn {
+    width: 100px;
+}

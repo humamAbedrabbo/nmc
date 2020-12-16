@@ -526,6 +526,11 @@ namespace NMC.Models
         [NotMapped]
         public DateTime To => Allocations?.Max(x => x.Date) ?? RequestDate;
 
+        public RoomStatus Status => Allocations.FirstOrDefault().Status;
+
+        [NotMapped]
+        public bool CanBeCancelled => !(Status == RoomStatus.Reserved && Allocations.Any(x => x.InpatientId.HasValue));
+
         public List<RoomAllocation> Allocations { get; set; } = new();
 
     }
