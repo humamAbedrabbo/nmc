@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using NMC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,16 @@ namespace NMC.Extensions
             else
                 return lang;
 
+        }
+        public static int? GetUserDoctorId(this ClaimsPrincipal principal)
+        {
+            string claimValue = principal.FindFirstValue("DoctorId");
+            if(!string.IsNullOrEmpty(claimValue) && int.TryParse(claimValue, out int doctorId))
+            {
+                return doctorId;
+            }
+
+            return null;
         }
     }
 }
