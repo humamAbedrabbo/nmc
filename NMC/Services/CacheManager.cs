@@ -13,6 +13,7 @@ namespace NMC.Services
     {
         private readonly MedContext context;
         private readonly IMemoryCache mem;
+        private int life = 1;
 
         public CacheManager(MedContext context, IMemoryCache mem)
         {
@@ -28,7 +29,6 @@ namespace NMC.Services
         public async Task<IEnumerable<Ward>> GetWards()
         {
             string key = nameof(Ward);
-            int life = 20;
             List<Ward> entry = null;
 
             if (!mem.TryGetValue(key, out entry))
@@ -54,7 +54,6 @@ namespace NMC.Services
         public async Task<IEnumerable<AdmissionType>> GetAdmissionTypes()
         {
             string key = nameof(AdmissionType);
-            int life = 20;
             List<AdmissionType> entry = null;
 
             if (!mem.TryGetValue(key, out entry))
@@ -80,7 +79,6 @@ namespace NMC.Services
         public async Task<IEnumerable<DischargeType>> GetDischargeTypes()
         {
             string key = nameof(DischargeType);
-            int life = 20;
             List<DischargeType> entry = null;
 
             if (!mem.TryGetValue(key, out entry))
@@ -106,7 +104,6 @@ namespace NMC.Services
         public async Task<IEnumerable<AppointmentType>> GetAppointmentTypes()
         {
             string key = nameof(AppointmentType);
-            int life = 20;
             List<AppointmentType> entry = null;
 
             if (!mem.TryGetValue(key, out entry))
@@ -132,7 +129,6 @@ namespace NMC.Services
         public async Task<IEnumerable<RoomType>> GetRoomTypes()
         {
             string key = nameof(RoomType);
-            int life = 20;
             List<RoomType> entry = null;
 
             if (!mem.TryGetValue(key, out entry))
@@ -158,7 +154,6 @@ namespace NMC.Services
         public async Task<IEnumerable<RoomGrade>> GetRoomGrades()
         {
             string key = nameof(RoomGrade);
-            int life = 20;
             List<RoomGrade> entry = null;
 
             if (!mem.TryGetValue(key, out entry))
@@ -184,7 +179,6 @@ namespace NMC.Services
         public async Task<IEnumerable<Language>> GetLanguages()
         {
             string key = nameof(Language);
-            int life = 20;
             List<Language> entry = null;
 
             if (!mem.TryGetValue(key, out entry))
@@ -210,7 +204,6 @@ namespace NMC.Services
         public async Task<IEnumerable<Country>> GetCountries()
         {
             string key = nameof(Country);
-            int life = 20;
             List<Country> entry = null;
 
             if (!mem.TryGetValue(key, out entry))
@@ -236,7 +229,6 @@ namespace NMC.Services
         public async Task<IEnumerable<City>> GetCities()
         {
             string key = nameof(City);
-            int life = 20;
             List<City> entry = null;
 
             if (!mem.TryGetValue(key, out entry))
@@ -262,7 +254,6 @@ namespace NMC.Services
         public async Task<IEnumerable<Doctor>> GetDoctors()
         {
             string key = nameof(Doctor);
-            int life = 20;
             List<Doctor> entry = null;
 
             if (!mem.TryGetValue(key, out entry))
@@ -289,7 +280,6 @@ namespace NMC.Services
         public async Task<IEnumerable<Inpatient>> GetInpatients()
         {
             string key = nameof(Inpatient);
-            int life = 3;
             List<Inpatient> entry = null;
 
             if (!mem.TryGetValue(key, out entry))
@@ -326,7 +316,6 @@ namespace NMC.Services
         public async Task<IEnumerable<Booking>> GetBookings()
         {
             string key = nameof(Booking);
-            int life = 20;
             List<Booking> entry = null;
 
             if (!mem.TryGetValue(key, out entry))
@@ -355,7 +344,6 @@ namespace NMC.Services
         public async Task<IEnumerable<Room>> GetRooms()
         {
             string key = nameof(Room);
-            int life = 20;
             List<Room> entry = null;
 
             if (!mem.TryGetValue(key, out entry))
@@ -384,7 +372,6 @@ namespace NMC.Services
         public async Task<IEnumerable<Speciality>> GetSpecialities()
         {
             string key = nameof(Speciality);
-            int life = 20;
             List<Speciality> entry = null;
 
             if (!mem.TryGetValue(key, out entry))
@@ -410,7 +397,6 @@ namespace NMC.Services
         public async Task<IEnumerable<AppUser>> GetUsers()
         {
             string key = nameof(AppUser);
-            int life = 20;
             List<AppUser> entry = null;
 
             if (!mem.TryGetValue(key, out entry))
@@ -438,7 +424,6 @@ namespace NMC.Services
         public async Task<IEnumerable<AppRole>> GetRoles()
         {
             string key = nameof(AppRole);
-            int life = 20;
             List<AppRole> entry = null;
 
             if (!mem.TryGetValue(key, out entry))

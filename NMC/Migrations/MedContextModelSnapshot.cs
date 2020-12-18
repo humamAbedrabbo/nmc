@@ -121,35 +121,35 @@ namespace NMC.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "d7d549b9-dc63-4110-aba0-9c45a709cf42",
+                            ConcurrencyStamp = "a738431d-fbf1-4a62-924e-38d459073cf5",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "d278270c-7a5d-4740-aef3-bf975543fd35",
+                            ConcurrencyStamp = "9466dbfb-b6f2-4028-9904-18c913345042",
                             Name = "Admission Officer",
                             NormalizedName = "ADMISSION OFFICER"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "2b357080-abc0-4e12-bb61-4da52ce36852",
+                            ConcurrencyStamp = "40749d71-ceb7-4d5f-827d-e64c895282c4",
                             Name = "Receptionist",
                             NormalizedName = "RECEPTIONIST"
                         },
                         new
                         {
                             Id = 4,
-                            ConcurrencyStamp = "386d2ae2-aabe-46b7-aa67-d6d588219c5a",
+                            ConcurrencyStamp = "e9219d78-5b90-4f58-8c45-8300484ae363",
                             Name = "Accountant",
                             NormalizedName = "ACCOUNTANT"
                         },
                         new
                         {
                             Id = 5,
-                            ConcurrencyStamp = "b09fadd4-f3a7-4487-be4a-961d728bb1f1",
+                            ConcurrencyStamp = "c4bb6c50-fb2a-492a-968e-d324ea391617",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         });
@@ -266,15 +266,15 @@ namespace NMC.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "67acb405-b4fd-43a0-9ca8-b6dd997d0e62",
+                            ConcurrencyStamp = "1e68e1e2-59d1-4478-9ab7-3532458dde38",
                             Email = "admin@nmc",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@NMC",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB8IYABlmPYrjXvsqHGvAVsGLXyOVOyR+JhI2MFap3Ter3ms1f6zWSFGIo6y5ls05w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEa8tJGnt6TvH8AUBQvIl0YhSPUX1R5rjvly0RTPvGApm4o21Qv4CZEIV56kG9zCtw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bf7f5c1e-2641-46da-a8d4-016ed74568f1",
+                            SecurityStamp = "479f25d9-29b9-4ea3-aa50-64fc13ae478f",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -282,15 +282,15 @@ namespace NMC.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "81b78019-fbe8-431d-9038-9cccd40b73aa",
+                            ConcurrencyStamp = "32161535-f1e7-44b2-a05e-83f0602b5189",
                             Email = "adm@nmc",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADM@NMC",
                             NormalizedUserName = "ADM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGxsqgNrWR4xMeSWBB4UNXqmFqhX4G62269U7hGUvIDpojU8yr+Ia8EW9HV8MZ2Kyg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE1BJwC73Xv+5l6heL/iothYVRsLT8FPGw0oXjCnmO9o4bXeZHy1rf7fIZcIIX5XOQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c6424914-491a-4c38-b8d3-cb521689201c",
+                            SecurityStamp = "a1f1cc62-67f2-486b-88e8-842c673650e5",
                             TwoFactorEnabled = false,
                             UserName = "adm"
                         },
@@ -298,15 +298,15 @@ namespace NMC.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "35bf789c-3b92-4a0d-af39-17bc9ea07e25",
+                            ConcurrencyStamp = "a1756139-003d-41c1-991f-ed0d4d292554",
                             Email = "acc@nmc",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ACC@NMC",
                             NormalizedUserName = "ACC",
-                            PasswordHash = "AQAAAAEAACcQAAAAEImqPIZ7KcIGqfxPdrJr7VWWA8xp14wpKKIky7rl15vtGsV2LWdpFrxXoZMP+vapJg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENTVVWZ218PPA/eP/ZmgXGW1/QX4mkV/a0EBtS1ez1bpAAQv/iAjsM9vszj0il5EeA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a1225f20-a4a9-4f92-8d62-2d11252cc0fa",
+                            SecurityStamp = "4003ee47-7940-4934-9df6-d8fb6f8c3f08",
                             TwoFactorEnabled = false,
                             UserName = "acc"
                         });
@@ -1300,8 +1300,7 @@ namespace NMC.Migrations
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(2)
-                        .HasColumnType("character varying(2)")
-                        .HasIdentityOptions(3L, null, null, null, null, null);
+                        .HasColumnType("character varying(2)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1528,312 +1527,6 @@ namespace NMC.Migrations
                     b.HasIndex("WardId");
 
                     b.ToTable("Rooms");
-
-                    b.HasData(
-                        new
-                        {
-                            RoomNo = "10",
-                            Floor = 1,
-                            RoomGradeId = 2,
-                            RoomTypeId = 1,
-                            WardId = 1
-                        },
-                        new
-                        {
-                            RoomNo = "11",
-                            Floor = 1,
-                            RoomGradeId = 3,
-                            RoomTypeId = 1,
-                            WardId = 1
-                        },
-                        new
-                        {
-                            RoomNo = "12",
-                            Floor = 1,
-                            RoomGradeId = 3,
-                            RoomTypeId = 1,
-                            WardId = 1
-                        },
-                        new
-                        {
-                            RoomNo = "13",
-                            Floor = 1,
-                            RoomGradeId = 4,
-                            RoomTypeId = 1,
-                            WardId = 1
-                        },
-                        new
-                        {
-                            RoomNo = "14",
-                            Floor = 1,
-                            RoomGradeId = 4,
-                            RoomTypeId = 1,
-                            WardId = 1
-                        },
-                        new
-                        {
-                            RoomNo = "15",
-                            Floor = 1,
-                            RoomGradeId = 4,
-                            RoomTypeId = 1,
-                            WardId = 1
-                        },
-                        new
-                        {
-                            RoomNo = "20",
-                            Floor = 2,
-                            RoomGradeId = 4,
-                            RoomTypeId = 1,
-                            WardId = 2
-                        },
-                        new
-                        {
-                            RoomNo = "21",
-                            Floor = 2,
-                            RoomGradeId = 4,
-                            RoomTypeId = 1,
-                            WardId = 2
-                        },
-                        new
-                        {
-                            RoomNo = "22",
-                            Floor = 2,
-                            RoomGradeId = 3,
-                            RoomTypeId = 1,
-                            WardId = 2
-                        },
-                        new
-                        {
-                            RoomNo = "23",
-                            Floor = 2,
-                            RoomGradeId = 1,
-                            RoomTypeId = 1,
-                            WardId = 2
-                        },
-                        new
-                        {
-                            RoomNo = "24",
-                            Floor = 2,
-                            RoomGradeId = 2,
-                            RoomTypeId = 1,
-                            WardId = 2
-                        },
-                        new
-                        {
-                            RoomNo = "25",
-                            Floor = 2,
-                            RoomGradeId = 3,
-                            RoomTypeId = 1,
-                            WardId = 2
-                        },
-                        new
-                        {
-                            RoomNo = "30",
-                            Floor = 3,
-                            RoomGradeId = 3,
-                            RoomTypeId = 1,
-                            WardId = 3
-                        },
-                        new
-                        {
-                            RoomNo = "31",
-                            Floor = 3,
-                            RoomGradeId = 3,
-                            RoomTypeId = 1,
-                            WardId = 3
-                        },
-                        new
-                        {
-                            RoomNo = "32",
-                            Floor = 3,
-                            RoomGradeId = 4,
-                            RoomTypeId = 1,
-                            WardId = 3
-                        },
-                        new
-                        {
-                            RoomNo = "33",
-                            Floor = 3,
-                            RoomGradeId = 4,
-                            RoomTypeId = 1,
-                            WardId = 3
-                        },
-                        new
-                        {
-                            RoomNo = "34",
-                            Floor = 3,
-                            RoomGradeId = 1,
-                            RoomTypeId = 1,
-                            WardId = 3
-                        },
-                        new
-                        {
-                            RoomNo = "35",
-                            Floor = 3,
-                            RoomGradeId = 2,
-                            RoomTypeId = 1,
-                            WardId = 3
-                        },
-                        new
-                        {
-                            RoomNo = "40",
-                            Floor = 4,
-                            RoomGradeId = 2,
-                            RoomTypeId = 1,
-                            WardId = 4
-                        },
-                        new
-                        {
-                            RoomNo = "41",
-                            Floor = 4,
-                            RoomGradeId = 3,
-                            RoomTypeId = 1,
-                            WardId = 4
-                        },
-                        new
-                        {
-                            RoomNo = "42",
-                            Floor = 4,
-                            RoomGradeId = 3,
-                            RoomTypeId = 1,
-                            WardId = 4
-                        },
-                        new
-                        {
-                            RoomNo = "43",
-                            Floor = 4,
-                            RoomGradeId = 4,
-                            RoomTypeId = 1,
-                            WardId = 4
-                        },
-                        new
-                        {
-                            RoomNo = "44",
-                            Floor = 4,
-                            RoomGradeId = 4,
-                            RoomTypeId = 1,
-                            WardId = 4
-                        },
-                        new
-                        {
-                            RoomNo = "45",
-                            Floor = 4,
-                            RoomGradeId = 1,
-                            RoomTypeId = 1,
-                            WardId = 4
-                        },
-                        new
-                        {
-                            RoomNo = "50",
-                            Floor = 5,
-                            RoomGradeId = 4,
-                            RoomTypeId = 1,
-                            WardId = 5
-                        },
-                        new
-                        {
-                            RoomNo = "51",
-                            Floor = 5,
-                            RoomGradeId = 3,
-                            RoomTypeId = 1,
-                            WardId = 5
-                        },
-                        new
-                        {
-                            RoomNo = "52",
-                            Floor = 5,
-                            RoomGradeId = 3,
-                            RoomTypeId = 1,
-                            WardId = 5
-                        },
-                        new
-                        {
-                            RoomNo = "53",
-                            Floor = 5,
-                            RoomGradeId = 2,
-                            RoomTypeId = 1,
-                            WardId = 5
-                        },
-                        new
-                        {
-                            RoomNo = "54",
-                            Floor = 5,
-                            RoomGradeId = 2,
-                            RoomTypeId = 1,
-                            WardId = 5
-                        },
-                        new
-                        {
-                            RoomNo = "55",
-                            Floor = 5,
-                            RoomGradeId = 2,
-                            RoomTypeId = 1,
-                            WardId = 5
-                        },
-                        new
-                        {
-                            RoomNo = "56",
-                            Floor = 5,
-                            RoomGradeId = 1,
-                            RoomTypeId = 1,
-                            WardId = 5
-                        },
-                        new
-                        {
-                            RoomNo = "60",
-                            Floor = 6,
-                            RoomGradeId = 1,
-                            RoomTypeId = 1,
-                            WardId = 6
-                        },
-                        new
-                        {
-                            RoomNo = "61",
-                            Floor = 6,
-                            RoomGradeId = 1,
-                            RoomTypeId = 1,
-                            WardId = 6
-                        },
-                        new
-                        {
-                            RoomNo = "62",
-                            Floor = 6,
-                            RoomGradeId = 2,
-                            RoomTypeId = 1,
-                            WardId = 6
-                        },
-                        new
-                        {
-                            RoomNo = "63",
-                            Floor = 6,
-                            RoomGradeId = 2,
-                            RoomTypeId = 1,
-                            WardId = 6
-                        },
-                        new
-                        {
-                            RoomNo = "64",
-                            Floor = 6,
-                            RoomGradeId = 3,
-                            RoomTypeId = 1,
-                            WardId = 6
-                        },
-                        new
-                        {
-                            RoomNo = "65",
-                            Floor = 6,
-                            RoomGradeId = 3,
-                            RoomTypeId = 1,
-                            WardId = 6
-                        },
-                        new
-                        {
-                            RoomNo = "66",
-                            Floor = 6,
-                            RoomGradeId = 4,
-                            RoomTypeId = 1,
-                            WardId = 6
-                        });
                 });
 
             modelBuilder.Entity("NMC.Models.RoomAllocation", b =>
@@ -2155,70 +1848,6 @@ namespace NMC.Migrations
                             Floor = 6,
                             Name = "Arthroscopy",
                             NameAr = "قسم التنظير",
-                            SortKey = 0
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Floor = 6,
-                            Name = "Cath Lab - Cardiovascular (CCU)",
-                            NameAr = "قسم العناية القلبة والقثطرة القلبية",
-                            SortKey = 0
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Floor = 6,
-                            Name = "Blood vessels",
-                            NameAr = "قسم الأوعية",
-                            SortKey = 0
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Floor = -1,
-                            Name = "Urology",
-                            NameAr = "قسم البولية",
-                            SortKey = 0
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Floor = 0,
-                            Name = "Respiratory System Diseases",
-                            NameAr = "أمراض الجهاز التنفسي",
-                            SortKey = 0
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Floor = 4,
-                            Name = "Emergency (ER)",
-                            NameAr = "قسم الإسعاف والطوارئ",
-                            SortKey = 0
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Floor = -1,
-                            Name = "Laboratory",
-                            NameAr = "المخبر",
-                            SortKey = 0
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Floor = -1,
-                            Name = "Radiography",
-                            NameAr = "قسم التصوير الشعاعي",
-                            SortKey = 0
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Floor = -2,
-                            Name = "Operation Rooms (OR)",
-                            NameAr = "جناح العمليات",
                             SortKey = 0
                         });
                 });

@@ -61,7 +61,7 @@
     private async Task GetRooms()
     {
         Rooms = (await _mem.GetRooms())?.ToList();
-        Wards = Rooms?.OrderBy(x => x.Floor).Select(x => x.Ward).Distinct().ToList();
+        Wards = (await _mem.GetWards())?.ToList().OrderBy(x => x.Floor).ThenBy(x => x.SortKey).ToList();
         Allocations = (await _ctx.RoomAllocations.Where(x => x.Date >= From && x.Date <= To).ToListAsync());
         if(InpatientId.HasValue)
         {
@@ -124,6 +124,9 @@
                         item.InpatientId = Inpatient.Id;
                         item.PatientId = Inpatient.PatientId;
                         item.Status = RoomStatus.Reserved;
+                        var entry = _ctx.Set<RoomAllocation>().Attach(item);
+                        entry.State = EntityState.Modified;
+
                     }
 
                     await _ctx.SaveChangesAsync();
@@ -209,10 +212,11 @@
                             </tr>
                             @foreach (var w in Wards)
                             {
+                                var rooms = Rooms.Where(x => x.WardId == w.Id).OrderBy(x => x.RoomNo).ToArray();
                                 <tr>
                                     <td class="table-primary text-left" scope="colgroup" colspan="25">@(Model.IsArabic ? w.NameAr : w.Name)</td>
                                 </tr>
-                                @foreach (var r in Rooms.Where(x => x.WardId == w.Id).OrderBy(x => x.RoomNo))
+                                @foreach (var r in rooms)
                                 {
                                     int ndx = 0;
                                     <tr>

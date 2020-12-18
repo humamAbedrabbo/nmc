@@ -23,7 +23,7 @@
     [StringLength(50, MinimumLength = 1)]
     [Display(Name = "Patient Last Name")]
     public string LastName { get; set; }
-    
+
     [BindProperty]
     [Required]
     [StringLength(50, MinimumLength = 1)]
@@ -53,7 +53,8 @@
 
     [BindProperty]
     [Display(Name = "Ward")]
-    public int WardId { get; set; }
+    [Required]
+    public int? WardId { get; set; }
 
     [BindProperty(SupportsGet = true)]
     [Display(Name = "Booking")]
@@ -74,11 +75,12 @@
     private async Task GetListsAsync()
     {
         AdmissionTypeSelect = await _lm.AdmissionTypeSelect();
-        WardSelect = await _lm.WardSelect();
         if(BookingId.HasValue)
         {
             Booking = (await _mem.GetBookings()).FirstOrDefault(x => x.Id == BookingId);
+            WardId = (await _mem.GetRooms()).Where(x => x.RoomNo == Booking.RoomNo).Select(x => x.WardId).FirstOrDefault();
         }
+        WardSelect = await _lm.WardSelect();
     }
 
     public async Task<IActionResult> OnPostAsync()
@@ -87,7 +89,7 @@
         {
             Patient patient = (await _ctx.Patients.Where(x => x.IdentityNo == this.IdentityNo).FirstOrDefaultAsync() ) ??
                 new() { IdentityNo = IdentityNo, FirstName = FirstName, LastName = LastName, FatherName = FatherName, MotherName = MotherName, BirthDate = BirthDate, Gender = Gender };
-
+            Booking = (await _mem.GetBookings()).FirstOrDefault(x => x.Id == BookingId);
             DateTime now = DateTime.Now;
             Inpatient inpatient = new()
             {
@@ -95,7 +97,10 @@
                 AdmissionDate = now,
                 AdmissionTypeId = AdmissionTypeId,
                 BookingId = BookingId,
-                WardId = WardId,
+                WardId = WardId.Value,
+                RoomNo = Booking?.RoomNo,
+                ReferrerId = Booking?.DoctorId,
+                AdmissionNote = Booking?.Message,
                 Statuses = new()
                 {
                     new() { Name = "New", StatusTime = now, UserName = User.Identity.Name }
@@ -105,7 +110,24 @@
 
             _ctx.Inpatients.Add(inpatient);
             await _ctx.SaveChangesAsync();
-            _mem.Reset(nameof(Inpatient));
+            //_mem.Reset(nameof(Inpatient));
+
+            if(BookingId.HasValue)
+            {
+                var allocs = await _ctx.RoomAllocations
+                     .Where(x => x.BookingId == BookingId)
+                     .ToListAsync();
+                foreach (var a in allocs)
+                {
+                    a.InpatientId = inpatient.Id;
+                    a.PatientId = inpatient.PatientId;
+                    a.Status = RoomStatus.Reserved;
+
+                }
+                await _ctx.SaveChangesAsync();
+                _mem.Reset(nameof(Inpatient));
+                _mem.Reset(nameof(Booking));
+            }
 
             return RedirectToPage("./Inpatients");
         }

@@ -10,16 +10,26 @@
 
 
     public int DoctorCount { get; set; }
+    public int RoomCount { get; set; }
 
     public async Task OnGetAsync()
     {
         DoctorCount = await ctx.Doctors.CountAsync();
+        RoomCount = await ctx.Rooms.CountAsync();
     }
 
-    public async Task OnPostDoctorsAsync()
+    public async Task<IActionResult> OnPostDoctorsAsync()
     {
         await ctx.AddTestDoctors();
         mem.Reset(nameof(Doctor));
+        return RedirectToPage("/Index");
+    }
+
+    public async Task<IActionResult> OnPostRoomsAsync()
+    {
+        await ctx.AddTestRooms();
+        mem.Reset(nameof(Room));
+        return RedirectToPage("/Index");
     }
 
 }
@@ -30,6 +40,12 @@
         <div class="col-md-4">
             <form method="post" asp-page-handler="doctors">
                 <button type="submit" class="btn btn-primary">Add Doctors (@DoctorCount)</button>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <form method="post" asp-page-handler="rooms">
+                <button type="submit" class="btn btn-primary">Add Rooms (@RoomCount)</button>
             </form>
         </div>
     </div>

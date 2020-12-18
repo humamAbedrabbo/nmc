@@ -1,5 +1,9 @@
 ﻿@page
 
+@using System.Linq
+@using Microsoft.EntityFrameworkCore
+  
+
 @using Microsoft.EntityFrameworkCore
 
 @{
@@ -29,11 +33,13 @@
         return Page();
     }
 
-    public async Task<IActionResult> OnPostUseBookingAsync(int bookinId)
+    public async Task<IActionResult> OnPostUseBookingAsync(int bookingId, int id)
     {
+        Id = id;
+
         var booking = await _ctx.Bookings
             .Include(x => x.Allocations)
-            .Where(x => x.Id == bookinId)
+            .Where(x => x.Id == bookingId)
             .FirstOrDefaultAsync();
 
         var inpatient = await _ctx.Inpatients
@@ -43,6 +49,7 @@
 
         inpatient.BookingId = booking.Id;
         inpatient.RoomNo = booking.RoomNo;
+        inpatient.WardId = (await _mem.GetRooms()).Where(x => x.RoomNo == booking.RoomNo).Select(x => x.WardId).FirstOrDefault() ?? 0;
         inpatient.MinDownPayment = booking.DownPayment;
         inpatient.ReferrerId = booking.DoctorId;
         inpatient.AdmissionNote = booking.Message;
@@ -170,7 +177,7 @@
                                         <td><date value="@item.To"></date></td>
                                         <td class="text-center">@item.Status</td>
                                         <td class="text-center">
-                                            <form method="post" asp-page-handler="UseBooking" asp-route-bookingId="@item.Id">
+                                            <form method="post" asp-page-handler="UseBooking" asp-route-bookingId="@item.Id" asp-route-Id="@Id">
                                                 <button type="submit" class="btn btn-primary" role="button">@_localizer["Select"]</button>
 
                                             </form>
