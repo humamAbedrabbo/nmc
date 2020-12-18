@@ -45,6 +45,56 @@ namespace NMC.Data
         public DbSet<Appointment> Appointments { get; set; }
 
 
+        public async Task<bool> AddTestDoctors()
+        {
+            var docMales = new Bogus.Faker<Doctor>("ar")
+                .RuleFor(d => d.FirstName, f => f.Name.FirstName(Bogus.DataSets.Name.Gender.Male))
+                .RuleFor(d => d.LastName, f => f.Name.LastName(Bogus.DataSets.Name.Gender.Male))
+                .RuleFor(d => d.Gender, f => Gender.Male)
+                .RuleFor(d => d.Phone, f => f.Phone.PhoneNumber())
+                .RuleFor(d => d.Mobile, f => f.Phone.PhoneNumber())
+                .RuleFor(d => d.Email, f => f.Internet.Email())
+                .RuleFor(d => d.Address, f => f.Address.FullAddress())
+                .RuleFor(d => d.Title, f => "Doctor in NMC")
+                .RuleFor(d => d.Consultant, f => f.Random.Bool())
+                .RuleFor(d => d.Referrer, f => f.Random.Bool())
+                .RuleFor(d => d.Surgeon, f => f.Random.Bool())
+                .RuleFor(d => d.Biography, f => f.Lorem.Paragraph())
+                .RuleFor(d => d.WardId, f => (f.Random.Bool() ? f.Random.Int(1, 14) : null));
+
+            var docFemales = new Bogus.Faker<Doctor>("ar")
+                .RuleFor(d => d.FirstName, f => f.Name.FirstName(Bogus.DataSets.Name.Gender.Female))
+                .RuleFor(d => d.LastName, f => f.Name.LastName(Bogus.DataSets.Name.Gender.Female))
+                .RuleFor(d => d.Gender, f => Gender.Female)
+                .RuleFor(d => d.Phone, f => f.Phone.PhoneNumber())
+                .RuleFor(d => d.Mobile, f => f.Phone.PhoneNumber())
+                .RuleFor(d => d.Email, f => f.Internet.Email())
+                .RuleFor(d => d.Address, f => f.Address.FullAddress())
+                .RuleFor(d => d.Title, f => "Doctor in NMC")
+                .RuleFor(d => d.Consultant, f => f.Random.Bool())
+                .RuleFor(d => d.Referrer, f => f.Random.Bool())
+                .RuleFor(d => d.Surgeon, f => f.Random.Bool())
+                .RuleFor(d => d.Biography, f => f.Lorem.Paragraph())
+                .RuleFor(d => d.WardId, f => (f.Random.Bool() ? f.Random.Int(1, 14) : null));
+
+            if(!Doctors.Any())
+            {
+                Doctors.AddRange(docMales.Generate(20));
+                Doctors.AddRange(docFemales.Generate(20));
+                try
+                {
+                    await SaveChangesAsync();
+                    
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -112,7 +162,7 @@ namespace NMC.Data
             SeedRolesAndUsers(builder);
             SeedTypes(builder);
             SeedWards(builder);
-
+            
         }
 
         private void SeedTypes(ModelBuilder builder)
@@ -193,8 +243,6 @@ namespace NMC.Data
                 new RoomType { Id = 1, Name = "Patient Room", NameAr = "غرفة مريض" }
                 );
         }
-
-
 
         private void SeedWards(ModelBuilder builder)
         {

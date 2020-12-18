@@ -8,6 +8,7 @@ namespace NMC.Services
         Task<SelectList> AdmissionTypeSelect(object key = null, string lang = "en");
         Task<SelectList> AppointmentTypeSelect(object key = null, string lang = "en");
         SelectList BloodTypeSelect(object key = null);
+        Task<SelectList> BookingSelect(object key = null, string lang = "en");
         Task<SelectList> CitySelect(object key = null, string lang = "en");
         Task<SelectList> CountrySelect(object key = null, string lang = "en");
         Task<SelectList> DischargeTypeSelect(object key = null, string lang = "en");

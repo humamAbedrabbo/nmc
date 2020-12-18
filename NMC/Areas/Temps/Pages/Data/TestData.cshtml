@@ -1,0 +1,37 @@
+﻿@page
+
+@using Microsoft.EntityFrameworkCore
+
+@inject NMC.Data.MedContext ctx
+@inject NMC.Services.ICacheManager mem
+
+
+@functions{
+
+
+    public int DoctorCount { get; set; }
+
+    public async Task OnGetAsync()
+    {
+        DoctorCount = await ctx.Doctors.CountAsync();
+    }
+
+    public async Task OnPostDoctorsAsync()
+    {
+        await ctx.AddTestDoctors();
+        mem.Reset(nameof(Doctor));
+    }
+
+}
+
+<div class="content">
+
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" asp-page-handler="doctors">
+                <button type="submit" class="btn btn-primary">Add Doctors (@DoctorCount)</button>
+            </form>
+        </div>
+    </div>
+
+</div>

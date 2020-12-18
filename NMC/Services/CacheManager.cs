@@ -36,6 +36,7 @@ namespace NMC.Services
                 // Key not in cache, so get data.
                 entry = await context.Wards
                     .OrderBy(x => x.SortKey)
+                    .AsNoTracking()
                     .ToListAsync();
 
                 // Set cache options.
@@ -61,6 +62,7 @@ namespace NMC.Services
                 // Key not in cache, so get data.
                 entry = await context.AdmissionTypes
                     .OrderBy(x => x.SortKey)
+                    .AsNoTracking()
                     .ToListAsync();
 
                 // Set cache options.
@@ -86,6 +88,7 @@ namespace NMC.Services
                 // Key not in cache, so get data.
                 entry = await context.DischargeTypes
                     .OrderBy(x => x.SortKey)
+                    .AsNoTracking()
                     .ToListAsync();
 
                 // Set cache options.
@@ -111,6 +114,7 @@ namespace NMC.Services
                 // Key not in cache, so get data.
                 entry = await context.AppointmentTypes
                     .OrderBy(x => x.SortKey)
+                    .AsNoTracking()
                     .ToListAsync();
 
                 // Set cache options.
@@ -136,6 +140,7 @@ namespace NMC.Services
                 // Key not in cache, so get data.
                 entry = await context.RoomTypes
                     .OrderBy(x => x.SortKey)
+                    .AsNoTracking()
                     .ToListAsync();
 
                 // Set cache options.
@@ -161,6 +166,7 @@ namespace NMC.Services
                 // Key not in cache, so get data.
                 entry = await context.RoomGrades
                     .OrderBy(x => x.SortKey)
+                    .AsNoTracking()
                     .ToListAsync();
 
                 // Set cache options.
@@ -186,6 +192,7 @@ namespace NMC.Services
                 // Key not in cache, so get data.
                 entry = await context.Languages
                     .OrderBy(x => x.SortKey)
+                    .AsNoTracking()
                     .ToListAsync();
 
                 // Set cache options.
@@ -211,6 +218,7 @@ namespace NMC.Services
                 // Key not in cache, so get data.
                 entry = await context.Countries
                     .OrderBy(x => x.SortKey)
+                    .AsNoTracking()
                     .ToListAsync();
 
                 // Set cache options.
@@ -236,6 +244,7 @@ namespace NMC.Services
                 // Key not in cache, so get data.
                 entry = await context.Cities
                     .OrderBy(x => x.SortKey)
+                    .AsNoTracking()
                     .ToListAsync();
 
                 // Set cache options.
@@ -262,6 +271,7 @@ namespace NMC.Services
                 entry = await context.Doctors
                     .Include(x => x.Ward)
                     .OrderBy(x => x.FirstName)
+                    .AsNoTracking()
                     .ToListAsync();
 
                 // Set cache options.
@@ -279,7 +289,7 @@ namespace NMC.Services
         public async Task<IEnumerable<Inpatient>> GetInpatients()
         {
             string key = nameof(Inpatient);
-            int life = 20;
+            int life = 3;
             List<Inpatient> entry = null;
 
             if (!mem.TryGetValue(key, out entry))
@@ -288,7 +298,7 @@ namespace NMC.Services
                 entry = await context.Inpatients
                     .Include(x => x.Patient).ThenInclude(x => x.Nationality)
                     .Include(x => x.Referrer)
-                    .Include(x => x.Booking)
+                    .Include(x => x.Booking).ThenInclude(x => x.Allocations)
                     .Include(x => x.Ward)
                     .Include(x => x.Room).ThenInclude(x => x.RoomGrade)
                     .Include(x => x.RoomGrade)
@@ -298,6 +308,7 @@ namespace NMC.Services
                     .Include(x => x.Bills)
                     .Where(x => x.Active)
                     .OrderBy(x => x.Patient.FirstName)
+                    .AsNoTracking()
                     .ToListAsync();
 
                 // Set cache options.
@@ -326,6 +337,7 @@ namespace NMC.Services
                     .Include(x => x.Allocations)
                     .Where(x => x.Active)
                     .OrderBy(x => x.RequestDate)
+                    .AsNoTracking()
                     .ToListAsync();
 
                 // Set cache options.
@@ -354,6 +366,7 @@ namespace NMC.Services
                     .Include(x => x.RoomGrade)
                     .Include(x => x.Ward)
                     .OrderBy(x => x.Floor)
+                    .AsNoTracking()
                     .ToListAsync();
 
                 // Set cache options.
@@ -379,6 +392,7 @@ namespace NMC.Services
                 // Key not in cache, so get data.
                 entry = await context.Specialities
                     .OrderBy(x => x.SortKey)
+                    .AsNoTracking()
                     .ToListAsync();
 
                 // Set cache options.

@@ -13,6 +13,11 @@
     [StringLength(50, MinimumLength = 1)]
     public string Name { get; set; }
 
+    [BindProperty(SupportsGet = true)]
+    public int? InpatientId { get; set; }
+
+    public Inpatient Inpatient { get; set; }
+
     [BindProperty]
     [Required]
     public string Message { get; set; }
@@ -58,7 +63,15 @@
         Rooms = (await _mem.GetRooms())?.ToList();
         Wards = Rooms?.OrderBy(x => x.Floor).Select(x => x.Ward).Distinct().ToList();
         Allocations = (await _ctx.RoomAllocations.Where(x => x.Date >= From && x.Date <= To).ToListAsync());
+        if(InpatientId.HasValue)
+        {
+            Inpatient = (await _mem.GetInpatients()).Where(x => x.Id == InpatientId).FirstOrDefault();
+            DoctorId = Inpatient.ReferrerId;
+            Message = Inpatient.AdmissionNote;
+            Name = Inpatient.Name;
+            DownPayment = Inpatient.MinDownPayment;
 
+        }
     }
 
 
@@ -89,7 +102,35 @@
                 _ctx.Bookings.Add(booking);
                 await _ctx.SaveChangesAsync();
                 _mem.Reset(nameof(Booking));
-                return RedirectToPage("./Bookings");
+                if(!InpatientId.HasValue)
+                {
+                    return RedirectToPage("./Bookings");
+                }
+                else
+                {
+                    Inpatient = await _ctx.Inpatients
+                        .Include(x => x.Patient)
+                        .Where(x => x.Id == InpatientId)
+                        .FirstOrDefaultAsync();
+
+                    Inpatient.BookingId = booking.Id;
+                    Inpatient.RoomNo = booking.RoomNo;
+                    Inpatient.MinDownPayment = booking.DownPayment;
+                    Inpatient.ReferrerId = booking.DoctorId;
+                    Inpatient.AdmissionNote = booking.Message;
+
+                    foreach (var item in booking.Allocations)
+                    {
+                        item.InpatientId = Inpatient.Id;
+                        item.PatientId = Inpatient.PatientId;
+                        item.Status = RoomStatus.Reserved;
+                    }
+
+                    await _ctx.SaveChangesAsync();
+                    _mem.Reset(nameof(Booking));
+                    _mem.Reset(nameof(Inpatient));
+                    return RedirectToPage("./SelectRoom", new { Id = InpatientId });
+                }
                 //
             }
 
@@ -113,6 +154,8 @@
             <div class="card-box">
                 <div class="card-body">
                     <form method="post">
+
+                        <input type="hidden" asp-for="InpatientId" />
                         <div class="form-group">
                             <label asp-for="Name"></label>
                             <input asp-for="Name" class="form-control">

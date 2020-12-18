@@ -524,6 +524,8 @@ namespace NMC.Models
         public DateTime From => Allocations?.Min(x => x.Date) ?? RequestDate;
 
         [NotMapped]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime To => Allocations?.Max(x => x.Date) ?? RequestDate;
 
         public RoomStatus Status => Allocations.FirstOrDefault().Status;
@@ -755,7 +757,16 @@ namespace NMC.Models
         public int PatientId { get; set; }
 
         [Display(Name = "Patient")]
-        public Patient Patient { get; set; }
+        public Patient Patient { get; set; } = new();
+
+        [Display(Name = "Patient")]
+        public string Name => Patient?.Name;
+        
+        [Display(Name = "Identity")]
+        public string IdentityNo => Patient?.IdentityNo;
+        
+        [Display(Name = "Gender")]
+        public string Gender => Patient?.Gender.ToString() ?? "";
 
         [Display(Name = "Booking")]
         public int? BookingId { get; set; }
@@ -781,7 +792,7 @@ namespace NMC.Models
         public Room Room { get; set; }
 
         [Display(Name = "Room Grade")]
-        public int RoomGradeId { get; set; }
+        public int? RoomGradeId { get; set; }
 
         [Display(Name = "Room Grade")]
         public RoomGrade RoomGrade { get; set; }
@@ -801,7 +812,7 @@ namespace NMC.Models
         [Display(Name = "Status")]
         public int? StatusId { get; set; }
 
-        public InpatientStatus Status { get; set; }
+        public InpatientStatus Status => Statuses.OrderByDescending(x => x.StatusTime).FirstOrDefault();
 
         [Display(Name = "File No.")]
         public string FileNo { get; set; }
