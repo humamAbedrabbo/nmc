@@ -1,0 +1,119 @@
+﻿@page "{id:int}"
+@functions
+{
+    string PageTitle = "Edit Room";
+
+    [BindProperty] public Room Item { get; set; }
+    [BindProperty(SupportsGet = true)] public int? Id { get; set; }
+    public SelectList SelectWard { get; set; }
+
+    public async Task Init()
+    {
+        SelectWard = new SelectList(
+            await _ctx.Wards.OrderBy(x => x.Name).Select(x => new { Id = x.Id, Name = x.Name }).AsNoTracking().ToListAsync()
+            , "Id"
+            , "Name"
+            );
+    }
+
+    public async Task<IActionResult> OnGetAsync()
+    {
+        if (!Id.HasValue)
+            return RedirectToPage("/NotFound");
+
+        Item = await _ctx.Rooms.Where(x => x.Id == Id).FirstOrDefaultAsync();
+        if (Item == null)
+            return RedirectToPage("/NotFound");
+
+        await Init();
+
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if(ModelState.IsValid)
+        {
+            try
+            {
+                _ctx.Rooms.Update(Item);
+                await _ctx.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+            catch
+            {
+                ModelState.AddModelError("Name", "Invalid");
+            }
+        }
+
+        await Init();
+        return Page();
+    }
+}
+
+<div class="content">
+
+    <div class="row">
+        <div class="col-sm-5 col-5">
+            <h4 class="page-title">@_localizer[PageTitle]</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form method="post">
+                <div class="card-box">
+                    <div class="card-body">
+                        <h3 class="card-title">@_localizer["Room Details"]</h3>
+
+                        <input asp-for="Item.Id" type="hidden" />
+
+                        <div class="form-group">
+                            <label asp-for="Item.Code" class="col-form-label"></label>
+                            <input asp-for="Item.Code" class="form-control col-md-3" />
+                            <span asp-validation-for="Item.Code" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Item.Floor" class="col-form-label"></label>
+                            <input asp-for="Item.Floor" class="form-control col-md-3" />
+                            <span asp-validation-for="Item.Floor" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Item.RoomType" class="col-form-label"></label>
+                            <select asp-for="Item.RoomType" asp-items="Html.GetEnumSelectList<RoomType>()" class="form-control col-md-6">
+                            </select>
+                            <span asp-validation-for="Item.RoomType" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Item.WardId" class="col-form-label"></label>
+                            <select asp-for="Item.WardId" asp-items="SelectWard" class="form-control col-md-6">
+                                <option></option>
+                            </select>
+                            <span asp-validation-for="Item.WardId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Item.RoomGrade" class="col-form-label"></label>
+                            <select asp-for="Item.RoomGrade" asp-items="Html.GetEnumSelectList<RoomGrade>()" class="form-control col-md-6">
+                            </select>
+                            <span asp-validation-for="Item.RoomGrade" class="text-danger"></span>
+                        </div>
+
+                        <div class="m-t-20 text-center">
+                            <button type="submit" class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

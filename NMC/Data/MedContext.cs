@@ -20,12 +20,17 @@ namespace NMC.Data
         }
 
         public DbSet<Ward> Wards { get; set; }
+        public DbSet<Room> Rooms { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             ConfigureIdentity(builder);
+
+            // Ward
+            // Room
+            builder.Entity<Room>().HasAlternateKey(x => x.Code);
 
         }
 

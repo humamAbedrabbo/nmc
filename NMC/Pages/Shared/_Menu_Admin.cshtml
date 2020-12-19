@@ -1,8 +1,12 @@
 ﻿@if(User.IsInRole("Admin"))
 {
 
-<li class="active">
+<li class="">
     <a href="/Admin/Wards/Index"><i class="fa fa-tag"></i> <span>@_localizer["Wards"]</span></a>
+</li>
+
+<li class="">
+    <a href="/Admin/Rooms/Index"><i class="fa fa-tag"></i> <span>@_localizer["Rooms"]</span></a>
 </li>
 
 
