@@ -6,15 +6,18 @@
     [BindProperty] public Doctor Item { get; set; } = new();
     [BindProperty, DataType(DataType.Password)] public string Password { get; set; }
     [BindProperty, DataType(DataType.Password)] public string ConfirmPassword { get; set; }
+    public MultiSelectList SpecSelect { get; set; }
+
+    [BindProperty] public List<int> Specs { get; set; } = new();
 
     public async Task Init()
     {
-        
+        SpecSelect = new MultiSelectList(await _ctx.Specialities.OrderBy(x => x.Name).ToListAsync(), "Id", "Name", Specs);
     }
 
     public async Task OnGetAsync()
     {
-        // await Init();
+       await Init();
     }
 
     public async Task<IActionResult> OnPostAsync()
@@ -23,6 +26,9 @@
         {
             try
             {
+                Item.Specialities = await _ctx.Specialities
+                    .Where(x => Specs.Contains(x.Id)).ToListAsync();
+
                 _ctx.Doctors.Add(Item);
                 await _ctx.SaveChangesAsync();
                 return RedirectToPage("./Index");
@@ -33,7 +39,7 @@
             }
         }
 
-        // await Init();
+        await Init();
         return Page();
     }
 }
@@ -149,6 +155,12 @@
                                     <input type="radio" asp-for="Item.Referrer" id="referrer" value="True" class="form-check-input">@_localizer["Yes"]
                                 </label>
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Item.Specialities"></label>
+                            <select asp-for="Specs" asp-items="SpecSelect" class="select" multiple>
+                            </select>
                         </div>
 
                         <hr />

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -80,5 +81,87 @@ namespace NMC.Models
         [Display(Name = "Address"), StringLength(150)] public string Address { get; set; }
         [Display(Name = "Joining Date"), DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)] public DateTime? JoiningDate { get; set; } = DateTime.Today;
         [Display(Name = "Biography"), StringLength(1000)] public string Biography { get; set; }
+        [Display(Name = "Schedules")] public List<DoctorSchedule> Schedule { get; set; } = new();
+        [Display(Name = "Education")] public List<DoctorEducation> Education { get; set; } = new();
+        [Display(Name = "Experience")] public List<DoctorExperience> Experience { get; set; } = new();
+        [Display(Name = "Specialities")] public List<Speciality> Specialities { get; set; } = new();
+    }
+
+    [Table("DoctorSpecialities")]
+    public class DoctorSpeciality
+    {
+        public int DoctorId { get; set; }
+        public Doctor Doctor { get; set; }
+        public int SpecialityId { get; set; }
+        public Speciality Speciality { get; set; }
+    }
+
+    [Table("DoctorSchedules")]
+    [Index(nameof(FromDate), IsUnique = false)]
+    [Index(nameof(ThruDate), IsUnique = false)]
+    public class DoctorSchedule : Entity<int>
+    {
+        public DoctorSchedule()
+        {
+            FromDate = DateTime.Today;
+        }
+
+        [Display(Name = "Doctor")] public int DoctorId { get; set; }
+        [Display(Name = "Doctor")] public Doctor Doctor { get; set; }
+        [Display(Name = "From Date"), DataType(DataType.Date),DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)] public DateTime FromDate { get; set; } = DateTime.Today;
+        [Display(Name = "Thru Date"), DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)] public DateTime? ThruDate { get; set; }
+        [Display(Name = "Available Days")] public string Days { get; set; }
+        [Display(Name = "Start Time"), Required, StringLength(20)] public string StartTime { get; set; }
+        [Display(Name = "End Time"), Required, StringLength(20)] public string EndTime { get; set; }
+        [Display(Name = "Message"), StringLength(150)] public string Message { get; set; }
+        [Display(Name = "Timing")] public string Timing => $"{StartTime} - {EndTime}";
+        [NotMapped]
+        public string[] DaysList
+        {
+            get => Days?.Split(" ");
+            set => Days = string.Join(" ", value);
+        }
+    }
+
+    [Table("DoctorEducations")]
+    [Index(nameof(Institution), IsUnique = false)]
+    [Index(nameof(StartingYear), IsUnique = false)]
+    [Index(nameof(CompletionYear), IsUnique = false)]
+    public class DoctorEducation : Entity<int>
+    {
+        [Display(Name = "Doctor")] public int DoctorId { get; set; }
+        [Display(Name = "Doctor")] public Doctor Doctor { get; set; }
+        [Display(Name = "Institution"), Required, StringLength(100)] public string Institution { get; set; }
+        [Display(Name = "Subject"), StringLength(100)] public string Subject { get; set; }
+        [Display(Name = "Degree"), Required, StringLength(100)] public string Degree { get; set; }
+        [Display(Name = "Grade"), StringLength(50)] public string Grade { get; set; }
+        [Display(Name = "Starting Year")] public int StartingYear { get; set; }
+        [Display(Name = "Completion Year")] public int CompletionYear { get; set; }
+    }
+
+    [Table("DoctorExperiences")]
+    [Index(nameof(Company), IsUnique = false)]
+    [Index(nameof(Location), IsUnique = false)]
+    [Index(nameof(FromYear), IsUnique = false)]
+    [Index(nameof(ToYear), IsUnique = false)]
+    public class DoctorExperience : Entity<int>
+    {
+        [Display(Name = "Doctor")] public int DoctorId { get; set; }
+        [Display(Name = "Doctor")] public Doctor Doctor { get; set; }
+        [Display(Name = "Company"), Required, StringLength(100)] public string Company { get; set; }
+        [Display(Name = "Location"), StringLength(50)] public string Location { get; set; }
+        [Display(Name = "Position"), Required, StringLength(100)] public string Position { get; set; }
+        [Display(Name = "From Year")] public int FromYear { get; set; }
+        [Display(Name = "To Year")] public int? ToYear { get; set; }
+    }
+
+    [Table("Specialities")]
+    [Index(nameof(Name), IsUnique = true)]
+    [Index(nameof(Code), IsUnique = true)]
+    public class Speciality : Entity<int>
+    {
+        [Display(Name = "Speciality"), Required, StringLength(50)] public string Name { get; set; }
+        [Display(Name = "S.Code"), Required, StringLength(5)] public string Code { get; set; }
+        [Display(Name = "Doctors")] public List<Doctor> Doctors { get; set; } = new();
     }
 }

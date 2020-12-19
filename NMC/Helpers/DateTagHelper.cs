@@ -14,7 +14,7 @@ namespace NMC.Helpers
         /// <summary>
         /// The Date to format
         /// </summary>
-        public DateTime Value { get; set; }
+        public DateTime? Value { get; set; }
 
         /// <summary>
         /// The format pattern <code>"dd-MM-yyyy"</code>
@@ -24,7 +24,7 @@ namespace NMC.Helpers
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            output.Content.SetContent(Value.ToString(Format));
+            output.Content.SetContent(Value.HasValue ? Value.Value.ToString(Format) : "");
         }
     }
 }

@@ -21,7 +21,11 @@ namespace NMC.Data
 
         public DbSet<Ward> Wards { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Speciality> Specialities { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<DoctorSchedule> DoctorSchedules { get; set; }
+        public DbSet<DoctorEducation> DoctorEducations { get; set; }
+        public DbSet<DoctorExperience> DoctorExperiences { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -32,6 +36,15 @@ namespace NMC.Data
             // Ward
             // Room
             builder.Entity<Room>().HasAlternateKey(x => x.Code);
+            builder.Entity<Speciality>().HasAlternateKey(x => x.Code);
+            builder.Entity<DoctorSpeciality>().HasKey(x => new { x.DoctorId, x.SpecialityId });
+            builder.Entity<Doctor>()
+                .HasMany(p => p.Specialities)
+                .WithMany(p => p.Doctors)
+                .UsingEntity<DoctorSpeciality>(
+                    j => j.HasOne(p => p.Speciality).WithMany().HasForeignKey(p => p.SpecialityId),
+                    j => j.HasOne(p => p.Doctor).WithMany().HasForeignKey(p => p.DoctorId)
+                );
             // Doctors
         }
 

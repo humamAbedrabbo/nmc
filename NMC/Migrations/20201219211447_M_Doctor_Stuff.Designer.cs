@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NMC.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NMC.Migrations
 {
     [DbContext(typeof(MedContext))]
-    partial class MedContextModelSnapshot : ModelSnapshot
+    [Migration("20201219211447_M_Doctor_Stuff")]
+    partial class M_Doctor_Stuff
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,21 +52,21 @@ namespace NMC.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "62d76dae-2ddb-4463-8d41-5c33bf919c68",
+                            ConcurrencyStamp = "69e4a1e0-a447-43a5-bff0-598a35b38bee",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "d724e294-cd28-4d81-9772-ea75089b3f9f",
+                            ConcurrencyStamp = "c3ea1983-7a0f-4b6e-aa46-98b24c37d098",
                             Name = "Admission",
                             NormalizedName = "ADMISSION"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "d09c2758-296c-4512-b4a5-24b6fac637e2",
+                            ConcurrencyStamp = "a00059fd-0a6b-439d-8ffa-c33c3d8246f1",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         });
@@ -172,15 +174,15 @@ namespace NMC.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4ba219ab-1b4a-4fae-8ff6-9cc82a2e9dca",
+                            ConcurrencyStamp = "55d67b80-ee24-42f2-8a4e-69844fb05bc1",
                             Email = "admin@nmc",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@NMC",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAENyy05M7hnDSmNKwh5XBrk9/K6oEkeAZubTVNg3dKu77SjlAwNC10I7enChR7QKeZQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECgM5AsdEOXg5I08hk/nm+8zgCnJ/PijjWYLV6hbKOGWnWeypaU+PURN8qrD8YIOUQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ddb6f19d-30c0-4d8f-82af-a7590d28fce0",
+                            SecurityStamp = "74256d70-a00d-4186-9e4d-4c361ba4883f",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -503,21 +505,6 @@ namespace NMC.Migrations
                     b.ToTable("DoctorSchedules");
                 });
 
-            modelBuilder.Entity("NMC.Models.DoctorSpeciality", b =>
-                {
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("SpecialityId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("DoctorId", "SpecialityId");
-
-                    b.HasIndex("SpecialityId");
-
-                    b.ToTable("DoctorSpecialities");
-                });
-
             modelBuilder.Entity("NMC.Models.Room", b =>
                 {
                     b.Property<int>("Id")
@@ -552,36 +539,6 @@ namespace NMC.Migrations
                     b.HasIndex("WardId");
 
                     b.ToTable("Rooms");
-                });
-
-            modelBuilder.Entity("NMC.Models.Speciality", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("character varying(5)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasAlternateKey("Code");
-
-                    b.HasIndex("Code")
-                        .IsUnique();
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("Specialities");
                 });
 
             modelBuilder.Entity("NMC.Models.Ward", b =>
@@ -725,25 +682,6 @@ namespace NMC.Migrations
                         .IsRequired();
 
                     b.Navigation("Doctor");
-                });
-
-            modelBuilder.Entity("NMC.Models.DoctorSpeciality", b =>
-                {
-                    b.HasOne("NMC.Models.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NMC.Models.Speciality", "Speciality")
-                        .WithMany()
-                        .HasForeignKey("SpecialityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Doctor");
-
-                    b.Navigation("Speciality");
                 });
 
             modelBuilder.Entity("NMC.Models.Room", b =>

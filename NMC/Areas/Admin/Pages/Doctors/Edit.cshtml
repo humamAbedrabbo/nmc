@@ -5,10 +5,14 @@
 
     [BindProperty] public Doctor Item { get; set; }
     [BindProperty(SupportsGet = true)] public int? Id { get; set; }
+    public MultiSelectList SpecSelect { get; set; }
+
+    [BindProperty] public List<int> Specs { get; set; } = new();
 
     public async Task Init()
     {
-
+        Specs = Item?.Specialities.Select(x => x.Id).ToList();
+        SpecSelect = new MultiSelectList(await _ctx.Specialities.OrderBy(x => x.Name).ToListAsync(), "Id", "Name", Specs);
     }
 
     public async Task<IActionResult> OnGetAsync()
@@ -16,11 +20,13 @@
         if (!Id.HasValue)
             return RedirectToPage("/NotFound");
 
-        Item = await _ctx.Doctors.Where(x => x.Id == Id).FirstOrDefaultAsync();
+        Item = await _ctx.Doctors
+            .Include(x => x.Specialities)
+            .Where(x => x.Id == Id).FirstOrDefaultAsync();
         if (Item == null)
             return RedirectToPage("/NotFound");
 
-        // await Init();
+        await Init();
 
         return Page();
     }
@@ -29,14 +35,28 @@
     {
         if(ModelState.IsValid)
         {
+            var tx = await _ctx.Database.BeginTransactionAsync();
             try
             {
+                List<int> oldSpecs = Item.Specialities.Select(x => x.Id).ToList();
+                var old = await _ctx.Set<DoctorSpeciality>()
+                    .Where(x => x.DoctorId == Item.Id && oldSpecs.Contains(x.SpecialityId))
+                    .ToListAsync();
+                _ctx.Set<DoctorSpeciality>().RemoveRange(old);
+
+                await _ctx.SaveChangesAsync();
+
+                Item.Specialities = await _ctx.Specialities
+                .Where(x => Specs.Contains(x.Id)).ToListAsync();
+
                 _ctx.Doctors.Update(Item);
                 await _ctx.SaveChangesAsync();
+                await tx.CommitAsync();
                 return RedirectToPage("./Index");
             }
-            catch
+            catch(Exception ex)
             {
+                await tx.RollbackAsync();
                 ModelState.AddModelError("Code", "Invalid");
             }
         }
@@ -158,6 +178,18 @@
                                     <input type="radio" asp-for="Item.Referrer" id="referrer" value="True" class="form-check-input">@_localizer["Yes"]
                                 </label>
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Item.Specialities"></label>
+                            <select asp-for="Specs" asp-items="SpecSelect" class="select" multiple>
+                            </select>
+                            @for (int i = 0; i < Item.Specialities.Count; i++)
+                            {
+                                <input asp-for="Item.Specialities[i].Id" type="hidden" />
+                                <input asp-for="Item.Specialities[i].Name" type="hidden" />
+                                <input asp-for="Item.Specialities[i].Code" type="hidden" />
+                            }
                         </div>
 
                         <hr />

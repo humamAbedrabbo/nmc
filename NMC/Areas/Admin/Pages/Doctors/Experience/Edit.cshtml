@@ -1,0 +1,135 @@
+﻿@page "{Id:int}"
+@functions
+{
+    string PageTitle = "Edit Doctor Experience";
+
+    [BindProperty] public DoctorExperience Item { get; set; } = new();
+    [BindProperty(SupportsGet = true)] public int Id { get; set; }
+
+    public async Task Init()
+    {
+    }
+
+    public async Task<IActionResult> OnGetAsync()
+    {
+        Item = await _ctx.DoctorExperiences
+            .Include(x => x.Doctor)
+            .Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+        if (Item == null)
+            return RedirectToPage("/NotFound");
+
+        // await Init();
+
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                _ctx.DoctorExperiences.Update(Item);
+                await _ctx.SaveChangesAsync();
+                return RedirectToPage("./Index", new { DoctorId = Item.DoctorId });
+            }
+            catch
+            {
+                ModelState.AddModelError("Name", "Invalid");
+            }
+        }
+
+        // await Init();
+        return Page();
+    }
+}
+
+<div class="content">
+
+    <div class="row">
+        <div class="col-sm-5 col-5">
+            <h4 class="page-title">@_localizer[PageTitle]</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form method="post">
+                <div class="card-box">
+                    <div class="card-body">
+
+                        <h3 class="card-title">@_localizer["Experience Details"]</h3>
+
+                        <input asp-for="Id" type="hidden" />
+                        <input asp-for="Item.Id" type="hidden" />
+                        <input asp-for="Item.DoctorId" type="hidden" />
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.Doctor.Name" class=""></label>
+                                    <input readonly asp-for="Item.Doctor.Name" class="form-control" />
+                                    <span asp-validation-for="Item.Doctor.Name" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.Location"></label>
+                                    <input asp-for="Item.Location" class="form-control">
+                                    <span asp-validation-for="Item.Location" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.Company"></label>
+                                    <input asp-for="Item.Company" class="form-control">
+                                    <span asp-validation-for="Item.Company" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.Position"></label>
+                                    <input asp-for="Item.Position" class="form-control">
+                                    <span asp-validation-for="Item.Position" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="Item.FromYear"></label>
+                                    <input asp-for="Item.FromYear" class="form-control">
+                                    <span asp-validation-for="Item.FromYear" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="Item.ToYear"></label>
+                                    <input asp-for="Item.ToYear" class="form-control">
+                                    <span asp-validation-for="Item.ToYear" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        
+                        <div class="m-t-20 text-center">
+                            <button type="submit" class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+}

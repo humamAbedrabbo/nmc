@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NMC.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,15 +10,31 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NMC.Migrations
 {
     [DbContext(typeof(MedContext))]
-    partial class MedContextModelSnapshot : ModelSnapshot
+    [Migration("20201219215730_M_Speciality")]
+    partial class M_Speciality
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .UseIdentityByDefaultColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.1");
+
+            modelBuilder.Entity("DoctorSpeciality", b =>
+                {
+                    b.Property<int>("DoctorsId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SpecialitiesId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("DoctorsId", "SpecialitiesId");
+
+                    b.HasIndex("SpecialitiesId");
+
+                    b.ToTable("DoctorSpeciality");
+                });
 
             modelBuilder.Entity("NMC.Models.AppRole", b =>
                 {
@@ -50,21 +67,21 @@ namespace NMC.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "62d76dae-2ddb-4463-8d41-5c33bf919c68",
+                            ConcurrencyStamp = "bb3a07af-f555-4977-ae8c-903d13d12321",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "d724e294-cd28-4d81-9772-ea75089b3f9f",
+                            ConcurrencyStamp = "fdc0d9d0-a276-46d2-8a9f-67c9e453edd0",
                             Name = "Admission",
                             NormalizedName = "ADMISSION"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "d09c2758-296c-4512-b4a5-24b6fac637e2",
+                            ConcurrencyStamp = "d3bfc276-7157-4061-bce7-d76d1bd543eb",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         });
@@ -172,15 +189,15 @@ namespace NMC.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4ba219ab-1b4a-4fae-8ff6-9cc82a2e9dca",
+                            ConcurrencyStamp = "9c442bac-8bd1-4f3f-a6ed-dab896506b53",
                             Email = "admin@nmc",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@NMC",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAENyy05M7hnDSmNKwh5XBrk9/K6oEkeAZubTVNg3dKu77SjlAwNC10I7enChR7QKeZQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHIThp8nAErEgNGfopv66LUEul8vbKVjYtsQN7Ra8adhjST9jPt4YZQ/+w+UK8zYLg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ddb6f19d-30c0-4d8f-82af-a7590d28fce0",
+                            SecurityStamp = "c5355c55-8596-4b13-a6f9-3ef70c62a6e8",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -503,21 +520,6 @@ namespace NMC.Migrations
                     b.ToTable("DoctorSchedules");
                 });
 
-            modelBuilder.Entity("NMC.Models.DoctorSpeciality", b =>
-                {
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("SpecialityId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("DoctorId", "SpecialityId");
-
-                    b.HasIndex("SpecialityId");
-
-                    b.ToTable("DoctorSpecialities");
-                });
-
             modelBuilder.Entity("NMC.Models.Room", b =>
                 {
                     b.Property<int>("Id")
@@ -613,6 +615,21 @@ namespace NMC.Migrations
                         .IsUnique();
 
                     b.ToTable("Wards");
+                });
+
+            modelBuilder.Entity("DoctorSpeciality", b =>
+                {
+                    b.HasOne("NMC.Models.Doctor", null)
+                        .WithMany()
+                        .HasForeignKey("DoctorsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NMC.Models.Speciality", null)
+                        .WithMany()
+                        .HasForeignKey("SpecialitiesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("NMC.Models.AppRoleClaim", b =>
@@ -725,25 +742,6 @@ namespace NMC.Migrations
                         .IsRequired();
 
                     b.Navigation("Doctor");
-                });
-
-            modelBuilder.Entity("NMC.Models.DoctorSpeciality", b =>
-                {
-                    b.HasOne("NMC.Models.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NMC.Models.Speciality", "Speciality")
-                        .WithMany()
-                        .HasForeignKey("SpecialityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Doctor");
-
-                    b.Navigation("Speciality");
                 });
 
             modelBuilder.Entity("NMC.Models.Room", b =>
