@@ -1,0 +1,187 @@
+﻿@page "{id:int}"
+@functions
+{
+    string PageTitle = "Edit Doctor";
+
+    [BindProperty] public Doctor Item { get; set; }
+    [BindProperty(SupportsGet = true)] public int? Id { get; set; }
+
+    public async Task Init()
+    {
+
+    }
+
+    public async Task<IActionResult> OnGetAsync()
+    {
+        if (!Id.HasValue)
+            return RedirectToPage("/NotFound");
+
+        Item = await _ctx.Doctors.Where(x => x.Id == Id).FirstOrDefaultAsync();
+        if (Item == null)
+            return RedirectToPage("/NotFound");
+
+        // await Init();
+
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if(ModelState.IsValid)
+        {
+            try
+            {
+                _ctx.Doctors.Update(Item);
+                await _ctx.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+            catch
+            {
+                ModelState.AddModelError("Code", "Invalid");
+            }
+        }
+
+        await Init();
+        return Page();
+    }
+}
+
+<div class="content">
+
+    <div class="row">
+        <div class="col-sm-5 col-5">
+            <h4 class="page-title">@_localizer[PageTitle]</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form method="post">
+                <div class="card-box">
+                    <div class="card-body">
+                        <h3 class="card-title">@_localizer["Doctor Details"]</h3>
+
+                        <input asp-for="Item.Id" type="hidden" />
+
+                        <div class="form-group">
+                            <label asp-for="Item.Code" class="col-form-label"></label>
+                            <input readonly asp-for="Item.Code" class="form-control col-md-3" />
+                            <span asp-validation-for="Item.Code" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="form-group col-md-6">
+                                <label asp-for="Item.FirstName" class="col-form-label"></label>
+                                <input asp-for="Item.FirstName" class="form-control" />
+                                <span asp-validation-for="Item.FirstName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label asp-for="Item.LastName" class="col-form-label"></label>
+                                <input asp-for="Item.LastName" class="form-control" />
+                                <span asp-validation-for="Item.LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Item.Title" class="col-form-label"></label>
+                            <input asp-for="Item.Title" class="form-control" />
+                            <span asp-validation-for="Item.Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label asp-for="Item.Gender" class="col-form-label"></label>
+                                <select asp-for="Item.Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control">
+                                </select>
+                                <span asp-validation-for="Item.Gender" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label asp-for="Item.ContractType" class="col-form-label"></label>
+                                <select asp-for="Item.ContractType" asp-items="Html.GetEnumSelectList<ContractType>()" class="form-control">
+                                </select>
+                                <span asp-validation-for="Item.ContractType" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label asp-for="Item.JoiningDate" class="col-form-label"></label>
+                                <input asp-for="Item.JoiningDate" class="form-control">
+                                <span asp-validation-for="Item.JoiningDate" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="form-group col-md-4">
+                                <label asp-for="Item.Phone" class="col-form-label"></label>
+                                <input asp-for="Item.Phone" class="form-control">
+                                <span asp-validation-for="Item.Phone" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label asp-for="Item.Mobile" class="col-form-label"></label>
+                                <input asp-for="Item.Mobile" class="form-control">
+                                <span asp-validation-for="Item.Mobile" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label asp-for="Item.Email" class="col-form-label"></label>
+                                <input asp-for="Item.Email" class="form-control">
+                                <span asp-validation-for="Item.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Item.Address" class="col-form-label"></label>
+                            <input asp-for="Item.Address" class="form-control">
+                            <span asp-validation-for="Item.Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Item.Biography" class="col-form-label"></label>
+                            <textarea asp-for="Item.Biography" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Item.Biography" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group gender-select">
+                            <label class="gen-label">@_localizer["Referrer"]:</label>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Item.Referrer" id="notReferrer" value="False" class="form-check-input">@_localizer["No"]
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Item.Referrer" id="referrer" value="True" class="form-check-input">@_localizer["Yes"]
+                                </label>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label asp-for="Item.UserName" class="col-form-label"></label>
+                                <input asp-for="Item.UserName" class="form-control">
+                                <span asp-validation-for="Item.UserName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="m-t-20 text-center">
+                            <button type="submit" class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

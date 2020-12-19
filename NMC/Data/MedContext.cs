@@ -21,6 +21,7 @@ namespace NMC.Data
 
         public DbSet<Ward> Wards { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -31,7 +32,7 @@ namespace NMC.Data
             // Ward
             // Room
             builder.Entity<Room>().HasAlternateKey(x => x.Code);
-
+            // Doctors
         }
 
         private static void ConfigureIdentity(ModelBuilder builder)
