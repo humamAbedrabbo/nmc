@@ -16,7 +16,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NMC.Extensions;
-using NMC.Services;
 
 namespace NMC
 {
@@ -76,9 +75,6 @@ namespace NMC
                 options.LowercaseQueryStrings = true;
                 options.AppendTrailingSlash = true;
             });
-
-            services.AddScoped<ICacheManager, CacheManager>();
-            services.AddScoped<IListsManager, ListsManager>();
 
         }
 

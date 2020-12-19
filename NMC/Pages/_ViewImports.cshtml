@@ -3,7 +3,6 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @using NMC.Extensions
 @using NMC.Data
-@using NMC.Services
 @using System.ComponentModel.DataAnnotations
 @using System
 @using System.Linq
@@ -11,8 +10,6 @@
 
 
 @inject IViewLocalizer _localizer
-@inject ICacheManager _mem
-@inject IListsManager _lm
 @inject MedContext _ctx
 
 @namespace NMC.Pages

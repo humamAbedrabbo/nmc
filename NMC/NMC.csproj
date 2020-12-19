@@ -18,4 +18,8 @@
 		<PackageReference Include="OrchardCore.Localization.Core" Version="1.0.0-rc2-13450" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Services\" />
+	</ItemGroup>
+
 </Project>
