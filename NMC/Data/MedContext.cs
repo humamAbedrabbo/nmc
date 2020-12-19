@@ -19,10 +19,18 @@ namespace NMC.Data
         {
         }
 
+        public DbSet<Ward> Wards { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
+            ConfigureIdentity(builder);
+
+        }
+
+        private static void ConfigureIdentity(ModelBuilder builder)
+        {
             builder.Entity<AppUser>().ToTable("Users");
             builder.Entity<AppRole>().ToTable("Roles");
             builder.Entity<AppUserRole>().ToTable("UserRoles");
@@ -41,10 +49,30 @@ namespace NMC.Data
                 .UsingEntity<AppUserRole>(
                 j => j.HasOne(p => p.Role).WithMany().HasForeignKey(p => p.RoleId),
                 j => j.HasOne(p => p.User).WithMany().HasForeignKey(p => p.UserId),
-                j => j.HasKey(t => new { t.RoleId, t.UserId  })
+                j => j.HasKey(t => new { t.RoleId, t.UserId })
                 );
 
-        }
 
+            // Add Roles and Admin
+            builder.Entity<AppRole>().HasData(new AppRole { Id = 1, Name = "Admin", NormalizedName = "ADMIN" });
+            builder.Entity<AppRole>().HasData(new AppRole { Id = 2, Name = "Admission", NormalizedName = "ADMISSION" });
+            builder.Entity<AppRole>().HasData(new AppRole { Id = 3, Name = "Doctor", NormalizedName = "DOCTOR" });
+            
+            var hasher = new PasswordHasher<AppUser>();
+            var admin = new AppUser
+            {
+                Id = 1,
+                UserName = "admin",
+                NormalizedUserName = "ADMIN",
+                Email = "admin@nmc",
+                NormalizedEmail = "ADMIN@NMC",
+                ConcurrencyStamp = Guid.NewGuid().ToString(),
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+            admin.PasswordHash = hasher.HashPassword(admin, "123456");
+            builder.Entity<AppUser>().HasData(admin);
+            builder.Entity<AppUserRole>().HasData(new AppUserRole { RoleId = 1, UserId = 1 });
+
+        }
     }
 }

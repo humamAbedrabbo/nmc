@@ -3,9 +3,15 @@
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
                 <li class="menu-title">@_localizer["Main"]</li>
+                
+
                 <li class="active">
                     <a href="/"><i class="fa fa-home"></i> <span>@_localizer["Home"]</span></a>
                 </li>
+                
+                <partial name="_Menu_Admin" />
+                
+                
                 <li>
                     <a href="/Temps/Data/TestData"><i class="fa fa-plus"></i> <span>@_localizer["Test Data"]</span></a>
                 </li>

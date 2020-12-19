@@ -1,0 +1,16 @@
+@using NMC
+@using NMC.Data
+@using NMC.Models
+@using Microsoft.AspNetCore.Mvc.Localization
+@using NMC.Extensions
+@using System.ComponentModel.DataAnnotations
+@using System
+@using System.Linq
+@using Microsoft.EntityFrameworkCore
+
+
+@inject IViewLocalizer _localizer
+@inject MedContext _ctx
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, NMC

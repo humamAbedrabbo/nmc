@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NMC.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NMC.Migrations
 {
     [DbContext(typeof(MedContext))]
-    partial class MedContextModelSnapshot : ModelSnapshot
+    [Migration("20201219160742_M_Ward")]
+    partial class M_Ward
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,29 +47,6 @@ namespace NMC.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ConcurrencyStamp = "175081c1-075b-456b-8400-d632c1cc2e84",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ConcurrencyStamp = "8f440f25-d07a-4095-8d60-e31a199bd833",
-                            Name = "Admission",
-                            NormalizedName = "ADMISSION"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ConcurrencyStamp = "300cd0df-ba51-42d1-9e36-8089824ca884",
-                            Name = "Doctor",
-                            NormalizedName = "DOCTOR"
-                        });
                 });
 
             modelBuilder.Entity("NMC.Models.AppRoleClaim", b =>
@@ -166,24 +145,6 @@ namespace NMC.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "d34b1028-bc85-4eab-aad4-61081cac5853",
-                            Email = "admin@nmc",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@NMC",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIBlGUrxoF3hlXElxqi+hey85TF1J7aVmANj7EcwTPeL/O8jFWHJ3DmBSFK+wGnugg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "fac395a1-6d4c-47a4-a054-a942bbcb2527",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("NMC.Models.AppUserClaim", b =>
@@ -255,13 +216,6 @@ namespace NMC.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            RoleId = 1,
-                            UserId = 1
-                        });
                 });
 
             modelBuilder.Entity("NMC.Models.AppUserToken", b =>
