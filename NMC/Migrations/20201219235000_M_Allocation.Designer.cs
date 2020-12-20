@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NMC.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NMC.Migrations
 {
     [DbContext(typeof(MedContext))]
-    partial class MedContextModelSnapshot : ModelSnapshot
+    [Migration("20201219235000_M_Allocation")]
+    partial class M_Allocation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,21 +52,21 @@ namespace NMC.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "c402fe0f-dbbf-4d6a-950c-61f9e10d84f7",
+                            ConcurrencyStamp = "7bc7f34a-76bb-445e-ac43-d511542dd396",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "266813d6-8c5a-4da9-b5e4-44e8c6830a0a",
+                            ConcurrencyStamp = "66d87b64-0dac-4e30-889a-d32096176836",
                             Name = "Admission",
                             NormalizedName = "ADMISSION"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "c8767879-7254-473a-95cb-47bcc067e11a",
+                            ConcurrencyStamp = "367a9b5a-1d13-41b8-b7ce-4cd1ec14540f",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         });
@@ -172,15 +174,15 @@ namespace NMC.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d9e02e20-ef00-4a05-95bc-c79cc5df4e03",
+                            ConcurrencyStamp = "2bbe4137-383c-4a4c-b933-9bccaf2f42dd",
                             Email = "admin@nmc",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@NMC",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGGr3yopSqYLp62MiMBoWH3dk45UVX6tM1DXLMfDp4UE12jO1saUJVr7xathTbnPFQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENeHlypyO4jBNFoDK08Y8UhYO+qV5cnFAWZEXJg1LpVxfE4wR+66e7wFj2t0VZZAvg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d8441105-d539-4611-849d-163ce0ed4683",
+                            SecurityStamp = "6b55504e-ec49-4553-a731-b11636a09560",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -558,194 +560,6 @@ namespace NMC.Migrations
                     b.ToTable("DoctorSpecialities");
                 });
 
-            modelBuilder.Entity("NMC.Models.Inpatient", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
-
-                    b.Property<bool>("Accident")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("AdmetOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int?>("BookingId")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("Companion")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<bool>("Death")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("DischargedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Diseases")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("Emergency")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("EstDays")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("GLACC")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("General")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("Healing")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("Ill")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("Improvement")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Meals")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Medicines")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("Other")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("PatientId")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("PoliceRef")
-                        .HasColumnType("boolean");
-
-                    b.Property<int?>("ReferrerId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ReferrerNotes")
-                        .HasColumnType("text");
-
-                    b.Property<int>("RoomGrade")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("RoomId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("WardId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookingId");
-
-                    b.HasIndex("PatientId");
-
-                    b.HasIndex("ReferrerId");
-
-                    b.HasIndex("RoomId");
-
-                    b.HasIndex("WardId");
-
-                    b.ToTable("Inpatients");
-                });
-
-            modelBuilder.Entity("NMC.Models.Patient", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
-
-                    b.Property<string>("Address")
-                        .HasMaxLength(150)
-                        .HasColumnType("character varying(150)");
-
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("BloodGroup")
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(150)
-                        .HasColumnType("character varying(150)");
-
-                    b.Property<string>("FatherName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.Property<string>("FoodAllergy")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("IdentityNo")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.Property<int>("MaritalStatus")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("MedicalAllergy")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Mobile")
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)");
-
-                    b.Property<string>("MotherName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.Property<string>("Occupation")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.Property<string>("Phone")
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Email");
-
-                    b.HasIndex("FirstName");
-
-                    b.HasIndex("IdentityNo");
-
-                    b.HasIndex("LastName");
-
-                    b.HasIndex("Mobile");
-
-                    b.HasIndex("Phone");
-
-                    b.ToTable("Patients");
-                });
-
             modelBuilder.Entity("NMC.Models.Room", b =>
                 {
                     b.Property<int>("Id")
@@ -813,8 +627,6 @@ namespace NMC.Migrations
                     b.HasIndex("BookingId");
 
                     b.HasIndex("Date");
-
-                    b.HasIndex("InpatientId");
 
                     b.HasIndex("RoomId");
 
@@ -1024,43 +836,6 @@ namespace NMC.Migrations
                     b.Navigation("Speciality");
                 });
 
-            modelBuilder.Entity("NMC.Models.Inpatient", b =>
-                {
-                    b.HasOne("NMC.Models.Booking", "Booking")
-                        .WithMany()
-                        .HasForeignKey("BookingId");
-
-                    b.HasOne("NMC.Models.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NMC.Models.Doctor", "Referrer")
-                        .WithMany()
-                        .HasForeignKey("ReferrerId");
-
-                    b.HasOne("NMC.Models.Room", "Room")
-                        .WithMany()
-                        .HasForeignKey("RoomId");
-
-                    b.HasOne("NMC.Models.Ward", "Ward")
-                        .WithMany()
-                        .HasForeignKey("WardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Booking");
-
-                    b.Navigation("Patient");
-
-                    b.Navigation("Referrer");
-
-                    b.Navigation("Room");
-
-                    b.Navigation("Ward");
-                });
-
             modelBuilder.Entity("NMC.Models.Room", b =>
                 {
                     b.HasOne("NMC.Models.Ward", "Ward")
@@ -1076,10 +851,6 @@ namespace NMC.Migrations
                         .WithMany("Allocations")
                         .HasForeignKey("BookingId");
 
-                    b.HasOne("NMC.Models.Inpatient", "Inpatient")
-                        .WithMany("Allocations")
-                        .HasForeignKey("InpatientId");
-
                     b.HasOne("NMC.Models.Room", "Room")
                         .WithMany("Allocations")
                         .HasForeignKey("RoomId")
@@ -1087,8 +858,6 @@ namespace NMC.Migrations
                         .IsRequired();
 
                     b.Navigation("Booking");
-
-                    b.Navigation("Inpatient");
 
                     b.Navigation("Room");
                 });
@@ -1119,11 +888,6 @@ namespace NMC.Migrations
                     b.Navigation("Experience");
 
                     b.Navigation("Schedule");
-                });
-
-            modelBuilder.Entity("NMC.Models.Inpatient", b =>
-                {
-                    b.Navigation("Allocations");
                 });
 
             modelBuilder.Entity("NMC.Models.Room", b =>

@@ -26,6 +26,10 @@ namespace NMC.Data
         public DbSet<DoctorSchedule> DoctorSchedules { get; set; }
         public DbSet<DoctorEducation> DoctorEducations { get; set; }
         public DbSet<DoctorExperience> DoctorExperiences { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<RoomAllocation> RoomAllocations { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Inpatient> Inpatients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -46,6 +50,8 @@ namespace NMC.Data
                     j => j.HasOne(p => p.Doctor).WithMany().HasForeignKey(p => p.DoctorId)
                 );
             // Doctors
+            // Bookings
+            // RoomAllocations
         }
 
         private static void ConfigureIdentity(ModelBuilder builder)

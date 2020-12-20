@@ -1,0 +1,202 @@
+﻿@page "{id:int}"
+@functions
+{
+    string PageTitle = "Edit Patient Information";
+
+    [BindProperty] public Patient Item { get; set; }
+    [BindProperty(SupportsGet = true)] public int? Id { get; set; }
+    [BindProperty(SupportsGet = true)] public int? InpatientId { get; set; }
+
+    public async Task Init()
+    {
+    }
+
+    public async Task<IActionResult> OnGetAsync()
+    {
+        if (!Id.HasValue)
+            return RedirectToPage("/NotFound");
+
+        Item = await _ctx.Inpatients
+            .Include(x => x.Patient)
+            .Where(x => x.Id == InpatientId && x.PatientId == Id)
+            .Select(x => x.Patient)
+            .FirstOrDefaultAsync();
+
+        if (Item == null)
+            return RedirectToPage("/NotFound");
+
+        await Init();
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if(ModelState.IsValid)
+        {
+            try
+            {
+                _ctx.Patients.Update(Item);
+                await _ctx.SaveChangesAsync();
+                return RedirectToPage("../Index", new { Id = InpatientId });
+            }
+            catch
+            {
+                ModelState.AddModelError("Name", "Invalid");
+            }
+        }
+
+        await Init();
+        return Page();
+    }
+}
+
+<div class="content">
+
+    <div class="row">
+        <div class="col-sm-5 col-5">
+            <h4 class="page-title">@_localizer[PageTitle]</h4>
+        </div>
+    </div>
+
+    <form method="post">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+
+                <div class="card-box">
+                    <div class="card-body">
+
+                        <h3 class="card-title">@_localizer["Patient Details"]</h3>
+
+                        <input asp-for="InpatientId" type="hidden" />
+                        <input asp-for="Id" type="hidden" />
+                        <input asp-for="Item.Id" type="hidden" />
+                        <input asp-for="Item.BloodGroup" type="hidden" />
+                        <input asp-for="Item.MedicalAllergy" type="hidden" />
+                        <input asp-for="Item.FoodAllergy" type="hidden" />
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Item.IdentityNo"></label>
+                                    <input asp-for="Item.IdentityNo" class="form-control" />
+                                    <span asp-validation-for="Item.IdentityNo" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.FirstName"></label>
+                                    <input asp-for="Item.FirstName" class="form-control" />
+                                    <span asp-validation-for="Item.FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.LastName"></label>
+                                    <input asp-for="Item.LastName" class="form-control" />
+                                    <span asp-validation-for="Item.LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.FatherName"></label>
+                                    <input asp-for="Item.FatherName" class="form-control" />
+                                    <span asp-validation-for="Item.FatherName" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.MotherName"></label>
+                                    <input asp-for="Item.MotherName" class="form-control" />
+                                    <span asp-validation-for="Item.MotherName" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.Gender"></label>
+                                    <select asp-for="Item.Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control"></select>
+                                    <span asp-validation-for="Item.Gender" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.MaritalStatus"></label>
+                                    <select asp-for="Item.MaritalStatus" asp-items="Html.GetEnumSelectList<MaritalStatus>()" class="form-control"></select>
+                                    <span asp-validation-for="Item.MaritalStatus" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.BirthDate"></label>
+                                    <input asp-for="Item.BirthDate" class="form-control" />
+                                    <span asp-validation-for="Item.BirthDate" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.Occupation"></label>
+                                    <input asp-for="Item.Occupation" class="form-control" />
+                                    <span asp-validation-for="Item.Occupation" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Item.Phone" class="col-form-label"></label>
+                                    <input asp-for="Item.Phone" class="form-control">
+                                    <span asp-validation-for="Item.Phone" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Item.Mobile" class="col-form-label"></label>
+                                    <input asp-for="Item.Mobile" class="form-control">
+                                    <span asp-validation-for="Item.Mobile" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Item.Email" class="col-form-label"></label>
+                                    <input asp-for="Item.Email" class="form-control">
+                                    <span asp-validation-for="Item.Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="Item.Address" class="col-form-label"></label>
+                                    <input asp-for="Item.Address" class="form-control">
+                                    <span asp-validation-for="Item.Address" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="m-t-20 text-center">
+                            <button type="submit" class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </form>
+
+</div>
+
+@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

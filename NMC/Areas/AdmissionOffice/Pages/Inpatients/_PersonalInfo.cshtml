@@ -1,0 +1,111 @@
+﻿@model Inpatient
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card-box">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Identity No."]
+                        </strong><span class="ml-2"></span>
+                        <span>@Model.Patient?.IdentityNo</span>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Name"]
+                        </strong><span class="ml-2"></span>
+                        <span>@Model.Patient?.Name</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["First Name"]
+                        </strong><span class="ml-2"></span>
+                        <span>@Model.Patient?.FirstName</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Last Name"]
+                        </strong><span class="ml-2"></span>
+                        <span>@Model.Patient?.LastName</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Gender"]
+                        </strong><span class="ml-2"></span>
+                        <span>@Model.Patient?.Gender.ToString()</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Marital Status"]
+                        </strong><span class="ml-2"></span>
+                        <span>@Model.Patient?.MaritalStatus.ToString()</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Father Name"]
+                        </strong><span class="ml-2"></span>
+                        <span>@Model.Patient?.FatherName</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Mother Name"]
+                        </strong><span class="ml-2"></span>
+                        <span>@Model.Patient?.MotherName</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Birth Date"]
+                        </strong><span class="ml-2"></span>
+                        <span>@Model.Patient?.BirthDate.ToShortDateString()</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Phone"]
+                        </strong><span class="ml-2"></span>
+                        <span>@Model.Patient?.Phone</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Mobile"]
+                        </strong><span class="ml-2"></span>
+                        <span>@Model.Patient?.Mobile</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Email"]
+                        </strong><span class="ml-2"></span>
+                        <span>@Model.Patient?.Email</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Address"]
+                        </strong><span class="ml-2"></span>
+                        <span>@Model.Patient?.Address</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Occupation"]
+                        </strong><span class="ml-2"></span>
+                        <span>@Model.Patient?.Occupation</span>
+                    </li>
+                </ul>
+
+
+            </div>
+        </div>
+    </div>
+</div> 

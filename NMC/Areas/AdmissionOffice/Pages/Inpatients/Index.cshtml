@@ -1,16 +1,13 @@
 ﻿@page
 @functions
 {
-    string PageTitle = "Doctors";
+    string PageTitle = "Inpatients";
 
-    public IEnumerable<Doctor> Items { get; set; }
+    public IEnumerable<Inpatient> Items { get; set; }
 
     public async Task OnGetAsync()
     {
-        Items = await _ctx.Doctors
-            .OrderBy(x => x.FirstName).ThenBy(x => x.LastName)
-            .AsNoTracking()
-            .ToListAsync();
+        Items = await _mem.GetInpatients();
     }
 }
 
@@ -35,10 +32,9 @@
                         <tr>
                             <th>#</th>
                             <th>@Html.DisplayNameFor(p => p.Items.FirstOrDefault().Name)</th>
-                            <th>@Html.DisplayNameFor(p => p.Items.FirstOrDefault().Title)</th>
-                            <th>@Html.DisplayNameFor(p => p.Items.FirstOrDefault().ContractType)</th>
-                            <th>@Html.DisplayNameFor(p => p.Items.FirstOrDefault().Phone)/@Html.DisplayNameFor(p => p.Items.FirstOrDefault().Mobile)</th>
-                            <th>@Html.DisplayNameFor(p => p.Items.FirstOrDefault().Email)</th>
+                            <th>@Html.DisplayNameFor(p => p.Items.FirstOrDefault().Status)</th>
+                            <th>@Html.DisplayNameFor(p => p.Items.FirstOrDefault().Ward)</th>
+                            <th>@Html.DisplayNameFor(p => p.Items.FirstOrDefault().Room.Code)</th>
                             <th class="text-right">@_localizer["Action"]</th>
                         </tr>
                     </thead>
@@ -46,12 +42,11 @@
                         @foreach (var item in Model.Items)
                         {
                             <tr>
-                                <td scope="row">@item.Code</td>
+                                <td scope="row">@item.Id</td>
                                 <td>@item.Name</td>
-                                <td>@item.Title</td>
-                                <td>@item.ContractType.ToString()</td>
-                                <td><span>@item.Phone</span><span class="ml-1">@item.Mobile</span> </td>
-                                <td>@item.Email</td>
+                                <td>@item.Status</td>
+                                <td>@item.Ward?.Name</td>
+                                <td>@item.Room?.Code</td>
                                 @*<td><span class="custom-badge status-green">Active</span></td>*@
                                 <td class="text-right">
                                     <div class="dropdown dropdown-action">
@@ -59,9 +54,8 @@
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" asp-page="./Details" asp-route-id="@item.Id"><i class="fa fa-pencil m-r-5"></i> @_localizer["Details"]</a>
                                             <a class="dropdown-item" asp-page="./Edit" asp-route-id="@item.Id"><i class="fa fa-pencil m-r-5"></i> @_localizer["Edit"]</a>
-                                            <a class="dropdown-item" asp-page="./Schedule/Index" asp-route-DoctorId="@item.Id"><i class="fa fa-pencil m-r-5"></i> @_localizer["Schedule"]</a>
-                                            <a class="dropdown-item" asp-page="./Education/Index" asp-route-DoctorId="@item.Id"><i class="fa fa-pencil m-r-5"></i> @_localizer["Education"]</a>
-                                            <a class="dropdown-item" asp-page="./Experience/Index" asp-route-DoctorId="@item.Id"><i class="fa fa-pencil m-r-5"></i> @_localizer["Experience"]</a>
+                                            <a class="dropdown-item" asp-page="./Admit" asp-route-id="@item.Id"><i class="fa fa-pencil m-r-5"></i> @_localizer["Admit"]</a>
+                                            <a class="dropdown-item" asp-page="./Patients/Edit" asp-route-InpatientId="@item.Id" asp-route-id="@item.PatientId"><i class="fa fa-pencil m-r-5"></i> @_localizer["Edit Patient Information"]</a>
                                         </div>
                                     </div>
                                 </td>

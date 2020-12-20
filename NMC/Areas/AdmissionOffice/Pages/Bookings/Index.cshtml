@@ -1,0 +1,212 @@
+﻿@page
+@using Microsoft.EntityFrameworkCore
+
+@{
+    ViewBag.PageTitle = _localizer["Bookings"];
+}
+
+@functions{
+
+    public IEnumerable<Booking> Items { get; set; }
+
+    [TempData]
+    public string AlertMessage { get; set; }
+
+    public async Task OnGetAsync()
+    {
+        Items = await _mem.GetBookings();
+    }
+
+    public async Task<IActionResult> OnPostCancelAsync(int id)
+    {
+        var booking = await _ctx.Bookings
+            .Include(x => x.Allocations).ThenInclude(x => x.Room)
+            .Include(x => x.Doctor)
+            .Where(x => x.Id == id)
+            .FirstOrDefaultAsync();
+
+        if (booking != null)
+        {
+            var tx = await _ctx.Database.BeginTransactionAsync();
+            try
+            {
+
+                booking.Active = false;
+                _ctx.RemoveRange(booking.Allocations);
+                //_ctx.Bookings.Remove(booking);
+                await _ctx.SaveChangesAsync();
+                await tx.CommitAsync();
+                _mem.Reset(nameof(Booking));
+            }
+            catch (Exception ex)
+            {
+                await tx.RollbackAsync();
+            }
+
+        }
+        return RedirectToPage("./Index");
+    }
+
+    public async Task<IActionResult> OnPostConfirmAsync(int id)
+    {
+        var booking = await _ctx.Bookings
+            .Include(x => x.Allocations).ThenInclude(x => x.Room)
+            .Where(x => x.Id == id)
+            .FirstOrDefaultAsync();
+
+        if (booking != null)
+        {
+            var tx = await _ctx.Database.BeginTransactionAsync();
+            try
+            {
+                foreach (var aloc in booking.Allocations)
+                {
+                    aloc.Status = RoomStatus.Reserved;
+                }
+                await _ctx.SaveChangesAsync();
+                await tx.CommitAsync();
+                _mem.Reset(nameof(Booking));
+                //AlertMessage = $"Room '{booking.RoomNo}' is reserved to booking '{booking.Name}' between '{booking.From.ToString("ddd dd-MM-yyyy")}' and '{booking.To.ToString("ddd dd-MM-yyyy")}'";
+            }
+            catch (Exception ex)
+            {
+                await tx.RollbackAsync();
+            }
+
+        }
+        return RedirectToPage("./Index");
+    }
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-sm-5 col-5">
+            <h4 class="page-title">@ViewBag.PageTitle</h4>
+        </div>
+        <div class="col-sm-7 col-7 text-right m-b-30">
+            <a asp-page="./Create" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> @_localizer["Create"]</a>
+        </div>
+    </div>
+
+    @if (AlertMessage != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> @AlertMessage
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table text-nowrap table-striped custom-table mb-0 datatable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>@Html.DisplayNameFor(p => p.Items.FirstOrDefault().Name)</th>
+                            <th>@Html.DisplayNameFor(p => p.Items.FirstOrDefault().RequestDate)</th>
+                            <th>@Html.DisplayNameFor(p => p.Items.FirstOrDefault().Doctor.Name)</th>
+                            <th>@Html.DisplayNameFor(p => p.Items.FirstOrDefault().RoomNo)</th>
+                            <th>@Html.DisplayNameFor(p => p.Items.FirstOrDefault().From)</th>
+                            <th>@Html.DisplayNameFor(p => p.Items.FirstOrDefault().To)</th>
+
+                            <th class="text-center">@_localizer["Status"]</th>
+                            <th class="text-center">@_localizer["Status Action"]</th>
+                            @*<th class="text-right">@_localizer["Action"]</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Name</td>
+                                <td><date value="@item.RequestDate"></date></td>
+                                <td>@item.Doctor?.Name</td>
+                                <td>@item.RoomNo</td>
+                                <td><date value="@item.From"></date></td>
+                                <td><date value="@item.To"></date></td>
+                                <td class="text-center">@item.Status</td>
+                                <td class="text-center">
+                                    <button disabled="@(!item.CanBeCancelled)" data-toggle="modal" data-id="@item.Id" data-target="#cancel-booking" class="custom-badge clickable status-red text-danger" role="button">Cancel</button>
+                                    <button hidden="@(item.Status == RoomStatus.Reserved)" data-toggle="modal" data-id="@item.Id" data-target="#confirm-booking" class="custom-badge status-blue  @(item.Status == RoomStatus.Reserved ? "disabled " : "clickable text-primary" )" role="button">Confirm</button>
+                                    <a asp-page="../Inpatients/Create" asp-route-bookingId="@item.Id" class="custom-badge status-blue"  role="button">New Inpatient</a>
+                                </td>
+                                @*<td class="text-right">
+                                    <div class="dropdown dropdown-action">
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" asp-page="./EditBooking" asp-route-id="@item.Id"><i class="fa fa-pencil m-r-5"></i> @_localizer["Edit"]</a>
+                                        </div>
+                                    </div>
+                                </td>*@
+                            </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="cancel-booking" class="modal fade delete-modal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <img src="~/assets/img/sent.png" alt="" width="50" height="46">
+                <h3>@_localizer["Are you sure want to cancel this"] @_localizer["booking"] @_localizer["?"]</h3>
+                <div class="m-t-20">
+                    <form method="post" asp-page-handler="cancel" asp-route-id="param-id">
+                        <a href="#" class="btn btn-white" data-dismiss="modal">@_localizer["Close"]</a>
+                        <button type="submit" class="btn btn-danger">@_localizer["Cancel"]</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="confirm-booking" class="modal fade delete-modal delete-modal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <img src="~/assets/img/sent.png" alt="" width="50" height="46">
+                <h3>@_localizer["Are you sure want to confirm this"] @_localizer["booking"] @_localizer["?"]</h3>
+                <div class="m-t-20">
+                    <form method="post" asp-page-handler="confirm" asp-route-id="param-id">
+                        <a href="#" class="btn btn-white" data-dismiss="modal">@_localizer["Close"]</a>
+                        <button type="submit" class="btn btn-primary">@_localizer["Confirm"]</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts 
+{
+<script>
+    $('#cancel-booking').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) 
+        var itemId = button.data('id') // get item.Id
+        var modal = $(this)
+        var current = modal.find('.modal-body form').attr('action')
+        current = current.replace('param-id', itemId)
+        modal.find('.modal-body form').attr('action', current)
+    })
+
+    $('#confirm-booking').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var itemId = button.data('id') // get item.Id
+        var modal = $(this)
+        var current = modal.find('.modal-body form').attr('action')
+        current = current.replace('param-id', itemId)
+        modal.find('.modal-body form').attr('action', current)
+    })
+</script>
+}

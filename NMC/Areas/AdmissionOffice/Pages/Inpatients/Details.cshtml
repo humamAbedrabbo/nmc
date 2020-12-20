@@ -1,0 +1,146 @@
+﻿@page "{id:int}"
+@{ 
+    ViewBag.PageTitle = $"INPATIENT - {Inpatient?.Name} ({Id})";
+}
+@functions
+{
+    public Inpatient Inpatient { get; set; }
+
+    [BindProperty(SupportsGet = true)]
+    public int Id { get; set; }
+
+    public bool IsArabic { get; set; }
+
+    public async Task OnGetAsync()
+    {
+        IsArabic = (User.GetUserLanguage()?.ToLower() == "ar");
+        Inpatient = (await _mem.GetInpatients()).Where(x => x.Id == Id).FirstOrDefault();
+    }
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-sm-7 col-6">
+            <h4 class="page-title">@ViewBag.PageTitle</h4>
+        </div>
+
+        <div class="col-sm-5 col-6 text-right m-b-30">
+            @*<a href="#" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit</a>*@
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-box profile-header">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="profile-view">
+
+                    <div class="profile-img-wrap">
+                        <div class="profile-img">
+                            <a href="#"><img class="" src="~/assets/img/barcode.png" alt=""></a>
+                        </div>
+                    </div>
+
+                    <div class="profile-basic">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="profile-info-left">
+                                    <h3 class="user-name m-t-0 mb-0">@Inpatient?.Name</h3>
+                                    <small class="text-muted">@Inpatient?.Patient?.Age @_localizer[$"years old, {Inpatient?.Patient?.Gender}"]</small>
+                                    <div class="staff-id">@_localizer["Generated ID"]: @Inpatient?.Id</div>
+                                    <div class="staff-msg">
+                                        @Inpatient?.Referrer?.Name
+                                        <div class="text-muted">@Inpatient?.Referrer?.Title</div>
+                                        <div class="text-primary m6-2"><i class="fa fa-phone-square"></i> @Inpatient?.Referrer?.Phone <i class="fa fa-mobile"></i> @Inpatient?.Referrer?.Mobile</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <ul class="personal-info">
+                                    <li>
+                                        <span class="title">@_localizer["Status"]:</span>
+                                        <span class="text"><span class="font-weight-bold text-primary">@Inpatient?.Status</span> </span>
+                                    </li>
+                                    <li>
+                                        <span class="title">@_localizer["Last Update"]:</span>
+                                        <span class="text"><date value="@Inpatient.StatusTime" format="ddd, dd-MM-yy HH:mm"></date></span>
+                                    </li>
+                                    <li>
+                                        <span class="title">@_localizer["Ward"]:</span>
+                                        <span class="text">@(IsArabic ? Inpatient?.Ward?.Name : Inpatient?.Ward?.Name)</span>
+                                    </li>
+                                    <li>
+                                        <span class="title">@_localizer["Room"]/@_localizer["Grade"]:</span>
+                                        <span class="text">
+                                            @Inpatient?.Room?.Name <span class="text-danger mx-2">
+                                                @_localizer[Inpatient?.RoomGrade.ToString()]
+                                                @if (Inpatient?.IsUpgrade() ?? false)
+                                                {
+                                                    <i class="fa fa-arrow-circle-o-up"></i>
+                                                }
+                                                else if (Inpatient?.IsDowngrade() ?? false)
+                                                {
+                                                    <i class="fa fa-arrow-circle-o-down"></i>
+                                                }
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="title">@_localizer["Companion"]:</span>
+                                        <span class="text">@Inpatient?.Companion</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-tabs">
+        <ul class="nav nav-tabs nav-tabs-bottom">
+            <li class="nav-item"><a class="nav-link active show" href="#tab-personal-info" data-toggle="tab">@_localizer["Personal Information"]</a></li>
+            <li class="nav-item"><a class="nav-link" href="#tab-admission" data-toggle="tab">@_localizer["Admission"]</a></li>
+            <li class="nav-item"><a class="nav-link" href="#tab-discharge" data-toggle="tab">@_localizer["Dishcharge"]</a></li>
+            <li class="nav-item"><a class="nav-link" href="#tab-timeline" data-toggle="tab">@_localizer["Admission Timeline"]</a></li>
+            <li class="nav-item"><a class="nav-link" href="#tab-med" data-toggle="tab">@_localizer["Medical Story"]</a></li>
+            <li class="nav-item"><a class="nav-link" href="#tab-test" data-toggle="tab">@_localizer["Lab Tests"]</a></li>
+            <li class="nav-item"><a class="nav-link" href="#tab-img" data-toggle="tab">@_localizer["Imaging"]</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane show active" id="tab-personal-info">
+                <partial name="_PersonalInfo" model="Inpatient" />
+            </div>
+            <div class="tab-pane" id="tab-admission">
+                <partial name="_Admission" model="Inpatient" />
+            </div>
+            <div class="tab-pane" id="tab-discharge">
+                <partial name="_Discharge" model="Inpatient" />
+            </div>
+            <div class="tab-pane" id="tab-timeline">
+                <partial name="_Timeline" model="Inpatient" />
+            </div>
+            <div class="tab-pane" id="tab-med">
+                <partial name="_MedicalStory" />
+            </div>
+            <div class="tab-pane" id="tab-test">
+                <partial name="_TestLab" />
+            </div>
+            <div class="tab-pane" id="tab-img">
+                <partial name="_Imaging" />
+            </div>
+        </div>
+    </div>
+</div>

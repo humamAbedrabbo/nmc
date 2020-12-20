@@ -9,11 +9,7 @@
 
     public async Task Init()
     {
-        SelectWard = new SelectList(
-            await _ctx.Wards.OrderBy(x => x.Name).Select(x => new { Id = x.Id, Name = x.Name }).AsNoTracking().ToListAsync()
-            , "Id"
-            , "Name"
-            );
+        SelectWard = new SelectList(await _mem.GetWards(), "Id", "Name");
     }
 
     public async Task<IActionResult> OnGetAsync()

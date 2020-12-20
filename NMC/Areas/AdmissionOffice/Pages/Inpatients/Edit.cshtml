@@ -1,0 +1,141 @@
+﻿@page "{id:int}"
+@functions
+{
+    string PageTitle = "Edit Inpatient";
+
+    [BindProperty] public Inpatient Item { get; set; }
+    [BindProperty(SupportsGet = true)] public int? Id { get; set; }
+    public SelectList SelectWard { get; set; }
+    public SelectList SelectDoctor { get; set; }
+    public SelectList SelectBooking { get; set; }
+
+    public async Task Init()
+    {
+        SelectWard = new SelectList(await _mem.GetWards(), "Id", "Name", Item?.WardId);
+        SelectBooking = new SelectList(await _mem.GetBookings(), "Id", "Name", Item?.BookingId);
+        SelectDoctor = new SelectList(await _mem.GetDoctors(), "Id", "Name", Item?.ReferrerId);
+    }
+
+    public async Task<IActionResult> OnGetAsync()
+    {
+        if (!Id.HasValue)
+            return RedirectToPage("/NotFound");
+
+        Item = await _ctx.Inpatients
+            .Include(x => x.Patient)
+            .Where(x => x.Id == Id)
+            .FirstOrDefaultAsync();
+
+        if (Item == null)
+            return RedirectToPage("/NotFound");
+
+        await Init();
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if(ModelState.IsValid)
+        {
+            try
+            {
+                _ctx.Attach(Item);
+                _ctx.Inpatients.Update(Item);
+                await _ctx.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+            catch
+            {
+                ModelState.AddModelError("Name", "Invalid");
+            }
+        }
+
+        await Init();
+        return Page();
+    }
+}
+
+<div class="content">
+
+    <div class="row">
+        <div class="col-sm-5 col-5">
+            <h4 class="page-title">@_localizer[PageTitle]</h4>
+        </div>
+    </div>
+
+    <form method="post">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+
+                <div class="card-box">
+                    <div class="card-body">
+
+                        <h3 class="card-title">@_localizer["Admission File Details"]</h3>
+
+                        <input asp-for="Item.Id" type="hidden" />
+                        <input asp-for="Item.CreatedOn" type="hidden" />
+                        <input asp-for="Item.PatientId" type="hidden" />
+                        <input asp-for="Item.BookingId" type="hidden" />
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.WardId"></label>
+                                    <select asp-for="Item.WardId" asp-items="SelectWard" class="form-control"></select>
+                                    <span asp-validation-for="Item.WardId" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.RoomId"></label>
+                                    <input asp-for="Item.RoomId" type="hidden" class="form-control" />
+                                    <input disabled asp-for="Item.Room.Code" class="form-control" />
+                                    <span asp-validation-for="Item.RoomId" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.ReferrerId"></label>
+                                    <select asp-for="Item.ReferrerId" asp-items="SelectDoctor" class="form-control"></select>
+                                    <span asp-validation-for="Item.ReferrerId" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.RoomGrade"></label>
+                                    <select asp-for="Item.RoomGrade" asp-items="Html.GetEnumSelectList<RoomGrade>()" class="form-control"></select>
+                                    <span asp-validation-for="Item.RoomGrade" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="Item.ReferrerNotes"></label>
+                                    <textarea asp-for="Item.ReferrerNotes" class="form-control"></textarea>
+                                    <span asp-validation-for="Item.ReferrerNotes" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="m-t-20 text-center">
+                            <button type="submit" class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

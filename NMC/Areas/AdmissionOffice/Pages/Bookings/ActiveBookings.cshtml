@@ -1,0 +1,113 @@
+﻿@page
+
+@using Microsoft.EntityFrameworkCore
+
+@{
+    ViewBag.PageTitle = _localizer["Current Bookings"];
+}
+
+@functions{
+
+    public string Lang { get; set; }
+    public bool IsArabic => Lang?.ToLower() == "ar";
+
+    public List<Room> Rooms { get; set; }
+    public List<Ward> Wards { get; set; }
+    public List<RoomAllocation> Allocations { get; set; }
+    public DateTime From { get; set; }
+    public DateTime To { get; set; }
+
+    public async Task OnGetAsync()
+    {
+        Lang = User.GetUserLanguage();
+        From = DateTime.Today;
+        To = From.AddDays(7);
+        await GetRooms();
+    }
+
+    private async Task GetRooms()
+    {
+        Rooms = (await _mem.GetRooms())?.ToList();
+        Wards = (await _mem.GetWards())?.ToList().OrderBy(x => x.Floor).ThenBy(x => x.Code).ToList();
+        Allocations = (await _ctx.RoomAllocations.Where(x => x.Date >= From && x.Date <= To).ToListAsync());
+
+    }
+
+}
+
+<div class="content-fluid">
+    @*<div class="row">
+        <div class="col-sm-5 col-5">
+            <h4 class="page-title">@ViewBag.PageTitle</h4>
+        </div>
+    </div>*@
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card-box">
+                
+                <div class="card-body">
+                    <h3 class="text-center mb-3">@_localizer["Active Bookings and Reservations"]</h3>
+                    
+                    <div class="table-responsive">
+                        <table class="table text-nowrap text-center table-bordered table-hover">
+                            <tr>
+                                <th>@_localizer["Room"]</th>
+                                @for (DateTime s = From; s <= To; s = s.AddDays(1))
+                                {
+                                    <th scope="col"><date value="@s" format="ddd MMM dd"></date></th>
+                                }
+                            </tr>
+                            @foreach (var w in Wards)
+                            {
+                                var rooms = Rooms.Where(x => x.WardId == w.Id).OrderBy(x => x.Code).ToArray();
+                                <tr>
+                                    <td class="table-primary text-left" scope="colgroup" colspan="25">@(Model.IsArabic ? w.Name : w.Name)</td>
+                                </tr>
+                                @foreach (var r in rooms)
+                                {
+                                    int ndx = 0;
+                                    <tr>
+                                        <th scope="row">@r.Name</th>
+                                        @for (DateTime s = From; s <= To; s = s.AddDays(1))
+                                        {
+                                            string color = "";
+                                            string text = "";
+                                            string css = ""; // "available";
+                                            List<string> names = new();
+                                            foreach (var aloc in Allocations.Where(x => x.RoomId == r.Id && x.Date == s))
+                                            {
+                                                if (aloc.Status == RoomStatus.Reserved)
+                                                {
+                                                    color = "table-danger";
+                                                }
+                                                else if (aloc.Status == RoomStatus.Booked)
+                                                {
+                                                    if (string.IsNullOrEmpty(color))
+                                                    {
+                                                        color = "table-warning";
+                                                    }
+                                                }
+
+                                                names.Add(aloc.Text);
+                                            }
+                                            if (string.IsNullOrEmpty(color))
+                                            {
+                                                //color = "table-success";
+                                            }
+                                            <td class="@color @css" data-room="@r.Code" data-ndx="@ndx">@string.Join(',', names.Distinct())</td>
+
+                                            ndx++;
+                                        }
+                                    </tr>
+                                }
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

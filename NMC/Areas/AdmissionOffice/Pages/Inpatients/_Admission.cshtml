@@ -1,0 +1,65 @@
+﻿@model Inpatient
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card-box">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Admission Type"]
+                        </strong>
+                        <span class="ml-2"></span>
+                        <span hidden="@(!Model.General)" class="custom-badge status-blue mx-1">@_localizer[nameof(Inpatient.General)]</span>
+                        <span hidden="@(!Model.Accident)" class="custom-badge status-blue mx-1">@_localizer[nameof(Inpatient.Accident)]</span>
+                        <span hidden="@(!Model.Emergency)" class="custom-badge status-blue mx-1">@_localizer[nameof(Inpatient.Emergency)]</span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Admission Date"]
+                        </strong>
+                        <span class="ml-2"></span>
+                        <span hidden="@(!Model.AdmetOn.HasValue)"><date value="Model.AdmetOn" format="dddd, dd-MMM-yyyy HH:mm"></date></span>
+                    </li>
+
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Referrer"]
+                        </strong>
+                        <span class="ml-2"></span>
+                        <span>@Model.Referrer?.Name</span>
+                    </li>
+                    
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Referrer Notes"]
+                        </strong>
+                        <span class="ml-2"></span>
+                        <span>@Model.ReferrerNotes</span>
+                    </li>
+                    
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Ward"]
+                        </strong>
+                        <span class="ml-2"></span>
+                        <span>@Model.Ward?.Name</span>
+                    </li>
+                    
+                    <li class="list-group-item">
+                        <strong>
+                            @_localizer["Room"]
+                        </strong>
+                        <span class="ml-2"></span>
+                        <span>@Model.Room?.Name</span>
+                    </li>
+
+                </ul>
+
+
+            </div>
+        </div>
+    </div>
+</div> 

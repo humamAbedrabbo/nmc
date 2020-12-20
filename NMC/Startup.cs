@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NMC.Extensions;
+using NMC.Services;
 
 namespace NMC
 {
@@ -76,6 +77,7 @@ namespace NMC
                 options.AppendTrailingSlash = true;
             });
 
+            services.AddScoped<ICacheManager, CacheManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
