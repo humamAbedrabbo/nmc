@@ -6,6 +6,14 @@
     ViewData["HasChart"] = false;
 }
 
-<div class="content">
+@if (User.IsInRole("Admin"))
+{
+    <partial name="_Home_Admin" />
+}
+else
+{
 
-</div>
+    <div class="content">
+
+    </div>
+}

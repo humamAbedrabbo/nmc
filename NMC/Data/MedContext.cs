@@ -98,6 +98,19 @@ namespace NMC.Data
             builder.Entity<AppUser>().HasData(admin);
             builder.Entity<AppUserRole>().HasData(new AppUserRole { RoleId = 1, UserId = 1 });
 
+            var adm = new AppUser
+            {
+                Id = 2,
+                UserName = "adm",
+                NormalizedUserName = "ADM",
+                Email = "adm@nmc",
+                NormalizedEmail = "ADM@NMC",
+                ConcurrencyStamp = Guid.NewGuid().ToString(),
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+            adm.PasswordHash = hasher.HashPassword(adm, "123456");
+            builder.Entity<AppUser>().HasData(adm);
+            builder.Entity<AppUserRole>().HasData(new AppUserRole { RoleId = 2, UserId = 2 });
         }
     }
 }
