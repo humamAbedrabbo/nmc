@@ -78,6 +78,7 @@ namespace NMC
             });
 
             services.AddScoped<ICacheManager, CacheManager>();
+            services.AddScoped<IBarcodeGen, BarcodeGen>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

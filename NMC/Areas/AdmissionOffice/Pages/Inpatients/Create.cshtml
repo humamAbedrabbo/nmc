@@ -1,4 +1,7 @@
 ﻿@page
+
+@inject IBarcodeGen barcode
+
 @functions
 {
     string PageTitle = "Create Inpatient";
@@ -52,6 +55,10 @@
 
                 _ctx.Inpatients.Add(Item);
                 await _ctx.SaveChangesAsync();
+
+                // Generate Barcode
+                barcode.Generate(Item.Id);
+
                 return RedirectToPage("./Index");
             }
             catch
