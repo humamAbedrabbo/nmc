@@ -8,6 +8,9 @@
 
 @if (User.IsInRole("Admin"))
 {
+    ViewData["HasChart"] = true;
+
+
     <partial name="_Home_Admin" />
 }
 else
