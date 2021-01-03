@@ -2,8 +2,7 @@
 
 namespace NMC.Models
 {
-    public class AppRole : IdentityRole<int>
+    public class AppRole : IdentityRole
     {
-
     }
 }

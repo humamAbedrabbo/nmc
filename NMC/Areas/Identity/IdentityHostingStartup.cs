@@ -16,9 +16,10 @@ namespace NMC.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContextPool<MedContext>(options =>
-                    // options.UseSqlServer(context.Configuration.GetConnectionString("MedContextConnection"))
-                    options.UseNpgsql(context.Configuration.GetConnectionString("Med"))
+                services.AddDbContextPool<NmcContext>(options =>
+                    // options.UseSqlServer(context.Configuration.GetConnectionString("NmcContext"))
+                    // options.UseNpgsql(context.Configuration.GetConnectionString("NmcContext"))
+                    options.UseInMemoryDatabase("NmcContext")
                     ) ;
 
                 services.AddDefaultIdentity<AppUser>(options => {
@@ -31,7 +32,7 @@ namespace NMC.Areas.Identity
                     options.Password.RequireUppercase = false;
                 })
                     .AddRoles<AppRole>()
-                    .AddEntityFrameworkStores<MedContext>();
+                    .AddEntityFrameworkStores<NmcContext>();
             });
         }
     }

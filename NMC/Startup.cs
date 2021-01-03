@@ -16,7 +16,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NMC.Extensions;
-using NMC.Services;
 
 namespace NMC
 {
@@ -25,15 +24,10 @@ namespace NMC
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            //cultures = supportedCultures.Select(x => new CultureInfo(x)).ToArray();
         }
-
-        //private string[] supportedCultures = new[] { "en", "ar" };
-        //private CultureInfo[] cultures;
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             if(!string.IsNullOrEmpty(Configuration["KnownProxy"]))
@@ -44,7 +38,7 @@ namespace NMC
                 });
             }
 
-            services.AddRazorPages(x => x.Conventions.AuthorizeFolder("/"))
+            services.AddRazorPages(/*x => x.Conventions.AuthorizeFolder("/")*/)
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization();
 
@@ -77,18 +71,8 @@ namespace NMC
                 options.AppendTrailingSlash = true;
             });
 
-            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-            services.AddScoped<ITypesRepository, TypesRepository>();
-            services.AddScoped<IDoctorRepository, DoctorRepository>();
-            services.AddScoped<IPatientRepository, PatientRepository>();
-            services.AddScoped<IRoomRepository, RoomRepository>();
-            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
-            services.AddScoped<IReservationRepository, ReservationRepository>();
-            services.AddScoped<IAdmissionRepository, AdmissionRepository>();
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -98,13 +82,12 @@ namespace NMC
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
 
+            app.UseStaticFiles();
 
             app.UseRequestLocalization();
 
@@ -127,7 +110,6 @@ namespace NMC
 
             app.UseEndpoints(endpoints =>
             {
-                
                 endpoints.MapRazorPages();
             });
         }
