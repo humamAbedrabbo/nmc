@@ -5,7 +5,7 @@
 @inject IViewLocalizer _localizer
 
 @{
-    ViewData["Title"] = _localizer["Create Unit"];
+    ViewData["Title"] = _localizer["Edit Unit"];
 }
 
 
@@ -56,7 +56,7 @@
 
                     <div class="m-t-20">
                         <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
-                        <a href="/Units" class="btn btn-secondary ml-1">@_localizer["Return"]</a>
+                        <a href="@Model.ReturnUrl" class="btn btn-secondary ml-1">@_localizer["Return"]</a>
                     </div>
                 </form>
             </div>

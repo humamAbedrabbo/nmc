@@ -1,10 +1,10 @@
 ﻿@page
-@model NMC.Pages.Units.CreateModel
+@model NMC.Pages.Rooms.EditModel
 
 @inject IViewLocalizer _localizer
 
 @{
-    ViewData["Title"] = _localizer["Create Unit"];
+    ViewData["Title"] = _localizer["Edit Room"];
 }
 
 
@@ -36,20 +36,26 @@
         <div class="row">
             <div class="col-md-12">
                 <form method="post">
+                    <input type="hidden" asp-for="Entity.Id" />
                     <div class="form-group">
-                        <label asp-for="Entity.Name" class="col-form-label"></label>
-                        <input asp-for="Entity.Name" class="form-control w-50" />
-                        <span asp-validation-for="Entity.Name" class="text-danger"></span>
+                        <label asp-for="Entity.Floor" class="col-form-label"></label>
+                        <input asp-for="Entity.Floor" class="form-control w-25" />
+                        <span asp-validation-for="Entity.Floor" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Entity.NameAr" class="col-form-label"></label>
-                        <input asp-for="Entity.NameAr" class="form-control w-50" />
-                        <span asp-validation-for="Entity.NameAr" class="text-danger"></span>
+                        <label asp-for="Entity.RoomNo" class="col-form-label"></label>
+                        <input asp-for="Entity.RoomNo" class="form-control w-25" />
+                        <span asp-validation-for="Entity.RoomNo" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Entity.Type" class="col-form-label"></label>
-                        <select asp-for="Entity.Type" asp-items="Html.GetEnumSelectList<UnitType>()" class="form-control w-25"></select>
-                        <span asp-validation-for="Entity.Type" class="text-danger"></span>
+                        <label asp-for="Entity.UnitId" class="col-form-label"></label>
+                        <select asp-for="Entity.UnitId" asp-items="Model.SelectUnit" class="form-control w-50"></select>
+                        <span asp-validation-for="Entity.UnitId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Entity.Capacity" class="col-form-label"></label>
+                        <input asp-for="Entity.Capacity" class="form-control w-25" />
+                        <span asp-validation-for="Entity.Capacity" class="text-danger"></span>
                     </div>
 
                     <div class="m-t-20">
@@ -65,5 +71,4 @@
 @section Scripts
 {
     <partial name="_ValidationScriptsPartial" />
-    
 }

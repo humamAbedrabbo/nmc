@@ -21,7 +21,7 @@ namespace NMC.Models
         [Display(Name = "Room")]
         public string Name => $"{Floor}/{RoomNo}";
 
-        public int Capacity { get; set; }
+        public int Capacity { get; set; } = 1;
 
         public Unit Unit { get; set; }
     }
