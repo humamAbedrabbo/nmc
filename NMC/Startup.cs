@@ -38,7 +38,7 @@ namespace NMC
                 });
             }
 
-            services.AddRazorPages(/*x => x.Conventions.AuthorizeFolder("/")*/)
+            services.AddRazorPages(x => x.Conventions.AuthorizeFolder("/"))
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization();
 
