@@ -1,0 +1,70 @@
+﻿@page "{id:int?}"
+@model NMC.Pages.Units.EditModel
+
+
+@inject IViewLocalizer _localizer
+
+@{
+    ViewData["Title"] = _localizer["Create Unit"];
+}
+
+
+<partial name="_Sidebar" />
+
+<div class="page-wrapper">
+    <div class="content">
+        <!-- Header -->
+        <div class="row">
+            <div class="col-sm-5 col-5">
+                <h4 class="page-title">@ViewBag.Title</h4>
+            </div>
+        </div>
+
+        <!-- Body -->
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>@_localizer["Error!"]</strong> @_localizer[ViewBag.ErrorMessage]
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <input type="hidden" asp-for="Entity.Id" />
+                    <div class="form-group">
+                        <label asp-for="Entity.Name" class="col-form-label"></label>
+                        <input asp-for="Entity.Name" class="form-control w-50" />
+                        <span asp-validation-for="Entity.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Entity.NameAr" class="col-form-label"></label>
+                        <input asp-for="Entity.NameAr" class="form-control w-50" />
+                        <span asp-validation-for="Entity.NameAr" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Entity.Type" class="col-form-label"></label>
+                        <select asp-for="Entity.Type" asp-items="Html.GetEnumSelectList<UnitType>()" class="form-control w-25"></select>
+                        <span asp-validation-for="Entity.Type" class="text-danger"></span>
+                    </div>
+
+                    <div class="m-t-20">
+                        <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
+                        <a href="/Units" class="btn btn-secondary ml-1">@_localizer["Return"]</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

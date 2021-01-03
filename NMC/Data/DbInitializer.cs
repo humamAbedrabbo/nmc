@@ -27,6 +27,12 @@ namespace NMC.Data
                 context.Users.Add(admin);
                 context.SaveChanges();
             }
+
+            if(!context.Units.Any())
+            {
+                context.Units.Add(new Unit { Name = "Internal", NameAr = "داخلية", Type = UnitType.IPD });
+                context.SaveChanges();
+            }
         }
     }
 }

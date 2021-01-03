@@ -40,5 +40,10 @@ namespace NMC.Extensions
                 return lang;
 
         }
+
+        public static bool IsArabic(this ClaimsPrincipal principal)
+        {
+            return principal.GetUserLanguage() == "ar";
+        }
     }
 }
