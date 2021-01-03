@@ -102,6 +102,7 @@
                     <button id="logout" type="submit" class="dropdown-item">@_localizer["Arabic"]</button>
                 </form>
                 @*<a class="dropdown-item" href="#">@_localizer["Settings"]</a>*@
+                <a class="dropdown-item" href="/Identity/Account/Manage/ChangePassword">@_localizer["Change Password"]</a>
                 <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
                     <button id="logout" type="submit" class="dropdown-item">@_localizer["Logout"]</button>
                 </form>
