@@ -49,6 +49,7 @@
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a class="dropdown-item" asp-page="./Edit" asp-route-id="@item.Id"><i class="fa fa-pencil m-r-5"></i> @_localizer["Edit"]</a>
                                                 <a class="dropdown-item" href="#" data-id="@item.Id" data-name="@item.UserName" data-email="@item.Email" data-phone="@item.PhoneNumber" data-toggle="modal" data-target="#delete_dlg"><i class="fa fa-trash-o m-r-5"></i> @_localizer["Delete"]</a>
+                                                <a class="dropdown-item" href="#" data-id="@item.Id" data-name="@item.UserName" data-email="@item.Email" data-phone="@item.PhoneNumber" data-toggle="modal" data-target="#reset_dlg"><i class="fa fa-recycle m-r-5"></i> @_localizer["Reset Password"]</a>
                                             </div>
                                         </div>
                                     </td>
@@ -70,11 +71,11 @@
                 <h3>@_localizer["Are you sure want to delete this record?"]</h3>
                 <dl class="row border my-2">
                     <dt class="mb-0 col-md-4 bg-light d-flex align-items-center justify-content-end">@_localizer["User"]</dt>
-                    <dd id="dlg_username" class="mb-0 text-info d-flex align-items-center justify-content-start"></dd>
+                    <dd id="dlg_username" class="mb-0 col-md-8 text-info d-flex align-items-center justify-content-start"></dd>
                     <dt class="mb-0 col-md-4 bg-light d-flex align-items-center justify-content-end">@_localizer["Email"]</dt>
-                    <dd id="dlg_email" class="mb-0 text-info d-flex align-items-center justify-content-start"></dd>
+                    <dd id="dlg_email" class="mb-0 col-md-8 text-info d-flex align-items-center justify-content-start"></dd>
                     <dt class="mb-0 col-md-4 bg-light d-flex align-items-center justify-content-end">@_localizer["Phone"]</dt>
-                    <dd id="dlg_phone" class="mb-0 text-info d-flex align-items-center justify-content-start"></dd>
+                    <dd id="dlg_phone" class="mb-0 col-md-8 text-info d-flex align-items-center justify-content-start"></dd>
 
                 </dl>
                 <div class="m-t-20">
@@ -88,6 +89,34 @@
         </div>
     </div>
 </div>
+
+<div id="reset_dlg" class="modal fade delete-modal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <img src="~/assets/img/sent.png" alt="" width="50" height="46">
+                <h3>@_localizer["Are you sure want to reset password of this user?"]</h3>
+                <dl class="row border my-2">
+                    <dt class="mb-0 col-md-4 bg-light d-flex align-items-center justify-content-end">@_localizer["User"]</dt>
+                    <dd id="dlg_username2" class="mb-0 col-md-8 text-info d-flex align-items-center justify-content-start"></dd>
+                    <dt class="mb-0 col-md-4 bg-light d-flex align-items-center justify-content-end">@_localizer["Email"]</dt>
+                    <dd id="dlg_email2" class="mb-0 col-md-8 text-info d-flex align-items-center justify-content-start"></dd>
+                    <dt class="mb-0 col-md-4 bg-light d-flex align-items-center justify-content-end">@_localizer["Phone"]</dt>
+                    <dd id="dlg_phone2" class="mb-0 col-md-8 text-info d-flex align-items-center justify-content-start"></dd>
+
+                </dl>
+                <div class="m-t-20">
+                    <a href="#" class="btn btn-white" data-dismiss="modal">@_localizer["Cancel"]</a>
+                    <form method="post" asp-page-handler="ResetPassword" class="d-inline">
+                        <input id="inputId" name="id" type="hidden" />
+                        <button type="submit" class="btn btn-danger">@_localizer["Reset"]</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @section Scripts
 {
@@ -103,6 +132,19 @@
             modal.find('#dlg_username').text(name)
             modal.find('#dlg_email').text(email)
             modal.find('#dlg_phone').text(phone)
+        })
+
+        $('#reset_dlg').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var name = button.data('name')
+            var email = button.data('email')
+            var phone = button.data('phone')
+            var modal = $(this)
+            modal.find('#inputId').val(id)
+            modal.find('#dlg_username2').text(name)
+            modal.find('#dlg_email2').text(email)
+            modal.find('#dlg_phone2').text(phone)
         })
     </script>
 }
