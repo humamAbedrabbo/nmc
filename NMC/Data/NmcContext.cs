@@ -22,6 +22,7 @@ namespace NMC.Data
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Inpatient> Inpatients { get; set; }
+        public DbSet<BookingReasonType> BookingReasonTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

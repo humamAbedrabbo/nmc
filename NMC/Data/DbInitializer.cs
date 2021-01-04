@@ -35,6 +35,13 @@ namespace NMC.Data
                 context.SaveChanges();
             }
 
+            if(!context.BookingReasonTypes.Any())
+            {
+                context.BookingReasonTypes.Add(new BookingReasonType { Name = "Reason 1", NameAr = "سبب 1" });
+                context.BookingReasonTypes.Add(new BookingReasonType { Name = "Reason 2", NameAr = "سبب 2" });
+                context.SaveChanges();
+            }
+
             if(!context.Rooms.Any())
             {
                 List<Room> rooms = new List<Room>();
