@@ -7,18 +7,21 @@ using System.Threading.Tasks;
 
 namespace NMC.Models
 {
-    [Index(nameof(LastName), IsUnique = false)]
     [Index(nameof(FirstName), IsUnique = false)]
-    [Index(nameof(IsConsultant), IsUnique = false)]
-    [Index(nameof(IsReferrer), IsUnique = false)]
-    [Index(nameof(Phone), IsUnique = false)]
-    [Index(nameof(Mobile), IsUnique = false)]
-    [Index(nameof(Email), IsUnique = false)]
-    public class Doctor
+    [Index(nameof(LastName), IsUnique = false)]
+    [Index(nameof(IdNo), IsUnique = true)]
+    public class Patient
     {
         public int Id { get; set; }
 
-        public string Name => $"{FirstName} {LastName}"; 
+        public string Name => $"{FirstName} {LastName}";
+
+        [Required, StringLength(50, MinimumLength = 1)]
+        [Display(Name = "Identity No.")]
+        public string IdNo { get; set; }
+
+        [Display(Name = "ID. Type")]
+        public IdType IdType { get; set; }
 
         [Required, StringLength(50, MinimumLength = 1)]
         [Display(Name = "First Name")]
@@ -27,27 +30,26 @@ namespace NMC.Models
         [Required, StringLength(50, MinimumLength = 1)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        
+        [Required, StringLength(50, MinimumLength = 1)]
+        [Display(Name = "Father Name")]
+        public string FatherName { get; set; }
+        
+        [Required, StringLength(50, MinimumLength = 1)]
+        [Display(Name = "Mother Name")]
+        public string MotherName { get; set; }
 
         public Gender Gender { get; set; }
 
-        [Required, StringLength(50, MinimumLength = 1)]
-        public string Title { get; set; }
-
-        [Display(Name = "Consultant")]
-        public bool IsConsultant { get; set; }
-
-        [Display(Name = "Surgeon")]
-        public bool IsSurgeon { get; set; }
-
-        [Display(Name = "Referrer")]
-        public bool IsReferrer { get; set; }
-
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Joining Date")]
-        public DateTime? JoiningDate { get; set; }
+        [Display(Name = "Birthdate")]
+        public DateTime Birthdate { get; set; } = DateTime.Today;
 
-        public string Biography { get; set; }
+        public int Age => DateTime.Today.Year - Birthdate.Year;
+
+        [Display(Name = "Married")]
+        public bool? IsMarried { get; set; }
 
         [StringLength(30)]
         public string Phone { get; set; }
@@ -62,8 +64,11 @@ namespace NMC.Models
         [StringLength(150)]
         public string Address { get; set; }
 
-        public string UserId { get; set; }
+        [StringLength(50)]
+        public string Occupation { get; set; }
 
-        public AppUser User { get; set; }
+        [StringLength(50)]
+        public string Company { get; set; }
     }
+
 }

@@ -40,6 +40,11 @@ namespace NMC.Data
                 context.Doctors.AddRange(GetRandomDoctor().Generate(50));
                 context.SaveChanges();
             }
+            if(!context.Patients.Any())
+            {
+                context.Patients.AddRange(GetRandomPatient().Generate(50));
+                context.SaveChanges();
+            }
         }
 
         private static Faker<Doctor> GetRandomDoctor()
@@ -57,5 +62,26 @@ namespace NMC.Data
                 .RuleFor(d => d.Gender, f => f.Person.Gender == Bogus.DataSets.Name.Gender.Male ? Gender.Male : Gender.Female)
                 ;
         }
+
+         private static Faker<Patient> GetRandomPatient()
+        {
+            return new Faker<Patient>("ar")
+                .RuleFor(d => d.FirstName, f => f.Person.FirstName)
+                .RuleFor(d => d.LastName, f => f.Person.LastName)
+                .RuleFor(d => d.FatherName, f => f.Name.FirstName(Bogus.DataSets.Name.Gender.Male))
+                .RuleFor(d => d.MotherName, f => f.Name.FirstName(Bogus.DataSets.Name.Gender.Female))
+                .RuleFor(d => d.IdNo, f => f.Random.String2(11, "0123456789"))
+                .RuleFor(d => d.IdType, f => IdType.National)
+                .RuleFor(d => d.Birthdate, f => f.Person.DateOfBirth)
+                .RuleFor(d => d.Phone, f => f.Person.Phone)
+                .RuleFor(d => d.Email, f => f.Person.Email)
+                .RuleFor(d => d.Address, f => f.Person.Address.Street)
+                .RuleFor(d => d.IsMarried, f => f.Random.Bool())
+                .RuleFor(d => d.Occupation, f => "job title")
+                .RuleFor(d => d.Gender, f => f.Person.Gender == Bogus.DataSets.Name.Gender.Male ? Gender.Male : Gender.Female)
+                ;
+        }
+
+
     }
 }

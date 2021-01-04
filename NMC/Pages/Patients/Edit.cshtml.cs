@@ -4,28 +4,41 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using NMC.Data;
 using NMC.Models;
 
-namespace NMC.Pages.Doctors
+namespace NMC.Pages.Patients
 {
-    public class CreateModel : PageModel
+    public class EditModel : PageModel
     {
         private readonly NmcContext context;
 
-        public CreateModel(NmcContext context)
+        public EditModel(NmcContext context)
         {
             this.context = context;
         }
 
         [BindProperty]
-        public Doctor Entity { get; set; }
+        public Patient Entity { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public string ReturnUrl { get; set; } = "/Doctors";
+        public int? Id { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string ReturnUrl { get; set; } = "/Patients";
 
+        public async Task<IActionResult> OnGetAsync()
+        {
+            if (Id == null)
+                return Redirect("/NotFound");
+
+            Entity = await context.Patients.FindAsync(Id);
+
+            if (Entity == null)
+                return Redirect("/NotFound");
+
+            return Page();
+        }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -33,7 +46,7 @@ namespace NMC.Pages.Doctors
             {
                 try
                 {
-                    context.Set<Doctor>().Add(Entity);
+                    context.Set<Patient>().Update(Entity);
                     await context.SaveChangesAsync();
                     return Redirect(ReturnUrl);
                 }

@@ -10,9 +10,9 @@ namespace NMC.Extensions
 {
     public static class HtmlHelpers
     {
-        public static HtmlString YesNo(this IHtmlHelper htmlHelper, bool yesNo)
+        public static HtmlString YesNo(this IHtmlHelper htmlHelper, bool? yesNo)
         {
-            var text = yesNo ? "Yes" : "No";
+            var text = yesNo.HasValue ? (yesNo.Value ? "Yes" : "No") : string.Empty;
             return new HtmlString(text);
         }
     }

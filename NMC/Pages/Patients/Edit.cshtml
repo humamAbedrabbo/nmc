@@ -1,0 +1,153 @@
+﻿@page "{id:int?}"
+@model NMC.Pages.Patients.EditModel
+
+
+@inject IViewLocalizer _localizer
+
+@{
+    ViewData["Title"] = _localizer["Edit Patient"];
+}
+
+
+<partial name="_Sidebar" />
+
+<div class="page-wrapper">
+    <div class="content">
+        <!-- Header -->
+        <div class="row">
+            <div class="col-sm-5 col-5">
+                <h4 class="page-title">@ViewBag.Title</h4>
+            </div>
+        </div>
+
+        <!-- Body -->
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>@_localizer["Error!"]</strong> @_localizer[ViewBag.ErrorMessage]
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <input type="hidden" asp-for="Entity.Id" />
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label asp-for="Entity.IdType" class="col-form-label"></label>
+                            <select asp-for="Entity.IdType" asp-items="Html.GetEnumSelectList<IdType>()" class="form-control"></select>
+                            <span asp-validation-for="Entity.IdType" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label asp-for="Entity.IdNo" class="col-form-label"></label>
+                            <input asp-for="Entity.IdNo" class="form-control" />
+                            <span asp-validation-for="Entity.IdNo" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Entity.FirstName" class="col-form-label"></label>
+                            <input asp-for="Entity.FirstName" class="form-control" />
+                            <span asp-validation-for="Entity.FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Entity.LastName" class="col-form-label"></label>
+                            <input asp-for="Entity.LastName" class="form-control" />
+                            <span asp-validation-for="Entity.LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Entity.FatherName" class="col-form-label"></label>
+                            <input asp-for="Entity.FatherName" class="form-control" />
+                            <span asp-validation-for="Entity.FatherName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Entity.MotherName" class="col-form-label"></label>
+                            <input asp-for="Entity.MotherName" class="form-control" />
+                            <span asp-validation-for="Entity.MotherName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label asp-for="Entity.Gender" class="col-form-label"></label>
+                            <select asp-for="Entity.Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control"></select>
+                            <span asp-validation-for="Entity.Gender" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label asp-for="Entity.Birthdate" class="col-form-label"></label>
+                            <input asp-for="Entity.Birthdate" class="form-control" />
+                            <span asp-validation-for="Entity.Birthdate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group gender-select col-md-4">
+                            <label asp-for="Entity.IsMarried" class="gen-label col-form-label mb-2"></label>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" id="marriedNotSpecified" value="" asp-for="Entity.IsMarried" class="form-check-input">@_localizer["Unspecified"]
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" id="notMarried" value="False" asp-for="Entity.IsMarried" class="form-check-input">@_localizer["No"]
+                                </label>
+                            </div>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" id="married" value="True" asp-for="Entity.IsMarried" class="form-check-input" />@_localizer["Yes"]
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label asp-for="Entity.Phone" class="col-form-label"></label>
+                            <input asp-for="Entity.Phone" class="form-control" />
+                            <span asp-validation-for="Entity.Phone" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="Entity.Mobile" class="col-form-label"></label>
+                            <input asp-for="Entity.Mobile" class="form-control" />
+                            <span asp-validation-for="Entity.Mobile" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="Entity.Email" class="col-form-label"></label>
+                            <input asp-for="Entity.Email" class="form-control" />
+                            <span asp-validation-for="Entity.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label asp-for="Entity.Address" class="col-form-label"></label>
+                            <input asp-for="Entity.Address" class="form-control" />
+                            <span asp-validation-for="Entity.Address" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="m-t-20">
+                        <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
+                        <a href="@Model.ReturnUrl" class="btn btn-secondary ml-1">@_localizer["Return"]</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+}
+
+
