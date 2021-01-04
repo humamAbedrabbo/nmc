@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bogus;
 using Microsoft.AspNetCore.Identity;
 using NMC.Models;
 
@@ -33,6 +34,28 @@ namespace NMC.Data
                 context.Units.Add(new Unit { Name = "Internal", NameAr = "داخلية", Type = UnitType.IPD });
                 context.SaveChanges();
             }
+
+            if(!context.Doctors.Any())
+            {
+                context.Doctors.AddRange(GetRandomDoctor().Generate(50));
+                context.SaveChanges();
+            }
+        }
+
+        private static Faker<Doctor> GetRandomDoctor()
+        {
+            return new Faker<Doctor>("ar")
+                .RuleFor(d => d.FirstName, f => f.Person.FirstName)
+                .RuleFor(d => d.LastName, f => f.Person.LastName)
+                .RuleFor(d => d.Phone, f => f.Person.Phone)
+                .RuleFor(d => d.Email, f => f.Person.Email)
+                .RuleFor(d => d.Address, f => f.Person.Address.Street)
+                .RuleFor(d => d.IsConsultant, f => f.Random.Bool())
+                .RuleFor(d => d.IsReferrer, f => f.Random.Bool())
+                .RuleFor(d => d.IsSurgeon, f => f.Random.Bool())
+                .RuleFor(d => d.Title, f => "Specialist Doctor")
+                .RuleFor(d => d.Gender, f => f.Person.Gender == Bogus.DataSets.Name.Gender.Male ? Gender.Male : Gender.Female)
+                ;
         }
     }
 }

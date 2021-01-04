@@ -19,6 +19,7 @@ namespace NMC.Data
 
         public DbSet<Unit> Units { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -36,7 +37,20 @@ namespace NMC.Data
                 .HasAlternateKey(p => p.UserName)
                 .HasName("AK_Username");
 
+            //builder.Entity<Doctor>()
+            //    .Property(p => p.Name)
+            //    .HasComputedColumnSql("[FirstName] + ' ' + [LastName]", stored: true);
+
+            builder.Entity<Doctor>()
+                .HasOne(p => p.User)
+                .WithOne(p => p.Doctor)
+                .HasForeignKey<Doctor>(p => p.UserId);
             
+            builder.Entity<AppUser>()
+                .HasOne(p => p.Doctor)
+                .WithOne(p => p.User)
+                .HasForeignKey<AppUser>(p => p.DoctorId);
+
         }
     }
 }

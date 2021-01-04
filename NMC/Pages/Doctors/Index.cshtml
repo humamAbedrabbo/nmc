@@ -1,0 +1,120 @@
+﻿@page
+@model NMC.Pages.Doctors.IndexModel
+
+@inject IViewLocalizer _localizer
+
+@{
+    ViewData["Title"] = _localizer["Doctors"];
+}
+
+
+<partial name="_Sidebar" />
+
+<div class="page-wrapper">
+    <div class="content">
+        <!-- Header -->
+        <div class="row">
+            <div class="col-sm-5 col-5">
+                <h4 class="page-title">@ViewBag.Title</h4>
+            </div>
+            <div class="col-sm-7 col-7 text-right m-b-30">
+                <a asp-page="./Create" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> @_localizer["Create"]</a>
+            </div>
+        </div>
+
+        <!-- Body -->
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table custom-table mb-0 datatable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>@_localizer[Html.DisplayNameFor(x => x.Items.FirstOrDefault().Name)]</th>
+                                <th>@_localizer[Html.DisplayNameFor(x => x.Items.FirstOrDefault().Title)]</th>
+                                <th>@_localizer[Html.DisplayNameFor(x => x.Items.FirstOrDefault().IsConsultant)]</th>
+                                <th>@_localizer[Html.DisplayNameFor(x => x.Items.FirstOrDefault().IsReferrer)]</th>
+                                <th>@_localizer[Html.DisplayNameFor(x => x.Items.FirstOrDefault().IsSurgeon)]</th>
+                                <th>@_localizer[Html.DisplayNameFor(x => x.Items.FirstOrDefault().UserId)]</th>
+                                <th>@_localizer["Actions"]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Items)
+                            {
+                                <tr>
+                                    <td scope="row">@Html.DisplayFor(x => item.Id)</td>
+                                    <td>@Html.DisplayFor(x => item.Name)</td>
+                                    <td>@Html.DisplayFor(x => item.Title)</td>
+                                    <td>@Html.YesNo(item.IsConsultant)</td>
+                                    <td>@Html.YesNo(item.IsReferrer)</td>
+                                    <td>@Html.YesNo(item.IsSurgeon)</td>
+                                    <td class="text-info">@Html.DisplayFor(x => item.User.UserName)</td>
+                                    <td class="text-right">
+                                        <div class="dropdown dropdown-action">
+                                            <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" asp-page="./Edit" asp-route-id="@item.Id"><i class="fa fa-pencil m-r-5"></i> @_localizer["Edit"]</a>
+                                                @if(string.IsNullOrEmpty(item.UserId))
+                                                {
+                                                <a class="dropdown-item" asp-page="/Users/Create" asp-route-doctorid="@item.Id" asp-route-returnurl="/Doctors"><i class="fa fa-user m-r-5"></i> @_localizer["Create User"]</a>
+                                                }
+                                                else
+                                                {
+                                                <a class="dropdown-item" asp-page="/Users/Edit" asp-route-id="@item.UserId"  asp-route-returnurl="/Doctors"><i class="fa fa-user m-r-5"></i> @_localizer["Edit User"]</a>
+                                                }
+                                                <a class="dropdown-item" href="#" data-id="@item.Id" data-name="@item.Name" data-title="@item.Title" data-toggle="modal" data-target="#delete_dlg"><i class="fa fa-trash-o m-r-5"></i> @_localizer["Delete"]</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="delete_dlg" class="modal fade delete-modal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <img src="~/assets/img/sent.png" alt="" width="50" height="46">
+                <h3>@_localizer["Are you sure want to delete this record?"]</h3>
+                <dl class="row border my-2">
+                    <dt class="mb-0 col-md-4 bg-light d-flex align-items-center justify-content-end">@_localizer["Doctor"]</dt>
+                    <dd id="dlg_name" class="mb-0 col-md-8 text-info d-flex align-items-center justify-content-start"></dd>
+                    <dt class="mb-0 col-md-4 bg-light d-flex align-items-center justify-content-end">@_localizer["Title"]</dt>
+                    <dd id="dlg_title" class="mb-0 col-md-8 text-info d-flex align-items-center justify-content-start"></dd>
+
+                </dl>
+                <div class="m-t-20">
+                    <a href="#" class="btn btn-white" data-dismiss="modal">@_localizer["Cancel"]</a>
+                    <form method="post" asp-page-handler="Delete" class="d-inline">
+                        <input id="inputId" name="id" type="hidden" />
+                        <button type="submit" class="btn btn-danger">@_localizer["Delete"]</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $('#delete_dlg').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var name = button.data('name')
+            var title = button.data('title')
+            var modal = $(this)
+            modal.find('#inputId').val(id)
+            modal.find('#dlg_name').text(name)
+            modal.find('#dlg_title').text(title)
+        })
+    </script>
+}

@@ -37,6 +37,7 @@
             <div class="col-md-12">
                 <form method="post">
                     <input type="hidden" asp-for="Entity.Id" />
+                    <input type="hidden" asp-for="Entity.DoctorId" />
                     <div class="form-group">
                         <label asp-for="Entity.UserName" class="col-form-label"></label>
                         <input readonly asp-for="Entity.UserName" class="form-control w-50" />
@@ -52,6 +53,13 @@
                         <input asp-for="Entity.PhoneNumber" class="form-control w-50" />
                         <span asp-validation-for="Entity.PhoneNumber" class="text-danger"></span>
                     </div>
+                    @if (Model.Entity.DoctorId.HasValue)
+                    {
+                    <div class="form-group">
+                        <label asp-for="Entity.Doctor.Name" class="col-form-label"></label>
+                        <input readonly asp-for="Entity.Doctor.Name" class="form-control-plaintext w-50" />
+                    </div>
+                    }
                     <div class="m-t-20">
                         <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
                         <a href="@Model.ReturnUrl" class="btn btn-secondary ml-1">@_localizer["Return"]</a>

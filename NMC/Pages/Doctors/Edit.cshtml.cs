@@ -2,45 +2,37 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using NMC.Data;
 using NMC.Models;
 
-namespace NMC.Pages.Users
+namespace NMC.Pages.Doctors
 {
     public class EditModel : PageModel
     {
         private readonly NmcContext context;
-        private readonly UserManager<AppUser> userManager;
 
-        public EditModel(NmcContext context, UserManager<AppUser> userManager)
+        public EditModel(NmcContext context)
         {
             this.context = context;
-            this.userManager = userManager;
         }
 
         [BindProperty]
-        public AppUser Entity { get; set; }
+        public Doctor Entity { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public string Id { get; set; }
+        public int? Id { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public string ReturnUrl { get; set; } = "/Users";
+        public string ReturnUrl { get; set; } = "/Doctors";
 
         public async Task<IActionResult> OnGetAsync()
         {
             if (Id == null)
                 return Redirect("/NotFound");
 
-            Entity = await context.Users
-                .Include(x => x.Doctor)
-                .Where(x => x.Id == Id)
-                .AsNoTracking()
-                .FirstOrDefaultAsync();
+            Entity = await context.Doctors.FindAsync(Id);
 
             if (Entity == null)
                 return Redirect("/NotFound");
@@ -54,10 +46,8 @@ namespace NMC.Pages.Users
             {
                 try
                 {
-                    var user = await userManager.FindByIdAsync(Id);
-                    user.Email = Entity.Email;
-                    user.PhoneNumber = Entity.PhoneNumber;
-                    await userManager.UpdateAsync(user);
+                    context.Set<Doctor>().Update(Entity);
+                    await context.SaveChangesAsync();
                     return Redirect(ReturnUrl);
                 }
                 catch (Exception ex)

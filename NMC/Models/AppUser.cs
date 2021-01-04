@@ -8,5 +8,8 @@ namespace NMC.Models
 {
     public class AppUser : IdentityUser
     {
+        public int? DoctorId { get; set; }
+
+        public Doctor Doctor { get; set; }
     }
 }
