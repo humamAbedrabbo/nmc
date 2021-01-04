@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace NMC.Models
@@ -23,6 +24,29 @@ namespace NMC.Models
 
         public int Capacity { get; set; } = 1;
 
+        [Display(Name = "Inpatient")]
+        public int? CurrentInpatientId { get; set; }
+
         public Unit Unit { get; set; }
+        public Inpatient CurrentInpatient { get; set; }
+
+        public RoomStatus GetStatus()
+        {
+            if (CurrentInpatientId.HasValue) return RoomStatus.Reserved;
+
+            return RoomStatus.Available;
+        }
+
+        public string GetStatusCss()
+        {
+            var status = GetStatus();
+            switch(status)
+            {
+                case RoomStatus.Reserved:
+                    return "status-red";
+                default:
+                    return "status-green";
+            }
+        }
     }
 }

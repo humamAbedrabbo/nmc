@@ -35,6 +35,19 @@ namespace NMC.Data
                 context.SaveChanges();
             }
 
+            if(!context.Rooms.Any())
+            {
+                List<Room> rooms = new List<Room>();
+                // Add IPD Rooms
+                for (int i = 1; i <= 10; i++)
+                {
+                    rooms.Add(new Room { Floor = 1, RoomNo = i.ToString(), UnitId = 1 });
+                }
+
+                context.Rooms.AddRange(rooms);
+                context.SaveChanges();
+            }
+
             if(!context.Doctors.Any())
             {
                 context.Doctors.AddRange(GetRandomDoctor().Generate(50));
@@ -42,7 +55,7 @@ namespace NMC.Data
             }
             if(!context.Patients.Any())
             {
-                context.Patients.AddRange(GetRandomPatient().Generate(50));
+                context.Patients.AddRange(GetRandomPatient().Generate(5));
                 context.SaveChanges();
             }
         }

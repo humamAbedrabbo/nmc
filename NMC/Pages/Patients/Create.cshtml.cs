@@ -54,7 +54,7 @@ namespace NMC.Pages.Patients
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string next = null)
         {
             if (ModelState.IsValid)
             {
@@ -62,7 +62,10 @@ namespace NMC.Pages.Patients
                 {
                     context.Set<Patient>().Add(Entity);
                     await context.SaveChangesAsync();
+                    if (next == "inpatient") return Redirect($"/Inpatients/Create/{Entity.Id}");
+                    
                     return Redirect(ReturnUrl);
+
                 }
                 catch (Exception ex)
                 {

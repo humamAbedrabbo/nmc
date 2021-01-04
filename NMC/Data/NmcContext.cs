@@ -21,6 +21,7 @@ namespace NMC.Data
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Patient> Patients { get; set; }
+        public DbSet<Inpatient> Inpatients { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -51,6 +52,17 @@ namespace NMC.Data
                 .HasOne(p => p.Doctor)
                 .WithOne(p => p.User)
                 .HasForeignKey<AppUser>(p => p.DoctorId);
+
+            builder.Entity<Inpatient>()
+                .HasOne(p => p.CurrentRoom)
+                .WithOne(p => p.CurrentInpatient)
+                .HasForeignKey<Inpatient>(p => p.CurrentRoomId);
+            
+            builder.Entity<Room>()
+                .HasOne(p => p.CurrentInpatient)
+                .WithOne(p => p.CurrentRoom)
+                .HasForeignKey<Room>(p => p.CurrentInpatientId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
         }
     }

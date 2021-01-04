@@ -1,0 +1,170 @@
+﻿@page "{id:int?}"
+@model NMC.Pages.Inpatients.DetailsModel
+
+
+@inject IViewLocalizer _localizer
+
+@{
+    ViewData["Title"] = _localizer["Inpatient"];
+}
+
+
+<partial name="_SidebarDetails" model="Model.Entity" />
+
+<div class="page-wrapper">
+    <div class="content">
+        <!-- Header -->
+        <div class="row">
+            <div class="col-sm-5 col-5">
+                <h4 class="page-title">@_localizer["Inpatient"]# <span class="h3 font-weight-bolder text-info">@Model.Entity.Id</span></h4>
+
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card-box">
+                    <div class="mailview-content">
+                        <div class="mailview-header">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <div class="text-ellipsis m-b-10">
+                                        <span class="mail-view-title">@Model.Entity.Patient.Name</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="mail-view-action">
+                                        <div class="btn-group">
+                                            @if (Model.Entity.GetStatus() == InpatientStatus.Pending)
+                                            {
+                                                <a href="/Inpatients/Admit/@(Model.Entity.Id)?returnurl=/Inpatients/Details/@Model.Entity.Id" class="btn btn-white btn-sm"> <i class="fa fa-bed mr-1"></i> @_localizer["Admit"]</a>
+                                                <button disabled type="button" class="btn btn-white btn-sm"> <i class="fa fa-close mr-1"></i> @_localizer["Discharge"]</button>
+
+                                            }
+                                            else if (Model.Entity.GetStatus() == InpatientStatus.Admitted)
+                                            {
+                                                <button disabled type="button" class="btn btn-white btn-sm"> <i class="fa fa-bed mr-1"></i> @_localizer["Admit"]</button>
+                                                <a href="/Inpatients/Discharge/@(Model.Entity.Id)?returnurl=/Inpatients/Details/@Model.Entity.Id" class="btn btn-white btn-sm"> <i class="fa fa-close mr-1"></i> @_localizer["Discharge"]</a>
+                                            }
+                                            else
+                                            {
+                                                <button disabled type="button" class="btn btn-white btn-sm"> <i class="fa fa-bed mr-1"></i> @_localizer["Admit"]</button>
+                                                <button disabled type="button" class="btn btn-white btn-sm"> <i class="fa fa-close mr-1"></i> @_localizer["Discharge"]</button>
+
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sender-info">
+                                
+                                <div class="receiver-details float-left">
+                                    @if(Model.Entity.CurrentRoomId.HasValue)
+                                    {
+                                        <span class="sender-name text-info">@Html.DisplayFor(x => Model.Entity.CurrentRoom.Unit.Name) (@_localizer["room"] @Html.DisplayFor(x => Model.Entity.CurrentRoom.Name))</span>
+                                    }
+                                    @if(Model.Entity.DoctorId.HasValue)
+                                    {
+                                        <span class="receiver-name">
+                                            @_localizer["doctor"] <span>@Html.DisplayFor(x => Model.Entity.Doctor.Name)</span>, <span>@Html.DisplayFor(x => Model.Entity.Doctor.Title)</span>
+                                        </span>
+                                    }
+                                </div>
+                                <div class="mail-sent-time">
+                                    <span class="mail-time">@Model.Entity.GetStatusTime().ToString("dd/MM/yyyy HH:mm tt")</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="mailview-inner">
+                            <dl class="row">
+                                <dt class="col-sm-3">@_localizer["Status"]</dt>
+                                <dd class="col-sm-9 text-danger">@_localizer[Model.Entity.GetStatus().ToString()]</dd>
+                                <dt class="col-sm-3">@_localizer["Status Time"]</dt>
+                                <dd class="col-sm-9 text-danger">@Model.Entity.GetStatusTime().ToString("dd-MM-yyyy HH:mm tt")</dd>
+
+                                <dt class="col-sm-3">@Html.DisplayNameFor(x => x.Entity.Patient.Name)</dt>
+                                <dd class="col-sm-9">@Html.DisplayFor(x => Model.Entity.Patient.Name)</dd>
+
+                                <dt class="col-sm-3">@Html.DisplayFor(x => x.Entity.Patient.IdType)</dt>
+                                <dd class="col-sm-9">@Html.DisplayFor(x => Model.Entity.Patient.IdNo)</dd>
+
+                                <dt class="col-sm-3">@Html.DisplayNameFor(x => x.Entity.Patient.Gender)</dt>
+                                <dd class="col-sm-9">@Html.DisplayFor(x => Model.Entity.Patient.Gender)</dd>
+
+                                <dt class="col-sm-3">@Html.DisplayNameFor(x => x.Entity.Patient.IsMarried)</dt>
+                                <dd class="col-sm-9">@Html.YesNo(Model.Entity.Patient.IsMarried)</dd>
+
+                                <dt class="col-sm-3">@Html.DisplayNameFor(x => x.Entity.Patient.Birthdate)</dt>
+                                <dd class="col-sm-9">@Html.DisplayFor(x => Model.Entity.Patient.Birthdate) (@Model.Entity.Patient.Age @_localizer["years"])</dd>
+
+                                <dt class="col-sm-3">@Html.DisplayNameFor(x => x.Entity.Patient.FatherName)</dt>
+                                <dd class="col-sm-9">@Html.DisplayFor(x => Model.Entity.Patient.FatherName)</dd>
+
+                                <dt class="col-sm-3">@Html.DisplayNameFor(x => x.Entity.Patient.MotherName)</dt>
+                                <dd class="col-sm-9">@Html.DisplayFor(x => Model.Entity.Patient.MotherName)</dd>
+
+                                <dt class="col-sm-3">@Html.DisplayNameFor(x => x.Entity.Patient.Phone)</dt>
+                                <dd class="col-sm-9"><i class="fa fa-phone"></i> @Html.DisplayFor(x => Model.Entity.Patient.Phone)</dd>
+
+                                <dt class="col-sm-3">@Html.DisplayNameFor(x => x.Entity.Patient.Mobile)</dt>
+                                <dd class="col-sm-9"><i class="fa fa-mobile"></i> @Html.DisplayFor(x => Model.Entity.Patient.Mobile)</dd>
+
+                                <dt class="col-sm-3">@Html.DisplayNameFor(x => x.Entity.Patient.Email)</dt>
+                                <dd class="col-sm-9"><i class="fa fa-envelope"></i> @Html.DisplayFor(x => Model.Entity.Patient.Email)</dd>
+
+                                <dt class="col-sm-3">@Html.DisplayNameFor(x => x.Entity.Patient.Address)</dt>
+                                <dd class="col-sm-9"><p><i class="fa fa-home"></i> @Html.DisplayFor(x => Model.Entity.Patient.Address)</p></dd>
+
+                                <dt class="col-sm-3">@Html.DisplayNameFor(x => x.Entity.Patient.Company)</dt>
+                                <dd class="col-sm-9">@Html.DisplayFor(x => Model.Entity.Patient.Company)</dd>
+
+                                <dt class="col-sm-3">@Html.DisplayNameFor(x => x.Entity.Patient.Occupation)</dt>
+                                <dd class="col-sm-9">@Html.DisplayFor(x => Model.Entity.Patient.Occupation)</dd>
+
+                                <dt class="col-sm-3">@_localizer["Admission"]</dt>
+                                <dd class="col-sm-9">
+                                    <dl class="row">
+                                        <dt class="col-sm-4">@Html.DisplayNameFor(x => Model.Entity.AdmissionDate)</dt>
+                                        <dd class="col-sm-8">@Html.DisplayFor(x => Model.Entity.AdmissionDate)</dd>
+                                        <dt class="col-sm-4">@Html.DisplayNameFor(x => Model.Entity.DoctorId)</dt>
+                                        <dd class="col-sm-8">@Html.DisplayFor(x => Model.Entity.Doctor.Name)</dd>
+
+                                        <dt class="col-sm-4">@Html.DisplayNameFor(x => Model.Entity.IsAccident)</dt>
+                                        <dd class="col-sm-8">@Html.YesNo(Model.Entity.IsAccident)</dd>
+                                        <dt class="col-sm-4">@Html.DisplayNameFor(x => Model.Entity.PoliceRef)</dt>
+                                        <dd class="col-sm-8">@Html.DisplayFor(x => Model.Entity.PoliceRef)</dd>
+                                        <dt class="col-sm-4">@Html.DisplayNameFor(x => Model.Entity.IsEmergency)</dt>
+                                        <dd class="col-sm-8">@Html.YesNo(Model.Entity.IsEmergency)</dd>
+                                        <dt class="col-sm-4">@Html.DisplayNameFor(x => Model.Entity.HasCompanion)</dt>
+                                        <dd class="col-sm-8">@Html.YesNo(Model.Entity.HasCompanion)</dd>
+
+                                    </dl>
+                                </dd>
+                                <dt class="col-sm-3">@_localizer["Discharge"]</dt>
+                                <dd class="col-sm-9">
+                                    <dl class="row">
+                                        <dt class="col-sm-4">@Html.DisplayNameFor(x => Model.Entity.DischargeDate)</dt>
+                                        <dd class="col-sm-8">@Html.DisplayFor(x => Model.Entity.DischargeDate)</dd>
+                                        <dt class="col-sm-4">@Html.DisplayNameFor(x => Model.Entity.DischargeType)</dt>
+                                        <dd class="col-sm-8">@Html.DisplayFor(x => Model.Entity.DischargeType)</dd>
+                                    </dl>
+                                </dd>
+
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Body -->
+        
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+}

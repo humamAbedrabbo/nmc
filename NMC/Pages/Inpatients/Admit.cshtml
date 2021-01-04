@@ -1,0 +1,127 @@
+﻿@page "{id:int?}"
+@model NMC.Pages.Inpatients.AdmitModel
+
+@inject IViewLocalizer _localizer
+
+@{
+    ViewData["Title"] = _localizer["Admit"];
+}
+
+
+<partial name="_SidebarDetails" model="Model.Entity" />
+
+<div class="page-wrapper">
+    <div class="content">
+        <!-- Header -->
+        <div class="row">
+            <div class="col-sm-5 col-5">
+                <h4 class="page-title">@_localizer["Admit"]# <span class="h3 font-weight-bolder text-info">@Model.Entity.Id</span></h4>
+            </div>
+        </div>
+
+        <!-- Body -->
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>@_localizer["Error!"]</strong> @_localizer[ViewBag.ErrorMessage]
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="form-group">
+                        <label asp-for="AdmissionTime" class="col-form-label"></label>
+                        <input asp-for="AdmissionTime" class="form-control" />
+                        <span asp-validation-for="AdmissionTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input asp-for="IsEmergency"> @Html.DisplayNameFor(x => Model.IsEmergency)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input asp-for="IsAccident"> @Html.DisplayNameFor(x => Model.IsAccident)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PoliceRef" class="col-form-label"></label>
+                        <input asp-for="PoliceRef" class="form-control" />
+                        <span asp-validation-for="PoliceRef" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input asp-for="HasCompanion"> @Html.DisplayNameFor(x => Model.HasCompanion)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table custom-table dataTable">
+                            <caption>@_localizer["IPD Rooms"]</caption>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@_localizer["Unit"]</th>
+                                    <th>@_localizer["Floor"]</th>
+                                    <th>@_localizer["Room No."]</th>
+                                    <th>@_localizer["Status"]</th>
+                                    <th>@_localizer["Inpatient"]</th>
+                                    <th>@_localizer["Action"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var room in Model.Rooms)
+                                {
+                                    <tr>
+                                        <td scope="row">@room.Id</td>
+                                        <td>@Html.DisplayFor(x => room.Unit.Name) (@Html.DisplayFor(x => room.Unit.Type))</td>
+                                        <td>@room.Floor</td>
+                                        <td>@room.RoomNo</td>
+                                        <td>
+                                            <span class="custom-badge @room.GetStatusCss()">@_localizer[room.GetStatus().ToString()]</span>
+                                        </td>
+                                        <td>@Html.DisplayFor(x => room.CurrentInpatient.Patient.Name)</td>
+                                        <td>
+                                            @if (room.GetStatus() == RoomStatus.Available)
+                                            {
+                                                <button type="submit" name="RoomId" value="@room.Id" class="btn btn-sm btn-primary">@_localizer["Reserve Room"]</button>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="m-t-20">
+                        <a href="@Model.ReturnUrl" class="btn btn-secondary ml-1">@_localizer["Return"]</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Body -->
+
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+}

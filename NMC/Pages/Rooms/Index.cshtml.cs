@@ -25,6 +25,7 @@ namespace NMC.Pages.Rooms
         {
             Items = await context.Set<Room>()
                 .Include(x => x.Unit)
+                .Include(x => x.CurrentInpatient).ThenInclude(x => x.Patient)
                 .AsNoTracking()
                 .ToListAsync();
         }
