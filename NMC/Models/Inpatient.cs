@@ -63,6 +63,7 @@ namespace NMC.Models
         public Patient Patient { get; set; }
         public Room CurrentRoom { get; set; }
         public Doctor Doctor { get; set; }
+        public IEnumerable<Booking> Bookings { get; set; }
 
         public InpatientStatus GetStatus()
         {

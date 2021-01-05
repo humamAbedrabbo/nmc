@@ -46,7 +46,7 @@ namespace NMC.Data
             {
                 List<Room> rooms = new List<Room>();
                 // Add IPD Rooms
-                for (int i = 1; i <= 10; i++)
+                for (int i = 1; i <= 1; i++)
                 {
                     rooms.Add(new Room { Floor = 1, RoomNo = i.ToString(), UnitId = 1 });
                 }

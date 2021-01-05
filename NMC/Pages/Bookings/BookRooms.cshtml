@@ -1,0 +1,172 @@
+﻿@page "{id:int?}"
+@model NMC.Pages.Bookings.BookRoomsModel
+
+@inject IViewLocalizer _localizer
+
+@{
+    ViewData["Title"] = _localizer["Booking Rooms"];
+}
+
+
+<partial name="_Sidebar" />
+
+<div class="page-wrapper">
+    <div class="content">
+        <!-- Header -->
+        <div class="row">
+            <div class="col-sm-5 col-5">
+                <h4 class="page-title">@ViewBag.Title</h4>
+            </div>
+        </div>
+
+        <!-- Body -->
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>@_localizer["Error!"]</strong> @_localizer[ViewBag.ErrorMessage]
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="form-row">
+                        <div class="col">
+                            <span class="mr-1">@(_localizer["dcotor"]): @Model.Entity.Doctor.Name</span>
+                            <span>@(_localizer["patient"]): @Model.Entity.Name</span>
+                        </div>
+                        <div class="col">
+                            <input asp-for="Start" class="form-control" />
+                            <span asp-validation-for="Start" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <input asp-for="End" class="form-control" />
+                            <span asp-validation-for="End" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-success">@_localizer["Refresh"]</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="table-responsive">
+                <table class="table">
+                    <caption style="caption-side: top;">@_localizer["Selected Rooms"]</caption>
+                    <thead>
+                        <tr>
+                            <th>@_localizer["Floor"]</th>
+                            <th>@_localizer["Unit"]</th>
+                            <th>@_localizer["Room"]</th>
+                            <th>@_localizer["From"]</th>
+                            <th>@_localizer["To"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Entity.Slots)
+                        {
+                            <tr>
+                                <td>@item.Room.Floor</td>
+                                <td>@item.Room.Unit[User.GetUserLanguage()]</td>
+                                <td>@item.Room.RoomNo</td>
+                                <td>@item.Start.ToString("dd-MM-yyyy HH:mm tt")</td>
+                                <td>@item.End.ToString("dd-MM-yyyy HH:mm tt")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table text-center" >
+                        <caption style="caption-side: top;">@_localizer["Room Avalability"]</caption>
+                        <thead>
+                            <tr>
+                                <th>@_localizer["Floor"]</th>
+                                <th>@_localizer["Unit"]</th>
+                                <th>@_localizer["Room"]</th>
+                                @for (DateTime i = Model.Start; i <= Model.End; i = i.AddDays(1))
+                                {
+                                    <th>
+                                        @i.ToString("ddd")
+                                        <br />
+                                        @i.ToString("dd MMM")
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Rooms)
+                            {
+                                <tr>
+                                    <td>@item.Floor</td>
+                                    <td>@Html.DisplayFor(x => item.Unit[User.GetUserLanguage()])</td>
+                                    <td>@item.RoomNo</td>
+                                    @for (DateTime i = Model.Start; i <= Model.End; i = i.AddDays(1))
+                                    {
+                                        <td>
+                                            @{
+                                                var segs = item.GetDayStatus(i);
+                                                bool canBook = false;
+                                                if(segs.Count == 1 && segs.First().Status ==RoomStatus.Available)
+                                                {
+                                                    canBook = true;
+                                                }
+
+                                                foreach (var seg in segs)
+                                                {
+                                                    string css = "status-green";
+                                                    if (seg.Status == RoomStatus.Booked)
+                                                    {
+                                                        css = "status-blue";
+                                                    }
+                                                    else if (seg.Status == RoomStatus.Reserved)
+                                                    {
+                                                        css = "status-red";
+                                                    }
+                                                    if(canBook)
+                                                    {
+                                                        <form method="post" asp-page-handler="BookRoom">
+                                                            <input type="hidden" name="bookingId" value="@Model.Entity.Id" />
+                                                            <input type="hidden" name="roomId" value="@item.Id" />
+                                                            <input type="hidden" name="date" value="@i.ToString("yyyy-MM-dd")" />
+                                                            <button style="cursor: pointer;" type="submit" class="custom-badge @css">@_localizer[seg.Status.ToString()] @seg.Start.ToString("HH:mm tt") - @seg.End.ToString("HH:mm tt")</button>
+                                                        </form>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="custom-badge @css">@_localizer[seg.Status.ToString()] @seg.Start.ToString("HH:mm tt") - @seg.End.ToString("HH:mm tt")</div>
+                                                        <br />
+
+                                                    }
+                                                }
+                                            }
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+}

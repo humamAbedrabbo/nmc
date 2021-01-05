@@ -1,0 +1,86 @@
+﻿@page
+@model NMC.Pages.Rooms.RoomChartModel
+
+
+@inject IViewLocalizer _localizer
+
+@{
+    ViewData["Title"] = _localizer["Room Chart"];
+}
+
+
+<partial name="_Sidebar" />
+
+<div class="page-wrapper">
+    <div class="content">
+        <!-- Header -->
+        <div class="row">
+            <div class="col-sm-5 col-5">
+                <h4 class="page-title">@ViewBag.Title</h4>
+            </div>
+
+        </div>
+
+        <!-- Body -->
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th>@_localizer["Floor"]</th>
+                                <th>@_localizer["Unit"]</th>
+                                <th>@_localizer["Room"]</th>
+                                @for (DateTime i = Model.Start; i <= Model.End; i = i.AddDays(1))
+                                {
+                                    <th>
+                                        @i.ToString("ddd")
+                                        <br />
+                                        @i.ToString("dd MMM")
+                                    </th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Rooms)
+                            {
+                            <tr>
+                                <td>@item.Floor</td>
+                                <td>@Html.DisplayFor(x => item.Unit[User.GetUserLanguage()])</td>
+                                <td>@item.RoomNo</td>
+                                @for (DateTime i = Model.Start; i <= Model.End; i = i.AddDays(1))
+                                {
+                                    <td>
+                                        @{ 
+                                            var segs = item.GetDayStatus(i);
+                                            foreach (var seg in segs)
+                                            {
+                                                string css = "status-green";
+                                                if(seg.Status == RoomStatus.Booked)
+                                                {
+                                                    css = "status-blue";
+                                                }
+                                                else if(seg.Status == RoomStatus.Reserved)
+                                                {
+                                                    css = "status-red";
+                                                }
+                                                <div class="custom-badge @css">@_localizer[seg.Status.ToString()] @seg.Start.ToString("HH:mm tt") - @seg.End.ToString("HH:mm tt")</div>
+                                                <br />
+                                            }
+                                        }
+                                    </td>
+                                }
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

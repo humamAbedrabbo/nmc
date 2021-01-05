@@ -67,5 +67,6 @@ namespace NMC.Models
         public AppUser User { get; set; }
 
         public IEnumerable<Inpatient> Inpatients { get; set; }
+        public IEnumerable<Booking> Bookings { get; set; }
     }
 }

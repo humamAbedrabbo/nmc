@@ -64,6 +64,7 @@ namespace NMC.Pages.Rooms
                 {
                     context.Set<Room>().Update(Entity);
                     await context.SaveChangesAsync();
+                    
                     return Redirect(ReturnUrl);
                 }
                 catch (Exception ex)

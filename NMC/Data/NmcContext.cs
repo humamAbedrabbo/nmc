@@ -23,6 +23,7 @@ namespace NMC.Data
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Inpatient> Inpatients { get; set; }
         public DbSet<BookingReasonType> BookingReasonTypes { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -65,6 +66,8 @@ namespace NMC.Data
                 .HasForeignKey<Room>(p => p.CurrentInpatientId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
+            builder.Entity<Timeslot>()
+                .HasKey(p => new { p.RoomId, p.BookingId });
         }
     }
 }

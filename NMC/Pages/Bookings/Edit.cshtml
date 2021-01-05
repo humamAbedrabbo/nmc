@@ -1,0 +1,142 @@
+﻿@page "{id:int?}"
+@model NMC.Pages.Bookings.EditModel
+
+
+@inject IViewLocalizer _localizer
+
+@{
+    ViewData["Title"] = _localizer["Edit Booking"];
+}
+
+
+<partial name="_Sidebar" />
+
+<div class="page-wrapper">
+    <div class="content">
+        <!-- Header -->
+        <div class="row">
+            <div class="col-sm-5 col-5">
+                <h4 class="page-title">@ViewBag.Title</h4>
+            </div>
+        </div>
+
+        <!-- Body -->
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>@_localizer["Error!"]</strong> @_localizer[ViewBag.ErrorMessage]
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <input type="hidden" asp-for="Entity.Id" />
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="Entity.InpatientId" />
+                    <input type="hidden" asp-for="Entity.CreatedBy" />
+                    <input type="hidden" asp-for="Entity.CreatedOn" />
+                    <input type="hidden" asp-for="Entity.ConfirmedOn" />
+                    <input type="hidden" asp-for="Entity.ClosedOn" />
+                    <input type="hidden" asp-for="Entity.CancelledOn" />
+                    <div class="form-group">
+                        <label asp-for="Entity.PatientFirstName" class="col-form-label"></label>
+                        <input asp-for="Entity.PatientFirstName" class="form-control w-50" />
+                        <span asp-validation-for="Entity.PatientFirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Entity.PatientLastName" class="col-form-label"></label>
+                        <input asp-for="Entity.PatientLastName" class="form-control w-50" />
+                        <span asp-validation-for="Entity.PatientLastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Entity.DoctorId" class="col-form-label"></label>
+                        <select asp-for="Entity.DoctorId" asp-items="Model.SelectDoctor" class="form-control w-25"></select>
+                        <span asp-validation-for="Entity.DoctorId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Entity.ReasonId" class="col-form-label"></label>
+                        <select asp-for="Entity.ReasonId" asp-items="Model.SelectReason" class="form-control w-25">
+                            <option value=""></option>
+                        </select>
+                        <span asp-validation-for="Entity.ReasonId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Entity.ReasonDetails" class="col-form-label"></label>
+                        <textarea rows="3" asp-for="Entity.ReasonDetails" class="form-control "></textarea>
+                        <span asp-validation-for="Entity.ReasonDetails" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <input asp-for="Entity.HasPaymentRequirements">
+                                </span>
+                            </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">@_localizer["Payment Requirement"]</span>
+                            </div>
+                            <input asp-for="Entity.PaymentRequirements" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <input asp-for="Entity.HasTestRequirements">
+                                </span>
+                            </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">@_localizer["Test Requirement"]</span>
+                            </div>
+                            <input asp-for="Entity.TestRequirements" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <input asp-for="Entity.HasRadiographRequirements">
+                                </span>
+                            </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">@_localizer["Radiograph Requirement"]</span>
+                            </div>
+                            <input asp-for="Entity.RadiographRequirements" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Entity.Notes" class="col-form-label"></label>
+                        <textarea rows="3" asp-for="Entity.Notes" class="form-control "></textarea>
+                        <span asp-validation-for="Entity.Notes" class="text-danger"></span>
+                    </div>
+
+                    <div class="m-t-20">
+                        <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>
+                        <button type="submit" name="rooms" value="True" class="btn btn-primary">@_localizer["Save And Book Rooms"]</button>
+
+                        <a href="@Model.ReturnUrl" class="btn btn-secondary ml-1">@_localizer["Return"]</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+}
