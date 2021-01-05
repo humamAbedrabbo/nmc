@@ -100,5 +100,14 @@ namespace NMC.Pages.Bookings
             await context.SaveChangesAsync();
             return Redirect($"/Bookings/BookRooms/{bookingId}?start={Start.ToString("yyyy-MM-dd")}&end={End.ToString("yyyy-MM-dd")}");
         }
+
+        public async Task<IActionResult> OnPostDeleteSlotAsync(int id)
+        {
+            var slot = await context.Set<Timeslot>().FindAsync(id);
+            var bookingId = slot.BookingId;
+            context.Set<Timeslot>().Remove(slot);
+            await context.SaveChangesAsync();
+            return Redirect($"/Bookings/BookRooms/{bookingId}?start={Start.ToString("yyyy-MM-dd")}&end={End.ToString("yyyy-MM-dd")}");
+        }
     }
 }

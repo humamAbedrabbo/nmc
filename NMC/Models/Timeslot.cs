@@ -21,6 +21,8 @@ namespace NMC.Models
             Duration = dur;
         }
 
+        public int Id { get; set; }
+
         [Display(Name = "Room")]
         public int RoomId { get; set; }
 

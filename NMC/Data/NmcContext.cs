@@ -66,8 +66,6 @@ namespace NMC.Data
                 .HasForeignKey<Room>(p => p.CurrentInpatientId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            builder.Entity<Timeslot>()
-                .HasKey(p => new { p.RoomId, p.BookingId });
         }
     }
 }
