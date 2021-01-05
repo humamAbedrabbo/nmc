@@ -26,30 +26,32 @@ namespace NMC.Models
         public int? DoctorId { get; set; }
 
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Admission Date")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Admission Time")]
         public DateTime? AdmissionDate { get; set; }
 
         [Display(Name = "Est. Days")]
         public int EstDays { get; set; } = 1;
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "Est. Discharge Date")]
         public DateTime? EstDischargeDate
         {
             get
             {
                 if (AdmissionDate.HasValue)
-                    return AdmissionDate.Value.Date.AddDays(EstDays);
+                {
+                    return AdmissionDate.Value.AddDays(EstDays).AddMinutes(-1);
+                }
                 else
                     return null;
             }
         }
         
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "Discharge Date")]
         public DateTime? DischargeDate { get; set; }
 
@@ -57,7 +59,7 @@ namespace NMC.Models
         public DischargeType DischargeType { get; set; }
 
         [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}", ApplyFormatInEditMode = true)]
         [Display(Name = "Created On")]
         public DateTime CreatedOn { get; set; }
 
@@ -81,6 +83,7 @@ namespace NMC.Models
         public Room CurrentRoom { get; set; }
         public Doctor Doctor { get; set; }
         public IEnumerable<Booking> Bookings { get; set; }
+        public List<Timeslot> Slots { get; set; } = new();
 
         public InpatientStatus GetStatus()
         {

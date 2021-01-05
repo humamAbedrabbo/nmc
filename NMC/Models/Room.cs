@@ -37,7 +37,7 @@ namespace NMC.Models
         {
             if (CurrentInpatientId.HasValue) return RoomStatus.Reserved;
 
-            if (IsAvailable(DateTime.Today, DateTime.Today.AddDays(1)))
+            if (IsAvailable(DateTime.Today, DateTime.Today.AddHours(23).AddMinutes(59)))
                 return RoomStatus.Available;
             else
                 return RoomStatus.Booked;
@@ -82,6 +82,22 @@ namespace NMC.Models
             if (start < DateTime.Now) return false;
             if (end <= start) return false;
             if ((end - start).TotalHours < 12) return false;
+            if(start.Hour < 12)
+            {
+                start = start.Date;
+            }
+            else
+            {
+                start = start.Date.AddHours(23).AddMinutes(59);
+            }
+            if(end.Hour < 12)
+            {
+                end = end.Date;
+            }
+            else
+            {
+                end = end.Date.AddHours(23).AddMinutes(59);
+            }
 
             if (!IsAvailable(start, end)) return false;
 
@@ -90,12 +106,13 @@ namespace NMC.Models
             booking.Slots.Add(slot);
             return true;
         }
-
+        
+        
         public List<SlotSegment> GetDayStatus(DateTime date)
         {
             List<SlotSegment> segments = new();
             DateTime start = date.Date;
-            DateTime end = start.AddDays(1).AddSeconds(-1);
+            DateTime end = start.AddHours(23).AddMinutes(59);
             // DateTime end = start.AddDays(1);
 
             if(IsAvailable(start, end))

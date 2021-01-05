@@ -97,7 +97,7 @@ namespace NMC.Pages.Bookings
                 .Where(x => x.Id == roomId)
                 .FirstOrDefaultAsync();
             DateTime start = date.Date;
-            DateTime end = date.Date.AddDays(1);
+            DateTime end = date.Date.AddDays(1).AddSeconds(-1);
             room.BookSlot(booking, start, end);
             await context.SaveChangesAsync();
             return Redirect($"/Bookings/BookRooms/{bookingId}?start={Start.ToString("yyyy-MM-dd")}&end={End.ToString("yyyy-MM-dd")}");

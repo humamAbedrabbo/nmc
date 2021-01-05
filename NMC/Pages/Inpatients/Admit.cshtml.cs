@@ -106,8 +106,19 @@ namespace NMC.Pages.Inpatients
                     {
                         Entity.AdmissionDate = AdmissionTime;
                         Entity.EstDays = EstDays;
-                        Entity.CurrentRoom = await context.Rooms.FindAsync(RoomId);
+                        var room = await context.Rooms
+                            .Include(x => x.Slots).ThenInclude(x => x.Booking)
+                            .Include(x => x.CurrentInpatient)
+                            .Where(x => x.Id == RoomId)
+                            .FirstOrDefaultAsync();
+                        if(!room.IsAvailable(Entity.AdmissionDate.Value, Entity.EstDischargeDate.Value))
+                        {
+                            throw new Exception($"Room {room.Name} is not available");
+                        }
+                        Entity.CurrentRoom = room;
                         Entity.CurrentRoomId = RoomId;
+
+
                         Entity.IsAccident = IsAccident;
                         Entity.IsEmergency = IsEmergency;
                         Entity.PoliceRef = PoliceRef;

@@ -71,7 +71,7 @@
                                     }
                                 </div>
                                 <div class="mail-sent-time">
-                                    <span class="mail-time">@Model.Entity.GetStatusTime().ToString("dd/MM/yyyy HH:mm tt")</span>
+                                    <span class="mail-time">@Model.Entity.GetStatusTime().ToString("dd-MM-yyyy hh tt")</span>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
@@ -81,7 +81,7 @@
                                 <dt class="col-sm-3">@_localizer["Status"]</dt>
                                 <dd class="col-sm-9 text-danger">@_localizer[Model.Entity.GetStatus().ToString()]</dd>
                                 <dt class="col-sm-3">@_localizer["Status Time"]</dt>
-                                <dd class="col-sm-9 text-danger">@Model.Entity.GetStatusTime().ToString("dd-MM-yyyy HH:mm tt")</dd>
+                                <dd class="col-sm-9 text-danger">@Model.Entity.GetStatusTime().ToString("dd-MM-yyyy hh tt")</dd>
 
                                 <dt class="col-sm-3">@Html.DisplayNameFor(x => x.Entity.Patient.Name)</dt>
                                 <dd class="col-sm-9">@Html.DisplayFor(x => Model.Entity.Patient.Name)</dd>
@@ -96,7 +96,7 @@
                                 <dd class="col-sm-9">@Html.YesNo(Model.Entity.Patient.IsMarried)</dd>
 
                                 <dt class="col-sm-3">@Html.DisplayNameFor(x => x.Entity.Patient.Birthdate)</dt>
-                                <dd class="col-sm-9">@Html.DisplayFor(x => Model.Entity.Patient.Birthdate) (@Model.Entity.Patient.Age @_localizer["years"])</dd>
+                                <dd class="col-sm-9">@Html.Date(Model.Entity.Patient.Birthdate) (@Model.Entity.Patient.Age @_localizer["years"])</dd>
 
                                 <dt class="col-sm-3">@Html.DisplayNameFor(x => x.Entity.Patient.FatherName)</dt>
                                 <dd class="col-sm-9">@Html.DisplayFor(x => Model.Entity.Patient.FatherName)</dd>
@@ -126,11 +126,11 @@
                                 <dd class="col-sm-9">
                                     <dl class="row">
                                         <dt class="col-sm-4">@Html.DisplayNameFor(x => Model.Entity.AdmissionDate)</dt>
-                                        <dd class="col-sm-8">@Html.DisplayFor(x => Model.Entity.AdmissionDate)</dd>
+                                        <dd class="col-sm-8">@Html.DateTime(Model.Entity.AdmissionDate)</dd>
                                         <dt class="col-sm-4">@Html.DisplayNameFor(x => Model.Entity.EstDays)</dt>
                                         <dd class="col-sm-8">@Html.DisplayFor(x => Model.Entity.EstDays)</dd>
                                         <dt class="col-sm-4">@Html.DisplayNameFor(x => Model.Entity.EstDischargeDate)</dt>
-                                        <dd class="col-sm-8">@Html.DisplayFor(x => Model.Entity.EstDischargeDate)</dd>
+                                        <dd class="col-sm-8">@Html.DateTime(Model.Entity.EstDischargeDate)</dd>
                                         
                                         <dt class="col-sm-4">@Html.DisplayNameFor(x => Model.Entity.DoctorId)</dt>
                                         <dd class="col-sm-8">@Html.DisplayFor(x => Model.Entity.Doctor.Name)</dd>
@@ -150,7 +150,7 @@
                                 <dd class="col-sm-9">
                                     <dl class="row">
                                         <dt class="col-sm-4">@Html.DisplayNameFor(x => Model.Entity.DischargeDate)</dt>
-                                        <dd class="col-sm-8">@Html.DisplayFor(x => Model.Entity.DischargeDate)</dd>
+                                        <dd class="col-sm-8">@Html.DateTime(Model.Entity.DischargeDate)</dd>
                                         <dt class="col-sm-4">@Html.DisplayNameFor(x => Model.Entity.DischargeType)</dt>
                                         <dd class="col-sm-8">@Html.DisplayFor(x => Model.Entity.DischargeType)</dd>
                                     </dl>

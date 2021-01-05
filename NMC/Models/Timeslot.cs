@@ -20,7 +20,7 @@ namespace NMC.Models
             Start = date;
             Duration = dur;
         }
-
+        
         public int Id { get; set; }
 
         [Display(Name = "Room")]
