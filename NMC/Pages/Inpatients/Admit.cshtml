@@ -45,6 +45,13 @@
                         <span asp-validation-for="AdmissionTime" class="text-danger"></span>
                     </div>
                     <div class="form-group">
+                        <label asp-for="EstDays" class="col-form-label"></label>
+                        <input asp-for="EstDays" class="form-control" />
+                        <span asp-validation-for="EstDays" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="form-group">
                         <div class="checkbox">
                             <label>
                                 <input asp-for="IsEmergency"> @Html.DisplayNameFor(x => Model.IsEmergency)

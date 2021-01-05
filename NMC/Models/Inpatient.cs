@@ -26,13 +26,30 @@ namespace NMC.Models
         public int? DoctorId { get; set; }
 
 
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Admission Date")]
         public DateTime? AdmissionDate { get; set; }
 
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Est. Days")]
+        public int EstDays { get; set; } = 1;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Est. Discharge Date")]
+        public DateTime? EstDischargeDate
+        {
+            get
+            {
+                if (AdmissionDate.HasValue)
+                    return AdmissionDate.Value.Date.AddDays(EstDays);
+                else
+                    return null;
+            }
+        }
+        
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Discharge Date")]
         public DateTime? DischargeDate { get; set; }
 
@@ -40,7 +57,7 @@ namespace NMC.Models
         public DischargeType DischargeType { get; set; }
 
         [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Created On")]
         public DateTime CreatedOn { get; set; }
 

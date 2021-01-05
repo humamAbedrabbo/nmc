@@ -33,6 +33,11 @@ namespace NMC.Pages.Inpatients
         [BindProperty]
         public DateTime AdmissionTime { get; set; } = DateTime.Now;
 
+        [Display(Name = "Est. Days")]
+        [Range(1, 15)]
+        [BindProperty]
+        public int EstDays { get; set; } = 1;
+
         [BindProperty]
         [Display(Name = "Room")]
         public int RoomId { get; set; }
@@ -63,6 +68,7 @@ namespace NMC.Pages.Inpatients
         {
             Rooms = (await context.Rooms
                     .Include(x => x.Unit)
+                    .Include(x => x.Slots).ThenInclude(x => x.Booking)
                     .Include(x => x.CurrentInpatient).ThenInclude(x => x.Patient)
                     .Where(x => x.Unit.Type == UnitType.IPD)
                     .OrderBy(x => x.Floor).ThenBy(x => x.RoomNo)
@@ -99,6 +105,7 @@ namespace NMC.Pages.Inpatients
                     if(Entity.GetStatus() == InpatientStatus.Pending)
                     {
                         Entity.AdmissionDate = AdmissionTime;
+                        Entity.EstDays = EstDays;
                         Entity.CurrentRoom = await context.Rooms.FindAsync(RoomId);
                         Entity.CurrentRoomId = RoomId;
                         Entity.IsAccident = IsAccident;

@@ -42,7 +42,12 @@ namespace NMC.Pages.Inpatients
 
         [BindProperty]
         [Display(Name = "Companion")]
-        public bool HasCompanion { get; set; }
+        public bool HasCompanion { get; set; }        
+        
+        [BindProperty]
+        [Range(1, 15)]
+        [Display(Name = "Est. Days")]
+        public int EstDays { get; set; }
 
         [Display(Name = "Doctor")]
         [BindProperty]
@@ -71,6 +76,7 @@ namespace NMC.Pages.Inpatients
             PoliceRef = Entity.PoliceRef;
             HasCompanion = Entity.HasCompanion;
             DoctorId = Entity.DoctorId;
+            EstDays = Entity.EstDays;
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -111,6 +117,7 @@ namespace NMC.Pages.Inpatients
                     Entity.HasCompanion = HasCompanion;
                     Entity.Doctor = await context.Doctors.FindAsync(DoctorId);
                     Entity.DoctorId = DoctorId;
+                    Entity.EstDays = EstDays;
                     await context.SaveChangesAsync();
                     return Redirect(ReturnUrl);
                 }

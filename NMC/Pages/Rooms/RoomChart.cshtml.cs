@@ -26,8 +26,9 @@ namespace NMC.Pages.Rooms
         public async Task OnGetAsync()
         {
             Rooms = await context.Rooms
-                .Include(x => x.Slots)
+                .Include(x => x.Slots).ThenInclude(x => x.Booking)
                 .Include(x => x.Unit)
+                .Include(x => x.CurrentInpatient)
                 .OrderBy(x => x.Floor).ThenBy(x => x.RoomNo)
                 .ToListAsync();
             Start = DateTime.Today;

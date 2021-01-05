@@ -37,7 +37,10 @@ namespace NMC.Models
         {
             if (CurrentInpatientId.HasValue) return RoomStatus.Reserved;
 
-            return RoomStatus.Available;
+            if (IsAvailable(DateTime.Today, DateTime.Today.AddDays(1)))
+                return RoomStatus.Available;
+            else
+                return RoomStatus.Booked;
         }
 
         public string GetStatusCss()
@@ -60,7 +63,18 @@ namespace NMC.Models
                     (start >= slot.Start && start <= slot.End) ||
                     (start <= slot.Start && end >= slot.End)
                 ).Count();
-            return overlaps == 0;
+            bool result = (overlaps == 0);
+
+            // Check Reservation
+            if(CurrentInpatientId.HasValue)
+            {
+                var overlap2 = (end <= CurrentInpatient.EstDischargeDate && end >= CurrentInpatient.AdmissionDate)
+                    || (start >= CurrentInpatient.AdmissionDate && start <= CurrentInpatient.EstDischargeDate)
+                    || (start <= CurrentInpatient.AdmissionDate && end >= CurrentInpatient.EstDischargeDate);
+                result &= !overlap2;
+            }
+
+            return result;
         }
 
         public bool BookSlot(Booking booking, DateTime start, DateTime end)
@@ -83,6 +97,28 @@ namespace NMC.Models
             DateTime start = date.Date;
             DateTime end = start.AddDays(1).AddSeconds(-1);
             // DateTime end = start.AddDays(1);
+
+            if(IsAvailable(start, end))
+            {
+                segments.Add(new SlotSegment { Start = start, End = end, Status = RoomStatus.Available });
+                return segments;
+            }
+
+            if(CurrentInpatientId.HasValue)
+            {
+                if(date >= CurrentInpatient.AdmissionDate || date <= CurrentInpatient.EstDischargeDate)
+                {
+                    segments.Add(new SlotSegment { Start = start, End = end, Status = RoomStatus.Reserved });
+                    return segments;
+                }
+            }
+            else
+            {
+                segments.Add(new SlotSegment { Start = start, End = end, Status = RoomStatus.Booked });
+                return segments;
+
+            }
+
             var daySlots = Slots.Where(slot =>
                 (end <= slot.End && end >= slot.Start) ||
                 (start >= slot.Start && start <= slot.End) ||

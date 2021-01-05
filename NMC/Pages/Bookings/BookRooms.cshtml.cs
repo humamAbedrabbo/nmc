@@ -52,7 +52,8 @@ namespace NMC.Pages.Bookings
                 .FirstOrDefaultAsync();
 
             Rooms = await context.Rooms
-                .Include(x => x.Slots)
+                .Include(x => x.Slots).ThenInclude(x => x.Booking)
+                .Include(x => x.CurrentInpatient)
                 .Include(x => x.Unit)
                 .OrderBy(x => x.Floor).ThenBy(x => x.RoomNo)
                 .ToListAsync();
@@ -92,6 +93,7 @@ namespace NMC.Pages.Bookings
                 .FirstOrDefaultAsync();
             var room = await context.Rooms
                 .Include(x => x.Slots).ThenInclude(x => x.Booking)
+                .Include(x => x.CurrentInpatient)
                 .Where(x => x.Id == roomId)
                 .FirstOrDefaultAsync();
             DateTime start = date.Date;
