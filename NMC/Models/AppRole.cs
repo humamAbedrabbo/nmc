@@ -17,10 +17,14 @@ namespace NMC.Models
                     RoleFacilityAdmin,
                     RoleMedicalAdmin,
                     RoleBooking,
-                    RoleLabAdmin,
-                    RoleLabManager,
-                    RoleLabClerk,
-                    RoleLabTechnition,
+                    RoleTestLabAdmin,
+                    RoleTestLabManager,
+                    RoleTestLabClerk,
+                    RoleTestLabTechnition,
+                    RoleRadiologyLabAdmin,
+                    RoleRadiologyLabClerk,
+                    RoleRadiologyLabManager,
+                    RoleRadiologyLabTechnition,
                     RoleAccountant,
                     RoleTopManagement
                 };
