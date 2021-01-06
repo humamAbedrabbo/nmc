@@ -139,7 +139,7 @@ namespace NMC.Pages.Inpatients
                     ReturnUrl = $"/Inpatients/Details/{Entity.Id}";
 
                     // Generate Barcode
-                    barcodeGen.Generate(Entity.Id);
+                    //barcodeGen.Generate(Entity.Id);
 
                     return Redirect(ReturnUrl);
                 }
