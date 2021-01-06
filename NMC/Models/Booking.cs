@@ -13,7 +13,7 @@ namespace NMC.Models
         [Display(Name = "Reason")]
         public int? ReasonId { get; set; }
 
-        [Display(Name = "Reason")]
+        [Display(Name = "Reason Details")]
         public string ReasonDetails { get; set; }
 
         [Display(Name = "Doctor")]
@@ -68,10 +68,10 @@ namespace NMC.Models
         [Display(Name = "Test Requirements")]
         public string TestRequirements { get; set; }
 
-        [Display(Name = "Has Radiograph Requirements")]
+        [Display(Name = "Has Radiology Requirements")]
         public bool HasRadiographRequirements { get; set; }
 
-        [Display(Name = "Radiograph Requirements")]
+        [Display(Name = "Radiology Requirements")]
         public string RadiographRequirements { get; set; }
 
         [Display(Name = "Inpatient")]
