@@ -129,41 +129,33 @@
                                     {
                                         <td>
                                             @{
-                                                var segs = item.GetDayStatus(i);
-                                                bool canBook = false;
-                                                if(segs.Count == 1 && segs.First().Status ==RoomStatus.Available)
+                                                var status = item.GetStatus(i);
+                                                SlotSegment seg = new();
+                                                seg.Status = status;
+                                                seg.Start = i.Date;
+                                                seg.End = seg.Start.AddHours(23).AddMinutes(59);
+                                                
+                                                bool canBook = seg.Status == RoomStatus.Available;
+                                                string css = item.GetStatusCss(i);
+
+                                                if(canBook)
                                                 {
-                                                    canBook = true;
+                                                    <form method="post" asp-page-handler="BookRoom">
+                                                        <input type="hidden" asp-for="Start" />
+                                                        <input type="hidden" asp-for="End" />
+                                                        <input type="hidden" name="bookingId" value="@Model.Entity.Id" />
+                                                        <input type="hidden" name="roomId" value="@item.Id" />
+                                                        <input type="hidden" name="date" value="@i.ToString("yyyy-MM-dd")" />
+                                                        <button style="cursor: pointer;" type="submit" class="custom-badge @css">@_localizer[seg.Status.ToString()] <br /> @seg.ToString()</button>
+                                                    </form>
+                                                }
+                                                else
+                                                {
+                                                    <div class="custom-badge @css">@_localizer[seg.Status.ToString()] <br /> @seg.ToString()</div>
+                                                    <br />
                                                 }
 
-                                                foreach (var seg in segs)
-                                                {
-                                                    string css = "status-green";
-                                                    if (seg.Status == RoomStatus.Booked)
-                                                    {
-                                                        css = "status-blue";
-                                                    }
-                                                    else if (seg.Status == RoomStatus.Reserved)
-                                                    {
-                                                        css = "status-red";
-                                                    }
-                                                    if(canBook)
-                                                    {
-                                                        <form method="post" asp-page-handler="BookRoom">
-                                                            <input type="hidden" asp-for="Start" />
-                                                            <input type="hidden" asp-for="End" />
-                                                            <input type="hidden" name="bookingId" value="@Model.Entity.Id" />
-                                                            <input type="hidden" name="roomId" value="@item.Id" />
-                                                            <input type="hidden" name="date" value="@i.ToString("yyyy-MM-dd")" />
-                                                            <button style="cursor: pointer;" type="submit" class="custom-badge @css">@_localizer[seg.Status.ToString()] <br /> @seg.ToString()</button>
-                                                        </form>
-                                                    }
-                                                    else
-                                                    {
-                                                        <div class="custom-badge @css">@_localizer[seg.Status.ToString()] <br /> @seg.ToString()</div>
-                                                        <br />
-                                                    }
-                                                }
+                                                
                                             }
                                         </td>
                                     }
