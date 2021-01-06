@@ -1,0 +1,422 @@
+﻿<div class="row">
+    <div class="col-md-4">
+        <div class="card-box">
+            <div class="card-body">
+                <div class="card-title">Test Request</div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <input type="checkbox">
+                        </span>
+                    </div>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white" style="background-color: #dc2e3f;">HEMATOLOGY</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Comments">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <input type="checkbox">
+                        </span>
+                    </div>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-black-50" style="background-color: #f7ff40;">URINALYSIS</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Comments">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <input type="checkbox">
+                        </span>
+                    </div>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white" style="background-color: #007bff;">BACTERIOLAGY</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Comments">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <input type="checkbox">
+                        </span>
+                    </div>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white" style="background-color: #7d1d26;">BLOOD GAS</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Comments">
+                </div>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <input type="checkbox">
+                        </span>
+                    </div>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-white" style="background-color: #22860c;">CHEMISTRY</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Comments">
+                </div>
+
+                <div class="form-group">
+                    <label for="selectTest" class="col-form-label">Select Tests</label>
+                    <select id="selectTest" class="select" multiple>
+                        <optgroup label="Blood Gas">
+                            <option>PH</option>
+                            <option>PCO2</option>
+                            <option>HCO3</option>
+                            <option>TCO3</option>
+                            <option>B E b</option>
+                            <option>% SO2 C</option>
+                        </optgroup>
+                        <optgroup label="Hematology">
+                            <option>R.B.C</option>
+                            <option>Hgb.</option>
+                            <option>Hct.</option>
+                            <option>W.B.C</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <button class="btn btn-primary">Submit Request</button>
+            </div>
+        </div>
+
+        <div class="card-box">
+            <div class="card-body">
+                <div class="card-title">Pending Requests</div>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">BLOOD GAS</h5>
+                        <small>2 hrs ago</small>
+                    </div>
+                    <ul class="tags mb-1">
+                        <li><a href="#." class="tag">PH</a></li>
+                        <li><a href="#." class="tag bg-danger text-light">PCO2 <i class="fa fa-check"></i></a></li>
+                        <li><a href="#." class="tag bg-success text-light">HCO3 <i class="fa fa-check"></i></a></li>
+                        <li><a href="#." class="tag">TCO2</a></li>
+                    </ul>
+                    <small>Samples collected 1 hr ago</small>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card-box">
+            <div class="card-header">Test Results</div>
+            <div class="card-body">
+                <form class="form-inline">
+                    <div class="form-group mb-2">
+                        <label for="category" class="sr-only">Category</label>
+                        <select id="category" class="form-control">
+                            <option>Blood Gas</option>
+                            <option>Hematology</option>
+                        </select>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="date" class="sr-only">Date</label>
+                        <input type="date" class="form-control" id="date">
+                        <select class="form-control">
+                            <option>12:00 AM</option>
+                            <option>01:00 AM</option>
+                            <option>02:00 AM</option>
+                            <option>03:00 AM</option>
+                            <option>04:00 AM</option>
+                            <option>05:00 AM</option>
+                            <option>06:00 AM</option>
+                            <option>07:00 AM</option>
+                            <option>08:00 AM</option>
+                            <option>09:00 AM</option>
+                            <option>10:00 AM</option>
+                            <option>11:00 AM</option>
+                            <option>12:00 PM</option>
+                            <option>01:00 PM</option>
+                            <option>02:00 PM</option>
+                            <option>03:00 PM</option>
+                            <option>04:00 PM</option>
+                            <option>05:00 PM</option>
+                            <option>06:00 PM</option>
+                            <option>07:00 PM</option>
+                            <option>08:00 PM</option>
+                            <option>09:00 PM</option>
+                            <option>10:00 PM</option>
+                            <option>11:00 PM</option>
+                        </select>
+                        <select class="form-control">
+                            <option>12:00 AM</option>
+                            <option>01:00 AM</option>
+                            <option>02:00 AM</option>
+                            <option>03:00 AM</option>
+                            <option>04:00 AM</option>
+                            <option>05:00 AM</option>
+                            <option>06:00 AM</option>
+                            <option>07:00 AM</option>
+                            <option>08:00 AM</option>
+                            <option>09:00 AM</option>
+                            <option>10:00 AM</option>
+                            <option>11:00 AM</option>
+                            <option>12:00 PM</option>
+                            <option>01:00 PM</option>
+                            <option>02:00 PM</option>
+                            <option>03:00 PM</option>
+                            <option>04:00 PM</option>
+                            <option>05:00 PM</option>
+                            <option>06:00 PM</option>
+                            <option>07:00 PM</option>
+                            <option>08:00 PM</option>
+                            <option>09:00 PM</option>
+                            <option>10:00 PM</option>
+                            <option>11:00 PM</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Refresh</button>
+                </form>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Test</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Range</th>
+                                <th>Result</th>
+                                <th>UOM</th>
+                                <th>Comments</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-nowrap">R.B.C</td>
+                                <td>T 01/05/20</td>
+                                <td>12:30 AM</td>
+                                <td></td>
+                                <td>5</td>
+                                <td>million / mm3</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr class="table-warning">
+                                <td class="text-nowrap">Hgb.</td>
+                                <td>T 01/05/20</td>
+                                <td>12:30 AM</td>
+                                <td></td>
+                                <td>0.05</td>
+                                <td>g./100</td>
+                                <td>L</td>
+                                <td></td>
+                            </tr>
+                            <tr class="table-danger">
+                                <td class="text-nowrap">XXX</td>
+                                <td>T 01/05/20</td>
+                                <td>12:30 AM</td>
+                                <td>1 - 5</td>
+                                <td>7</td>
+                                <td>yy</td>
+                                <td>H</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="text-nowrap">A</td>
+                                <td>T 01/05/20</td>
+                                <td>12:30 AM</td>
+                                <td></td>
+                                <td>5</td>
+                                <td>million / mm3</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="text-nowrap">B</td>
+                                <td>T 01/05/20</td>
+                                <td>12:30 AM</td>
+                                <td></td>
+                                <td>5</td>
+                                <td>million / mm3</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="text-nowrap">C</td>
+                                <td>T 01/05/20</td>
+                                <td>12:30 AM</td>
+                                <td></td>
+                                <td>5</td>
+                                <td>million / mm3</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center">
+                        <tr>
+                            <th scope="row" rowspan="2">Test</th>
+                            <th colspan="24">Date</th>
+                        </tr>
+                        <tr>
+                            <th>12A</th>
+                            <th>01A</th>
+                            <th>02A</th>
+                            <th>03A</th>
+                            <th>04A</th>
+                            <th>05A</th>
+                            <th>06A</th>
+                            <th>07A</th>
+                            <th>08A</th>
+                            <th>09A</th>
+                            <th>10A</th>
+                            <th>11A</th>
+                            <th>12P</th>
+                            <th>01P</th>
+                            <th>02P</th>
+                            <th>03P</th>
+                            <th>04P</th>
+                            <th>05P</th>
+                            <th>06P</th>
+                            <th>07P</th>
+                            <th>08P</th>
+                            <th>09P</th>
+                            <th>10P</th>
+                            <th>11P</th>
+                        </tr>
+                        <tr>
+                            <td class="text-nowrap">R. B. C.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span class="badge badge-primary">5</span>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span class="badge badge-primary">8</span>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span class="badge badge-primary">3</span>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="text-nowrap">W.B.C.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span class="badge badge-primary">0.1</span>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span class="badge badge-warning"><i class="fa fa-long-arrow-up"></i> 0.5</span>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span class="badge badge-danger"><i class="fa fa-long-arrow-up"></i> 0.6</span>
+                            </td>
+                            <td></td>
+                            <td>
+                                <span class="badge badge-warning"><i class="fa fa-long-arrow-down"></i> 0.4</span>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span class="badge badge-success"><i class="fa fa-long-arrow-down"></i> 0.3</span>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="text-nowrap">Hgb.</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="text-nowrap">AAA</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
