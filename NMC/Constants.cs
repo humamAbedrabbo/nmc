@@ -16,10 +16,14 @@ namespace NMC
         public const string RoleFacilityAdmin = "Facility Admin";
         public const string RoleMedicalAdmin = "Medical Admin";
         public const string RoleBooking = "Booking";
-        public const string RoleLabAdmin = "Laboratory Admin";
-        public const string RoleLabManager = "Laboratory Manager";
-        public const string RoleLabClerk = "Laboratory Clerk";
-        public const string RoleLabTechnition = "Laboratory Technition";
+        public const string RoleTestLabAdmin = "Test Laboratory Admin";
+        public const string RoleTestLabManager = "Test Laboratory Manager";
+        public const string RoleTestLabClerk = "Test Laboratory Clerk";
+        public const string RoleTestLabTechnition = "Test Laboratory Technition";
+        public const string RoleRadiologyLabAdmin = "Radiology Laboratory Admin";
+        public const string RoleRadiologyLabManager = "Radiology Laboratory Manager";
+        public const string RoleRadiologyLabClerk = "Radiology Laboratory Clerk";
+        public const string RoleRadiologyLabTechnition = "Radiology Laboratory Technition";
         public const string RoleAccountant = "Accountant";
         public const string RoleTopManagement = "Top Management";
 
