@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NMC.Extensions;
+using NMC.Services;
 
 namespace NMC
 {
@@ -71,6 +72,7 @@ namespace NMC
                 options.AppendTrailingSlash = true;
             });
 
+            services.AddScoped<IBarcodeGen, BarcodeGen>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

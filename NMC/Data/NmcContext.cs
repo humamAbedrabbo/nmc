@@ -24,6 +24,11 @@ namespace NMC.Data
         public DbSet<Inpatient> Inpatients { get; set; }
         public DbSet<BookingReasonType> BookingReasonTypes { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Speciality> Specialities { get; set; }
+        public DbSet<DoctorExperience> DoctorExperiences { get; set; }
+        public DbSet<DoctorEducation> DoctorEducations { get; set; }
+        public DbSet<DoctorSchedule> DoctorSchedules { get; set; }
+        public DbSet<DoctorSpeciality> DoctorSpecialities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -65,7 +70,16 @@ namespace NMC.Data
                 .WithOne(p => p.CurrentRoom)
                 .HasForeignKey<Room>(p => p.CurrentInpatientId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
-
+            
+            builder.Entity<DoctorSpeciality>().HasKey(x => new { x.DoctorId, x.SpecialityId });
+            
+            builder.Entity<Doctor>()
+                .HasMany(p => p.Specialities)
+                .WithMany(p => p.Doctors)
+                .UsingEntity<DoctorSpeciality>(
+                    j => j.HasOne(p => p.Speciality).WithMany().HasForeignKey(p => p.SpecialityId),
+                    j => j.HasOne(p => p.Doctor).WithMany().HasForeignKey(p => p.DoctorId)
+                );
         }
     }
 }

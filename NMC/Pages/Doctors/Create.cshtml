@@ -137,7 +137,13 @@
                         </div>
 
                     </div>
-                   
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label asp-for="Entity.Specialities"></label>
+                            <select asp-for="Specs" asp-items="Model.SpecSelect" class="select" multiple>
+                            </select>
+                        </div>
+                    </div>
 
                     <div class="m-t-20">
                         <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>

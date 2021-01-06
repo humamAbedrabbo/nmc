@@ -59,11 +59,11 @@
                             <div class="sender-info">
                                 
                                 <div class="receiver-details float-left">
-                                    @if(Model.Entity.CurrentRoomId.HasValue)
+                                    @if (Model.Entity.CurrentRoomId.HasValue)
                                     {
                                         <span class="sender-name text-info">@Html.DisplayFor(x => Model.Entity.CurrentRoom.Unit.Name) (@_localizer["room"] @Html.DisplayFor(x => Model.Entity.CurrentRoom.Name))</span>
                                     }
-                                    @if(Model.Entity.DoctorId.HasValue)
+                                    @if (Model.Entity.DoctorId.HasValue)
                                     {
                                         <span class="receiver-name">
                                             @_localizer["doctor"] <span>@Html.DisplayFor(x => Model.Entity.Doctor.Name)</span>, <span>@Html.DisplayFor(x => Model.Entity.Doctor.Title)</span>
@@ -77,6 +77,7 @@
                             </div>
                         </div>
                         <div class="mailview-inner">
+                            <img src="/barcode/@(Model.Entity.Id).jpeg" class="img-responsive mb-2 w-25" alt="" />
                             <dl class="row">
                                 <dt class="col-sm-3">@_localizer["Status"]</dt>
                                 <dd class="col-sm-9 text-danger">@_localizer[Model.Entity.GetStatus().ToString()]</dd>

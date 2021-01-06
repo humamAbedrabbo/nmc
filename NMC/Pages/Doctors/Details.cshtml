@@ -1,0 +1,245 @@
+﻿@page "{id:int}"
+@inject IViewLocalizer _localizer
+@inject NmcContext _ctx
+
+@{
+    ViewData["PageTitle"] = _localizer["Doctor Details"];
+    bool isArabic = (User.GetUserLanguage() == "ar");
+    string photo = "assets/img/user.jpg";
+}
+
+@functions
+{
+    public Doctor Doctor { get; set; }
+
+    [BindProperty(SupportsGet = true)] public int Id { get; set; }
+
+    public async Task<IActionResult> OnGetAsync()
+    {
+        Doctor = await _ctx.Doctors
+            .Include(x => x.Specialities)
+            .Include(x => x.Schedule)
+            .Include(x => x.Education)
+            .Include(x => x.Experience)
+            .Where(x => x.Id == Id)
+            .FirstOrDefaultAsync();
+
+        if (Doctor == null)
+        {
+            return RedirectToPage("/NotFound");
+        }
+
+        return Page();
+    }
+}
+<partial name="_Sidebar" />
+
+<div class="page-wrapper">
+
+<div class="content">
+    <div class="row">
+        <div class="col-sm-7 col-6">
+            <h4 class="page-title">@ViewBag.PageTitle</h4>
+        </div>
+
+        <div class="col-sm-5 col-6 text-right m-b-30">
+            <a asp-page="/Edit" asp-route-id="@Model.Doctor.Id" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> @_localizer["Edit"]</a>
+        </div>
+    </div>
+    <div class="card-box profile-header">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="profile-view">
+                    <div class="profile-img-wrap">
+                        <div class="profile-img">
+                            <a href="#"><img class="avatar" src="~/@photo" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="profile-basic">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="profile-info-left">
+                                    <h3 class="user-name m-t-0 mb-0">@Model.Doctor.Name</h3>
+                                    <small style="font-size: 100%;" class="text-muted">@Model.Doctor.Title</small>
+                                    <div class="staff-id">
+                                        <span class="custom-badge status-blue mr-1">@_localizer[(Model.Doctor.IsConsultant ? "Consultant" : "Hired")]</span>
+                                        <span class="custom-badge status-blue mr-1" hidden="@(!Model.Doctor.IsReferrer)">@_localizer["Referrer"]</span>
+                                    </div>
+                                    <div class="staff-msg">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <ul class="personal-info">
+
+                                    <li>
+                                        <span class="title">@_localizer["Phone"]:</span>
+                                        <span class="text">@Doctor.Phone</span>
+                                        <span class="text ml-1">@Doctor.Mobile</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="title">@_localizer["Email"]:</span>
+                                        <span class="text">@Doctor.Email</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="title">@_localizer["Joining Date"]:</span>
+                                        <span class="text"><date value="@Doctor.JoiningDate" format="dd-MMM-yyyy"></date></span>
+                                    </li>
+                                    <li>
+                                        <span class="title">@_localizer["Address"]:</span>
+                                        <span class="text">@Doctor.Address</span>
+                                    </li>
+                                    <li>
+                                        <span class="title">@_localizer["Gender"]:</span>
+                                        <span class="text">@Doctor.Gender.ToString()</span>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="profile-tabs">
+        <ul class="nav nav-tabs nav-tabs-bottom">
+            <li class="nav-item"><a class="nav-link active" href="#general-infot" data-toggle="tab">@_localizer["General Information"]</a></li>
+            <li class="nav-item"><a class="nav-link" href="#schedule-info" data-toggle="tab">@_localizer["Schedule"]</a></li>
+            <li class="nav-item"><a class="nav-link" href="#spec-info" data-toggle="tab">@_localizer["Speciality"]</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane show active" id="general-info">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-box">
+                            <h3 class="card-title">@_localizer["Biography"]</h3>
+                            <p class="blog-content">
+                                @Model.Doctor.Biography
+                            </p>
+                        </div>
+                        <div class="card-box">
+                            <h3 class="card-title">@_localizer["Education"]</h3>
+
+                            <div class="experience-box">
+                                <ul class="experience-list" hidden="@(Model.Doctor.Education == null)">
+                                    @foreach (var edu in Model.Doctor.Education.OrderByDescending(x => x.StartingYear))
+                                    {
+                                        <li>
+                                            <div class="experience-user">
+                                                <div class="before-circle"></div>
+                                            </div>
+                                            <div class="experience-content">
+                                                <div class="timeline-content">
+                                                    <a href="#/" class="name">@edu.Institution</a>
+                                                    <div>@edu.Degree</div>
+                                                    <span class="time">@edu.StartingYear - @edu.CompletionYear</span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-box mb-0">
+                            <h3 class="card-title">@_localizer["Experience"]</h3>
+                            <div class="experience-box">
+                                <ul class="experience-list" hidden="@(Model.Doctor.Experience == null)">
+                                    @foreach (var exp in Model.Doctor.Experience.OrderByDescending(x => x.FromYear))
+                                    {
+                                        <li>
+                                            <div class="experience-user">
+                                                <div class="before-circle"></div>
+                                            </div>
+                                            <div class="experience-content">
+                                                <div class="timeline-content">
+                                                    <a href="#/" class="name">@exp.Position</a>
+                                                    <span class="time">@exp.FromYear @exp.ToYear</span>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="schedule-info">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-box mb-0">
+                            <h3 class="card-title">@_localizer["Schedule"]</h3>
+                            <div class="table-responsive" hidden="@(Model.Doctor.Schedule == null)">
+                                <table class="table table-striped custom-table mb-0 datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>@Html.DisplayNameFor(p => p.Doctor.Schedule.FirstOrDefault().FromDate)</th>
+                                            <th>@Html.DisplayNameFor(p => p.Doctor.Schedule.FirstOrDefault().Timing)</th>
+                                            <th>@Html.DisplayNameFor(p => p.Doctor.Schedule.FirstOrDefault().Days)</th>
+                                            <th>@Html.DisplayNameFor(p => p.Doctor.Schedule.FirstOrDefault().Message)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var sched in Model.Doctor.Schedule)
+                                        {
+                                            <tr>
+                                                <td>@sched.FromDate.ToShortDateString()</td>
+                                                <td>@sched.Timing</td>
+                                                <td>
+                                                    @foreach (var d in sched.DaysList)
+                                                    {
+                                                        <span class="custom-badge status-green">@_localizer[d]</span>
+                                                    }
+                                                </td>
+                                                <td>@sched.Message</td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="spec-info">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-box mb-0">
+                            <h3 class="card-title">@_localizer["Speciality"]</h3>
+                            <div class="table-responsive" hidden="@(Model.Doctor.Specialities == null)">
+                                <table class="table table-striped custom-table mb-0 datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>@Html.DisplayNameFor(p => p.Doctor.Specialities.FirstOrDefault().Name)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var sched in Model.Doctor.Specialities)
+                                        {
+                                            <tr>
+                                                <td>@sched.Name</td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>

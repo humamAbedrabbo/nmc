@@ -68,5 +68,17 @@ namespace NMC.Models
 
         public IEnumerable<Inpatient> Inpatients { get; set; }
         public IEnumerable<Booking> Bookings { get; set; }
+
+        public List<Speciality> Specialities { get; set; } = new();
+
+        [Display(Name = "Schedules")] 
+        public List<DoctorSchedule> Schedule { get; set; } = new();
+        
+        [Display(Name = "Education")] 
+        public List<DoctorEducation> Education { get; set; } = new();
+
+        [Display(Name = "Experience")] 
+        public List<DoctorExperience> Experience { get; set; } = new();
+
     }
 }

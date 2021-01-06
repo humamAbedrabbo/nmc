@@ -141,7 +141,25 @@
                         </div>
 
                     </div>
-
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label asp-for="Entity.Specialities"></label>
+                            <select asp-for="Specs" asp-items="Model.SpecSelect" class="select" multiple>
+                            </select>
+                            @for (int i = 0; i < Model.Entity.Specialities.Count; i++)
+                            {
+                                <input asp-for="Entity.Specialities[i].Id" type="hidden" />
+                                <input asp-for="Entity.Specialities[i].Name" type="hidden" />
+                            }
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label asp-for="Entity.Biography" class="col-form-label"></label>
+                            <textarea rows="3" asp-for="Entity.Biography" class="form-control" ></textarea>
+                            <span asp-validation-for="Entity.Biography" class="text-danger"></span>
+                        </div>
+                    </div>
 
                     <div class="m-t-20">
                         <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>

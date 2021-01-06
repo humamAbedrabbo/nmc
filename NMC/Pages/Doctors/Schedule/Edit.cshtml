@@ -1,0 +1,163 @@
+﻿@page "{Id:int}"
+@inject IViewLocalizer _localizer
+@inject NmcContext _ctx
+
+@functions
+{
+    string PageTitle = "Edit Doctor Schedule";
+
+    [BindProperty] public DoctorSchedule Item { get; set; } = new();
+    [BindProperty(SupportsGet = true)] public int Id { get; set; }
+
+    private string[] weekdays = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+    public MultiSelectList DaysSelect { get; set; }
+
+    public async Task Init()
+    {
+        DaysSelect = new MultiSelectList(weekdays, Item?.DaysList);
+    }
+
+    public async Task<IActionResult> OnGetAsync()
+    {
+        Item = await _ctx.DoctorSchedules
+            .Include(x => x.Doctor)
+            .Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+        if (Item == null)
+            return RedirectToPage("/NotFound");
+
+        await Init();
+
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                _ctx.DoctorSchedules.Update(Item);
+                await _ctx.SaveChangesAsync();
+                return RedirectToPage("./Index", new { DoctorId = Item.DoctorId });
+            }
+            catch
+            {
+                ModelState.AddModelError("Name", "Invalid");
+            }
+        }
+
+        await Init();
+        return Page();
+    }
+}
+<partial name="_Sidebar" />
+
+<div class="page-wrapper">
+    
+<div class="content">
+
+    <div class="row">
+        <div class="col-sm-5 col-5">
+            <h4 class="page-title">@_localizer[PageTitle]</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form method="post">
+                <div class="card-box">
+                    <div class="card-body">
+
+                        <h3 class="card-title">@_localizer["Schedule Details"]</h3>
+
+                        <input asp-for="Id" type="hidden" />
+                        <input asp-for="Item.Id" type="hidden" />
+                        <input asp-for="Item.DoctorId" type="hidden" />
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.Doctor.Name" class=""></label>
+                                    <input readonly asp-for="Item.Doctor.Name" class="form-control" />
+                                    <span asp-validation-for="Item.Doctor.Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Item.Days"></label>
+                                    <select asp-for="Item.DaysList" asp-items="DaysSelect" class="select" multiple>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="Item.FromDate"></label>
+                                    <input asp-for="Item.FromDate" class="form-control">
+                                    <span asp-validation-for="Item.FromDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="Item.ThruDate"></label>
+                                    <input asp-for="Item.ThruDate" class="form-control">
+                                    <span asp-validation-for="Item.ThruDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="Item.StartTime"></label>
+                                    <div class="time-icon">
+                                        <input asp-for="Item.StartTime" type="text" class="form-control" id="startTime">
+                                        <span asp-validation-for="Item.StartTime" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="Item.EndTime"></label>
+                                    <div class="time-icon">
+                                        <input asp-for="Item.EndTime" type="text" class="form-control" id="endTime">
+                                        <span asp-validation-for="Item.EndTime" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Item.Message"></label>
+                            <textarea asp-for="Item.Message" cols="30" rows="4" class="form-control"></textarea>
+                        </div>
+
+                        <div class="m-t-20 text-center">
+                            <button type="submit" class="btn btn-primary submit-btn">@_localizer["Save"]</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+</div>
+
+@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(function () {
+            $('#startTime').datetimepicker({
+                format: 'LT'
+
+            });
+
+            $('#endTime').datetimepicker({
+                format: 'LT'
+
+            });
+        });
+    </script>
+}

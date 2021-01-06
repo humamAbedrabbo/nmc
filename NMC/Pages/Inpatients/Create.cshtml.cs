@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using NMC.Data;
 using NMC.Models;
+using NMC.Services;
 
 namespace NMC.Pages.Inpatients
 {
     public class CreateModel : PageModel
     {
         private readonly NmcContext context;
+        private readonly IBarcodeGen barcodeGen;
 
-        public CreateModel(NmcContext context)
+        public CreateModel(NmcContext context, IBarcodeGen barcodeGen)
         {
             this.context = context;
+            this.barcodeGen = barcodeGen;
         }
 
         [BindProperty]
@@ -64,6 +67,10 @@ namespace NMC.Pages.Inpatients
                     context.Set<Inpatient>().Add(Entity);
                     await context.SaveChangesAsync();
                     ReturnUrl = $"/Inpatients/Details/{Entity.Id}";
+
+                    // Generate Barcode
+                    barcodeGen.Generate(Entity.Id);
+
                     return Redirect(ReturnUrl);
                 }
                 catch (Exception ex)

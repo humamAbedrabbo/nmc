@@ -35,6 +35,13 @@ namespace NMC.Data
                 context.SaveChanges();
             }
 
+            if(!context.Specialities.Any())
+            {
+                context.Specialities.Add(new Speciality { Name = "Spec 1", NameAr = "اختصاص 1" });
+                context.Specialities.Add(new Speciality { Name = "Spec 2", NameAr = "اختصاص 2" });
+                context.SaveChanges();
+            }
+
             if(!context.BookingReasonTypes.Any())
             {
                 context.BookingReasonTypes.Add(new BookingReasonType { Name = "Reason 1", NameAr = "سبب 1" });
