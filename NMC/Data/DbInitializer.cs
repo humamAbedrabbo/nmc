@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Bogus;
 using Microsoft.AspNetCore.Identity;
 using NMC.Models;
+using static NMC.Constants;
 
 namespace NMC.Data
 {
@@ -12,6 +13,15 @@ namespace NMC.Data
     {
         public static void Initialize(NmcContext context)
         {
+            if(!context.Roles.Any())
+            {
+                var roles = AppRole.GetRoles();
+                context.Roles.AddRange(
+                    roles.Select(r => new AppRole { Name = r, NormalizedName = r.ToUpper(), Id = Guid.NewGuid().ToString("D"), ConcurrencyStamp = Guid.NewGuid().ToString("D") })
+                    );
+                context.SaveChanges();
+            }
+
             if(!context.Users.Any())
             {
                 var admin = new AppUser
@@ -26,6 +36,13 @@ namespace NMC.Data
                 var hasher = new PasswordHasher<AppUser>();
                 admin.PasswordHash = hasher.HashPassword(admin, "123456");
                 context.Users.Add(admin);
+                context.SaveChanges();
+
+                context.UserRoles.Add(new IdentityUserRole<string>
+                {
+                    UserId = admin.Id,
+                    RoleId = context.Roles.First(x => x.Name == RoleAdmin).Id
+                });
                 context.SaveChanges();
             }
             //return;

@@ -15,10 +15,12 @@ namespace NMC.Pages.Users
     public class CreateModel : PageModel
     {
         private readonly NmcContext context;
+        private readonly UserManager<AppUser> userManager;
 
-        public CreateModel(NmcContext context)
+        public CreateModel(NmcContext context, UserManager<AppUser> userManager)
         {
             this.context = context;
+            this.userManager = userManager;
         }
 
         [BindProperty]
@@ -41,6 +43,8 @@ namespace NMC.Pages.Users
 
         [BindProperty(SupportsGet = true)]
         public string ReturnUrl { get; set; } = "/Users";
+
+        public string[] AppRoles => AppRole.GetRoles();
 
         public async Task OnGetAsync()
         {
@@ -65,7 +69,7 @@ namespace NMC.Pages.Users
             }
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string[] roles)
         {
             if (ModelState.IsValid)
             {
@@ -91,6 +95,12 @@ namespace NMC.Pages.Users
                     Entity.PasswordHash = hasher.HashPassword(Entity, Password);
                     context.Set<AppUser>().Add(Entity);
                     await context.SaveChangesAsync();
+
+                    if(roles != null)
+                    {
+                        await userManager.AddToRolesAsync(Entity, roles);
+                    }
+
                     return Redirect(ReturnUrl);
                 }
                 catch (Exception ex)

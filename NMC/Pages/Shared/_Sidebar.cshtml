@@ -1,40 +1,100 @@
 ﻿@inject IViewLocalizer _localizer
 
+@using static NMC.Constants
+
+@{ 
+    bool CanInpatients = User.IsInRole(RoleAdmin)
+        || User.IsInRole(RoleIPDClerk)
+        || User.IsInRole(RoleDoctor)
+        || User.IsInRole(RoleNurse)
+        || User.IsInRole(RoleAccountant);
+
+    bool CanBookings = User.IsInRole(RoleAdmin)
+        || User.IsInRole(RoleBooking);
+
+    bool CanDoctors = User.IsInRole(RoleAdmin)
+        || User.IsInRole(RoleIPDClerk)
+        || User.IsInRole(RoleOPDClerk)
+        || User.IsInRole(RoleRecieptionist)
+        || User.IsInRole(RoleTopManagement);
+
+    bool CanPatients = User.IsInRole(RoleAdmin)
+        || User.IsInRole(RoleIPDClerk)
+        || User.IsInRole(RoleOPDClerk)
+        || User.IsInRole(RoleRecieptionist);
+
+    bool CanFacility = User.IsInRole(RoleAdmin)
+        || User.IsInRole(RoleFacilityAdmin);
+
+    bool CanMedical = User.IsInRole(RoleAdmin)
+        || User.IsInRole(RoleMedicalAdmin);
+
+    bool CanUsers = User.IsInRole(RoleAdmin);
+
+}
+
 <div class="sidebar" id="sidebar">
     <div class="sidebar-inner slimscroll">
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
                 <li class="menu-title">@_localizer["Main"]</li>
-                <li>
-                    <a href="/Units"><i class="fa fa-hospital-o"></i> <span>@_localizer["Units"]</span></a>
-                </li>
-                <li>
-                    <a href="/Rooms"><i class="fa fa-cube"></i> <span>@_localizer["Rooms"]</span></a>
-                </li>
-                <li>
-                    <a href="/Users"><i class="fa fa-users"></i> <span>@_localizer["Users"]</span></a>
-                </li>
-                <li>
-                    <a href="/Doctors"><i class="fa fa-user-md"></i> <span>@_localizer["Doctors"]</span></a>
-                </li>
-                <li>
-                    <a href="/Patients"><i class="fa fa-wheelchair"></i> <span>@_localizer["Patients"]</span></a>
-                </li>
-                <li>
-                    <a href="/Inpatients"><i class="fa fa-bed"></i> <span>@_localizer["Inpatients"]</span></a>
-                </li>                
-                <li>
-                    <a href="/BookingReasonTypes"><i class="fa fa-cog"></i> <span>@_localizer["Booking Reason Types"]</span></a>
-                </li>
-                <li>
-                    <a href="/Bookings"><i class="fa fa-calculator"></i> <span>@_localizer["Bookings"]</span></a>
-                </li>
-                <li>
-                    <a href="/Rooms/RoomChart"><i class="fa fa-calendar"></i> <span>@_localizer["Room Chart"]</span></a>
-                </li>
-                <li>
-                    <a href="/Specialities"><i class="fa fa-tag"></i> <span>@_localizer["Specialities"]</span></a>
-                </li>
+                @if(CanInpatients)
+                {
+                    <li>
+                        <a href="/Inpatients"><i class="fa fa-bed"></i> <span>@_localizer["Inpatients"]</span></a>
+                    </li>                
+                }
+
+                @if(CanBookings)
+                {
+                    <li>
+                        <a href="/Bookings"><i class="fa fa-calculator"></i> <span>@_localizer["Bookings"]</span></a>
+                    </li>
+                }
+
+                @if(CanDoctors)
+                {
+                    <li>
+                        <a href="/Doctors"><i class="fa fa-user-md"></i> <span>@_localizer["Doctors"]</span></a>
+                    </li>
+                }
+
+                @if(CanPatients)
+                {
+                    <li>
+                        <a href="/Patients"><i class="fa fa-wheelchair"></i> <span>@_localizer["Patients"]</span></a>
+                    </li>
+                }
+
+                @if(CanFacility)
+                {
+                    <li>
+                        <a href="/Units"><i class="fa fa-hospital-o"></i> <span>@_localizer["Units"]</span></a>
+                    </li>
+                    <li>
+                        <a href="/Rooms"><i class="fa fa-cube"></i> <span>@_localizer["Rooms"]</span></a>
+                    </li>
+                    <li>
+                        <a href="/Rooms/RoomChart"><i class="fa fa-calendar"></i> <span>@_localizer["Room Chart"]</span></a>
+                    </li>
+                }
+
+                @if(CanMedical)
+                {
+                    <li>
+                        <a href="/BookingReasonTypes"><i class="fa fa-cog"></i> <span>@_localizer["Booking Reason Types"]</span></a>
+                    </li>
+                    <li>
+                        <a href="/Specialities"><i class="fa fa-tag"></i> <span>@_localizer["Specialities"]</span></a>
+                    </li>
+                }
+
+                @if(CanUsers)
+                {
+                    <li>
+                        <a href="/Users"><i class="fa fa-users"></i> <span>@_localizer["Users"]</span></a>
+                    </li>
+                }
 
                 @*<li class="active">
             <a asp-page="/Index"><i class="fa fa-dashboard"></i> <span>@_localizer["Dashboard"]</span></a>
