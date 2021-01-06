@@ -55,7 +55,7 @@
     <script src="~/assets/js/bootstrap-datetimepicker.min.js"></script>
     <script src="~/assets/plugins/light-gallery/js/lightgallery-all.min.js"></script>
     <script src="~/assets/js/Chart.bundle.js"></script>
-    @*<script src="~/assets/js/@chartJS"></script>*@
+    @RenderSection("Charts", required: false)
     <script src="~/assets/js/@appJS" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

@@ -2,9 +2,11 @@
 @model IndexModel
 
 @inject IViewLocalizer _localizer
+@using static NMC.Constants
 
 @{
     ViewData["Title"] = _localizer["Home page"];
+    ViewBag.HasChart = false;
 }
 
 
@@ -12,6 +14,19 @@
 
 <div class="page-wrapper">
     <div class="content">
-
+        @if (User.IsInRole(RoleAdmin) || User.IsInRole(RoleTopManagement))
+        {
+            <partial name="_Dashboard" />
+            ViewBag.HasChart = true;
+        }
     </div>
 </div>
+
+@section Charts
+{
+    @if (ViewBag.HasChart == true)
+    {
+        string chartJS = User.IsArabic() ? "chart-rtl.js" : "chart.js";
+        <script src="~/assets/js/@chartJS"></script>
+    }
+}
