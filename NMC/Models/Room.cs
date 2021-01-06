@@ -33,23 +33,34 @@ namespace NMC.Models
 
         public List<Timeslot> Slots { get; set; } = new();
 
-        public RoomStatus GetStatus()
+        public RoomStatus GetStatus(DateTime? start = null, DateTime? end = null)
         {
-            if (CurrentInpatientId.HasValue) return RoomStatus.Reserved;
+            if (!start.HasValue) start = DateTime.Now;
+            if (!end.HasValue) end = start.Value.AddHours(23).AddMinutes(59);
 
-            if (IsAvailable(DateTime.Today, DateTime.Today.AddHours(23).AddMinutes(59)))
+            if (CurrentInpatientId.HasValue)
+            {
+                var overlap2 = (end <= CurrentInpatient.EstDischargeDate && end >= CurrentInpatient.AdmissionDate)
+                    || (start >= CurrentInpatient.AdmissionDate && start <= CurrentInpatient.EstDischargeDate)
+                    || (start <= CurrentInpatient.AdmissionDate && end >= CurrentInpatient.EstDischargeDate);
+                if(overlap2) return RoomStatus.Reserved; 
+            }
+
+            if (IsAvailable(start.Value, end.Value))
                 return RoomStatus.Available;
             else
                 return RoomStatus.Booked;
         }
 
-        public string GetStatusCss()
+        public string GetStatusCss(DateTime? start = null, DateTime? end = null)
         {
-            var status = GetStatus();
+            var status = GetStatus(start, end);
             switch(status)
             {
                 case RoomStatus.Reserved:
                     return "status-red";
+                case RoomStatus.Booked:
+                    return "status-blue";
                 default:
                     return "status-green";
             }
