@@ -66,6 +66,7 @@
 
                                                 @if (status == BookingStatus.Pending || status == BookingStatus.Expired)
                                                 {
+                                                    <a class="dropdown-item" asp-page="/Inpatients/Create" asp-route-bookingid="@item.Id"><i class="fa fa-bed m-r-5"></i> @_localizer["Create Inpatient"]</a>
 
                                                     <form method="post" asp-page-handler="Confirm">
                                                         <button type="submit" name="id" value="@item.Id" class="dropdown-item"><i class="fa fa-check m-r-5"></i> @_localizer["Confirm"]</button>

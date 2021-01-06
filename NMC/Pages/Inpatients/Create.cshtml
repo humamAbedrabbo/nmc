@@ -136,6 +136,19 @@
                         </div>
                     </div>
 
+                    <hr />
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label asp-for="Entity.BookingId" class="col-form-label"></label>
+                            <select asp-for="Entity.BookingId" asp-items="Model.SelectBooking" class="form-control"></select>
+                            <span asp-validation-for="Entity.BookingId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="Entity.DoctorId" class="col-form-label"></label>
+                            <select asp-for="Entity.DoctorId" asp-items="Model.SelectDoctor" class="form-control" ></select>
+                            <span asp-validation-for="Entity.DoctorId" class="text-danger"></span>
+                        </div>
+                    </div>
 
                     <div class="m-t-20">
                         <button type="submit" class="btn btn-primary">@_localizer["Save"]</button>

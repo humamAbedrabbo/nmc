@@ -25,6 +25,9 @@ namespace NMC.Models
         [Display(Name = "Doctor")]
         public int? DoctorId { get; set; }
 
+        [Display(Name = "Booking")]
+        public int? BookingId { get; set; }
+
 
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}", ApplyFormatInEditMode = true)]
@@ -82,7 +85,7 @@ namespace NMC.Models
         public Patient Patient { get; set; }
         public Room CurrentRoom { get; set; }
         public Doctor Doctor { get; set; }
-        public IEnumerable<Booking> Bookings { get; set; }
+        public Booking Booking { get; set; }
         public List<Timeslot> Slots { get; set; } = new();
 
         public InpatientStatus GetStatus()

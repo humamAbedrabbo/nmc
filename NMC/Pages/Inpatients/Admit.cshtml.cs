@@ -111,10 +111,10 @@ namespace NMC.Pages.Inpatients
                             .Include(x => x.CurrentInpatient)
                             .Where(x => x.Id == RoomId)
                             .FirstOrDefaultAsync();
-                        if(!room.IsAvailable(Entity.AdmissionDate.Value, Entity.EstDischargeDate.Value))
-                        {
-                            throw new Exception($"Room {room.Name} is not available");
-                        }
+                        //if(!room.IsAvailable(Entity.AdmissionDate.Value, Entity.EstDischargeDate.Value))
+                        //{
+                        //    throw new Exception($"Room {room.Name} is not available");
+                        //}
                         Entity.CurrentRoom = room;
                         Entity.CurrentRoomId = RoomId;
 
@@ -124,6 +124,23 @@ namespace NMC.Pages.Inpatients
                         Entity.PoliceRef = PoliceRef;
                         Entity.HasCompanion = HasCompanion;
                         await context.SaveChangesAsync();
+                        //TODO: Booking to inpatient
+                        //if (Entity.BookingId.HasValue)
+                        //{
+                        //    var booking = await context.Bookings
+                        //        .Include(x => x.Slots).ThenInclude(x => x.Room).ThenInclude(x => x.Unit)
+                        //        .Where(x => x.Id == Entity.BookingId)
+                        //        .FirstOrDefaultAsync();
+                        //    var admittionRoom = booking.Slots.OrderBy(x => x.StartDate)
+                        //        .Where(x => x.Room.Unit.Type == UnitType.IPD)
+                        //        .Select(x => x.Room).FirstOrDefault();
+                        //    if (admittionRoom != null)
+                        //    {
+                        //        Entity.CurrentRoom = admittionRoom;
+                        //        Entity.CurrentRoomId = admittionRoom.Id;
+                        //        await context.SaveChangesAsync();
+                        //    }
+                        //}
                     }
                     return Redirect(ReturnUrl);
                 }

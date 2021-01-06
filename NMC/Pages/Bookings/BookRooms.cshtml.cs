@@ -30,13 +30,13 @@ namespace NMC.Pages.Bookings
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Start")]
         [BindProperty(SupportsGet = true)]
-        public DateTime Start { get; set; } = DateTime.Today.AddDays(1);
+        public DateTime Start { get; set; } = DateTime.Today;
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Start")]
         [BindProperty(SupportsGet = true)]
-        public DateTime End { get; set; } = DateTime.Today.AddDays(2);
+        public DateTime End { get; set; } = DateTime.Today.AddDays(7);
 
         [BindProperty(SupportsGet = true)]
         public string ReturnUrl { get; set; } = "/Bookings";
@@ -72,11 +72,11 @@ namespace NMC.Pages.Bookings
         {
             if (ModelState.IsValid)
             {
-                if (Start <= DateTime.Now || Start >= DateTime.Today.AddDays(15))
-                    ModelState.AddModelError("Start", "Start is out of range");
+                //if (Start <= DateTime.Now || Start >= DateTime.Today.AddDays(15))
+                //    ModelState.AddModelError("Start", "Start is out of range");
 
-                if (End <= Start || End >= Start.AddDays(15))
-                    ModelState.AddModelError("End", "End is out of range");
+                //if (End <= Start || End >= Start.AddDays(15))
+                //    ModelState.AddModelError("End", "End is out of range");
 
             }
 

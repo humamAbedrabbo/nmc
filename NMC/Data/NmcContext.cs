@@ -70,7 +70,18 @@ namespace NMC.Data
                 .WithOne(p => p.CurrentRoom)
                 .HasForeignKey<Room>(p => p.CurrentInpatientId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
-            
+
+            builder.Entity<Inpatient>()
+                .HasOne(p => p.Booking)
+                .WithOne(p => p.Inpatient)
+                .HasForeignKey<Inpatient>(p => p.BookingId);
+
+            builder.Entity<Booking>()
+                .HasOne(p => p.Inpatient)
+                .WithOne(p => p.Booking)
+                .HasForeignKey<Booking>(p => p.InpatientId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
             builder.Entity<DoctorSpeciality>().HasKey(x => new { x.DoctorId, x.SpecialityId });
             
             builder.Entity<Doctor>()

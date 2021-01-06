@@ -90,7 +90,7 @@ namespace NMC.Models
 
         public bool BookSlot(Booking booking, DateTime start, DateTime end)
         {
-            if (start < DateTime.Now) return false;
+            //if (start < DateTime.Now) return false;
             if (end <= start) return false;
             if ((end - start).TotalHours < 12) return false;
             if(start.Hour < 12)
