@@ -145,7 +145,7 @@ namespace NMC.Pages.Inpatients
                 }
                 catch (Exception ex)
                 {
-                    ViewData["ErrorMessage"] = ex.Message;
+                    ViewData["ErrorMessage"] = ex.Message + ",, " + ex.InnerException?.Message;
                 }
             }
 

@@ -22,9 +22,9 @@ namespace NMC.Services
             var path = Path.Combine(env.WebRootPath, "barcode");
             Directory.CreateDirectory(path);
             path = Path.Combine(path, $"{idInpatient}.jpeg");
-
-            var barcode = new Barcode($"{idInpatient}", true);
-            barcode.SaveImageFile(path: path);
+                var barcode = new Barcode($"{idInpatient}", true);
+                barcode.SaveImageFile(path: path);
+            
         }
     }
 }
