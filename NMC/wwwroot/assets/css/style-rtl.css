@@ -56,12 +56,12 @@ Version      : 1.0
 	1. General
 -----------------------*/
 
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Almarai:400,500,700');
 html {
 	height: 100%;
 }
 body {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Almarai', sans-serif;
 	font-size: 0.875rem;
 	color: #666;
 	background-color: #fafafa;
