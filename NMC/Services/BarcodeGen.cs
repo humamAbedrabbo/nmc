@@ -19,6 +19,7 @@ namespace NMC.Services
 
         public void Generate(int idInpatient)
         {
+            return;
             var path = Path.Combine(env.WebRootPath, "barcode");
             Directory.CreateDirectory(path);
             path = Path.Combine(path, $"{idInpatient}.jpeg");
