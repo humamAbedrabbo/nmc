@@ -2,6 +2,6 @@
 {
     public interface IBarcodeGen
     {
-        void Generate(int idInpatient);
+        string Generate(int idInpatient, string room = "");
     }
 }

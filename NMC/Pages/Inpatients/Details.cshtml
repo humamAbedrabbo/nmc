@@ -77,7 +77,12 @@
                             </div>
                         </div>
                         <div class="mailview-inner">
-                            <img src="/barcode/@(Model.Entity.Id).jpeg" class="img-responsive mb-2 w-25" alt="" />
+                            @*<img src="/barcode/@(Model.Entity.Id).jpeg" class="img-responsive mb-2 w-25" alt="" />*@
+                            @if(Model.Entity.CurrentRoomId.HasValue)
+                            {
+                            <img src="data:image/png;base64,@Model.Barcode" class="img-responsive m-5 w-25" alt="" />
+
+                            }
                             <dl class="row">
                                 <dt class="col-sm-3">@_localizer["Status"]</dt>
                                 <dd class="col-sm-9 text-danger">@_localizer[Model.Entity.GetStatus().ToString()]</dd>

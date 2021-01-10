@@ -7,19 +7,24 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using NMC.Data;
 using NMC.Models;
+using NMC.Services;
 
 namespace NMC.Pages.Inpatients
 {
     public class DetailsModel : PageModel
     {
         private readonly NmcContext context;
+        private readonly IBarcodeGen barcodeGen;
 
-        public DetailsModel(NmcContext context)
+        public DetailsModel(NmcContext context, IBarcodeGen barcodeGen)
         {
             this.context = context;
+            this.barcodeGen = barcodeGen;
         }
 
         public Inpatient Entity { get; set; }
+
+        public string Barcode { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public int? Id { get; set; }
@@ -35,7 +40,7 @@ namespace NMC.Pages.Inpatients
                 .Where(x => x.Id == Id.Value)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
-
+            Barcode = barcodeGen.Generate(Entity.Id, Entity.CurrentRoom?.Name ?? "");
             return Page();
         }
     }

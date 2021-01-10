@@ -38,6 +38,8 @@ namespace NMC.Pages.Inpatients
         public SelectList SelectBooking { get; set; }
         public SelectList SelectDoctor { get; set; }
 
+        
+
         public async Task InitDataAsync()
         {
             var bookings = await context.Bookings
@@ -105,6 +107,7 @@ namespace NMC.Pages.Inpatients
                     Entity.Patient.Gender = booking.Gender;
                 }
                 await InitDataAsync();
+                //Barcode = barcodeGen.Generate(Entity.Id);
             }
             
         }
@@ -139,7 +142,7 @@ namespace NMC.Pages.Inpatients
                     ReturnUrl = $"/Inpatients/Details/{Entity.Id}";
 
                     // Generate Barcode
-                    barcodeGen.Generate(Entity.Id);
+                    //barcodeGen.Generate(Entity.Id);
 
                     return Redirect(ReturnUrl);
                 }
