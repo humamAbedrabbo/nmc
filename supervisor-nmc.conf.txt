@@ -1,0 +1,13 @@
+[program:nmc]
+command=/usr/bin/dotnet /var/www/NMC/NMC.dll
+directory=/var/www/NMC
+autostart=true
+autorestart=true
+exitcodes=0
+stderr_logfile=/var/log/nmc.err.log
+stdout_logfile=/var/log/nmc.out.log
+environment=ASPNETCORE_ENVIRONMENT=Production
+user=www-data
+stopsignal=INT
+stopasgroup=true
+killasgroup=true

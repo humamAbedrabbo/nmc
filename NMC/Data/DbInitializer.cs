@@ -48,32 +48,109 @@ namespace NMC.Data
             //return;
             if(!context.Units.Any())
             {
-                context.Units.Add(new Unit { Name = "Internal", NameAr = "داخلية", Type = UnitType.IPD });
+                //context.Units.Add(new Unit { Name = "Internal", NameAr = "داخلية", Type = UnitType.IPD });
+                context.Units.AddRange
+                    (new[] {
+                new Unit { Type = UnitType.IPD, Name = "Pediatric Department -  Incubators section (NICU)", NameAr = "جناح الأطفال - قسم الحواضن" },
+                new Unit { Type = UnitType.IPD, Name = "Internal Medicine", NameAr = "قسم الداخلية الباطنية" },
+                new Unit { Type = UnitType.IPD, Name = "Intensive Care Unite (ICU)", NameAr = "قسم العناية المشددة" },
+                new Unit { Type = UnitType.IPD, Name = "Obstetric & Genecology", NameAr = "جناح النسائية والمخاض" },
+                new Unit { Type = UnitType.IPD, Name = "Dialysis", NameAr = "قسم غسيل الكلى" },
+                new Unit { Type = UnitType.IPD, Name = "Arthroscopy", NameAr = "قسم التنظير" },
+                new Unit { Type = UnitType.IPD, Name = "Cath Lab - Cardiovascular (CCU)", NameAr = "قسم العناية القلبة والقثطرة القلبية" },
+                new Unit { Type = UnitType.IPD, Name = "Blood vessels", NameAr = "قسم الأوعية" },
+                new Unit { Type = UnitType.IPD, Name = "Urology", NameAr = "قسم البولية" },
+                new Unit { Type = UnitType.IPD, Name = "Respiratory System Diseases", NameAr = "أمراض الجهاز التنفسي" },
+                new Unit { Type = UnitType.IPD, Name = "Emergency (ER)", NameAr = "قسم الإسعاف والطوارئ" },
+                new Unit { Type = UnitType.Unspecified, Name = "Maintenance Department", NameAr = "قسم الصيانة" },
+                new Unit { Type = UnitType.Lab, Name = "Laboratory", NameAr = "المخبر" },
+                new Unit { Type = UnitType.Lab, Name = "Radiography", NameAr = "قسم التصوير الشعاعي" },
+                new Unit { Type = UnitType.OR, Name = "Operation Rooms (OR)", NameAr = "جناح العمليات" }
+                // new Unit { Type = UnitType.Unspecified, Name = "Administration", NameAr = "الادارة" },
+                // new Unit { Type = UnitType.Unspecified, Name = "Financial and Accounting Department ", NameAr = "الإدارة المالية و قسم المحاسبة" },
+                // new Unit { Type = UnitType.Unspecified, Name = "Catering section", NameAr = "قسم الإطعام" },
+                // new Unit { Type = UnitType.Unspecified, Name = "Medical warehouse", NameAr = "المستودع الطبي" },
+                // new Unit { Type = UnitType.Unspecified, Name = "Pharmacy", NameAr = "الصيدلية" },
+                    });
                 context.SaveChanges();
             }
 
+            Speciality a = null, b = null, c = null, d = null, e = null, f = null;
             if(!context.Specialities.Any())
             {
-                context.Specialities.Add(new Speciality { Name = "Spec 1", NameAr = "اختصاص 1" });
-                context.Specialities.Add(new Speciality { Name = "Spec 2", NameAr = "اختصاص 2" });
+                context.Specialities.Add(a = new Speciality { Name = "بولية", NameAr = "بولية" });
+                context.Specialities.Add(b = new Speciality { Name = "أوعية", NameAr = "أوعية" });
+                context.Specialities.Add(c = new Speciality { Name = "قلبية", NameAr = "قلبية" });
+                context.Specialities.Add(d = new Speciality { Name = "صدرية", NameAr = "صدرية" });
+                context.Specialities.Add(e = new Speciality { Name = "أطفال", NameAr = "أطفال" });
+                context.Specialities.Add(f = new Speciality { Name = "نسائية", NameAr = "نسائية" });
                 context.SaveChanges();
             }
 
             if(!context.BookingReasonTypes.Any())
             {
-                context.BookingReasonTypes.Add(new BookingReasonType { Name = "Reason 1", NameAr = "سبب 1" });
-                context.BookingReasonTypes.Add(new BookingReasonType { Name = "Reason 2", NameAr = "سبب 2" });
+                context.BookingReasonTypes.Add(new BookingReasonType { Name = "Operation", NameAr = "عملية جراحية" });
+                context.BookingReasonTypes.Add(new BookingReasonType { Name = "Check Up", NameAr = "فحص عام" });
                 context.SaveChanges();
             }
 
             if(!context.Rooms.Any())
             {
                 List<Room> rooms = new List<Room>();
-                // Add IPD Rooms
-                for (int i = 1; i <= 1; i++)
-                {
-                    rooms.Add(new Room { Floor = 1, RoomNo = i.ToString(), UnitId = 1 });
-                }
+                rooms.Add(new Room { Floor = 1, RoomNo = "101", UnitId = 2, Capacity = 2 });
+                rooms.Add(new Room { Floor = 1, RoomNo = "102", UnitId = 2, Capacity = 2 });
+                rooms.Add(new Room { Floor = 1, RoomNo = "103", UnitId = 2, Capacity = 2 });
+                rooms.Add(new Room { Floor = 1, RoomNo = "104", UnitId = 2, Capacity = 2 });
+                rooms.Add(new Room { Floor = 1, RoomNo = "105", UnitId = 2, Capacity = 2 });
+                rooms.Add(new Room { Floor = 1, RoomNo = "106", UnitId = 2, Capacity = 2 });
+                rooms.Add(new Room { Floor = 1, RoomNo = "107", UnitId = 2, Capacity = 2 });
+                rooms.Add(new Room { Floor = 1, RoomNo = "108", UnitId = 2, Capacity = 1 });
+                rooms.Add(new Room { Floor = 1, RoomNo = "109", UnitId = 2, Capacity = 1 });
+                rooms.Add(new Room { Floor = 1, RoomNo = "110", UnitId = 2, Capacity = 1 });
+                rooms.Add(new Room { Floor = 1, RoomNo = "111", UnitId = 2, Capacity = 2 });
+                rooms.Add(new Room { Floor = 1, RoomNo = "112", UnitId = 1, Capacity = 1 });
+                
+                rooms.Add(new Room { Floor = 2, RoomNo = "201", UnitId = 2, Capacity = 2 });
+                rooms.Add(new Room { Floor = 2, RoomNo = "202", UnitId = 2, Capacity = 2 });
+                rooms.Add(new Room { Floor = 2, RoomNo = "203", UnitId = 2, Capacity = 2 });
+                rooms.Add(new Room { Floor = 2, RoomNo = "204", UnitId = 2, Capacity = 2 });
+                rooms.Add(new Room { Floor = 2, RoomNo = "205", UnitId = 2, Capacity = 2 });
+                rooms.Add(new Room { Floor = 2, RoomNo = "206", UnitId = 2, Capacity = 2 });
+                rooms.Add(new Room { Floor = 2, RoomNo = "207", UnitId = 2, Capacity = 2 });
+                rooms.Add(new Room { Floor = 2, RoomNo = "208", UnitId = 2, Capacity = 1 });
+                rooms.Add(new Room { Floor = 2, RoomNo = "209", UnitId = 2, Capacity = 1 });
+                rooms.Add(new Room { Floor = 2, RoomNo = "210", UnitId = 2, Capacity = 1 });
+                rooms.Add(new Room { Floor = 2, RoomNo = "211", UnitId = 2, Capacity = 2 });
+                rooms.Add(new Room { Floor = 2, RoomNo = "212", UnitId = 1, Capacity = 1 });
+
+                rooms.Add(new Room { Floor = 3, RoomNo = "301", UnitId = 2, Capacity = 1 });
+                rooms.Add(new Room { Floor = 3, RoomNo = "302", UnitId = 2, Capacity = 1 });
+                rooms.Add(new Room { Floor = 3, RoomNo = "303", UnitId = 2, Capacity = 1 });
+                rooms.Add(new Room { Floor = 3, RoomNo = "304", UnitId = 2, Capacity = 1 });
+                rooms.Add(new Room { Floor = 3, RoomNo = "305", UnitId = 2, Capacity = 1 });
+                rooms.Add(new Room { Floor = 3, RoomNo = "306", UnitId = 2, Capacity = 1 });
+                rooms.Add(new Room { Floor = 3, RoomNo = "307", UnitId = 2, Capacity = 1 });
+                rooms.Add(new Room { Floor = 3, RoomNo = "308", UnitId = 2, Capacity = 1 });
+                rooms.Add(new Room { Floor = 3, RoomNo = "309", UnitId = 2, Capacity = 1 });
+
+                rooms.Add(new Room { Floor = 4, RoomNo = "401", UnitId = 4, Capacity = 1 });
+                rooms.Add(new Room { Floor = 4, RoomNo = "402", UnitId = 4, Capacity = 1 });
+                rooms.Add(new Room { Floor = 4, RoomNo = "407", UnitId = 4, Capacity = 1 });
+                rooms.Add(new Room { Floor = 4, RoomNo = "408", UnitId = 4, Capacity = 1 });
+                rooms.Add(new Room { Floor = 4, RoomNo = "409", UnitId = 4, Capacity = 1 });
+                rooms.Add(new Room { Floor = 4, RoomNo = "410", UnitId = 4, Capacity = 1 });
+                rooms.Add(new Room { Floor = 4, RoomNo = "412", UnitId = 4, Capacity = 1 });
+
+                rooms.Add(new Room { Floor = 6, RoomNo = "601", UnitId = 3, Capacity = 1 });
+                rooms.Add(new Room { Floor = 6, RoomNo = "602", UnitId = 3, Capacity = 1 });
+                rooms.Add(new Room { Floor = 6, RoomNo = "603", UnitId = 3, Capacity = 1 });
+                rooms.Add(new Room { Floor = 6, RoomNo = "604", UnitId = 3, Capacity = 1 });
+                rooms.Add(new Room { Floor = 6, RoomNo = "606", UnitId = 7, Capacity = 1 });
+                rooms.Add(new Room { Floor = 6, RoomNo = "607", UnitId = 7, Capacity = 2 });
+                rooms.Add(new Room { Floor = 6, RoomNo = "608", UnitId = 7, Capacity = 2 });
+                rooms.Add(new Room { Floor = 6, RoomNo = "609", UnitId = 7, Capacity = 1 });
+                rooms.Add(new Room { Floor = 6, RoomNo = "610", UnitId = 7, Capacity = 1 });
+                rooms.Add(new Room { Floor = 6, RoomNo = "611", UnitId = 7, Capacity = 2 });
 
                 context.Rooms.AddRange(rooms);
                 context.SaveChanges();
@@ -81,7 +158,104 @@ namespace NMC.Data
 
             if(!context.Doctors.Any())
             {
-                context.Doctors.AddRange(GetRandomDoctor().Generate(50));
+                //context.Doctors.AddRange(GetRandomDoctor().Generate(50));
+                List<Doctor> doctors = new List<Doctor>();
+
+                doctors.Add(new Doctor { FirstName = "هشام", LastName = "سنان", Gender = Gender.Male });
+                doctors.Add(new Doctor { FirstName = "عبد الحميد", LastName = "سنان", Gender = Gender.Male });
+                doctors.Add(new Doctor { FirstName = "عبد الرحيم", LastName = "سنان", Gender = Gender.Male });
+                doctors.Add(new Doctor { FirstName = "أسامة", LastName = "قولي", Gender = Gender.Male });
+                doctors.Add(new Doctor { FirstName = "نضال", LastName = "الكسم", Gender = Gender.Male });
+                doctors.Add(new Doctor { FirstName = "رائف", LastName = "ياسين", Gender = Gender.Male });
+                doctors.Add(new Doctor { FirstName = "عامر", LastName = "تللو", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { a }, FirstName = "عبد القادر", LastName = "سنان", Gender = Gender.Male });
+                doctors.Add(new Doctor { FirstName = "علاء", LastName = "ديراني", Gender = Gender.Male });
+                doctors.Add(new Doctor { FirstName = "محمد", LastName = "الأحمد", Gender = Gender.Male });
+                doctors.Add(new Doctor { FirstName = "باسل", LastName = "قوطرش", Gender = Gender.Male });
+                doctors.Add(new Doctor { FirstName = "باسل", LastName = "أبو الهيجاء", Gender = Gender.Male });
+                doctors.Add(new Doctor { FirstName = "سعيد", LastName = "فليون", Gender = Gender.Male });
+                
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "جهاد", LastName = "الأشقر", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "هدى", LastName = "جيكو", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "هزار", LastName = "جيكو", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "ريد", LastName = "قدورة", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "وليد", LastName = "الشهابي", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "بسام", LastName = "الياس", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "ريم", LastName = "عرنوق", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "فاتن", LastName = "عثمان", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "أولغا", LastName = "الرفاعي", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "آلاء", LastName = "جاويش", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "صباح", LastName = "الحافظ", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "غفران", LastName = "الكل", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "جمال", LastName = "توتنجي", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "علا", LastName = "شحادة", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "رزان", LastName = "وتار", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "بشار", LastName = "الكردي", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "لطفية", LastName = "الرقيق", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "نور الهدى", LastName = "أبو الشامات", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "سلام", LastName = "مشهدي", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "غيداء", LastName = "اليوسف", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "رضوان", LastName = "فيومي", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "ميسون", LastName = "رحيم", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "فريز", LastName = "بيرقدار", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "لينا", LastName = "الدنيا", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "سلوى", LastName = "جبر", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "أحمد", LastName = "طه", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "كنعان", LastName = "السقا", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "دينا", LastName = "الخوري", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "غولناز", LastName = "عثمان", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "سمر", LastName = "السادات", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "فرناز", LastName = "نعال", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "ليلى", LastName = "طوقتلي", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "قمر", LastName = "زينة", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "سميرة", LastName = "دياب", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "فوزي", LastName = "عبد الحميد", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "أنس", LastName = "مشوح", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "ندى", LastName = "اله رشي", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { f }, FirstName = "رائدة", LastName = "مللي", Gender = Gender.Female });
+                
+                doctors.Add(new Doctor { Specialities = { e }, FirstName = "المصون", LastName = "طرقجي", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { e }, FirstName = "نوران", LastName = "طرقجي", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { e }, FirstName = "محمد ماهر", LastName = "رمضان", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { e }, FirstName = "ظاقر", LastName = "سلامة", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { e }, FirstName = "جهاد", LastName = "الحكيم", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { e }, FirstName = "عدنان", LastName = "الحسامي", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { e }, FirstName = "حسام", LastName = "دالاتي", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { e }, FirstName = "معروف", LastName = "موصللي", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { e }, FirstName = "سمير", LastName = "سرور", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { e }, FirstName = "لينا", LastName = "الخوري", Gender = Gender.Female });
+                
+                doctors.Add(new Doctor { Specialities = { d }, FirstName = "هادي", LastName = "العقاد", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { d }, FirstName = "حسام", LastName = "البردان", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { d }, FirstName = "عبد الرحمن", LastName = "دكاك", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { d }, FirstName = "خالد", LastName = "الصباغ", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { d }, FirstName = "عماد", LastName = "حفار", Gender = Gender.Male });
+                
+                doctors.Add(new Doctor { Specialities = { c }, FirstName = "رشيد", LastName = "السعدي", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { c }, FirstName = "أنس", LastName = "الخالد", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { c }, FirstName = "مجد", LastName = "نصار", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { c }, FirstName = "إياد", LastName = "شعيبي", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { c }, FirstName = "إيهاب", LastName = "الزراد", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { c }, FirstName = "أمين", LastName = "الخطيب", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { c }, FirstName = "محمد", LastName = "الفنار", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { c }, FirstName = "عبد القادر", LastName = "قطيني", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { c }, FirstName = "عمرو", LastName = "طرية", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { c }, FirstName = "محمود", LastName = "المطلق", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { c }, FirstName = "خالد", LastName = "مصطفى", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { c }, FirstName = "علي", LastName = "خدام", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { c }, FirstName = "زياد", LastName = "عباس", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { c }, FirstName = "مصعب", LastName = "خلايلي", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { c }, FirstName = "أحمد", LastName = "غيبور", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { c }, FirstName = "ماجد", LastName = "الحسين", Gender = Gender.Male });
+                
+                doctors.Add(new Doctor { Specialities = { b }, FirstName = "هشام", LastName = "حمزة", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { b }, FirstName = "بشار", LastName = "العجان", Gender = Gender.Male });
+                doctors.Add(new Doctor { Specialities = { b }, FirstName = "موفق", LastName = "العلبي", Gender = Gender.Male });
+                
+                doctors.Add(new Doctor { Specialities = { a }, FirstName = "شهناز", LastName = "الألوسي", Gender = Gender.Female });
+                doctors.Add(new Doctor { Specialities = { a }, FirstName = "محمد", LastName = "الطويل", Gender = Gender.Male });
+
+                context.Doctors.AddRange(doctors);
                 context.SaveChanges();
             }
             if(!context.Patients.Any())

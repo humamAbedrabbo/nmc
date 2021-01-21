@@ -8,6 +8,8 @@ namespace NMC.Models
     {
         Unspecified,
         IPD,
-        OPD
+        OPD,
+        OR,
+        Lab
     }
 }

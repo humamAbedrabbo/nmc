@@ -1,0 +1,12 @@
+<VirtualHost *:80>
+   ServerName 185.216.132.134
+   ProxyPreserveHost On
+   ProxyPass / http://127.0.0.1:5000/
+   ProxyPassReverse / http://127.0.0.1:5000/
+   RewriteEngine on
+   RewriteCond %{HTTP:UPGRADE} ^WebSocket$ [NC]
+   RewriteCond %{HTTP:CONNECTION} Upgrade$ [NC]
+   RewriteRule /(.*) ws://127.0.0.1:5000/$1 [P]
+   ErrorLog /var/log/apache2/nmc-error.log
+   CustomLog /var/log/apache2/nmc-access.log common
+</VirtualHost>

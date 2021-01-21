@@ -1,0 +1,47 @@
+gdiplus
+sudo apt-get install libgif-dev autoconf libtool automake build-essential gettext libglib2.0-dev libcairo2-dev libtiff-dev libexif-dev
+sudo apt-get install -y libc6-dev
+sudo apt install -y libgdiplus
+sudo ln -s /usr/lib/libgdiplus.so /lib/x86_64-linux-gnu/libgdiplus.so
+
+wget https://www.barcoderesource.com/products/linuxbarcodefonts.zip
+sudo apt-get install zip unzip
+unzip linuxbarcodefonts.zip
+sudo cp ~/linuxbarcodefonts/*.ttf /usr/local/share/fonts
+for barcode
+(ISSUE with Permission Trust/Medium or so)
+
+${APACHE_RUN_USER}
+export ${APACHE_RUN_USER}=humam
+
+Public IP Address = 185.216.132.134
+VPN IP address = 192.168.277.3
+User= humam
+Password= CdAPoG$
+
+ssh humam@185.216.132.134
+
+Remove some ubuntu source  repos:
+sudo vim /etc/apt/sources.list
+
+---------------------
+cd NMC
+sudo rm -R -f nmc/
+git clone https://humamabedrabbo@dev.azure.com/humamabedrabbo/nmc/_git/nmc
+
+cd nmc/
+git checkout admission-1
+dotnet build
+
+sudo dotnet publish --configuration Release
+-------------
+sudo service supervisor stop
+sudo service apache2 stop
+cd /var/www
+mv NMC/ nmc-old-8
+mkdir NMC
+sudo chown humam /var/www/NMC
+sudo chmod 755 -R /var/www/NMC
+sudo cp -R ~/NMC/nmc/NMC/bin/Release/net5.0/publish/* /var/www/NMC/
+sudo service supervisor start
+sudo service apache2 start
