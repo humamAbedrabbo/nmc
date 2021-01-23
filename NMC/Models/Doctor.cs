@@ -30,7 +30,7 @@ namespace NMC.Models
 
         public Gender Gender { get; set; }
 
-        [Required, StringLength(50, MinimumLength = 1)]
+        [StringLength(50, MinimumLength = 1)]
         public string Title { get; set; }
 
         [Display(Name = "Consultant")]
