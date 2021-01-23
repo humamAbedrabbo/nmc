@@ -39,6 +39,7 @@ namespace NMC.Pages.Inpatients
         {
             Items = await context.Set<Inpatient>()
                 .Include(x => x.Patient)
+                .Include(x => x.CurrentRoom)
                 .Where(x =>
                     (string.IsNullOrEmpty(IdentityNo) || EF.Functions.Like(x.Patient.IdNo, $"%{IdentityNo}%"))
                     &&
