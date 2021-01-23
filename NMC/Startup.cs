@@ -110,6 +110,8 @@ namespace NMC
                 await next();
             });
 
+
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
