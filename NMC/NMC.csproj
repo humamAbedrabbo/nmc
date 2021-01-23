@@ -6,18 +6,18 @@
 
 	<ItemGroup>
 		<PackageReference Include="Bogus" Version="32.0.2" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.1" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.1" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.1" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.1" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.1">
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.2">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.1" />
 		<PackageReference Include="NetBarcode" Version="1.4.0" />
-		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.2" />
 		<PackageReference Include="OrchardCore.Localization.Core" Version="1.0.0-rc2-13450" />
 	</ItemGroup>
 
