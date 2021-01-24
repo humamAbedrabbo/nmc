@@ -18,8 +18,8 @@ namespace NMC.Areas.Identity
             builder.ConfigureServices((context, services) => {
                 services.AddDbContextPool<NmcContext>(options =>
                     // options.UseSqlServer(context.Configuration.GetConnectionString("NmcContext"))
-                    // options.UseNpgsql(context.Configuration.GetConnectionString("NmcContext"))
-                    options.UseInMemoryDatabase("NmcContext")
+                    options.UseNpgsql(context.Configuration.GetConnectionString("NmcContext"))
+                    // options.UseInMemoryDatabase("NmcContext")
                     ) ;
 
                 services.AddDefaultIdentity<AppUser>(options => {
