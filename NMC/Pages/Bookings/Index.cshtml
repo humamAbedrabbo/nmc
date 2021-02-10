@@ -76,6 +76,11 @@
                                                     </form>
 
                                                 }
+                                                else if(status == BookingStatus.Confirmed)
+                                                {
+                                                    <a class="dropdown-item" asp-page="/Inpatients/Create" asp-route-bookingid="@item.Id"><i class="fa fa-bed m-r-5"></i> @_localizer["Create Inpatient"]</a>
+
+                                                }
                                                 <a class="dropdown-item" href="#" data-id="@item.Id" data-name="@item.Name" data-toggle="modal" data-target="#delete_dlg"><i class="fa fa-trash-o m-r-5"></i> @_localizer["Delete"]</a>
                                             </div>
                                         </div>
